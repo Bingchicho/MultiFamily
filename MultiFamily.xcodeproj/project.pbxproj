@@ -37,6 +37,34 @@
 			);
 			target = 5A0151002F2AEC20008A5839 /* MultiFamily */;
 		};
+		5A77F5BB2F2B300F00FF756F /* Exceptions for "MultiFamily" folder in "MultiFamilyTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Domain/User/UserToken.swift,
+				Domain/User/VerificationRequired.swift,
+				Environment/APIHost.swift,
+				Environment/AppEnvironment.swift,
+				Environment/Device/DefaultDeviceIdentifierProvider.swift,
+				Environment/Device/DeviceIdentifierProvider.swift,
+				Environment/EnvironmentConfig.swift,
+				Infrastructure/Security/KeychainService.swift,
+				Network/Core/APIClient.swift,
+				Network/Core/APIRequest.swift,
+				Network/DTO/Request/User/LoginPayloadDTO.swift,
+				Network/DTO/Request/User/RefreshTokenPayloadDTO.swift,
+				Network/DTO/Request/User/UserRequestDTO.swift,
+				Network/DTO/Request/User/UserRequestFactory.swift,
+				Network/DTO/Response/User/AttributeDTO.swift,
+				Network/DTO/Response/User/UserResponseDTO.swift,
+				Network/DTO/Response/User/VerificationRequiredDTO.swift,
+				Network/Endpoint/UserEndpoint.swift,
+				Network/Interceptor/AuthorizationInterceptor.swift,
+				User/Repository/UserRepository.swift,
+				User/Repository/UserRepositoryImpl.swift,
+				User/Token/TokenStore.swift,
+			);
+			target = 5A0151192F2AEC21008A5839 /* MultiFamilyTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +72,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				5A01512C2F2AEC21008A5839 /* Exceptions for "MultiFamily" folder in "MultiFamily" target */,
+				5A77F5BB2F2B300F00FF756F /* Exceptions for "MultiFamily" folder in "MultiFamilyTests" target */,
 			);
 			path = MultiFamily;
 			sourceTree = "<group>";

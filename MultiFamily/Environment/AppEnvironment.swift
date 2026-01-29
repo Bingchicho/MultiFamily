@@ -8,15 +8,18 @@
 import Foundation
 
 enum AppEnvironment {
-    static let apiHostname =
-        Bundle.main.infoDictionary?["API_HOSTNAME"] as? String ?? ""
-
-    static let authService =
-        Bundle.main.infoDictionary?["AUTH_SERVICE"] as? String ?? ""
-
-    static let envName =
-        Bundle.main.infoDictionary?["ENV_NAME"] as? String ?? ""
-
-    static let brand =
-        Bundle.main.infoDictionary?["APP_BRAND"] as? String ?? ""
+    
+    private static func value(for key: String) -> String {
+        Bundle.main.infoDictionary?[key] as? String ?? ""
+    }
+    
+    static let brand = value(for: "APP_BRAND")
+    
+    static let apiHostname = value(for: "API_HOSTNAME")
+    static let authService = value(for: "AUTH_SERVICE")
+    static let envName = value(for: "ENV_NAME")
+    static let apiKey = value(for: "API_KEY")
+    static let apiApplicationId = value(for: "API_APPLICATION_ID")
+    
+    static let mqttHostname = value(for: "MQTT_HOSTNAME")
 }

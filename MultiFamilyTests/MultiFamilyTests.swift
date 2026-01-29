@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import MultiFamily
+import MultiFamily
 
 final class MultiFamilyTests: XCTestCase {
 
