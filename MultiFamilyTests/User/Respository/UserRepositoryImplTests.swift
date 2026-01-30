@@ -16,6 +16,7 @@ final class UserRepositoryImplTests: XCTestCase {
         let apiClient = MockAPIClient()
         let tokenStore = FakeTokenStore()
         let factory = FakeUserRequestFactory()
+        let attribute = FakeUserAttributeStore()
 
         apiClient.response = UserResponseDTO(
             tokenType: "Bearer",
@@ -31,7 +32,8 @@ final class UserRepositoryImplTests: XCTestCase {
         let sut = UserRepositoryImpl(
             apiClient: apiClient,
             tokenStore: tokenStore,
-            userRequestFactory: factory as! UserRequestFactory
+            userRequestFactory: factory,
+            userAttribute: attribute
         )
 
         // when
@@ -45,7 +47,7 @@ final class UserRepositoryImplTests: XCTestCase {
         XCTAssertEqual(apiClient.calledEndpoint, .login)
         XCTAssertEqual(tokenStore.accessToken, "ACCESS")
         XCTAssertEqual(tokenStore.refreshToken, "REFRESH")
-        XCTAssertEqual(token.accessToken, "ACCESS")
+        XCTAssertEqual(attribute.currentUser?.username, "test")
     }
     
     func test_refresh_updates_tokens() async throws {
@@ -53,6 +55,7 @@ final class UserRepositoryImplTests: XCTestCase {
         let apiClient = MockAPIClient()
         let tokenStore = FakeTokenStore()
         let factory = FakeUserRequestFactory()
+        let attribute = FakeUserAttributeStore()
 
         tokenStore.refreshToken = "OLD_REFRESH"
 
@@ -70,7 +73,8 @@ final class UserRepositoryImplTests: XCTestCase {
         let sut = UserRepositoryImpl(
             apiClient: apiClient,
             tokenStore: tokenStore,
-            userRequestFactory: factory as! UserRequestFactory
+            userRequestFactory: factory,
+            userAttribute: attribute
         )
 
         // when
@@ -80,7 +84,7 @@ final class UserRepositoryImplTests: XCTestCase {
         XCTAssertTrue(factory.didMakeTokenRequest)
         XCTAssertEqual(tokenStore.accessToken, "NEW_ACCESS")
         XCTAssertEqual(tokenStore.refreshToken, "NEW_REFRESH")
-        XCTAssertEqual(token.accessToken, "NEW_ACCESS")
+        XCTAssertEqual(attribute.currentUser?.username, "test")
     }
 }
 
@@ -125,30 +129,59 @@ final class FakeTokenStore: TokenStore {
     func clear() {}
 }
 
-final class FakeUserRequestFactory {
+final class FakeUserRequestFactory: UserRequestFactoryProtocol {
 
-    var didMakeLoginRequest = false
-    var didMakeTokenRequest = false
+    private(set) var didMakeLoginRequest = false
+    private(set) var didMakeTokenRequest = false
 
-    func makeLoginRequest(email: String, password: String) -> UserRequestDTO {
+    func makeLoginRequest(
+        email: String,
+        password: String
+    ) -> UserRequestDTO {
+
         didMakeLoginRequest = true
+
         return UserRequestDTO(
             applicationID: "TEST_APP",
             clientToken: "TEST_DEVICE",
             payload: .login(
-                LoginPayloadDTO(email: email, password: password)
+                LoginPayloadDTO(
+                    email: email,
+                    password: password
+                )
             )
         )
     }
 
     func makeTokenRequest() -> UserRequestDTO {
+
         didMakeTokenRequest = true
+
         return UserRequestDTO(
             applicationID: "TEST_APP",
             clientToken: "TEST_DEVICE",
             payload: .refreshToken(
-                RefreshTokenPayloadDTO(refreshToken: "REFRESH")
+                RefreshTokenPayloadDTO(
+                    refreshToken: "TEST_REFRESH"
+                )
             )
         )
+    }
+}
+
+final class FakeUserAttributeStore: UserAttributeStore {
+
+    private(set) var currentUser: UserAttribute?
+    private(set) var didSaveUser = false
+    private(set) var didClear = false
+
+    func save(_ user: UserAttribute) {
+        didSaveUser = true
+        currentUser = user
+    }
+
+    func clear() {
+        didClear = true
+        currentUser = nil
     }
 }

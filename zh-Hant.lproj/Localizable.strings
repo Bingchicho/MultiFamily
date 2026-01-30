@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  MultiFamily
+
+  Created by Sunion on 2026/1/30.
+  
+*/
+
+login_title = "Login";
+login_button = "Sign In";
+error_network = "Network error. Please try again.";

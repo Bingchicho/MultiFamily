@@ -4,8 +4,9 @@
 <dict>
 	<key>API_APPLICATIONID</key>
 	<string>$(API_APPLICATIONID)</string>
-	<key>API_HOSTNAME
-</key>
+	<key>API_APPLICATION_ID</key>
+	<string>$(API_APPLICATION_ID)</string>
+	<key>API_HOSTNAME</key>
 	<string>$(API_HOSTNAME)</string>
 	<key>API_HOSTNAME
 API_HOSTNAME

@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  MultiFamily
+
+  Created by Sunion on 2026/1/30.
+  
+*/
+login_title = "登入";
+login_button = "登入";
+error_network = "網路異常，請稍後再試";

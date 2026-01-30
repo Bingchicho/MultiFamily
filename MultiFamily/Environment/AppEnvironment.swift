@@ -9,13 +9,19 @@ import Foundation
 
 enum AppEnvironment {
     
-    private static func value(for key: String) -> String {
-        Bundle.main.infoDictionary?[key] as? String ?? ""
+    static func value(for key: String) -> String {
+        guard
+            let value = Bundle.main.object(forInfoDictionaryKey: key) as? String,
+            !value.isEmpty
+        else {
+            fatalError("❌ Missing \(key) in Info.plist")
+        }
+        return value
     }
     
     static let brand = value(for: "APP_BRAND")
     
-    static let apiHostname = value(for: "API_HOSTNAME")
+    static let apiHostname = "https://" + value(for: "API_HOSTNAME")
     static let authService = value(for: "AUTH_SERVICE")
     static let envName = value(for: "ENV_NAME")
     static let apiKey = value(for: "API_KEY")

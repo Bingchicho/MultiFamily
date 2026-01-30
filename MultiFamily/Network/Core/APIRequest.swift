@@ -6,20 +6,23 @@
 //
 
 struct APIRequest {
-    let host: APIHost
+    let host: String
+    let version: String
     let path: String
     let method: HTTPMethod
     let body: Encodable?
     let requiresAuth: Bool
 
     init(
-        host: APIHost,
+        host: String,
+        version: String,
         path: String,
         method: HTTPMethod,
         body: Encodable? = nil,
         requiresAuth: Bool = true   // ⭐ 預設要授權
     ) {
         self.host = host
+        self.version = version
         self.path = path
         self.method = method
         self.body = body

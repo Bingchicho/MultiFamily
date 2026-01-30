@@ -5,7 +5,12 @@
 //  Created by Sunion on 2026/1/29.
 //
 
-struct UserRequestFactory {
+protocol UserRequestFactoryProtocol {
+    func makeLoginRequest(email: String, password: String) -> UserRequestDTO
+    func makeTokenRequest() -> UserRequestDTO
+}
+
+struct UserRequestFactory: UserRequestFactoryProtocol {
 
     private let env: EnvironmentConfig
     private let device: DeviceIdentifierProvider

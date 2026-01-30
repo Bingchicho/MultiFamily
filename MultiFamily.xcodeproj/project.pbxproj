@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5A7AF27C2F2C40ED009D0C63 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A7AF27A2F2C40ED009D0C63 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		5A01511B2F2AEC21008A5839 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,8 @@
 		5A0151012F2AEC20008A5839 /* MultiFamily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiFamily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A01511A2F2AEC21008A5839 /* MultiFamilyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiFamilyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A0151242F2AEC21008A5839 /* MultiFamilyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiFamilyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A7AF27B2F2C40ED009D0C63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5A7AF27F2F2C410D009D0C63 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -40,9 +46,9 @@
 		5A77F5BB2F2B300F00FF756F /* Exceptions for "MultiFamily" folder in "MultiFamilyTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Domain/User/User.swift,
 				Domain/User/UserToken.swift,
 				Domain/User/VerificationRequired.swift,
-				Environment/APIHost.swift,
 				Environment/AppEnvironment.swift,
 				Environment/Device/DefaultDeviceIdentifierProvider.swift,
 				Environment/Device/DeviceIdentifierProvider.swift,
@@ -50,6 +56,7 @@
 				Infrastructure/Security/KeychainService.swift,
 				Network/Core/APIClient.swift,
 				Network/Core/APIRequest.swift,
+				Network/Core/URLSessionAPIClient.swift,
 				Network/DTO/Request/User/LoginPayloadDTO.swift,
 				Network/DTO/Request/User/RefreshTokenPayloadDTO.swift,
 				Network/DTO/Request/User/UserRequestDTO.swift,
@@ -59,9 +66,13 @@
 				Network/DTO/Response/User/VerificationRequiredDTO.swift,
 				Network/Endpoint/UserEndpoint.swift,
 				Network/Interceptor/AuthorizationInterceptor.swift,
+				User/Attribute/DefaultUserAttributeStore.swift,
 				User/Repository/UserRepository.swift,
 				User/Repository/UserRepositoryImpl.swift,
 				User/Token/TokenStore.swift,
+				User/UseCase/LoginUseCase.swift,
+				User/UseCase/LoginUseCaseImpl.swift,
+				User/ViewModel/LoginViewModel.swift,
 			);
 			target = 5A0151192F2AEC21008A5839 /* MultiFamilyTests */;
 		};
@@ -117,6 +128,7 @@
 		5A0150F82F2AEC20008A5839 = {
 			isa = PBXGroup;
 			children = (
+				5A7AF27A2F2C40ED009D0C63 /* Localizable.strings */,
 				5A0151032F2AEC20008A5839 /* MultiFamily */,
 				5A01511D2F2AEC21008A5839 /* MultiFamilyTests */,
 				5A0151272F2AEC21008A5839 /* MultiFamilyUITests */,
@@ -234,9 +246,12 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 5A0150F82F2AEC20008A5839;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5A0151022F2AEC20008A5839 /* Products */;
 			projectDirPath = "";
@@ -254,6 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A7AF27C2F2C40ED009D0C63 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +325,18 @@
 			targetProxy = 5A0151252F2AEC21008A5839 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5A7AF27A2F2C40ED009D0C63 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A7AF27B2F2C40ED009D0C63 /* en */,
+				5A7AF27F2F2C410D009D0C63 /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5A01512E2F2AEC21008A5839 /* Develop */ = {
@@ -386,6 +414,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -450,6 +479,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -601,6 +631,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

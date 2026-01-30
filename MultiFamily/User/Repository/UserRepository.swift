@@ -6,6 +6,6 @@
 //
 
 protocol UserRepository {
-    func login(email: String, password: String) async throws -> UserToken
-    func refreshIfNeeded() async throws -> UserToken
+    func login(email: String, password: String) async throws
+    func refreshIfNeeded() async throws 
 }

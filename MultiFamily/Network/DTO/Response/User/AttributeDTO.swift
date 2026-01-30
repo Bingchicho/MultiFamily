@@ -27,3 +27,27 @@ struct PermissionDTO: Decodable {
     let siteID: String
     let userRole: String
 }
+
+extension AttributeDTO {
+
+    func toDomain() -> UserAttribute {
+        UserAttribute(
+            username: preferredUsername,
+            language: Language.from(apiValue: preferredLanguage),
+            phone: phone,
+            country: country,
+            isDebugEnabled: debugLog,
+            permissions: permission.map { $0.toDomain() }
+        )
+    }
+}
+
+extension PermissionDTO {
+
+    func toDomain() -> UserPermission {
+        UserPermission(
+            siteID: siteID,
+            role: UserRole(rawValue: userRole) ?? .user
+        )
+    }
+}
