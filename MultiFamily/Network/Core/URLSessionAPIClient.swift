@@ -29,11 +29,12 @@ final class URLSessionAPIClient: APIClient {
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
         }
-        print("🌐 Request URL =", urlString)
+        AppLogger.log(.info, category: .network, "🌐 Request URL = \(urlString)")
         if let body = request.body {
-            print("📦 Request body JSON:\n", body.toJSONString() ?? "nil")
+
+            AppLogger.log(.info, category: .network, "📦 Request body JSON:\n\(body.toJSONString() ?? "nil")")
         } else {
-            print("📦 Request body = nil")
+            AppLogger.log(.info, category: .network, "📦 Request body = nil")
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
@@ -42,28 +43,29 @@ final class URLSessionAPIClient: APIClient {
         if let interceptor = authInterceptor {
             try await interceptor.adapt(request, urlRequest: &urlRequest)
         }
-        print("🧾 Request Headers:")
+
+        AppLogger.log(.info, category: .network, "🧾 Request Headers:")
         urlRequest.allHTTPHeaderFields?.forEach { key, value in
-            print("  \(key): \(value)")
+            AppLogger.log(.info, category: .network, "  \(key): \(value)")
         }
 
         if let bodyData = urlRequest.httpBody,
            let bodyString = String(data: bodyData, encoding: .utf8) {
-            print("📤 HTTP Body:\n\(bodyString)")
+            AppLogger.log(.info, category: .network, "📤 HTTP Body:\n\(bodyString)")
         }
         do {
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("📥 Response Status Code:", httpResponse.statusCode)
+                AppLogger.log(.info, category: .network, "📥 Response Status Code: \(httpResponse.statusCode)")
             }
 
             if let jsonObject = try? JSONSerialization.jsonObject(with: data),
                let prettyData = try? JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted]),
                let jsonString = String(data: prettyData, encoding: .utf8) {
-                print("📦 Response JSON:\n\(jsonString)")
+                AppLogger.log(.info, category: .network, "📦 Response JSON:\n\(jsonString)")
             } else if let rawString = String(data: data, encoding: .utf8) {
-                print("📦 Response Raw:\n\(rawString)")
+                AppLogger.log(.info, category: .network, "📦 Response Raw:\n\(rawString)")
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
