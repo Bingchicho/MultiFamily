@@ -30,15 +30,23 @@ final class URLSessionAPIClient: APIClient {
             throw URLError(.badURL)
         }
         AppLogger.log(.info, category: .network, "🌐 Request URL = \(urlString)")
-        if let body = request.body {
 
-            AppLogger.log(.info, category: .network, "📦 Request body JSON:\n\(body.toJSONString() ?? "nil")")
-        } else {
-            AppLogger.log(.info, category: .network, "📦 Request body = nil")
-        }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
         urlRequest.timeoutInterval = timeout
+ 
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let body = request.body {
+            let encoder = JSONEncoder()
+            do {
+                let data = try encoder.encode(AnyEncodable(body))
+                urlRequest.httpBody = data
+            } catch {
+                AppLogger.log(.error, category: .network, "❌ Failed to encode request body: \(error)")
+                throw error
+            }
+        }
         
         if let interceptor = authInterceptor {
             try await interceptor.adapt(request, urlRequest: &urlRequest)
@@ -53,6 +61,7 @@ final class URLSessionAPIClient: APIClient {
            let bodyString = String(data: bodyData, encoding: .utf8) {
             AppLogger.log(.info, category: .network, "📤 HTTP Body:\n\(bodyString)")
         }
+        
         do {
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
