@@ -11,6 +11,7 @@ struct DefaultTheme: Theme {
     var primary: UIColor { UIColor(named: "Primary")! }
     var secondary: UIColor { UIColor(named: "Secondary")! }
     var error: UIColor { UIColor(named: "Error")! }
+    var background: UIColor { UIColor(named: "Background")! }
 }
 
 enum AppTheme {

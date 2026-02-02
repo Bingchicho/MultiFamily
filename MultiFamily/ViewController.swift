@@ -9,12 +9,12 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    @IBOutlet weak var logoLabel: UILabel!
+    @IBOutlet weak var logoLabel: AppLabel!
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var forgotButton: UIButton!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var loginButton: PrimaryButton!
+    @IBOutlet weak var forgotButton: TextButton!
+    @IBOutlet weak var registerButton: TextButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
 
@@ -29,9 +29,13 @@ final class ViewController: UIViewController {
 
     private func setupUI() {
         logoLabel.text = L10n.loginTitle
+        logoLabel.style = .title
         loginButton.isEnabled = false
         loadingIndicator.isHidden = true
         loadingBackground.isHidden = true
+        registerButton.setTitle(L10n.registerTitle, for: .normal)
+        forgotButton.setTitle(L10n.forgotPasswordTitle, for: .normal)
+        loginButton.setTitle(L10n.loginTitle, for: .normal)
  
     }
 

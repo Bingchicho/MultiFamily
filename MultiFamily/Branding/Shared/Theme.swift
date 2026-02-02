@@ -11,4 +11,5 @@ protocol Theme {
     var primary: UIColor { get }
     var secondary: UIColor { get }
     var error: UIColor { get }
+    var background: UIColor { get }
 }
