@@ -11,7 +11,7 @@ final class ViewController: UIViewController {
 
     @IBOutlet weak var logoLabel: AppLabel!
     @IBOutlet weak var accountTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: PasswordTextField!
     @IBOutlet weak var loginButton: PrimaryButton!
     @IBOutlet weak var forgotButton: TextButton!
     @IBOutlet weak var registerButton: TextButton!
@@ -26,6 +26,34 @@ final class ViewController: UIViewController {
         bindViewModel()
         setupUI()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resetUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
+    private func resetUI() {
+        // 清空輸入
+        accountTextField.text = ""
+        passwordTextField.text = ""
+        accountTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+
+        // Reset ViewModel
+        viewModel.email = ""
+        viewModel.password = ""
+
+        // Reset Button
+        loginButton.isEnabled = false
+
+        // Reset Loading
+        loadingIndicator.stopAnimating()
+        loadingIndicator.isHidden = true
+        loadingBackground.isHidden = true
+    }
 
     private func setupUI() {
         logoLabel.text = L10n.loginTitle
@@ -36,6 +64,9 @@ final class ViewController: UIViewController {
         registerButton.setTitle(L10n.registerTitle, for: .normal)
         forgotButton.setTitle(L10n.forgotPasswordTitle, for: .normal)
         loginButton.setTitle(L10n.loginTitle, for: .normal)
+        passwordTextField.enablePasswordToggle()
+        accountTextField.placeholder = L10n.emailPlaceholder
+        passwordTextField.placeholder = L10n.passwordPlaceholder
  
     }
 
@@ -126,5 +157,9 @@ final class ViewController: UIViewController {
 
     @IBAction func signinButtonAction(_ sender: UIButton) {
         // 導向註冊
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
