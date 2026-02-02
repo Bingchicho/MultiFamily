@@ -8,4 +8,7 @@
 
 login_title = "Login";
 login_button = "Sign In";
-error_network = "Network error. Please try again.";
+error_network = "Network error. Please try again";
+error_title = "Error";
+error_email_or_password = "Incorrect account or password";
+button_confirm = "Confirm";

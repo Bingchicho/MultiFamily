@@ -5,6 +5,9 @@
   Created by Sunion on 2026/1/30.
   
 */
-login_title = "登入";
-login_button = "登入";
-error_network = "網路異常，請稍後再試";
+login_title = "Login";
+login_button = "Sign In";
+error_network = "Network error. Please try again";
+error_title = "Error";
+error_email_or_password = "Incorrect account or password";
+button_confirm = "Confirm";

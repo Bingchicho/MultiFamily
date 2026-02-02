@@ -32,6 +32,7 @@ final class ViewController: UIViewController {
         loginButton.isEnabled = false
         loadingIndicator.isHidden = true
         loadingBackground.isHidden = true
+ 
     }
 
     private func bindViewModel() {
@@ -104,8 +105,8 @@ final class ViewController: UIViewController {
     }
 
     private func showErrorAlert(_ message: String) {
-        let alert = UIAlertController(title: "錯誤", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "確定", style: .default))
+        let alert = UIAlertController(title: L10n.errorTitle, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.confirmButton, style: .default))
         present(alert, animated: true)
     }
 
