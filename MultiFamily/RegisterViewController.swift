@@ -27,7 +27,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var countryLabel: AppLabel!
     @IBOutlet weak var countryTextField: UITextField!
     
-    @IBOutlet weak var termsPrivacySwitch: UISwitch!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var termsPrivacyLabel: AppLabel!
     
     @IBOutlet weak var registerButton: PrimaryButton!
@@ -42,6 +42,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = L10n.registerTitle
+        setupKeyboardHandling()
         setupUI()
         bind()
     }
@@ -110,6 +111,43 @@ class RegisterViewController: UIViewController {
     @objc private func countryChanged() {
         viewModel.country = countryTextField.text ?? ""
     
+    }
+    
+    private func setupKeyboardHandling() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard
+            let info = notification.userInfo,
+            let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        else { return }
+
+        let bottomInset = keyboardFrame.height - view.safeAreaInsets.bottom
+
+        scrollView.contentInset.bottom = bottomInset + 16
+        scrollView.verticalScrollIndicatorInsets.bottom = bottomInset
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        scrollView.contentInset.bottom = 0
+        scrollView.verticalScrollIndicatorInsets.bottom = 0
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     private func setupUI() {
