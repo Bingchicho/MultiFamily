@@ -111,6 +111,9 @@ final class ViewController: UIViewController {
         
         loadingIndicator.isHidden = !animat
         loadingBackground.isHidden = !animat
+        
+        view.isUserInteractionEnabled = !animat
+         navigationController?.view.isUserInteractionEnabled = !animat
     }
 
     private func render(_ state: LoginViewState) {

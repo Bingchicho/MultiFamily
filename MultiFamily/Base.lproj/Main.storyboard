@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -329,11 +330,28 @@
                         <outlet property="phoneTextField" destination="GRi-bx-gcT" id="DDW-FS-fkJ"/>
                         <outlet property="registerButton" destination="85G-FN-pwi" id="JqO-Ck-vRM"/>
                         <outlet property="termsPrivacyLabel" destination="xaz-9s-5sN" id="Zp7-vT-bqT"/>
+                        <segue destination="7bh-Ix-Oxb" kind="show" identifier="verify" id="EPr-iP-4au"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M9g-Nn-SyW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2214.5038167938928" y="130.98591549295776"/>
+        </scene>
+        <!--Register Verify View Controller-->
+        <scene sceneID="YtN-HX-fjq">
+            <objects>
+                <viewController id="7bh-Ix-Oxb" customClass="RegisterVerifyViewController" customModule="MultiFamily" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VBj-XO-OW3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="G9i-24-590"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2DG-Oa-bsF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kC6-ls-5Jb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3215" y="131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="n4H-Cn-n4i">
@@ -361,5 +379,8 @@
         <namedColor name="Primary">
             <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -36,6 +36,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var loadingBackground: UIView!
     
     var viewModel: RegisterViewModel!
+    private var verifyEmail: String?
+    private var verifyTicket: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,6 +214,9 @@ class RegisterViewController: UIViewController {
         
         loadingIndicator.isHidden = !animat
         loadingBackground.isHidden = !animat
+        
+        view.isUserInteractionEnabled = !animat
+         navigationController?.view.isUserInteractionEnabled = !animat
     }
     
     private func render(_ state: RegisterViewState) {
@@ -237,10 +242,17 @@ class RegisterViewController: UIViewController {
         switch route {
             
         case .verification(let email, let ticket):
-            // 導向驗證頁
-            //   let vc = VerificationViewController(email: email)
-            //   navigationController?.pushViewController(vc, animated: true)
-            break
+            self.verifyEmail = email
+            self.verifyTicket = ticket
+            self.performSegue(withIdentifier: "verify", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "verify",
+           let vc = segue.destination as? RegisterVerifyViewController {
+            vc.email = verifyEmail
+            vc.ticket = verifyTicket
         }
     }
     
