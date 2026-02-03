@@ -12,6 +12,7 @@ enum AppLogger {
 
     private static let subsystem = Bundle.main.bundleIdentifier ?? "App"
 
+    @available(iOS 14.0, *)
     private static let loggers: [LogCategory: Logger] = {
         Dictionary(uniqueKeysWithValues:
             LogCategory.allCases.map {
@@ -32,16 +33,21 @@ enum AppLogger {
         let formatted = format(level, category, masked, metadata)
 
         // OSLog
-        let logger = loggers[category]!
-        switch level {
-        case .debug:
-            logger.debug("\(formatted, privacy: .private)")
-        case .info:
-            logger.info("\(formatted, privacy: .private)")
-        case .warning:
-            logger.warning("\(formatted, privacy: .private)")
-        case .error:
-            logger.error("\(formatted, privacy: .private)")
+        if #available(iOS 14.0, *) {
+            let logger = loggers[category]!
+            switch level {
+            case .debug:
+                logger.debug("\(formatted, privacy: .private)")
+            case .info:
+                logger.info("\(formatted, privacy: .private)")
+            case .warning:
+                logger.warning("\(formatted, privacy: .private)")
+            case .error:
+                logger.error("\(formatted, privacy: .private)")
+            }
+        } else {
+            let oslog = OSLog(subsystem: subsystem, category: category.rawValue)
+            os_log("%{public}@", log: oslog, type: level.osLogType, formatted)
         }
 
         // File
@@ -87,4 +93,16 @@ private extension AppLogger {
         formatter.timeZone = TimeZone.current
         return formatter
     }()
+}
+
+
+private extension LogLevel {
+    var osLogType: OSLogType {
+        switch self {
+        case .debug: return .debug
+        case .info: return .info
+        case .warning: return .default
+        case .error: return .error
+        }
+    }
 }
