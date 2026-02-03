@@ -50,19 +50,69 @@ class RegisterViewController: UIViewController {
         )
         
         viewModel.onStateChange = { [weak self] state in
-            self?.render(state)
+            DispatchQueue.main.async {
+                self?.render(state)
+            }
+           
         }
 
         viewModel.onRoute = { [weak self] route in
-            self?.handle(route)
+            DispatchQueue.main.async {
+                self?.handle(route)
+            }
+         
         }
         
         viewModel.onOpenLink = { [weak self] link in
-            self?.openURL(link.urlString)
+            DispatchQueue.main.async {
+                self?.openURL(link.urlString)
+            }
+            
+            
         }
+        
+        
+        emailTextField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
+        confirmPasswordTextField.addTarget(self, action: #selector(confirmPasswordChanged), for: .editingChanged)
+        nametTextField.addTarget(self, action: #selector(nameChanged), for: .editingChanged)
+        phoneTextField.addTarget(self, action: #selector(phoneChanged), for: .editingChanged)
+        countryTextField.addTarget(self, action: #selector(countryChanged), for: .editingChanged)
+    }
+    
+    @objc private func emailChanged() {
+        viewModel.email = emailTextField.text ?? ""
+        registerButton.isEnabled = viewModel.isRegisterEnabled
+    }
+
+    @objc private func passwordChanged() {
+        viewModel.password = passwordTextField.text ?? ""
+        registerButton.isEnabled = viewModel.isRegisterEnabled
+    }
+    
+    @objc private func confirmPasswordChanged() {
+        viewModel.confirmPassword = confirmPasswordTextField.text ?? ""
+        registerButton.isEnabled = viewModel.isRegisterEnabled
+    }
+    
+    @objc private func nameChanged() {
+        viewModel.name = nametTextField.text ?? ""
+        registerButton.isEnabled = viewModel.isRegisterEnabled
+    }
+    
+    @objc private func phoneChanged() {
+        viewModel.phone = phoneTextField.text ?? ""
+    
+    }
+    
+    @objc private func countryChanged() {
+        viewModel.country = countryTextField.text ?? ""
+    
     }
     
     private func setupUI() {
+        registerButton.isEnabled = false
+        
         emailLabel.style = .body
         passwordLabel.style = .body
         confirmPasswordLabel.style = .body
@@ -97,7 +147,7 @@ class RegisterViewController: UIViewController {
         let fullText =
             L10n.termsConditions1 + " " +
             L10n.termsConfitions + " " +
-            L10n.termsConditions1 + " " +
+            L10n.termsConditions2 + " " +
             L10n.privacyPolicy
 
         let attributed = NSMutableAttributedString(string: fullText)
@@ -202,6 +252,10 @@ class RegisterViewController: UIViewController {
         )
         alert.addAction(UIAlertAction(title: L10n.confirmButton, style: .default))
         present(alert, animated: true)
+    }
+    
+    @IBAction func registerButtonAction(_ sender: UIButton) {
+        viewModel.register()
     }
 
 }

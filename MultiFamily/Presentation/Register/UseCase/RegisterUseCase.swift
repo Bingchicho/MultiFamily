@@ -40,7 +40,7 @@ final class RegisterUseCaseImpl: RegisterUseCase {
                 country: country
             )
         } catch {
-            return .failure("註冊失敗，請稍後再試")
+            return .failure(L10n.registerError)
         }
     }
 }

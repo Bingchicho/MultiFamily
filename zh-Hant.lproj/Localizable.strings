@@ -30,3 +30,4 @@ phone_title = "Phone";
 country_title = "Country";
 privacy_policy_link = "https://example.com/privacy";
 terms_confitions_link = "https://example.com/terms";
+register_error = "Register fail, Please try again";

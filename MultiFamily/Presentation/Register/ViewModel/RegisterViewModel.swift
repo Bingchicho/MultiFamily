@@ -16,7 +16,7 @@ final class RegisterViewModel {
     var name: String = "" { didSet { validate() } }
     var phone: String = ""
     var country: String = ""
-    var isTermsAccepted: Bool = false { didSet { validate() } }
+
 
     // MARK: - Output
     private(set) var isRegisterEnabled: Bool = false
@@ -85,8 +85,7 @@ final class RegisterViewModel {
             isValidEmail(email) &&
             password.count >= 6 &&
             password == confirmPassword &&
-            !name.isEmpty &&
-            isTermsAccepted
+            !name.isEmpty
     }
 
     private func isValidEmail(_ value: String) -> Bool {

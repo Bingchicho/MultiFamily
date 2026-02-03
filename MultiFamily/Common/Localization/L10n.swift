@@ -32,6 +32,7 @@ enum L10n {
     static let countryTitle = NSLocalizedString("country_title", comment: "")
     static let termsLink = NSLocalizedString("terms_confitions_link", comment: "")
     static let privacyLink = NSLocalizedString("privacy_policy_link", comment: "")
+    static let registerError = NSLocalizedString("register_error", comment: "")
 }
 
 
