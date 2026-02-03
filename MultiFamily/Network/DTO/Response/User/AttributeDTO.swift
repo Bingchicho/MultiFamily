@@ -5,13 +5,13 @@
 //  Created by Sunion on 2026/1/29.
 //
 
-struct AttributeDTO: Decodable {
+struct AttributeDTO: Codable {
     let preferredUsername: String
     let preferredLanguage: String
-    let phone: String
-    let country: String
-    let debugLog: Bool
-    let permission: [PermissionDTO]
+    let phone: String?
+    let country: String?
+    let debugLog: Bool?
+    let permission: [PermissionDTO]?
 
     enum CodingKeys: String, CodingKey {
         case preferredUsername = "PreferredUsername"
@@ -23,7 +23,7 @@ struct AttributeDTO: Decodable {
     }
 }
 
-struct PermissionDTO: Decodable {
+struct PermissionDTO: Codable {
     let siteID: String
     let userRole: String
 }
@@ -37,7 +37,7 @@ extension AttributeDTO {
             phone: phone,
             country: country,
             isDebugEnabled: debugLog,
-            permissions: permission.map { $0.toDomain() }
+            permissions: permission?.map { $0.toDomain() }
         )
     }
 }

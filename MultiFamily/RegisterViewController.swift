@@ -32,11 +32,34 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var registerButton: PrimaryButton!
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingBackground: UIView!
+    
+    var viewModel: RegisterViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = L10n.registerTitle
         setupUI()
+        bind()
+    }
+    
+    private func bind() {
+        viewModel = RegisterViewModel(
+            useCase: AppAssembler.makeRegisterUseCase()
+        )
+        
+        viewModel.onStateChange = { [weak self] state in
+            self?.render(state)
+        }
+
+        viewModel.onRoute = { [weak self] route in
+            self?.handle(route)
+        }
+        
+        viewModel.onOpenLink = { [weak self] link in
+            self?.openURL(link.urlString)
+        }
     }
     
     private func setupUI() {
@@ -66,7 +89,119 @@ class RegisterViewController: UIViewController {
         confirmPasswordTextField.enablePasswordToggle()
         
         registerButton.setTitle(L10n.registerTitle, for: .normal)
+        setupUserTermsPrivacyPolicyText()
  
+    }
+    
+    private func setupUserTermsPrivacyPolicyText() {
+        let fullText =
+            L10n.termsConditions1 + " " +
+            L10n.termsConfitions + " " +
+            L10n.termsConditions1 + " " +
+            L10n.privacyPolicy
+
+        let attributed = NSMutableAttributedString(string: fullText)
+
+        let termsRange = (fullText as NSString).range(of: L10n.termsConfitions)
+        let privacyRange = (fullText as NSString).range(of: L10n.privacyPolicy)
+
+        attributed.addAttribute(.foregroundColor, value: AppTheme.current.primary, range: termsRange)
+        attributed.addAttribute(.foregroundColor, value: AppTheme.current.primary, range: privacyRange)
+
+        attributed.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: termsRange)
+        attributed.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: privacyRange)
+
+        termsPrivacyLabel.attributedText = attributed
+        termsPrivacyLabel.isUserInteractionEnabled = true
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTermsPrivacyTap(_:)))
+        termsPrivacyLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleTermsPrivacyTap(_ gesture: UITapGestureRecognizer) {
+        guard let label = gesture.view as? UILabel,
+              let text = label.attributedText?.string else { return }
+
+        let location = gesture.location(in: label)
+
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: label.bounds.size)
+        let textStorage = NSTextStorage(string: text)
+
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+
+        textContainer.lineFragmentPadding = 0
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        textContainer.lineBreakMode = label.lineBreakMode
+
+        let index = layoutManager.characterIndex(
+            for: location,
+            in: textContainer,
+            fractionOfDistanceBetweenInsertionPoints: nil
+        )
+
+        if (text as NSString).range(of: L10n.termsConfitions).contains(index) {
+            viewModel.didTapTerms()
+        } else if (text as NSString).range(of: L10n.privacyPolicy).contains(index) {
+            viewModel.didTapPrivacy()
+        }
+    }
+    
+    private func openURL(_ urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    private func holdLoading(animat: Bool) {
+        if animat {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
+        
+        loadingIndicator.isHidden = !animat
+        loadingBackground.isHidden = !animat
+    }
+    
+    private func render(_ state: RegisterViewState) {
+        switch state {
+
+        case .idle:
+            registerButton.isEnabled = viewModel.isRegisterEnabled
+            holdLoading(animat: false)
+
+        case .loading:
+            registerButton.isEnabled = false
+            holdLoading(animat: true)
+
+        case .error(let message):
+            holdLoading(animat: false)
+            registerButton.isEnabled = viewModel.isRegisterEnabled
+            
+            showError(message)
+        }
+    }
+    
+    private func handle(_ route: RegisterRoute) {
+        switch route {
+            
+        case .verification(let email, let ticket):
+            // 導向驗證頁
+            //   let vc = VerificationViewController(email: email)
+            //   navigationController?.pushViewController(vc, animated: true)
+            break
+        }
+    }
+    
+    private func showError(_ message: String) {
+        let alert = UIAlertController(
+            title: L10n.errorTitle,
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.confirmButton, style: .default))
+        present(alert, animated: true)
     }
 
 }

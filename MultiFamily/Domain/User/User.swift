@@ -23,10 +23,10 @@ enum LoginError: Error, Equatable {
 struct UserAttribute {
     let username: String
     let language: Language
-    let phone: String
-    let country: String
-    let isDebugEnabled: Bool
-    let permissions: [UserPermission]
+    let phone: String?
+    let country: String?
+    let isDebugEnabled: Bool?
+    let permissions: [UserPermission]?
 }
 
 struct UserPermission {

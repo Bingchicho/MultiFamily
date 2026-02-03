@@ -101,25 +101,30 @@ final class ViewController: UIViewController {
         viewModel.password = passwordTextField.text ?? ""
         loginButton.isEnabled = viewModel.isLoginEnabled
     }
+    
+    private func holdLoading(animat: Bool) {
+        if animat {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
+        
+        loadingIndicator.isHidden = !animat
+        loadingBackground.isHidden = !animat
+    }
 
     private func render(_ state: LoginViewState) {
         switch state {
         case .idle:
-            loadingIndicator.stopAnimating()
-            loadingIndicator.isHidden = true
-            loadingBackground.isHidden = true
+            holdLoading(animat: false)
             loginButton.isEnabled = viewModel.isLoginEnabled
 
         case .loading:
-            loadingBackground.isHidden = false
-            loadingIndicator.isHidden = false
-            loadingIndicator.startAnimating()
+            holdLoading(animat: true)
             loginButton.isEnabled = false
 
         case .error(let message):
-            loadingIndicator.stopAnimating()
-            loadingIndicator.isHidden = true
-            loadingBackground.isHidden = true
+            holdLoading(animat: false)
             showErrorAlert(message)
         }
     }

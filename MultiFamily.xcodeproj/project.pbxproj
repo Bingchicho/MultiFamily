@@ -64,15 +64,16 @@
 				Network/DTO/Response/User/AttributeDTO.swift,
 				Network/DTO/Response/User/UserResponseDTO.swift,
 				Network/DTO/Response/User/VerificationRequiredDTO.swift,
+				Network/Endpoint/RegisterEndpoint.swift,
 				Network/Endpoint/UserEndpoint.swift,
 				Network/Interceptor/AuthorizationInterceptor.swift,
-				User/Attribute/DefaultUserAttributeStore.swift,
-				User/Repository/UserRepository.swift,
-				User/Repository/UserRepositoryImpl.swift,
-				User/Token/TokenStore.swift,
-				User/UseCase/LoginUseCase.swift,
-				User/UseCase/LoginUseCaseImpl.swift,
-				User/ViewModel/LoginViewModel.swift,
+				Presentation/User/Attribute/DefaultUserAttributeStore.swift,
+				Presentation/User/Repository/UserRepository.swift,
+				Presentation/User/Repository/UserRepositoryImpl.swift,
+				Presentation/User/Token/TokenStore.swift,
+				Presentation/User/UseCase/LoginUseCase.swift,
+				Presentation/User/UseCase/LoginUseCaseImpl.swift,
+				Presentation/User/ViewModel/LoginViewModel.swift,
 			);
 			target = 5A0151192F2AEC21008A5839 /* MultiFamilyTests */;
 		};
