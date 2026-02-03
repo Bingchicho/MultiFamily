@@ -107,6 +107,7 @@ final class MockAPIClient: APIClient {
     enum CalledEndpoint {
         case login
         case refresh
+        case create
     }
 
     var calledEndpoint: CalledEndpoint?

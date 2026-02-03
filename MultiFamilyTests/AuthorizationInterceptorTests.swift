@@ -27,7 +27,8 @@ final class AuthorizationInterceptorTests: XCTestCase {
         )
 
         let apiRequest = APIRequest(
-            host: .api,
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
             path: "/profile",
             method: .get,
             requiresAuth: true
@@ -54,7 +55,8 @@ final class AuthorizationInterceptorTests: XCTestCase {
         )
 
         let apiRequest = APIRequest(
-            host: .auth,
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
             path: "/login",
             method: .post,
             requiresAuth: false
@@ -80,7 +82,8 @@ final class AuthorizationInterceptorTests: XCTestCase {
         )
 
         let apiRequest = APIRequest(
-            host: .api,
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
             path: "/profile",
             method: .get,
             requiresAuth: true
