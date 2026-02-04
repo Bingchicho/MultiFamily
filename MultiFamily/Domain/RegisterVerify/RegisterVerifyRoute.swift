@@ -7,4 +7,5 @@
 
 enum RegisterVerifyRoute {
     case login
+    case resend
 }

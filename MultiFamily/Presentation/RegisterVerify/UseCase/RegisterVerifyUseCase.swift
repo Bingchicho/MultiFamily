@@ -7,10 +7,13 @@
 
 protocol RegisterVerifyUseCase {
     func verify(ticket: String,code: String) async -> RegisterVerifyResult
+    func resend(email: String) async -> VerifyResendResult
 }
 
 
 final class RegisterVerifyUseCaseImpl: RegisterVerifyUseCase {
+
+    
 
     private let repository: RegisterVerifyRepository
 
@@ -27,7 +30,17 @@ final class RegisterVerifyUseCaseImpl: RegisterVerifyUseCase {
             )
 
         } catch {
-            return .failure("驗證失敗，請稍後再試")
+            return .failure(L10n.Verify.error)
         }
     }
+    
+    func resend(email: String) async -> VerifyResendResult {
+        do {
+            return try await repository.resend(email: email)
+
+        } catch {
+            return .failure(L10n.Verify.error)
+        }
+    }
+    
 }

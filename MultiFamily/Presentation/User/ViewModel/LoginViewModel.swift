@@ -14,7 +14,6 @@ enum LoginViewState {
 enum LoginRoute {
     case home
     case verification(ticket: String)
-    case locked(until: Date)
 }
 
 final class LoginViewModel {
@@ -69,9 +68,6 @@ final class LoginViewModel {
 
         case .verificationRequired(let ticket):
             onRoute?(.verification(ticket: ticket))
-
-        case .locked(let until):
-            onRoute?(.locked(until: until))
 
         case .failure:
             state = .error(L10n.Login.Error.invalid)

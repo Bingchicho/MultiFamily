@@ -6,7 +6,8 @@
 //
 
 protocol RegisterVerifyRepository {
-    func verify(ticket: String, code: String) async throws -> RegisterVerifyResult 
+    func verify(ticket: String, code: String) async throws -> RegisterVerifyResult
+    func resend(email: String) async throws -> VerifyResendResult
 }
 
 

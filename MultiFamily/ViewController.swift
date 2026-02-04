@@ -142,8 +142,6 @@ final class ViewController: UIViewController {
             // 導向驗證頁
             print("Navigate to Verification with ticket:", ticket)
 
-        case .locked(let until):
-            showErrorAlert("帳號已鎖定至 \(until)")
         }
     }
 

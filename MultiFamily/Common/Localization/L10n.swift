@@ -104,6 +104,8 @@ internal enum L10n {
   internal enum Verify {
     /// Verification code has been sent to
     internal static let content = L10n.tr("Localizable", "verify.content", fallback: "Verification code has been sent to")
+    /// Verify Code error, Please try again
+    internal static let error = L10n.tr("Localizable", "verify.error", fallback: "Verify Code error, Please try again")
     /// Register Verify
     internal static let title = L10n.tr("Localizable", "verify.title", fallback: "Register Verify")
     internal enum Button {
@@ -115,6 +117,18 @@ internal enum L10n {
     internal enum Code {
       /// Verify Code
       internal static let placeholder = L10n.tr("Localizable", "verify.code.placeholder", fallback: "Verify Code")
+    }
+    internal enum Resend {
+      /// Resend Verify Code (%ds)
+      internal static func cooldown(_ p1: Int) -> String {
+        return L10n.tr("Localizable", "verify.resend.cooldown", p1, fallback: "Resend Verify Code (%ds)")
+      }
+      /// Resend Verify Code error, Please try again
+      internal static let error = L10n.tr("Localizable", "verify.resend.error", fallback: "Resend Verify Code error, Please try again")
+      /// New Verify Code is send to %@
+      internal static func success(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "verify.resend.success", String(describing: p1), fallback: "New Verify Code is send to %@")
+      }
     }
     internal enum Success {
       /// You can login now

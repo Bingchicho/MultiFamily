@@ -71,6 +71,8 @@ class RegisterVerifyViewController: UIViewController {
         case .idle:
             holdLoading(animat: false)
             verifyButton.isEnabled = viewModel.isVerifyEnabled
+            resendButton.isEnabled = true
+            resendButton.setTitle(L10n.Verify.Button.resend, for: .normal)
 
         case .loading:
             holdLoading(animat: true)
@@ -79,6 +81,16 @@ class RegisterVerifyViewController: UIViewController {
         case .error(let message):
             holdLoading(animat: false)
             showError(message)
+        case .resendCooldown(let remaining):
+            resendButton.isEnabled = false
+
+            let title = L10n.Verify.Resend.cooldown(remaining)
+            if resendButton.title(for: .normal) != title {
+                UIView.performWithoutAnimation {
+                    resendButton.setTitle(title, for: .normal)
+                    resendButton.layoutIfNeeded()
+                }
+            }
         }
     }
     
@@ -89,6 +101,8 @@ class RegisterVerifyViewController: UIViewController {
             showSuccessAlert {
                 self.navigationController?.popToRootViewController(animated: true)
             }
+        case .resend:
+            showResendSuccessAlert()
         }
     }
     
@@ -134,12 +148,27 @@ class RegisterVerifyViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func showResendSuccessAlert() {
+        let alert = UIAlertController(
+            title: L10n.Verify.Resend.success(email ?? ""),
+            message: nil,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
+        present(alert, animated: true)
+    }
+    
     private func setupUI() {
         contentLabel.style = .secondary
         emailLabel.style = .body
-        
-        emailLabel.text = email
+
         verifyButton.isEnabled = false
+        
+        contentLabel.text = L10n.Verify.content
+        emailLabel.text = email
+        verifyCodeTextField.placeholder = L10n.Verify.Code.placeholder
+        resendButton.setTitle(L10n.Verify.Button.resend, for: .normal)
+        verifyButton.setTitle(L10n.Verify.Button.verify, for: .normal)
         
     }
     
@@ -162,7 +191,7 @@ class RegisterVerifyViewController: UIViewController {
     
     
     @IBAction  func resendButtonTapped(_ sender: Any) {
-        
+        viewModel.resend()
     }
     
     @IBAction  func verifyButtonTapped(_ sender: Any) {

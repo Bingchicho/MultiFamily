@@ -11,7 +11,6 @@ enum LoginResult: Equatable {
     case success
     case verificationRequired(ticket: String)
     case failure(LoginError)
-    case locked(until: Date)
 }
 
 enum LoginError: Error, Equatable {

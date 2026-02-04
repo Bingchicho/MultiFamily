@@ -7,6 +7,8 @@
 import Foundation
 
 final class RegisterVerifyViewModel {
+    
+
 
     // MARK: - Input
     var code: String = "" {
@@ -18,13 +20,22 @@ final class RegisterVerifyViewModel {
     private(set) var state: RegisterVerifyViewState = .idle {
         didSet { onStateChange?(state) }
     }
+    
+    // MARK: - Cooldown
+    private let resendCooldownSeconds = 60
+    private var resendRemaining = 0
+    private var resendTimer: Timer?
+
+    var isResendEnabled: Bool {
+        resendRemaining == 0 && !state.isLoading
+    }
 
     var onStateChange: ((RegisterVerifyViewState) -> Void)?
     var onRoute: ((RegisterVerifyRoute) -> Void)?
 
     // MARK: - Dependency
     private let email: String
-    private let ticket: String
+    private var ticket: String
     private let useCase: RegisterVerifyUseCase
 
     init(
@@ -51,8 +62,62 @@ final class RegisterVerifyViewModel {
             }
         }
     }
+    
+    func resend() {
+        guard isResendEnabled else { return }
+
+        state = .loading
+
+        Task {
+            let result = await useCase.resend(email: email)
+
+            DispatchQueue.main.async {
+                self.handleResend(result)
+            }
+        }
+    }
 
     // MARK: - Private
+    
+    private func startResendCooldown() {
+        resendTimer?.invalidate()
+
+        resendRemaining = resendCooldownSeconds
+        state = .resendCooldown(remaining: resendRemaining)
+
+        resendTimer = Timer.scheduledTimer(
+            withTimeInterval: 1,
+            repeats: true
+        ) { [weak self] timer in
+            guard let self = self else { return }
+
+            self.resendRemaining -= 1
+
+            if self.resendRemaining <= 0 {
+                timer.invalidate()
+                self.resendRemaining = 0
+                self.state = .idle
+            } else {
+                self.state = .resendCooldown(remaining: self.resendRemaining)
+            }
+        }
+    }
+    
+    private func handleResend(_ result: VerifyResendResult) {
+        state = .idle
+
+        switch result {
+        case .success(let ticket):
+            self.startResendCooldown()
+            self.ticket = ticket
+            onRoute?(.resend)
+
+        case .failure(let message):
+            state = .error(message)
+        }
+    }
+    
+    
     private func handle(_ result: RegisterVerifyResult) {
         state = .idle
 

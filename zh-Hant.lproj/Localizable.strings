@@ -60,3 +60,10 @@
 
 "verify.success.title" = "Register Success";
 "verify.success.content" = "You can login now";
+
+"verify.error" = "Verify Code error, Please try again";
+"verify.resend.error" = "Resend Verify Code error, Please try again";
+
+"verify.resend.success" = "New Verify Code is send to %@";
+
+"verify.resend.cooldown" = "Resend Verify Code (%ds)";

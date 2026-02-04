@@ -28,4 +28,15 @@ enum RegisterEndpoint {
         )
     }
     
+    static func resend(_ dto: VerifyResendRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/user/verify/resend",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
+    
 }
