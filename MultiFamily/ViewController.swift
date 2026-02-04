@@ -56,17 +56,17 @@ final class ViewController: UIViewController {
     }
 
     private func setupUI() {
-        logoLabel.text = L10n.loginTitle
+        logoLabel.text = L10n.Login.title
         logoLabel.style = .title
         loginButton.isEnabled = false
         loadingIndicator.isHidden = true
         loadingBackground.isHidden = true
-        registerButton.setTitle(L10n.registerTitle, for: .normal)
-        forgotButton.setTitle(L10n.forgotPasswordTitle, for: .normal)
-        loginButton.setTitle(L10n.loginTitle, for: .normal)
+        registerButton.setTitle(L10n.Register.title, for: .normal)
+        forgotButton.setTitle(L10n.Login.forgotPassword, for: .normal)
+        loginButton.setTitle(L10n.Login.title, for: .normal)
         passwordTextField.enablePasswordToggle()
-        accountTextField.placeholder = L10n.emailPlaceholder
-        passwordTextField.placeholder = L10n.passwordPlaceholder
+        accountTextField.placeholder = L10n.Login.Email.placeholder
+        passwordTextField.placeholder = L10n.Login.Password.placeholder
  
     }
 
@@ -148,8 +148,8 @@ final class ViewController: UIViewController {
     }
 
     private func showErrorAlert(_ message: String) {
-        let alert = UIAlertController(title: L10n.errorTitle, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: L10n.confirmButton, style: .default))
+        let alert = UIAlertController(title: L10n.Common.Error.title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
         present(alert, animated: true)
     }
 

@@ -12,9 +12,9 @@ enum RegisterLink {
     var urlString: String {
         switch self {
         case .terms:
-            return L10n.termsLink
+            return L10n.Register.Terms.link
         case .privacy:
-            return L10n.privacyLink
+            return L10n.Register.Privacy.link
         }
     }
 }

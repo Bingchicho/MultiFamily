@@ -1,36 +1,62 @@
-/* 
-  Localizable.strings
-  MultiFamily
+/*
+ Localizable.strings
+ MultiFamily
 
-  Created by Sunion on 2026/1/30.
-  
+ Generated & maintained for SwiftGen
 */
 
-login_title = "Login";
-error_network = "Network error. Please try again";
-error_title = "Error";
-error_email_or_password = "Incorrect account or password";
-button_confirm = "Confirm";
-register_title = "Register";
-forgot_password_title = "Forgot Password";
-email_placeholder = "email";
-password_placeholder = "password";
-confirm_password_placeholder = "confirm password";
-name_placeholder = "name";
-option_placeholder = "Option";
-terms_confitions_1 = "By clicking Register, you agree to our ";
-terms_confitions_2 = " and that you have read our ";
-privacy_policy = "Privacy Policy";
-terms_confitions = "Terms & Conditions";
-email_title = "Email";
-password_title = "Password";
-confirm_password_title = "Confirm Password";
-name_title = "Name";
-phone_title = "Phone";
-country_title = "Country";
-privacy_policy_link = "https://example.com/privacy";
-terms_confitions_link = "https://example.com/terms";
-register_error = "Register fail, Please try again";
-verify_title = "Register Verify";
-register_success_title = "Register Success";
-register_success_content = "You can Login now";
+// ==========================
+// Common
+// ==========================
+"common.error.title" = "Error";
+"common.error.network" = "Network error. Please try again";
+"common.button.confirm" = "Confirm";
+
+// ==========================
+// Login
+// ==========================
+"login.title" = "Login";
+"login.email.placeholder" = "Email";
+"login.password.placeholder" = "Password";
+"login.error.invalid" = "Incorrect account or password";
+"login.forgot_password" = "Forgot Password";
+
+// ==========================
+// Register
+// ==========================
+"register.title" = "Register";
+"register.error" = "Register failed. Please try again";
+
+"register.name.placeholder" = "Name";
+"register.email.placeholder" = "Email";
+"register.password.placeholder" = "Password";
+"register.confirm_password.placeholder" = "Confirm password";
+"register.option.placeholder" = "Option";
+
+"register.name.title" = "Name";
+"register.email.title" = "Email";
+"register.password.title" = "Password";
+"register.confirm_password.title" = "Confirm Password";
+"register.phone.title" = "Phone";
+"register.country.title" = "Country";
+
+// Terms & Privacy (split text + link)
+"register.terms.prefix" = "By clicking Register, you agree to our ";
+"register.terms.terms" = "Terms & Conditions";
+"register.terms.middle" = " and that you have read our ";
+"register.terms.privacy" = "Privacy Policy";
+
+"register.terms.link" = "https://example.com/terms";
+"register.privacy.link" = "https://example.com/privacy";
+
+// ==========================
+// Verify (Register Verify)
+// ==========================
+"verify.title" = "Register Verify";
+"verify.content" = "Verification code has been sent to";
+"verify.code.placeholder" = "Verify Code";
+"verify.button.verify" = "Verify";
+"verify.button.resend" = "Resend Verify Code";
+
+"verify.success.title" = "Register Success";
+"verify.success.content" = "You can login now";

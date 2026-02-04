@@ -74,7 +74,7 @@ final class LoginViewModel {
             onRoute?(.locked(until: until))
 
         case .failure:
-            state = .error(L10n.emailOrPasswordError)
+            state = .error(L10n.Login.Error.invalid)
         }
     }
 

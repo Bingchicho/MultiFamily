@@ -171,6 +171,7 @@
 				5A0150FD2F2AEC20008A5839 /* Sources */,
 				5A0150FE2F2AEC20008A5839 /* Frameworks */,
 				5A0150FF2F2AEC20008A5839 /* Resources */,
+				5A4EC1182F32ED2900E391CF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -303,6 +304,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5A4EC1182F32ED2900E391CF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nif which swiftgen >/dev/null; then\n  echo \"🧬 SwiftGen: Generating L10n.swift\"\n  swiftgen\nelse\n  echo \"⚠️ SwiftGen not installed. Run: brew install swiftgen\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5A0150FD2F2AEC20008A5839 /* Sources */ = {

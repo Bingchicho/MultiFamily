@@ -28,7 +28,7 @@ class RegisterVerifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = L10n.registerVerifyTitle
+        self.title = L10n.Register.title
         setLeftTopBackButton()
         setupUI()
         
@@ -108,23 +108,23 @@ class RegisterVerifyViewController: UIViewController {
     
     private func showError(_ message: String) {
         let alert = UIAlertController(
-            title: L10n.errorTitle,
+            title: L10n.Common.Error.title,
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: L10n.confirmButton, style: .default))
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
         present(alert, animated: true)
     }
     
     private func showSuccessAlert(onConfirm: @escaping () -> Void) {
         let alert = UIAlertController(
-            title: L10n.registerSuccessTitle,
-            message: L10n.registerSucessContent,
+            title: L10n.Verify.Success.title,
+            message: L10n.Verify.Success.content,
             preferredStyle: .alert
         )
         alert.addAction(
             UIAlertAction(
-                title: L10n.confirmButton,
+                title: L10n.Common.Button.confirm,
                 style: .default,
                 handler: { _ in
                     onConfirm()

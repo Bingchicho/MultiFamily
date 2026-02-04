@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = L10n.registerTitle
+        self.title = L10n.Register.title
         setupKeyboardHandling()
         setupUI()
         bind()
@@ -161,39 +161,39 @@ class RegisterViewController: UIViewController {
         countryLabel.style = .body
         termsPrivacyLabel.style = .secondary
         
-        emailLabel.text = L10n.emailTitle
-        passwordLabel.text = L10n.passwordTitle
-        confirmPasswordLabel.text = L10n.confirmPasswordPlaceholder
-        nameLabel.text = L10n.nameTitle
-        phoneLabel.text = L10n.phoneTitle
-        countryLabel.text = L10n.countryTitle
+        emailLabel.text = L10n.Register.Email.title
+        passwordLabel.text = L10n.Register.Password.title
+        confirmPasswordLabel.text = L10n.Register.ConfirmPassword.title
+        nameLabel.text = L10n.Register.Name.title
+        phoneLabel.text = L10n.Register.Phone.title
+        countryLabel.text = L10n.Register.Country.title
         
-        emailTextField.placeholder = L10n.emailPlaceholder
-        passwordTextField.placeholder = L10n.passwordPlaceholder
-        confirmPasswordTextField.placeholder = L10n.confirmPasswordPlaceholder
-        nametTextField.placeholder = L10n.namePlaceholder
-        phoneTextField.placeholder = L10n.optionPlaceholder
-        countryTextField.placeholder = L10n.optionPlaceholder
+        emailTextField.placeholder = L10n.Register.Email.placeholder
+        passwordTextField.placeholder = L10n.Register.Password.placeholder
+        confirmPasswordTextField.placeholder = L10n.Register.ConfirmPassword.placeholder
+        nametTextField.placeholder = L10n.Register.Name.placeholder
+        phoneTextField.placeholder = L10n.Register.Option.placeholder
+        countryTextField.placeholder = L10n.Register.Option.placeholder
         
         passwordTextField.enablePasswordToggle()
         confirmPasswordTextField.enablePasswordToggle()
         
-        registerButton.setTitle(L10n.registerTitle, for: .normal)
+        registerButton.setTitle(L10n.Register.title, for: .normal)
         setupUserTermsPrivacyPolicyText()
  
     }
     
     private func setupUserTermsPrivacyPolicyText() {
         let fullText =
-            L10n.termsConditions1 + " " +
-            L10n.termsConfitions + " " +
-            L10n.termsConditions2 + " " +
-            L10n.privacyPolicy
+        L10n.Register.Terms.prefix + " " +
+        L10n.Register.Terms.terms + " " +
+        L10n.Register.Terms.middle + " " +
+        L10n.Register.Terms.privacy
 
         let attributed = NSMutableAttributedString(string: fullText)
 
-        let termsRange = (fullText as NSString).range(of: L10n.termsConfitions)
-        let privacyRange = (fullText as NSString).range(of: L10n.privacyPolicy)
+        let termsRange = (fullText as NSString).range(of: L10n.Register.Terms.terms)
+        let privacyRange = (fullText as NSString).range(of: L10n.Register.Terms.privacy)
 
         attributed.addAttribute(.foregroundColor, value: AppTheme.current.primary, range: termsRange)
         attributed.addAttribute(.foregroundColor, value: AppTheme.current.primary, range: privacyRange)
@@ -231,9 +231,9 @@ class RegisterViewController: UIViewController {
             fractionOfDistanceBetweenInsertionPoints: nil
         )
 
-        if (text as NSString).range(of: L10n.termsConfitions).contains(index) {
+        if (text as NSString).range(of: L10n.Register.Terms.terms).contains(index) {
             viewModel.didTapTerms()
-        } else if (text as NSString).range(of: L10n.privacyPolicy).contains(index) {
+        } else if (text as NSString).range(of: L10n.Register.Terms.privacy).contains(index) {
             viewModel.didTapPrivacy()
         }
     }
@@ -296,11 +296,11 @@ class RegisterViewController: UIViewController {
     
     private func showError(_ message: String) {
         let alert = UIAlertController(
-            title: L10n.errorTitle,
+            title: L10n.Common.Error.title,
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: L10n.confirmButton, style: .default))
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
         present(alert, animated: true)
     }
     
