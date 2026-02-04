@@ -7,9 +7,6 @@
 
 final class RegisterVerifyRepositoryImpl: RegisterVerifyRepository {
 
-    
-
-    
 
     private let apiClient: APIClient
     private let registerVerifyRequestFactory: RegsiterVerifyRequestFactoryProtocol

@@ -129,29 +129,7 @@ final class LoginViewModelTests: XCTestCase {
         await fulfillment(of: [exp], timeout: 1)
     }
 
-    // MARK: - Locked Route
-
-    func test_loginLocked_routesToLocked() async {
-        let exp = expectation(description: "route to locked")
-        let date = Date().addingTimeInterval(600)
-
-        sut.onRoute = { route in
-            if case .locked(let until) = route {
-                XCTAssertEqual(until, date)
-                exp.fulfill()
-            }
-        }
-
-        useCase.action = .locked(until: date)
-        sut.email = "a@test.com"
-        sut.password = "123456"
-
-        await MainActor.run {
-            sut.login()
-        }
-
-        await fulfillment(of: [exp], timeout: 1)
-    }
+   
 }
 
 final class FakeLoginUseCase: LoginUseCase {
@@ -160,7 +138,6 @@ final class FakeLoginUseCase: LoginUseCase {
         case success
         case verification(ticket: String)
         case failure(LoginError)
-        case locked(until: Date)
     }
 
     var action: Action = .success
@@ -179,8 +156,8 @@ final class FakeLoginUseCase: LoginUseCase {
             return .verificationRequired(ticket: ticket)
         case .failure(let error):
             return .failure(error)
-        case .locked(let until):
-            return .locked(until: until)
+
+
         }
     }
 

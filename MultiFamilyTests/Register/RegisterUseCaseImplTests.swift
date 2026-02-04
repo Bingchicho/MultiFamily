@@ -74,7 +74,7 @@ final class RegisterUseCaseImplTests: XCTestCase {
         // then
         switch result {
         case .failure(let message):
-            XCTAssertEqual(message, "註冊失敗，請稍後再試")
+            XCTAssertEqual(message, L10n.Register.error)
         default:
             XCTFail("Expected generic failure")
         }

@@ -65,7 +65,8 @@ final class LoginUseCaseImplTests: XCTestCase {
         {
           "verifyRequired": true,
           "verifyRequiredAction": "EMAIL",
-          "ticket": "test-ticket"
+          "ticket": "test-ticket",
+          "clientToken": "TEST_CLIENT_TOKEN"
         }
         """.data(using: .utf8)!
 
