@@ -25,7 +25,7 @@ extension RegisterResponseDTO {
         if verifyRequired {
             return .success(ticket: ticket)
         } else {
-            return .failure("註冊失敗")
+            return .failure(L10n.registerError)
         }
     }
 }

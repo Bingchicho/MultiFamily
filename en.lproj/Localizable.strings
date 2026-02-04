@@ -30,3 +30,6 @@ country_title = "Country";
 privacy_policy_link = "https://example.com/privacy";
 terms_confitions_link = "https://example.com/terms";
 register_error = "Register fail, Please try again";
+verify_title = "Register Verify";
+register_success_title = "Register Success";
+register_success_content = "You can Login now";

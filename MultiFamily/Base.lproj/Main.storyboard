@@ -286,7 +286,7 @@
                                                         <rect key="frame" x="0.0" y="562.33333333333337" width="329" height="34.333333333333371"/>
                                                         <color key="tintColor" name="Primary"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="REGISTER"/>
                                                         <connections>
                                                             <action selector="registerButtonAction:" destination="c6M-rK-Mit" eventType="touchUpInside" id="Qpc-7H-341"/>
                                                         </connections>
@@ -374,10 +374,99 @@
                     <view key="view" contentMode="scaleToFill" id="VBj-XO-OW3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VhB-C4-LPf">
+                                <rect key="frame" x="39.333333333333343" y="260.33333333333331" width="314.33333333333326" height="235.66666666666669"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qkb-sx-fMj">
+                                        <rect key="frame" x="9.3333333333333428" y="0.0" width="295.66666666666663" height="61"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERIFICATION CODE HAS BEEN SENT TO " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXx-Gl-xTo" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="295.66666666666669" height="40.666666666666664"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXAMPLE@MAIL.COM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbL-sx-QkR" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="40.666666666666686" width="295.66666666666669" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rlD-jM-aYa">
+                                        <rect key="frame" x="0.0" y="93" width="314.33333333333331" height="76.333333333333314"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOE-gN-zkS">
+                                                <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCh-Ql-ArV" customClass="TextButton" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="42" width="199" height="34.333333333333343"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="RESEND VERIFY CODE"/>
+                                                <connections>
+                                                    <action selector="resendButtonTapped:" destination="7bh-Ix-Oxb" eventType="touchUpInside" id="iPJ-gC-OdR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="iOE-gN-zkS" firstAttribute="width" secondItem="rlD-jM-aYa" secondAttribute="width" id="ecG-AY-p7K"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvo-bj-T0R" customClass="PrimaryButton" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="201.33333333333337" width="314.33333333333331" height="34.333333333333343"/>
+                                        <color key="tintColor" name="Primary"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="VERIFY"/>
+                                        <connections>
+                                            <action selector="verifyButtonTapped:" destination="7bh-Ix-Oxb" eventType="touchUpInside" id="dYN-zh-YTT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vvo-bj-T0R" firstAttribute="width" secondItem="VhB-C4-LPf" secondAttribute="width" id="8b1-aT-Kfc"/>
+                                    <constraint firstItem="rlD-jM-aYa" firstAttribute="width" secondItem="VhB-C4-LPf" secondAttribute="width" id="ETD-tX-EiU"/>
+                                </constraints>
+                            </stackView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCZ-f3-4Ys">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6i9-bg-SeU">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="6i9-bg-SeU" firstAttribute="centerY" secondItem="VCZ-f3-4Ys" secondAttribute="centerY" id="U32-Bg-MkK"/>
+                                    <constraint firstItem="6i9-bg-SeU" firstAttribute="centerX" secondItem="VCZ-f3-4Ys" secondAttribute="centerX" id="cVH-Ic-ggj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="G9i-24-590"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="G9i-24-590" firstAttribute="trailing" secondItem="VCZ-f3-4Ys" secondAttribute="trailing" id="1Mh-mj-C3V"/>
+                            <constraint firstItem="VhB-C4-LPf" firstAttribute="centerY" secondItem="G9i-24-590" secondAttribute="centerY" constant="-100" id="2hg-Qd-eBA"/>
+                            <constraint firstItem="VCZ-f3-4Ys" firstAttribute="leading" secondItem="G9i-24-590" secondAttribute="leading" id="I9N-Vs-iTc"/>
+                            <constraint firstItem="VhB-C4-LPf" firstAttribute="width" secondItem="VBj-XO-OW3" secondAttribute="width" multiplier="0.8" id="IKo-ct-NnK"/>
+                            <constraint firstAttribute="top" secondItem="VCZ-f3-4Ys" secondAttribute="top" id="neX-4c-MRN"/>
+                            <constraint firstItem="VCZ-f3-4Ys" firstAttribute="bottom" secondItem="VBj-XO-OW3" secondAttribute="bottom" id="qan-aG-Lr7"/>
+                            <constraint firstItem="VhB-C4-LPf" firstAttribute="centerX" secondItem="G9i-24-590" secondAttribute="centerX" id="rWQ-EY-e0m"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2DG-Oa-bsF"/>
+                    <connections>
+                        <outlet property="contentLabel" destination="SXx-Gl-xTo" id="bRD-sP-h3Z"/>
+                        <outlet property="emailLabel" destination="DbL-sx-QkR" id="R0g-OZ-MCq"/>
+                        <outlet property="loadingBackground" destination="VCZ-f3-4Ys" id="Mwl-WZ-CHf"/>
+                        <outlet property="loadingIndicator" destination="6i9-bg-SeU" id="Yol-T6-LzH"/>
+                        <outlet property="resendButton" destination="zCh-Ql-ArV" id="hQN-mQ-2dE"/>
+                        <outlet property="verifyButton" destination="vvo-bj-T0R" id="mnj-Ly-i0V"/>
+                        <outlet property="verifyCodeTextField" destination="iOE-gN-zkS" id="ixi-7V-CHi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kC6-ls-5Jb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

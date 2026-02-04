@@ -66,6 +66,7 @@
 				Network/Core/URLSessionAPIClient.swift,
 				Network/DTO/Request/Register/RegisterRequestDTO.swift,
 				Network/DTO/Request/Register/RegisterRequestFactory.swift,
+				Network/DTO/Request/RegisterVerify/RegsiterVerifyRequestFactory.swift,
 				Network/DTO/Request/User/LoginPayloadDTO.swift,
 				Network/DTO/Request/User/RefreshTokenPayloadDTO.swift,
 				Network/DTO/Request/User/UserRequestDTO.swift,

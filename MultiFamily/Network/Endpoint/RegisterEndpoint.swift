@@ -17,6 +17,15 @@ enum RegisterEndpoint {
         )
     }
     
-
+    static func verify(_ dto: RegisterVerifyRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/user/verify",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
     
 }
