@@ -24,6 +24,46 @@ internal enum L10n {
       ///  Generated & maintained for SwiftGen
       internal static let title = L10n.tr("Localizable", "common.error.title", fallback: "Error")
     }
+    internal enum Notice {
+      /// Notice
+      internal static let title = L10n.tr("Localizable", "common.notice.title", fallback: "Notice")
+    }
+  }
+  internal enum Forgotpassword {
+    /// Forgot Password
+    internal static let title = L10n.tr("Localizable", "forgotpassword.title", fallback: "Forgot Password")
+    internal enum Button {
+      /// Verify
+      internal static let getcode = L10n.tr("Localizable", "forgotpassword.button.getcode", fallback: "Verify")
+      /// Resend Verify Code
+      internal static let resend = L10n.tr("Localizable", "forgotpassword.button.resend", fallback: "Resend Verify Code")
+    }
+    internal enum Code {
+      /// Verify Code error, Please try again
+      internal static let error = L10n.tr("Localizable", "forgotpassword.code.error", fallback: "Verify Code error, Please try again")
+      /// Verify Code
+      internal static let placeholder = L10n.tr("Localizable", "forgotpassword.code.placeholder", fallback: "Verify Code")
+      /// Resend Verify Code(%@s)
+      internal static func resend(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "forgotpassword.code.resend", String(describing: p1), fallback: "Resend Verify Code(%@s)")
+      }
+      /// Verify Code is send to %@
+      internal static func success(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "forgotpassword.code.success", String(describing: p1), fallback: "Verify Code is send to %@")
+      }
+    }
+    internal enum ConfirmPassword {
+      /// Confirm Password
+      internal static let title = L10n.tr("Localizable", "forgotpassword.confirm_password.title", fallback: "Confirm Password")
+    }
+    internal enum Email {
+      /// Email
+      internal static let placeholder = L10n.tr("Localizable", "forgotpassword.email.placeholder", fallback: "Email")
+    }
+    internal enum Password {
+      /// Password
+      internal static let title = L10n.tr("Localizable", "forgotpassword.password.title", fallback: "Password")
+    }
   }
   internal enum Login {
     /// Forgot Password

@@ -28,7 +28,7 @@ class RegisterVerifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = L10n.Register.title
+        self.title = L10n.Verify.title
         setLeftTopBackButton()
         setupUI()
         

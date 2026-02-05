@@ -72,6 +72,7 @@
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="forgotButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tXW-uW-pKJ"/>
+                                                    <segue destination="C6s-7h-fiq" kind="show" id="s1a-9y-b1Z"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCW-Du-V4d" customClass="TextButton" customModule="MultiFamily" customModuleProvider="target">
@@ -137,7 +138,190 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1059" y="131"/>
+            <point key="canvasLocation" x="1189" y="131"/>
+        </scene>
+        <!--Forgot Password View Controller-->
+        <scene sceneID="ard-mp-zfK">
+            <objects>
+                <viewController id="C6s-7h-fiq" customClass="ForgotPasswordViewController" customModule="MultiFamily" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uqF-IE-9HF">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="on0-sw-47F">
+                                <rect key="frame" x="0.0" y="172" width="393" height="680"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7X-nP-MVF">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="438"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="APV-ff-vmd">
+                                                <rect key="frame" x="32" y="32" width="329" height="406"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yCx-2J-eA1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="329" height="96.333333333333329"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="EMAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OgG-52-Eep">
+                                                                <rect key="frame" x="0.0" y="0.0" width="329" height="34"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="emailChanged:" destination="C6s-7h-fiq" eventType="editingChanged" id="0EI-9Q-qUV"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHi-Y1-UQt" customClass="PrimaryButton" customModule="MultiFamily" customModuleProvider="target">
+                                                                <rect key="frame" x="220.33333333333334" y="42" width="108.66666666666666" height="54.333333333333343"/>
+                                                                <color key="tintColor" name="Primary"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="filled" title="VERIFYCODE"/>
+                                                                <connections>
+                                                                    <action selector="verifyButtonAction:" destination="C6s-7h-fiq" eventType="touchUpInside" id="Rwc-6Z-F36"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="OgG-52-Eep" firstAttribute="width" secondItem="yCx-2J-eA1" secondAttribute="width" id="1Zc-kw-hcX"/>
+                                                            <constraint firstItem="eHi-Y1-UQt" firstAttribute="width" secondItem="yCx-2J-eA1" secondAttribute="width" multiplier="0.33" id="CQv-aY-ENk"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="sdQ-O3-Bvy">
+                                                        <rect key="frame" x="0.0" y="129.33333333333329" width="329" height="276.66666666666674"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pai-TE-uZ9">
+                                                                <rect key="frame" x="0.0" y="0.0" width="329" height="76.333333333333329"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="VERIFY CODE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="meJ-WV-9y6">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="329" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="codeChanged:" destination="C6s-7h-fiq" eventType="editingChanged" id="VY4-Id-7Be"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hi-qd-RLr" customClass="TextButton" customModule="MultiFamily" customModuleProvider="target">
+                                                                        <rect key="frame" x="240.33333333333329" y="42" width="88.666666666666657" height="34.333333333333343"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="plain" title="RESEND"/>
+                                                                        <connections>
+                                                                            <action selector="resendButtonAction:" destination="C6s-7h-fiq" eventType="touchUpInside" id="aDD-jl-Qnh"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="meJ-WV-9y6" firstAttribute="width" secondItem="pai-TE-uZ9" secondAttribute="width" id="5mR-vI-Hc3"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="dYw-Jd-xXY">
+                                                                <rect key="frame" x="0.0" y="108.33333333333339" width="329" height="168.33333333333337"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NEW PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iAl-7g-S7R" customClass="PasswordTextField" customModule="MultiFamily" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="329" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="passwordChanged:" destination="C6s-7h-fiq" eventType="editingChanged" id="TWo-m1-pd3"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CONFIRM PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SXL-3e-RQ4" customClass="PasswordTextField" customModule="MultiFamily" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="67" width="329" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="confirmPasswordChanged:" destination="C6s-7h-fiq" eventType="editingChanged" id="ynV-ge-bpp"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IjB-xS-PYc" customClass="PrimaryButton" customModule="MultiFamily" customModuleProvider="target">
+                                                                        <rect key="frame" x="33" y="133.99999999999994" width="263" height="34.333333333333343"/>
+                                                                        <color key="tintColor" name="Primary"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="filled" title="CONFIRM"/>
+                                                                        <connections>
+                                                                            <action selector="confirmButtonAction:" destination="C6s-7h-fiq" eventType="touchUpInside" id="1sU-G8-e1I"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="iAl-7g-S7R" firstAttribute="width" secondItem="dYw-Jd-xXY" secondAttribute="width" id="6H1-VM-4ty"/>
+                                                                    <constraint firstItem="IjB-xS-PYc" firstAttribute="width" secondItem="dYw-Jd-xXY" secondAttribute="width" multiplier="0.8" id="uwS-uF-zEi"/>
+                                                                    <constraint firstItem="SXL-3e-RQ4" firstAttribute="width" secondItem="dYw-Jd-xXY" secondAttribute="width" id="z28-UI-vE5"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="dYw-Jd-xXY" firstAttribute="width" secondItem="sdQ-O3-Bvy" secondAttribute="width" id="Lzg-3a-Pry"/>
+                                                            <constraint firstItem="pai-TE-uZ9" firstAttribute="width" secondItem="sdQ-O3-Bvy" secondAttribute="width" id="gsK-PJ-CZz"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="yCx-2J-eA1" firstAttribute="width" secondItem="APV-ff-vmd" secondAttribute="width" id="Wgr-1r-qUr"/>
+                                                    <constraint firstItem="sdQ-O3-Bvy" firstAttribute="width" secondItem="APV-ff-vmd" secondAttribute="width" id="ztT-Bf-Wev"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="APV-ff-vmd" firstAttribute="leading" secondItem="P7X-nP-MVF" secondAttribute="leading" constant="32" id="6zf-IG-Wu5"/>
+                                            <constraint firstItem="APV-ff-vmd" firstAttribute="top" secondItem="P7X-nP-MVF" secondAttribute="top" constant="32" id="IHd-54-30B"/>
+                                            <constraint firstAttribute="bottom" secondItem="APV-ff-vmd" secondAttribute="bottom" id="dsn-pj-FjR"/>
+                                            <constraint firstAttribute="trailing" secondItem="APV-ff-vmd" secondAttribute="trailing" constant="32" id="sIt-9Z-ykT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="P7X-nP-MVF" firstAttribute="width" secondItem="on0-sw-47F" secondAttribute="width" id="60U-B8-m1V"/>
+                                    <constraint firstAttribute="bottom" secondItem="P7X-nP-MVF" secondAttribute="bottom" id="AIs-aW-ci8"/>
+                                    <constraint firstItem="P7X-nP-MVF" firstAttribute="top" secondItem="on0-sw-47F" secondAttribute="top" id="J3h-TO-WVc"/>
+                                    <constraint firstAttribute="trailing" secondItem="P7X-nP-MVF" secondAttribute="trailing" id="drg-X5-FwP"/>
+                                    <constraint firstItem="P7X-nP-MVF" firstAttribute="leading" secondItem="on0-sw-47F" secondAttribute="leading" id="pEO-tu-1aX"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Q2E-3v-4g6"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="DW8-l3-MaP"/>
+                            </scrollView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWR-1p-vdC">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Tdb-IY-sjz">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Tdb-IY-sjz" firstAttribute="centerX" secondItem="iWR-1p-vdC" secondAttribute="centerX" id="dd7-TC-5mq"/>
+                                    <constraint firstItem="Tdb-IY-sjz" firstAttribute="centerY" secondItem="iWR-1p-vdC" secondAttribute="centerY" id="nA8-Zq-teU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Nya-1p-TNK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="on0-sw-47F" firstAttribute="top" secondItem="Nya-1p-TNK" secondAttribute="top" id="85Y-nz-95G"/>
+                            <constraint firstItem="Nya-1p-TNK" firstAttribute="trailing" secondItem="on0-sw-47F" secondAttribute="trailing" id="HIh-C6-lDf"/>
+                            <constraint firstItem="on0-sw-47F" firstAttribute="leading" secondItem="Nya-1p-TNK" secondAttribute="leading" id="Hbv-G9-icE"/>
+                            <constraint firstItem="iWR-1p-vdC" firstAttribute="leading" secondItem="Nya-1p-TNK" secondAttribute="leading" id="O9c-PG-iWm"/>
+                            <constraint firstItem="Nya-1p-TNK" firstAttribute="trailing" secondItem="iWR-1p-vdC" secondAttribute="trailing" id="ao5-hA-9a2"/>
+                            <constraint firstAttribute="bottom" secondItem="iWR-1p-vdC" secondAttribute="bottom" id="g0l-3J-9B0"/>
+                            <constraint firstItem="iWR-1p-vdC" firstAttribute="top" secondItem="uqF-IE-9HF" secondAttribute="top" id="qCO-X5-R1r"/>
+                            <constraint firstAttribute="bottom" secondItem="on0-sw-47F" secondAttribute="bottom" id="weo-cA-ljb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hc3-dL-0dN"/>
+                    <connections>
+                        <outlet property="changeStackView" destination="sdQ-O3-Bvy" id="idl-jw-aQd"/>
+                        <outlet property="confirmButton" destination="IjB-xS-PYc" id="dTf-Cv-Jcf"/>
+                        <outlet property="confirmPasswordTextField" destination="SXL-3e-RQ4" id="gRY-cv-DEl"/>
+                        <outlet property="emailTextField" destination="OgG-52-Eep" id="4dA-ZE-3sn"/>
+                        <outlet property="loadingBackground" destination="iWR-1p-vdC" id="aj9-0b-Hxz"/>
+                        <outlet property="loadingIndicator" destination="Tdb-IY-sjz" id="2Tc-1a-zVU"/>
+                        <outlet property="passwordTextField" destination="iAl-7g-S7R" id="pHN-Tm-7lc"/>
+                        <outlet property="resendButton" destination="5hi-qd-RLr" id="b5W-NR-vMA"/>
+                        <outlet property="scrollView" destination="on0-sw-47F" id="ZuE-sx-VtR"/>
+                        <outlet property="verifyButton" destination="eHi-Y1-UQt" id="J1N-AJ-6rQ"/>
+                        <outlet property="verifyCodeTextField" destination="meJ-WV-9y6" id="Sps-ge-vW4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aWt-0G-Cak" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1175" y="857"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="fkK-Os-7Ca">
@@ -151,7 +335,7 @@
                                 <rect key="frame" x="0.0" y="172" width="393" height="680"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMR-Fu-vuA">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="596.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="32" width="393" height="596.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="CzG-7N-V5W">
                                                 <rect key="frame" x="32" y="0.0" width="329" height="596.66666666666663"/>
@@ -306,7 +490,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PMR-Fu-vuA" secondAttribute="bottom" id="9Zx-NJ-xyz"/>
                                     <constraint firstItem="PMR-Fu-vuA" firstAttribute="width" secondItem="3gv-wm-FBB" secondAttribute="width" id="Aui-Qv-7PY"/>
-                                    <constraint firstItem="PMR-Fu-vuA" firstAttribute="top" secondItem="3gv-wm-FBB" secondAttribute="top" id="KhX-nL-h0z"/>
+                                    <constraint firstItem="PMR-Fu-vuA" firstAttribute="top" secondItem="3gv-wm-FBB" secondAttribute="top" constant="32" id="KhX-nL-h0z"/>
                                     <constraint firstAttribute="trailing" secondItem="PMR-Fu-vuA" secondAttribute="trailing" id="lMI-Bi-aCz"/>
                                     <constraint firstItem="PMR-Fu-vuA" firstAttribute="leading" secondItem="3gv-wm-FBB" secondAttribute="leading" id="q4D-2F-PLv"/>
                                 </constraints>

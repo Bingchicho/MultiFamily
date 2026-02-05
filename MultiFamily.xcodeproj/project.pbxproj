@@ -82,6 +82,7 @@
 				Network/DTO/Response/User/AttributeDTO.swift,
 				Network/DTO/Response/User/UserResponseDTO.swift,
 				Network/DTO/Response/User/VerificationRequiredDTO.swift,
+				Network/Endpoint/ForgotPasswordEndpoint.swift,
 				Network/Endpoint/RegisterEndpoint.swift,
 				Network/Endpoint/UserEndpoint.swift,
 				Network/Interceptor/AuthorizationInterceptor.swift,

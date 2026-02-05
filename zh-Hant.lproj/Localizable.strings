@@ -11,6 +11,7 @@
 "common.error.title" = "Error";
 "common.error.network" = "Network error. Please try again";
 "common.button.confirm" = "Confirm";
+"common.notice.title" = "Notice";
 
 // ==========================
 // Login
@@ -67,3 +68,21 @@
 "verify.resend.success" = "New Verify Code is send to %@";
 
 "verify.resend.cooldown" = "Resend Verify Code (%ds)";
+
+
+// ==========================
+// ForgotPassword
+// ==========================
+"forgotpassword.title" = "Forgot Password";
+
+"forgotpassword.email.placeholder" = "Email";
+"forgotpassword.button.getcode" = "Verify";
+
+"forgotpassword.code.placeholder" = "Verify Code";
+"forgotpassword.button.resend" = "Resend Verify Code";
+
+"forgotpassword.password.title" = "Password";
+"forgotpassword.confirm_password.title" = "Confirm Password";
+
+"forgotpassword.code.success" = "Verify Code is send to %@";
+"forgotpassword.code.error" = "Verify Code error, Please try again";

@@ -5,7 +5,7 @@
 //  Created by Sunion on 2026/1/29.
 //
 
-struct LoginPayloadDTO: Encodable {
+struct LoginPayloadDTO: Codable {
     let email: String
     let password: String
 }

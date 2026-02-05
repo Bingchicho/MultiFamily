@@ -6,13 +6,7 @@
 //
 
 protocol RegisterUseCase {
-    func register(
-        email: String,
-        password: String,
-        name: String,
-        phone: String?,
-        country: String?
-    ) async -> RegisterResult
+    func register(email: String, password: String, name: String, phone: String?, country: String?) async -> RegisterResult
 }
 
 final class RegisterUseCaseImpl: RegisterUseCase {
