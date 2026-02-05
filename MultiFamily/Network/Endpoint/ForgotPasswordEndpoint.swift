@@ -7,7 +7,7 @@
 
 
 enum ForgotPasswordEndpoint {
-    static func sendCode(_ dto: ForgotPasswordSendCodeRequestDTO) -> APIRequest {
+    static func sendCode(_ dto: ForgotPasswordRequestDTO) -> APIRequest {
         APIRequest(
             host: AppEnvironment.apiHostname,
             version: AppEnvironment.authService,
@@ -18,7 +18,7 @@ enum ForgotPasswordEndpoint {
         )
     }
     
-    static func resetPassword(_ dto: ForgotPasswordConfirmRequestDTO) -> APIRequest {
+    static func resetPassword(_ dto: ForgotPasswordRequestDTO) -> APIRequest {
         APIRequest(
             host: AppEnvironment.apiHostname,
             version: AppEnvironment.authService,

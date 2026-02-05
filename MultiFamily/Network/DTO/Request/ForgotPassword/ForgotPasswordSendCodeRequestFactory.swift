@@ -8,8 +8,8 @@
 
 
 protocol ForgotPasswordRequestFactoryProtocol {
-    func makeForgotPasswordSendCodeRequestFactory(email: String) -> ForgotPasswordSendCodeRequestDTO
-    func makeForgotPasswordConfirmRequestFactory(ticket: String, code: String, email: String, password: String) -> ForgotPasswordConfirmRequestDTO
+    func makeForgotPasswordSendCodeRequestFactory(email: String) -> ForgotPasswordRequestDTO
+    func makeForgotPasswordConfirmRequestFactory(ticket: String, code: String, email: String, password: String) -> ForgotPasswordRequestDTO
     
 }
 
@@ -31,23 +31,32 @@ struct ForgotPasswordRequestFactory: ForgotPasswordRequestFactoryProtocol {
     }
     
     
-    func makeForgotPasswordSendCodeRequestFactory(email: String ) -> ForgotPasswordSendCodeRequestDTO {
-        ForgotPasswordSendCodeRequestDTO(
-            applicationID: env.applicationID,
-            login:
-                LoginEmailDTO(email: email),
-            clientToken: device.clientToken)
-    }
-    
-    func makeForgotPasswordConfirmRequestFactory(ticket: String, code: String, email: String, password: String) -> ForgotPasswordConfirmRequestDTO {
+    func makeForgotPasswordSendCodeRequestFactory(email: String ) -> ForgotPasswordRequestDTO {
         
-        ForgotPasswordConfirmRequestDTO(
+        ForgotPasswordRequestDTO(
             applicationID: env.applicationID,
             clientToken: device.clientToken,
+            login: ForgotPasswordLoginDTO(
+                email: email,
+                password: nil
+            ),
+            ticket: nil,
+            code: nil
+        )
+    }
+    
+    func makeForgotPasswordConfirmRequestFactory(ticket: String, code: String, email: String, password: String) -> ForgotPasswordRequestDTO {
+        
+        ForgotPasswordRequestDTO(
+            applicationID: env.applicationID,
+            clientToken: device.clientToken,
+            login: ForgotPasswordLoginDTO(
+                email: email,
+                password: password
+            ),
             ticket: ticket,
-            code: code,
-            login:
-                LoginPayloadDTO(email: email, password: password))
+            code: code
+        )
     }
     
     
