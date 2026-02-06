@@ -27,11 +27,7 @@ final class ForgotPasswordUseCaseImpl: ForgotPasswordUseCase {
         }
     }
     
-    func resetPassword(
-        email: String,
-        code: String,
-        newPassword: String
-    ) async -> ForgotPasswordResult {
+    func resetPassword(email: String, code: String, newPassword: String) async -> ForgotPasswordResult {
         do {
             try await repository.resetPassword(
                 email: email,

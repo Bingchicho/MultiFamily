@@ -16,6 +16,7 @@ enum LoginRoute {
     case verification(ticket: String)
 }
 
+@MainActor
 final class LoginViewModel {
 
     // Input
@@ -50,19 +51,21 @@ final class LoginViewModel {
 
         state = .loading
 
-        Task {
-            let result = await useCase.login(email: email, password: password)
+        Task { [weak self] in
+            guard let self = self else { return }
 
-            DispatchQueue.main.async {
-                self.handle(result)
-            }
+            let result = await useCase.login(email: self.email, password: self.password)
+
+            self.handle(result)
         }
     }
 
     private func handle(_ result: LoginResult) {
+
         state = .idle
 
         switch result {
+
         case .success:
             onRoute?(.home)
 
@@ -75,7 +78,8 @@ final class LoginViewModel {
     }
 
     private func validate() {
-        isLoginEnabled = isValidEmail(email) && password.count >= 6
+        let enabled = isValidEmail(email) && password.count >= 6
+        isLoginEnabled = enabled
     }
 
     private func isValidEmail(_ value: String) -> Bool {

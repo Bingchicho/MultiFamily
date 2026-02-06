@@ -1,22 +1,49 @@
-//
-//  LoginUseCaseImpl.swift
-//  MultiFamily
-//
-//  Created by Sunion on 2026/1/30.
-//
-
 import Foundation
 
 final class LoginUseCaseImpl: LoginUseCase {
 
     private let repository: UserRepository
 
-    init(repository: UserRepository) {
+
+    init(
+        repository: UserRepository
+    ) {
         self.repository = repository
 
     }
-    
+
+    // MARK: - Public API
+
+    func login(email: String, password: String) async -> LoginResult {
+        await execute {
+            try await repository.login(email: email, password: password)
+        }
+    }
+
+    func refreshToken() async -> LoginResult {
+        await execute {
+            try await repository.refreshIfNeeded()
+        }
+    }
+
+    // MARK: - Private
+
+    /// Centralized execution wrapper to avoid duplicated error handling
+    private func execute(
+        _ block: () async throws -> Void
+    ) async -> LoginResult {
+
+        do {
+            try await block()
+            return .success
+        } catch {
+            return mapErrorToLoginResult(error)
+        }
+    }
+
+    /// Maps infrastructure / API errors into presentation-friendly LoginResult
     private func mapErrorToLoginResult(_ error: Error) -> LoginResult {
+
         guard let apiError = error as? APIClientError else {
             return .failure(.unknown)
         }
@@ -24,43 +51,40 @@ final class LoginUseCaseImpl: LoginUseCase {
         switch apiError {
 
         case .httpStatus(let code, let data):
-            if code == 423 {
-                let dto = try? JSONDecoder().decode(
-                    VerificationRequiredDTO.self,
-                    from: data
-                )
-                return .verificationRequired(ticket: dto?.ticket ?? "")
-            }
 
-            if code == 401 {
+            switch code {
+
+            case 423:
+                return mapVerificationRequired(data)
+
+            case 401:
                 return .failure(.invalidCredentials)
-            }
 
-            return .failure(.unknown)
+            default:
+                return .failure(.unknown)
+            }
 
         case .timeout:
             return .failure(.network)
 
-        default:
-            return .failure(.unknown)
+        case .invalidResponse:
+            return .failure(.network)
+
         }
     }
 
-    func login(email: String, password: String) async -> LoginResult {
-        do {
-            try await repository.login(email: email, password: password)
-            return .success
-        } catch {
-            return mapErrorToLoginResult(error)
+    private func mapVerificationRequired(_ data: Data) -> LoginResult {
+
+        guard
+            let dto = try? JSONDecoder().decode(
+                VerificationRequiredDTO.self,
+                from: data
+            ),
+            !dto.ticket.isEmpty
+        else {
+            return .failure(.unknown)
         }
-    }
-    
-    func refreshToken() async -> LoginResult {
-        do {
-            try await repository.refreshIfNeeded()
-            return .success
-        } catch {
-            return mapErrorToLoginResult(error)
-        }
+
+        return .verificationRequired(ticket: dto.ticket)
     }
 }

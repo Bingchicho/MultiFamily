@@ -7,7 +7,8 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+@MainActor
+final class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailLabel: AppLabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -35,9 +36,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
     
-    var viewModel: RegisterViewModel!
+    private var viewModel: RegisterViewModel?
     private var verifyEmail: String?
-    private var verifyTicket: String!
+    private var verifyTicket: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,33 +49,25 @@ class RegisterViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel = RegisterViewModel(
+
+        let vm = RegisterViewModel(
             useCase: AppAssembler.makeRegisterUseCase()
         )
-        
-        viewModel.onStateChange = { [weak self] state in
-            DispatchQueue.main.async {
-                self?.render(state)
-            }
-           
+
+        viewModel = vm
+
+        vm.onStateChange = { [weak self] state in
+            self?.render(state)
         }
 
-        viewModel.onRoute = { [weak self] route in
-            DispatchQueue.main.async {
-                self?.handle(route)
-            }
-         
+        vm.onRoute = { [weak self] route in
+            self?.handle(route)
         }
-        
-        viewModel.onOpenLink = { [weak self] link in
-            DispatchQueue.main.async {
-                self?.openURL(link.urlString)
-            }
-            
-            
+
+        vm.onOpenLink = { [weak self] link in
+            self?.openURL(link.urlString)
         }
-        
-        
+
         emailTextField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
         confirmPasswordTextField.addTarget(self, action: #selector(confirmPasswordChanged), for: .editingChanged)
@@ -84,32 +77,32 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func emailChanged() {
-        viewModel.email = emailTextField.text ?? ""
-        registerButton.isEnabled = viewModel.isRegisterEnabled
+        viewModel?.email = emailTextField.text ?? ""
+        registerButton.isEnabled = viewModel?.isRegisterEnabled ?? false
     }
 
     @objc private func passwordChanged() {
-        viewModel.password = passwordTextField.text ?? ""
-        registerButton.isEnabled = viewModel.isRegisterEnabled
+        viewModel?.password = passwordTextField.text ?? ""
+        registerButton.isEnabled = viewModel?.isRegisterEnabled ?? false
     }
     
     @objc private func confirmPasswordChanged() {
-        viewModel.confirmPassword = confirmPasswordTextField.text ?? ""
-        registerButton.isEnabled = viewModel.isRegisterEnabled
+        viewModel?.confirmPassword = confirmPasswordTextField.text ?? ""
+        registerButton.isEnabled = viewModel?.isRegisterEnabled ?? false
     }
     
     @objc private func nameChanged() {
-        viewModel.name = nametTextField.text ?? ""
-        registerButton.isEnabled = viewModel.isRegisterEnabled
+        viewModel?.name = nametTextField.text ?? ""
+        registerButton.isEnabled = viewModel?.isRegisterEnabled ?? false
     }
     
     @objc private func phoneChanged() {
-        viewModel.phone = phoneTextField.text ?? ""
+        viewModel?.phone = phoneTextField.text ?? ""
     
     }
     
     @objc private func countryChanged() {
-        viewModel.country = countryTextField.text ?? ""
+        viewModel?.country = countryTextField.text ?? ""
     
     }
     
@@ -232,9 +225,9 @@ class RegisterViewController: UIViewController {
         )
 
         if (text as NSString).range(of: L10n.Register.Terms.terms).contains(index) {
-            viewModel.didTapTerms()
+            viewModel?.didTapTerms()
         } else if (text as NSString).range(of: L10n.Register.Terms.privacy).contains(index) {
-            viewModel.didTapPrivacy()
+            viewModel?.didTapPrivacy()
         }
     }
     
@@ -244,24 +237,25 @@ class RegisterViewController: UIViewController {
     }
     
     private func holdLoading(animat: Bool) {
+
         if animat {
             loadingIndicator.startAnimating()
         } else {
             loadingIndicator.stopAnimating()
         }
-        
+
         loadingIndicator.isHidden = !animat
         loadingBackground.isHidden = !animat
-        
+
+        // Only disable current screen interaction (avoid navigation freeze)
         view.isUserInteractionEnabled = !animat
-         navigationController?.view.isUserInteractionEnabled = !animat
     }
     
     private func render(_ state: RegisterViewState) {
         switch state {
 
         case .idle:
-            registerButton.isEnabled = viewModel.isRegisterEnabled
+            registerButton.isEnabled = viewModel?.isRegisterEnabled ?? false
             holdLoading(animat: false)
 
         case .loading:
@@ -270,7 +264,7 @@ class RegisterViewController: UIViewController {
 
         case .error(let message):
             holdLoading(animat: false)
-            registerButton.isEnabled = viewModel.isRegisterEnabled
+            registerButton.isEnabled = viewModel?.isRegisterEnabled ?? false
             
             showError(message)
         }
@@ -290,7 +284,7 @@ class RegisterViewController: UIViewController {
         if segue.identifier == "verify",
            let vc = segue.destination as? RegisterVerifyViewController {
             vc.email = verifyEmail
-            vc.ticket = verifyTicket
+            vc.ticket = verifyTicket ?? ""
         }
     }
     
@@ -305,7 +299,10 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func registerButtonAction(_ sender: UIButton) {
-        viewModel.register()
+        viewModel?.register()
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class RegisterViewModel {
 
     // MARK: - Input
@@ -41,18 +42,18 @@ final class RegisterViewModel {
 
         state = .loading
 
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
+
             let result = await useCase.register(
-                email: email,
-                password: password,
-                name: name,
-                phone: phone.isEmpty ? nil : phone,
-                country: country.isEmpty ? nil : country
+                email: self.email,
+                password: self.password,
+                name: self.name,
+                phone: self.phone.isEmpty ? nil : self.phone,
+                country: self.country.isEmpty ? nil : self.country
             )
 
-            DispatchQueue.main.async {
-                self.handle(result)
-            }
+            self.handle(result)
         }
     }
 

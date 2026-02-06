@@ -33,13 +33,15 @@ final class ForgotPasswordRepositoryImpl: ForgotPasswordRepository {
       
     }
 
-    func resetPassword(email: String, code: String, newPassword: String) async throws {
+    func resetPassword(email: String, code: String, newPassword: String) async throws -> ForgotPasswordResult{
 
         guard let ticket = ticket else { throw APIClientError.invalidResponse}
         let requestDTO = registerForgotPasswordFactory.makeForgotPasswordConfirmRequestFactory(ticket: ticket, code: code, email: email, password: newPassword)
         
-        let response: ForgotPasswordSendCodeResponseDTO = try await apiClient.request(
+        let response: ForgotPasswordConfirmResponseDTO = try await apiClient.request(
             ForgotPasswordEndpoint.resetPassword(requestDTO)
         )
+        
+        return response.toDomain()
     }
 }

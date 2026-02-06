@@ -64,6 +64,12 @@ internal enum L10n {
       /// Password
       internal static let title = L10n.tr("Localizable", "forgotpassword.password.title", fallback: "Password")
     }
+    internal enum Success {
+      /// You can login now
+      internal static let content = L10n.tr("Localizable", "forgotpassword.success.content", fallback: "You can login now")
+      /// Change Password Success
+      internal static let title = L10n.tr("Localizable", "forgotpassword.success.title", fallback: "Change Password Success")
+    }
   }
   internal enum Login {
     /// Forgot Password

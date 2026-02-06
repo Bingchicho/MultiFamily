@@ -10,6 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--HomeViewController-->
+        <scene sceneID="SBP-5R-2uc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="HomeViewController" id="JTI-7F-41G" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Lr8-NC-C5S"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2K-VE-HlO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1280" y="-310"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -134,6 +144,7 @@
                         <outlet property="logoLabel" destination="DZH-VM-opm" id="btj-oa-212"/>
                         <outlet property="passwordTextField" destination="E0U-ca-B46" id="VtE-dA-tDA"/>
                         <outlet property="registerButton" destination="tCW-Du-V4d" id="FU0-RN-u1i"/>
+                        <segue destination="JTI-7F-41G" kind="presentation" identifier="login" modalPresentationStyle="fullScreen" id="HP3-hf-vX8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

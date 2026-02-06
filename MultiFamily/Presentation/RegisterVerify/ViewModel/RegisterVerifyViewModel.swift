@@ -6,6 +6,7 @@
 //
 import Foundation
 
+@MainActor
 final class RegisterVerifyViewModel {
     
 
@@ -54,12 +55,12 @@ final class RegisterVerifyViewModel {
 
         state = .loading
 
-        Task {
-            let result = await useCase.verify(ticket: ticket,code: code)
+        Task { [weak self] in
+            guard let self = self else { return }
 
-            DispatchQueue.main.async {
-                self.handle(result)
-            }
+            let result = await useCase.verify(ticket: self.ticket, code: self.code)
+
+            self.handle(result)
         }
     }
     
@@ -68,12 +69,12 @@ final class RegisterVerifyViewModel {
 
         state = .loading
 
-        Task {
-            let result = await useCase.resend(email: email)
+        Task { [weak self] in
+            guard let self = self else { return }
 
-            DispatchQueue.main.async {
-                self.handleResend(result)
-            }
+            let result = await useCase.resend(email: self.email)
+
+            self.handleResend(result)
         }
     }
 
@@ -132,5 +133,9 @@ final class RegisterVerifyViewModel {
 
     private func validate() {
         isVerifyEnabled = code.count >= 6
+    }
+    
+    deinit {
+        resendTimer?.invalidate()
     }
 }

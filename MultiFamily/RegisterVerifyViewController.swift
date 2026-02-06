@@ -7,7 +7,8 @@
 
 import UIKit
 
-class RegisterVerifyViewController: UIViewController {
+@MainActor
+final class RegisterVerifyViewController: UIViewController {
     
     var email: String?
     var ticket: String?
@@ -20,7 +21,7 @@ class RegisterVerifyViewController: UIViewController {
     
     @IBOutlet weak var verifyButton: PrimaryButton!
     
-    var viewModel: RegisterVerifyViewModel!
+    private var viewModel: RegisterVerifyViewModel?
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
@@ -40,29 +41,33 @@ class RegisterVerifyViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        
-        viewModel = RegisterVerifyViewModel(
+
+        let vm = RegisterVerifyViewModel(
             email: email ?? "",
             ticket: ticket ?? "",
             useCase: AppAssembler.makeRegisterVerifyUseCase()
         )
 
-        // state → UI
-        viewModel.onStateChange = { [weak self] state in
+        viewModel = vm
+
+        vm.onStateChange = { [weak self] state in
             self?.render(state)
         }
 
-        // route → navigation
-        viewModel.onRoute = { [weak self] route in
+        vm.onRoute = { [weak self] route in
             self?.handle(route)
         }
-        
-        verifyCodeTextField.addTarget(self, action: #selector(codeChanged), for: .editingChanged)
+
+        verifyCodeTextField.addTarget(
+            self,
+            action: #selector(codeChanged),
+            for: .editingChanged
+        )
     }
     
     @objc private func codeChanged() {
-        viewModel.code = verifyCodeTextField.text ?? ""
-        verifyButton.isEnabled = viewModel.isVerifyEnabled
+        viewModel?.code = verifyCodeTextField.text ?? ""
+        verifyButton.isEnabled = viewModel?.isVerifyEnabled ?? false
     }
     
     private func render(_ state: RegisterVerifyViewState) {
@@ -70,7 +75,7 @@ class RegisterVerifyViewController: UIViewController {
 
         case .idle:
             holdLoading(animat: false)
-            verifyButton.isEnabled = viewModel.isVerifyEnabled
+            verifyButton.isEnabled = viewModel?.isVerifyEnabled ?? false
             resendButton.isEnabled = true
             resendButton.setTitle(L10n.Verify.Button.resend, for: .normal)
 
@@ -107,17 +112,18 @@ class RegisterVerifyViewController: UIViewController {
     }
     
     private func holdLoading(animat: Bool) {
+
         if animat {
             loadingIndicator.startAnimating()
         } else {
             loadingIndicator.stopAnimating()
         }
-        
+
         loadingIndicator.isHidden = !animat
         loadingBackground.isHidden = !animat
-        
+
+        // Only disable current view interaction (avoid navigation freeze)
         view.isUserInteractionEnabled = !animat
-         navigationController?.view.isUserInteractionEnabled = !animat
     }
     
     private func showError(_ message: String) {
@@ -191,13 +197,12 @@ class RegisterVerifyViewController: UIViewController {
     
     
     @IBAction  func resendButtonTapped(_ sender: Any) {
-        viewModel.resend()
+        viewModel?.resend()
     }
     
     @IBAction  func verifyButtonTapped(_ sender: Any) {
-        viewModel.verify()
+        viewModel?.verify()
     }
     
+
 }
-
-

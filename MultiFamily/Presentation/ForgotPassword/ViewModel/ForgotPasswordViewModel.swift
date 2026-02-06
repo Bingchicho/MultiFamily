@@ -6,6 +6,7 @@
 //
 import Foundation
 
+@MainActor
 final class ForgotPasswordViewModel {
 
     // MARK: - Input
@@ -58,14 +59,13 @@ final class ForgotPasswordViewModel {
         Task {
             let result = await useCase.sendCode(email: email)
 
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.state = .sendedCode(email: self.email)
-                    self.startCooldown()
-                case .failure(let message):
-                    self.state = .error(message)
-                }
+            switch result {
+            case .success:
+                state = .sendedCode(email: email)
+                startCooldown()
+
+            case .failure(let message):
+                state = .error(message)
             }
         }
     }
@@ -82,13 +82,12 @@ final class ForgotPasswordViewModel {
                 newPassword: newPassword
             )
 
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.onRoute?(.login)
-                case .failure(let message):
-                    self.state = .error(message)
-                }
+            switch result {
+            case .success:
+                onRoute?(.login)
+
+            case .failure(let message):
+                state = .error(message)
             }
         }
     }
@@ -105,7 +104,9 @@ final class ForgotPasswordViewModel {
             withTimeInterval: 1,
             repeats: true
         ) { [weak self] _ in
-            self?.tick()
+            Task { @MainActor in
+                self?.tick()
+            }
         }
     }
 
@@ -121,5 +122,8 @@ final class ForgotPasswordViewModel {
         } else {
             state = .codeSent(remaining: remaining)
         }
+    }
+    deinit {
+        timer?.invalidate()
     }
 }

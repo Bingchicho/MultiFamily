@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 final class ViewController: UIViewController {
 
     @IBOutlet weak var logoLabel: AppLabel!
@@ -18,7 +19,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
 
-    var viewModel: LoginViewModel!
+    private var viewModel: LoginViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +44,8 @@ final class ViewController: UIViewController {
         passwordTextField.resignFirstResponder()
 
         // Reset ViewModel
-        viewModel.email = ""
-        viewModel.password = ""
+        viewModel?.email = ""
+        viewModel?.password = ""
 
         // Reset Button
         loginButton.isEnabled = false
@@ -71,21 +72,19 @@ final class ViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        
-        viewModel = LoginViewModel(
+
+        let vm = LoginViewModel(
             useCase: AppAssembler.makeLoginUseCase()
         )
 
-        viewModel.onStateChange = { [weak self] state in
-            DispatchQueue.main.async {
-                self?.render(state)
-            }
+        viewModel = vm
+
+        vm.onStateChange = { [weak self] state in
+            self?.render(state)
         }
 
-        viewModel.onRoute = { [weak self] route in
-            DispatchQueue.main.async {
-                self?.handle(route)
-            }
+        vm.onRoute = { [weak self] route in
+            self?.handle(route)
         }
 
         accountTextField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
@@ -93,34 +92,35 @@ final class ViewController: UIViewController {
     }
 
     @objc private func emailChanged() {
-        viewModel.email = accountTextField.text ?? ""
-        loginButton.isEnabled = viewModel.isLoginEnabled
+        viewModel?.email = accountTextField.text ?? ""
+        loginButton.isEnabled = viewModel?.isLoginEnabled ?? false
     }
 
     @objc private func passwordChanged() {
-        viewModel.password = passwordTextField.text ?? ""
-        loginButton.isEnabled = viewModel.isLoginEnabled
+        viewModel?.password = passwordTextField.text ?? ""
+        loginButton.isEnabled = viewModel?.isLoginEnabled ?? false
     }
     
     private func holdLoading(animat: Bool) {
+
         if animat {
             loadingIndicator.startAnimating()
         } else {
             loadingIndicator.stopAnimating()
         }
-        
+
         loadingIndicator.isHidden = !animat
         loadingBackground.isHidden = !animat
-        
+
+        // Only disable current view interaction (avoid freezing navigation stack)
         view.isUserInteractionEnabled = !animat
-         navigationController?.view.isUserInteractionEnabled = !animat
     }
 
     private func render(_ state: LoginViewState) {
         switch state {
         case .idle:
             holdLoading(animat: false)
-            loginButton.isEnabled = viewModel.isLoginEnabled
+            loginButton.isEnabled = viewModel?.isLoginEnabled ?? false
 
         case .loading:
             holdLoading(animat: true)
@@ -135,8 +135,8 @@ final class ViewController: UIViewController {
     private func handle(_ route: LoginRoute) {
         switch route {
         case .home:
-            // 導向首頁
-            print("Navigate to Home")
+
+            self.performSegue(withIdentifier: "login", sender: nil)
 
         case .verification(let ticket):
             // 導向驗證頁
@@ -154,7 +154,7 @@ final class ViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func loginButtonAction(_ sender: UIButton) {
-        viewModel.login()
+        viewModel?.login()
     }
 
     @IBAction func forgotButtonAction(_ sender: UIButton) {
@@ -168,4 +168,5 @@ final class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+
 }

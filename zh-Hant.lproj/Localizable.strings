@@ -86,3 +86,6 @@
 
 "forgotpassword.code.success" = "Verify Code is send to %@";
 "forgotpassword.code.error" = "Verify Code error, Please try again";
+
+"forgotpassword.success.title" = "Change Password Success";
+"forgotpassword.success.content" = "You can login now";

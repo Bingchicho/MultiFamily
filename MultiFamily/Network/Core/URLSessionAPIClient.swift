@@ -52,30 +52,12 @@ final class URLSessionAPIClient: APIClient {
             try await interceptor.adapt(request, urlRequest: &urlRequest)
         }
 
-        AppLogger.log(.info, category: .network, "🧾 Request Headers:")
-        urlRequest.allHTTPHeaderFields?.forEach { key, value in
-            AppLogger.log(.info, category: .network, "  \(key): \(value)")
-        }
-
-        if let bodyData = urlRequest.httpBody,
-           let bodyString = String(data: bodyData, encoding: .utf8) {
-            AppLogger.log(.info, category: .network, "📤 HTTP Body:\n\(bodyString)")
-        }
+        logRequest(urlRequest)
         
         do {
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
-            if let httpResponse = response as? HTTPURLResponse {
-                AppLogger.log(.info, category: .network, "📥 Response Status Code: \(httpResponse.statusCode)")
-            }
-
-            if let jsonObject = try? JSONSerialization.jsonObject(with: data),
-               let prettyData = try? JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted]),
-               let jsonString = String(data: prettyData, encoding: .utf8) {
-                AppLogger.log(.info, category: .network, "📦 Response JSON:\n\(jsonString)")
-            } else if let rawString = String(data: data, encoding: .utf8) {
-                AppLogger.log(.info, category: .network, "📦 Response Raw:\n\(rawString)")
-            }
+            logResponse(data: data, response: response)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw APIClientError.invalidResponse
@@ -91,6 +73,34 @@ final class URLSessionAPIClient: APIClient {
                 throw APIClientError.timeout
             }
             throw error
+        }
+    }
+    
+    
+    private func logRequest(_ request: URLRequest) {
+        AppLogger.log(.info, category: .network, "🧾 Request Headers:")
+        request.allHTTPHeaderFields?.forEach {
+            AppLogger.log(.info, category: .network, "  \($0): \($1)")
+        }
+
+        if let body = request.httpBody,
+           let string = String(data: body, encoding: .utf8) {
+            AppLogger.log(.info, category: .network, "📤 HTTP Body:\n\(string)")
+        }
+    }
+
+    private func logResponse(data: Data, response: URLResponse) {
+
+        if let http = response as? HTTPURLResponse {
+            AppLogger.log(.info, category: .network, "📥 Status Code: \(http.statusCode)")
+        }
+
+        if let json = try? JSONSerialization.jsonObject(with: data),
+           let pretty = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
+           let string = String(data: pretty, encoding: .utf8) {
+            AppLogger.log(.info, category: .network, "📦 Response JSON:\n\(string)")
+        } else if let string = String(data: data, encoding: .utf8) {
+            AppLogger.log(.info, category: .network, "📦 Response Raw:\n\(string)")
         }
     }
 }
