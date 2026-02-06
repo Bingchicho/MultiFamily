@@ -59,6 +59,19 @@ final class LoginViewModel {
             self.handle(result)
         }
     }
+    
+    func refreshTokenIfNeeded() {
+
+        state = .loading
+
+        Task { [weak self] in
+            guard let self else { return }
+
+            let result = await useCase.refreshToken()
+
+            self.handle(result)
+        }
+    }
 
     private func handle(_ result: LoginResult) {
 

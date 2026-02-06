@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,18 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fru-ZT-uhA">
-                                <rect key="frame" x="172" y="440.66666666666669" width="49" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIN-ca-rt9">
+                                <rect key="frame" x="169" y="433.66666666666669" width="55" height="35"/>
+                                <color key="tintColor" name="Primary"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="house" catalog="system"/>
+                                <connections>
+                                    <segue destination="HP8-Oz-FbX" kind="presentation" id="PUl-Ht-aXr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Fru-ZT-uhA" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="G6e-7h-S7F"/>
-                            <constraint firstItem="Fru-ZT-uhA" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="rwJ-Vu-Tv4"/>
+                            <constraint firstItem="BIN-ca-rt9" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="WdT-pr-uVk"/>
+                            <constraint firstItem="BIN-ca-rt9" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="lb3-qy-XZs"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,8 +40,20 @@
             </objects>
             <point key="canvasLocation" x="141" y="131"/>
         </scene>
+        <!--SiteListViewController-->
+        <scene sceneID="qcf-b8-1hH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Site" referencedIdentifier="SiteListViewController" id="HP8-Oz-FbX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lOi-hZ-fgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="758" y="79"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <namedColor name="Primary">
+            <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

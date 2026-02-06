@@ -89,6 +89,17 @@ final class ViewController: UIViewController {
 
         accountTextField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
+        
+        checkRefreshToken()
+    }
+    
+    private func checkRefreshToken() {
+
+        guard DefaultTokenStore().accessToken != nil else {
+            return
+        }
+        
+        viewModel?.refreshTokenIfNeeded()
     }
 
     @objc private func emailChanged() {
