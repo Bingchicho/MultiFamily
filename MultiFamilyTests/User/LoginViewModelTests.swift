@@ -9,7 +9,7 @@ import Foundation
 
 import XCTest
 import MultiFamily
-
+@MainActor
 final class LoginViewModelTests: XCTestCase {
 
     private var useCase: FakeLoginUseCase!

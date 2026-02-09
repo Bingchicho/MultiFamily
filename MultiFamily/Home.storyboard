@@ -13,32 +13,46 @@
         <!--Home View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="MultiFamily" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="HomeViewController" customModule="MultiFamily" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIN-ca-rt9">
-                                <rect key="frame" x="169" y="433.66666666666669" width="55" height="35"/>
-                                <color key="tintColor" name="Primary"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="house" catalog="system"/>
-                                <connections>
-                                    <segue destination="HP8-Oz-FbX" kind="presentation" identifier="site" id="PUl-Ht-aXr"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="BIN-ca-rt9" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="WdT-pr-uVk"/>
-                            <constraint firstItem="BIN-ca-rt9" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="lb3-qy-XZs"/>
-                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" style="editor" id="a5P-x1-eSq">
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="mUy-aM-Tpx">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6Ed-ha-kdg">
+                                    <rect key="frame" x="323.33333333333326" y="4.6666666666666687" width="49.666666666666686" height="34.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" name="Primary"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="person.circle" catalog="system"/>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="X8b-oP-BwH">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="BIN-ca-rt9">
+                                    <rect key="frame" x="252.66666666666663" y="4.6666666666666687" width="54.666666666666686" height="34.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" name="Primary"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="house" catalog="system"/>
+                                    <connections>
+                                        <segue destination="HP8-Oz-FbX" kind="presentation" identifier="site" id="PUl-Ht-aXr"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="accountButton" destination="6Ed-ha-kdg" id="ZPL-Nj-pBY"/>
+                        <outlet property="siteButton" destination="BIN-ca-rt9" id="mk5-Tn-UqV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="141" y="131"/>
+            <point key="canvasLocation" x="1066.4122137404579" y="130.98591549295776"/>
         </scene>
         <!--SiteListViewController-->
         <scene sceneID="qcf-b8-1hH">
@@ -46,11 +60,30 @@
                 <viewControllerPlaceholder storyboardName="Site" referencedIdentifier="SiteListViewController" id="HP8-Oz-FbX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOi-hZ-fgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="758" y="79"/>
+            <point key="canvasLocation" x="1683.9694656488548" y="78.873239436619727"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qKL-qw-I5w">
+            <objects>
+                <navigationController restorationIdentifier="HomeViewController" storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="41G-55-df5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7yw-TG-6h6">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="qTh-gM-FTH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BHx-Be-r6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="115" y="131"/>
         </scene>
     </scenes>
     <resources>
         <image name="house" catalog="system" width="128" height="104"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
         <namedColor name="Primary">
             <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

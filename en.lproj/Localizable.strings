@@ -89,3 +89,13 @@
 
 "forgotpassword.success.title" = "Change Password Success";
 "forgotpassword.success.content" = "You can login now";
+
+// ==========================
+// Site
+// ==========================
+"site.title" = "Site";
+
+// ==========================
+// Home
+// ==========================
+"Home.title" = "Lock";

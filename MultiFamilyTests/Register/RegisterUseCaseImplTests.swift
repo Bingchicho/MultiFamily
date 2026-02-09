@@ -107,4 +107,4 @@ final class MockRegisterRepository: RegisterRepository {
     }
 }
 
-private struct DummyError: Error {}
+

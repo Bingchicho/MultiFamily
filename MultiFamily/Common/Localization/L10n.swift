@@ -10,6 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum Home {
+    /// Lock
+    internal static let title = L10n.tr("Localizable", "Home.title", fallback: "Lock")
+  }
   internal enum Common {
     internal enum Button {
       /// Confirm
@@ -146,6 +150,10 @@ internal enum L10n {
       /// Terms & Conditions
       internal static let terms = L10n.tr("Localizable", "register.terms.terms", fallback: "Terms & Conditions")
     }
+  }
+  internal enum Site {
+    /// Site
+    internal static let title = L10n.tr("Localizable", "site.title", fallback: "Site")
   }
   internal enum Verify {
     /// Verification code has been sent to

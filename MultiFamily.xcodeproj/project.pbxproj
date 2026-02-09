@@ -46,15 +46,22 @@
 		5A77F5BB2F2B300F00FF756F /* Exceptions for "MultiFamily" folder in "MultiFamilyTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Application/DI/AppAssembler.swift,
+				"Application/DI/AppAssembler+TokenStore.swift",
+				"Application/DI/AppAssembler+UserAttribute.swift",
 				Common/JSON/AnyEncodable.swift,
 				Common/Localization/L10n.swift,
+				Domain/ForgotPassword/ForgotPasswordResult.swift,
 				Domain/Register/RegisterResult.swift,
 				Domain/RegisterVerify/RegisterVerifyResult.swift,
 				Domain/RegisterVerify/VerifyResendResult.swift,
+				Domain/Site/Site.swift,
+				Domain/Site/SiteListResult.swift,
 				Domain/User/User.swift,
 				Domain/User/UserToken.swift,
 				Domain/User/VerificationRequired.swift,
 				Environment/AppEnvironment.swift,
+				Environment/DefaultEnvironmentConfig.swift,
 				Environment/Device/DefaultDeviceIdentifierProvider.swift,
 				Environment/Device/DeviceIdentifierProvider.swift,
 				Environment/EnvironmentConfig.swift,
@@ -74,6 +81,8 @@
 				Network/DTO/Request/RegisterVerify/RegsiterVerifyRequestFactory.swift,
 				Network/DTO/Request/RegisterVerify/VerifyResendRequestDTO.swift,
 				Network/DTO/Request/RegisterVerify/VerifyResendRequestFactory.swift,
+				Network/DTO/Request/Site/SiteListRequestDTO.swift,
+				Network/DTO/Request/Site/SiteListRequestFactory.swift,
 				Network/DTO/Request/User/LoginPayloadDTO.swift,
 				Network/DTO/Request/User/RefreshTokenPayloadDTO.swift,
 				Network/DTO/Request/User/UserRequestDTO.swift,
@@ -83,6 +92,7 @@
 				Network/DTO/Response/Register/RegisterResponseDTO.swift,
 				Network/DTO/Response/RegisterVerify/RegisterVerifyResponseDTO.swift,
 				Network/DTO/Response/RegisterVerify/VerifyResendResponseDTO.swift,
+				Network/DTO/Response/Site/SiteListResponseDTO.swift,
 				Network/DTO/Response/User/AttributeDTO.swift,
 				Network/DTO/Response/User/UserResponseDTO.swift,
 				Network/DTO/Response/User/VerificationRequiredDTO.swift,
@@ -96,6 +106,7 @@
 				Presentation/Login/Attribute/DefaultUserAttributeStore.swift,
 				Presentation/Login/Repository/UserRepository.swift,
 				Presentation/Login/Repository/UserRepositoryImpl.swift,
+				Presentation/Login/Token/DefaultTokenStore.swift,
 				Presentation/Login/UseCase/LoginUseCase.swift,
 				Presentation/Login/UseCase/LoginUseCaseImpl.swift,
 				Presentation/Login/ViewModel/LoginViewModel.swift,
@@ -104,6 +115,8 @@
 				Presentation/Register/UseCase/RegisterUseCase.swift,
 				Presentation/RegisterVerify/Repository/RegisterVerifyRepository.swift,
 				Presentation/RegisterVerify/Repository/RegisterVerifyRepositoryImpl.swift,
+				Presentation/Site/Repository/SiteListRepository.swift,
+				Presentation/Site/Repository/SiteListRepositoryImpl.swift,
 			);
 			target = 5A0151192F2AEC21008A5839 /* MultiFamilyTests */;
 		};

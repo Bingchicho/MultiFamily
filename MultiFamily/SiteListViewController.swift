@@ -38,7 +38,7 @@ final class SiteListViewController: UIViewController {
     }
     
     private func setupUI() {
-       
+        titleLabel.text = L10n.Site.title
         titleLabel.style = .title
         closeButton.setTitle("", for: .normal)
     }

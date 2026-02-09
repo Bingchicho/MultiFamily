@@ -8,11 +8,20 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    @IBOutlet weak var siteButton: UIButton!
+    @IBOutlet weak var accountButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+     
+        setupUI()
+    }
+    
+    private func setupUI() {
+        self.title = L10n.Home.title
+        siteButton.setTitle("", for: .normal)
+        accountButton.setTitle("", for: .normal)
     }
     
 
