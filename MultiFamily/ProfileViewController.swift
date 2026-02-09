@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+@MainActor
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var mobileLabel: AppLabel!
@@ -21,13 +21,103 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var logoutButton: ImageTextButton!
     @IBOutlet weak var editMobileButton: ImageTextButton!
     
-    
-    
-    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingBackground: UIView!
+    private lazy var viewModel = ProfileViewModel(
+        useCase: AppAssembler.makeProfileUseCase()
+    )
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-       
+        bindViewModel()
+    }
+    
+    private func bindViewModel() {
+
+
+        viewModel.onStateChange = { [weak self] state in
+            self?.render(state)
+        }
+
+        viewModel.onRoute = { [weak self] route in
+            self?.handle(route)
+        }
+        
+        viewModel.onProfileUpdated = { [weak self] in
+            self?.updated()
+        }
+        
+        viewModel.load()
+        
+        nameLabel.text = viewModel.name
+        emailLabel.text = viewModel.email
+        mobileLabel.text = viewModel.phone
+        
+        
+    }
+    
+    private func updated() {
+        viewModel.load()
+    }
+    
+    private func render(_ state: ProfileViewState) {
+        
+        switch state {
+
+        case .idle:
+        
+            holdLoading(animat: false)
+
+        case .loading:
+          
+            holdLoading(animat: true)
+
+        case .error(let message):
+            holdLoading(animat: false)
+  
+            
+            showError(message)
+        }
+        
+        nameLabel.text = viewModel.name
+        emailLabel.text = viewModel.email
+        mobileLabel.text = viewModel.phone
+    }
+    
+    private func showError(_ message: String) {
+        let alert = UIAlertController(
+            title: L10n.Common.Error.title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func holdLoading(animat: Bool) {
+
+        if animat {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
+
+        loadingIndicator.isHidden = !animat
+        loadingBackground.isHidden = !animat
+
+        // Only disable current screen interaction (avoid navigation freeze)
+        view.isUserInteractionEnabled = !animat
+    }
+    
+    private func handle(_ route: ProfileRoute) {
+
+        switch route {
+
+        case .logout,
+             .deleted:
+
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     private func setupUI() {
@@ -44,9 +134,7 @@ class ProfileViewController: UIViewController {
         emailLabel.style = .body
         mobileLabel.style = .body
         
-        emailLabel.text = AppAssembler.userAttributeStore.currentEmail ?? "-"
-        nameLabel.text = AppAssembler.userAttributeStore.currentUser?.username ?? "-"
-        mobileLabel.text = AppAssembler.userAttributeStore.currentUser?.phone ?? "-"
+
         
     }
     
@@ -67,14 +155,10 @@ class ProfileViewController: UIViewController {
 
 
         let confirm = UIAlertAction(title: "Confirm", style: .default) { _ in
-            let firstName = alert.textFields?[0].text ?? ""
-         
-
-            let fullName = [firstName]
-                .filter { !$0.isEmpty }
-                .joined(separator: " ")
-
-            self.nameLabel.text = fullName.isEmpty ? "-" : fullName
+            if let firstName = alert.textFields?[0].text{
+                self.viewModel.updateName(firstName)
+            }
+    
         }
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -100,14 +184,11 @@ class ProfileViewController: UIViewController {
 
 
         let confirm = UIAlertAction(title: "Confirm", style: .default) { _ in
-            let phone = alert.textFields?[0].text ?? ""
+            if let phone = alert.textFields?[0].text {
+                self.viewModel.changeMobile(phone)
+            }
          
-
-            let fullPhone = [phone]
-                .filter { !$0.isEmpty }
-                .joined(separator: " ")
-
-            self.mobileLabel.text = fullPhone.isEmpty ? "-" : fullPhone
+            
         }
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -124,6 +205,11 @@ class ProfileViewController: UIViewController {
             message: "Enter your new password",
             preferredStyle: .alert
         )
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Old Password"
+            textField.isSecureTextEntry = true
+        }
 
         alert.addTextField { textField in
             textField.placeholder = "New Password"
@@ -136,8 +222,9 @@ class ProfileViewController: UIViewController {
         }
 
         let confirm = UIAlertAction(title: "Confirm", style: .default) { _ in
-            let newPassword = alert.textFields?[0].text ?? ""
-            let confirmPassword = alert.textFields?[1].text ?? ""
+            let oldPassword = alert.textFields?[0].text ?? ""
+            let newPassword = alert.textFields?[1].text ?? ""
+            let confirmPassword = alert.textFields?[2].text ?? ""
 
             guard !newPassword.isEmpty,
                   newPassword == confirmPassword else {
@@ -148,7 +235,7 @@ class ProfileViewController: UIViewController {
                 return
             }
 
-            // TODO: call change password use case
+            self.viewModel.changePassword(oldPassword: oldPassword, newPassword: newPassword)
         }
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -186,9 +273,7 @@ class ProfileViewController: UIViewController {
         )
 
         let confirm = UIAlertAction(title: "Confirm", style: .destructive) { _ in
-            AppAssembler.tokenStore.clear()
-
-            self.navigationController?.popToRootViewController(animated: true)
+            self.viewModel.logout()
         }
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)

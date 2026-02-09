@@ -36,6 +36,14 @@
                                     <action selector="deleteAccountAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="P50-ah-SSH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBR-Bq-DSl" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
+                                <rect key="frame" x="91" y="452" width="211" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="lock.rotation" catalog="system" title="CHANGEPASSWORD"/>
+                                <connections>
+                                    <action selector="changePasswordAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BBn-Z8-waW"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="PHS-oI-iMk">
                                 <rect key="frame" x="16" y="134" width="361" height="238"/>
                                 <subviews>
@@ -142,14 +150,19 @@
                                     <constraint firstItem="NcU-Y9-YhB" firstAttribute="width" secondItem="PHS-oI-iMk" secondAttribute="width" id="vCg-GW-ovi"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBR-Bq-DSl" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
-                                <rect key="frame" x="91" y="452" width="211" height="34.333333333333314"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="lock.rotation" catalog="system" title="CHANGEPASSWORD"/>
-                                <connections>
-                                    <action selector="changePasswordAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BBn-Z8-waW"/>
-                                </connections>
-                            </button>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXh-Vv-WqU">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="EdW-XU-bgP">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="EdW-XU-bgP" firstAttribute="centerY" secondItem="GXh-Vv-WqU" secondAttribute="centerY" id="L4D-Hi-jdP"/>
+                                    <constraint firstItem="EdW-XU-bgP" firstAttribute="centerX" secondItem="GXh-Vv-WqU" secondAttribute="centerX" id="mtW-I2-Gyd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -159,11 +172,15 @@
                             <constraint firstItem="wLn-HN-fEo" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-16" id="9N7-3K-imn"/>
                             <constraint firstItem="wLn-HN-fEo" firstAttribute="top" secondItem="KEJ-DY-n0Z" secondAttribute="bottom" constant="64" id="Ak3-88-hsr"/>
                             <constraint firstItem="wLn-HN-fEo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="BbG-LD-Qwb"/>
+                            <constraint firstItem="GXh-Vv-WqU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="FHz-m4-XJs"/>
                             <constraint firstItem="HBR-Bq-DSl" firstAttribute="top" secondItem="PHS-oI-iMk" secondAttribute="bottom" constant="80" id="JDU-sC-uaD"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="GXh-Vv-WqU" secondAttribute="trailing" id="KKw-bK-MeW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PHS-oI-iMk" secondAttribute="trailing" constant="16" id="XhI-f2-x2j"/>
                             <constraint firstItem="HBR-Bq-DSl" firstAttribute="centerX" secondItem="KEJ-DY-n0Z" secondAttribute="centerX" id="cdM-9Y-tAT"/>
                             <constraint firstItem="KEJ-DY-n0Z" firstAttribute="centerX" secondItem="wLn-HN-fEo" secondAttribute="centerX" id="gn2-oo-SkF"/>
+                            <constraint firstItem="GXh-Vv-WqU" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="rEw-Pg-Uhz"/>
                             <constraint firstItem="PHS-oI-iMk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="sUw-fb-5Az"/>
+                            <constraint firstAttribute="top" secondItem="GXh-Vv-WqU" secondAttribute="top" id="yqX-Lj-TCk"/>
                         </constraints>
                     </view>
                     <connections>
@@ -173,6 +190,8 @@
                         <outlet property="editNameButton" destination="GxP-xj-rMn" id="47e-Ua-oo3"/>
                         <outlet property="emailLabel" destination="nys-TT-1FS" id="zDJ-od-z5O"/>
                         <outlet property="emailTitleLabel" destination="9hG-28-XgQ" id="j2c-Px-bpL"/>
+                        <outlet property="loadingBackground" destination="GXh-Vv-WqU" id="2Y9-wb-yXA"/>
+                        <outlet property="loadingIndicator" destination="EdW-XU-bgP" id="R36-M7-6sE"/>
                         <outlet property="logoutButton" destination="wLn-HN-fEo" id="Jn6-Jl-7b8"/>
                         <outlet property="mobileLabel" destination="ab9-PW-Nii" id="x7y-ZH-BZe"/>
                         <outlet property="mobileTitleLabel" destination="H41-CU-Oq3" id="F7E-sI-gnY"/>
