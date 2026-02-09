@@ -14,11 +14,15 @@ import Foundation
 
 protocol SiteListUseCase {
     func execute() async -> SiteListResult
+    func setSiteSelection(_ site: Site)
 }
 
 final class SiteListUseCaseImpl: SiteListUseCase {
 
+    
+
     private let repository: SiteListRepository
+    private let siteSelectionStore = AppAssembler.siteSelectionStore
 
     init(repository: SiteListRepository) {
         self.repository = repository
@@ -45,5 +49,9 @@ final class SiteListUseCaseImpl: SiteListUseCase {
             return .failure(message)
 
         }
+    }
+    
+    func setSiteSelection(_ site: Site) {
+        siteSelectionStore.save(site)
     }
 }

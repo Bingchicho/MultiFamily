@@ -49,4 +49,8 @@ final class SiteListViewModel {
     var count: Int {
         sites.count
     }
+    
+    func setSelectedSite(_ site: Site) {
+        useCase.setSiteSelection(site)
+    }
 }

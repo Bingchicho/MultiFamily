@@ -96,7 +96,6 @@
 				Presentation/Login/Attribute/DefaultUserAttributeStore.swift,
 				Presentation/Login/Repository/UserRepository.swift,
 				Presentation/Login/Repository/UserRepositoryImpl.swift,
-				Presentation/Login/Token/TokenStore.swift,
 				Presentation/Login/UseCase/LoginUseCase.swift,
 				Presentation/Login/UseCase/LoginUseCaseImpl.swift,
 				Presentation/Login/ViewModel/LoginViewModel.swift,

@@ -12,6 +12,8 @@ protocol UserAttributeStore {
 }
 
 final class DefaultUserAttributeStore: UserAttributeStore {
+    
+    static let shared = DefaultUserAttributeStore()
 
     private(set) var currentUser: UserAttribute?
 

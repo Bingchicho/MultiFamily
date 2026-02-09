@@ -37,6 +37,8 @@ final class LoginUseCaseImpl: LoginUseCase {
             try await block()
             return .success
         } catch {
+            AppAssembler.tokenStore.clear()
+            AppAssembler.userAttributeStore.clear()
             return mapErrorToLoginResult(error)
         }
     }

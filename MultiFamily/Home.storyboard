@@ -24,7 +24,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="house" catalog="system"/>
                                 <connections>
-                                    <segue destination="HP8-Oz-FbX" kind="presentation" id="PUl-Ht-aXr"/>
+                                    <segue destination="HP8-Oz-FbX" kind="presentation" identifier="site" id="PUl-Ht-aXr"/>
                                 </connections>
                             </button>
                         </subviews>

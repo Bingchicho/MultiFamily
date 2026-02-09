@@ -166,9 +166,9 @@ extension SiteListViewController: UITableViewDelegate {
     ) {
 
         let site = sites[indexPath.row]
-
+    
         delegate?.siteListDidSelect(site)
-
+        viewModel?.setSelectedSite(site)
         dismiss(animated: true)
     }
 }

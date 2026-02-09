@@ -6,6 +6,7 @@
 //
 
 
+import Foundation
 final class SiteListRepositoryImpl: SiteListRepository {
 
     
@@ -33,7 +34,9 @@ final class SiteListRepositoryImpl: SiteListRepository {
                 SiteEndpoint.getList(requestDTO)
             )
             
-            let sites = response.sites.map { $0.toDomain() }
+            let sites = response.sites
+                .map { $0.toDomain() }
+                .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
             
             return .success(sides: sites)
             

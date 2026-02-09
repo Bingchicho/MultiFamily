@@ -13,7 +13,7 @@ final class AppAssembler {
         let tokenStore = AppAssembler.tokenStore
         let env = DefaultEnvironmentConfig()
         let device = DefaultDeviceIdentifierProvider()
-        let attribute = DefaultUserAttributeStore()
+        let attribute = AppAssembler.userAttributeStore
 
         let requestFactory = UserRequestFactory(
             env: env,

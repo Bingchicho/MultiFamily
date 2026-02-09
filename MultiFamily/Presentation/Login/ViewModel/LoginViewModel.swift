@@ -83,9 +83,11 @@ final class LoginViewModel {
             onRoute?(.home)
 
         case .verificationRequired(let ticket):
+     
             onRoute?(.verification(ticket: ticket))
 
         case .failure:
+        
             state = .error(L10n.Login.Error.invalid)
         }
     }
