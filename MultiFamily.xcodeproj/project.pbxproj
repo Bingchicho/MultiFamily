@@ -97,6 +97,7 @@
 				Network/DTO/Response/User/UserResponseDTO.swift,
 				Network/DTO/Response/User/VerificationRequiredDTO.swift,
 				Network/Endpoint/ForgotPasswordEndpoint.swift,
+				Network/Endpoint/ProfileEndpoint.swift,
 				Network/Endpoint/RegisterEndpoint.swift,
 				Network/Endpoint/SiteListEndpoint.swift,
 				Network/Endpoint/UserEndpoint.swift,

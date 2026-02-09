@@ -61,6 +61,6 @@ final class UserRepositoryImpl: UserRepository {
         tokenStore.refreshToken = token.refreshToken
 
         let attribute = response.attribute.toDomain()
-        userAttributeStore.save(attribute)
+        userAttributeStore.save(attribute, email: response.email)
     }
 }

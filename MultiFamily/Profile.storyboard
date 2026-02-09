@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="MultiFamily" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLn-HN-fEo" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
+                                <rect key="frame" x="135" y="733.66666666666663" width="123" height="34.333333333333371"/>
+                                <color key="tintColor" name="Primary"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="rectangle.portrait.and.arrow.right" catalog="system" title="LOGOUT"/>
+                                <connections>
+                                    <action selector="logoutAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="npC-mP-PBa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEJ-DY-n0Z" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
+                                <rect key="frame" x="99.333333333333329" y="635.33333333333337" width="194.33333333333337" height="34.333333333333371"/>
+                                <color key="tintColor" name="Error"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system" title="DELETE ACCOUNT"/>
+                                <connections>
+                                    <action selector="deleteAccountAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="P50-ah-SSH"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="PHS-oI-iMk">
+                                <rect key="frame" x="16" y="134" width="361" height="238"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NcU-Y9-YhB">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="62.666666666666664"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D5I-Y6-2cv">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmf-IW-RWF" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="6.9999999999999982" width="47.333333333333336" height="20.333333333333329"/>
+                                                        <color key="tintColor" name="Secondary"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxP-xj-rMn" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
+                                                        <rect key="frame" x="273" y="0.0" width="88" height="34.333333333333336"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="highlighter" catalog="system" title="EDIT"/>
+                                                        <connections>
+                                                            <action selector="editNameAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Vtn-JB-G4f"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{NAME}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-pb-wA4" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="42.333333333333343" width="59.666666666666664" height="20.333333333333329"/>
+                                                <color key="tintColor" name="Primary"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="Primary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="D5I-Y6-2cv" firstAttribute="width" secondItem="NcU-Y9-YhB" secondAttribute="width" id="MrP-iR-LdY"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lJv-2e-Nwu">
+                                        <rect key="frame" x="0.0" y="94.666666666666657" width="60.666666666666664" height="48.666666666666657"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-28-XgQ" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="20.333333333333332"/>
+                                                <color key="tintColor" name="Secondary"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{EMAIL}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nys-TT-1FS" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28.333333333333343" width="60.666666666666664" height="20.333333333333329"/>
+                                                <color key="tintColor" name="Primary"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="Primary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZgZ-ZO-HjW">
+                                        <rect key="frame" x="0.0" y="175.33333333333331" width="361" height="62.666666666666657"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fvg-TU-cfP">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-5n-Bzq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H41-CU-Oq3" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="6.9999999999999982" width="51" height="20.333333333333329"/>
+                                                                <color key="tintColor" name="Secondary"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJZ-dA-T2u" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
+                                                                <rect key="frame" x="273" y="0.0" width="88" height="34.333333333333336"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="highlighter" catalog="system" title="EDIT"/>
+                                                                <connections>
+                                                                    <action selector="editMobileAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tKE-U2-TRz"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="dJE-5n-Bzq" firstAttribute="width" secondItem="fvg-TU-cfP" secondAttribute="width" id="WzP-Ea-CzX"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{MOBILE}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab9-PW-Nii" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="42.333333333333371" width="73.333333333333329" height="20.333333333333329"/>
+                                                <color key="tintColor" name="Primary"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="Primary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="fvg-TU-cfP" firstAttribute="width" secondItem="ZgZ-ZO-HjW" secondAttribute="width" id="EIr-FZ-F4V"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZgZ-ZO-HjW" firstAttribute="width" secondItem="PHS-oI-iMk" secondAttribute="width" id="Yue-7c-dVv"/>
+                                    <constraint firstItem="NcU-Y9-YhB" firstAttribute="width" secondItem="PHS-oI-iMk" secondAttribute="width" id="vCg-GW-ovi"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBR-Bq-DSl" customClass="ImageTextButton" customModule="MultiFamily" customModuleProvider="target">
+                                <rect key="frame" x="91" y="452" width="211" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="lock.rotation" catalog="system" title="CHANGEPASSWORD"/>
+                                <connections>
+                                    <action selector="changePasswordAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BBn-Z8-waW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KEJ-DY-n0Z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HBR-Bq-DSl" secondAttribute="bottom" constant="64" id="3Lh-4N-kuv"/>
+                            <constraint firstItem="PHS-oI-iMk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="44s-47-GAc"/>
+                            <constraint firstItem="wLn-HN-fEo" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-16" id="9N7-3K-imn"/>
+                            <constraint firstItem="wLn-HN-fEo" firstAttribute="top" secondItem="KEJ-DY-n0Z" secondAttribute="bottom" constant="64" id="Ak3-88-hsr"/>
+                            <constraint firstItem="wLn-HN-fEo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="BbG-LD-Qwb"/>
+                            <constraint firstItem="HBR-Bq-DSl" firstAttribute="top" secondItem="PHS-oI-iMk" secondAttribute="bottom" constant="80" id="JDU-sC-uaD"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PHS-oI-iMk" secondAttribute="trailing" constant="16" id="XhI-f2-x2j"/>
+                            <constraint firstItem="HBR-Bq-DSl" firstAttribute="centerX" secondItem="KEJ-DY-n0Z" secondAttribute="centerX" id="cdM-9Y-tAT"/>
+                            <constraint firstItem="KEJ-DY-n0Z" firstAttribute="centerX" secondItem="wLn-HN-fEo" secondAttribute="centerX" id="gn2-oo-SkF"/>
+                            <constraint firstItem="PHS-oI-iMk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="sUw-fb-5Az"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="changePasswordButton" destination="HBR-Bq-DSl" id="KCe-Ez-aWD"/>
+                        <outlet property="deleteAccountButton" destination="KEJ-DY-n0Z" id="Uz7-C2-1Wv"/>
+                        <outlet property="editMobileButton" destination="TJZ-dA-T2u" id="MbC-x2-vRL"/>
+                        <outlet property="editNameButton" destination="GxP-xj-rMn" id="47e-Ua-oo3"/>
+                        <outlet property="emailLabel" destination="nys-TT-1FS" id="zDJ-od-z5O"/>
+                        <outlet property="emailTitleLabel" destination="9hG-28-XgQ" id="j2c-Px-bpL"/>
+                        <outlet property="logoutButton" destination="wLn-HN-fEo" id="Jn6-Jl-7b8"/>
+                        <outlet property="mobileLabel" destination="ab9-PW-Nii" id="x7y-ZH-BZe"/>
+                        <outlet property="mobileTitleLabel" destination="H41-CU-Oq3" id="F7E-sI-gnY"/>
+                        <outlet property="nameLabel" destination="Nfj-pb-wA4" id="kU7-4b-hHz"/>
+                        <outlet property="nameTitleLabel" destination="Vmf-IW-RWF" id="P9K-IB-DLi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="highlighter" catalog="system" width="128" height="120"/>
+        <image name="lock.rotation" catalog="system" width="128" height="119"/>
+        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="109"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <namedColor name="Error">
+            <color red="0.89803921568627454" green="0.25098039215686274" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary">
+            <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Secondary">
+            <color red="0.45490196078431372" green="0.58823529411764708" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

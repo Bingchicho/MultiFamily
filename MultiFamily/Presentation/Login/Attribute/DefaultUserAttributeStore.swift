@@ -7,7 +7,8 @@
 
 protocol UserAttributeStore {
     var currentUser: UserAttribute? { get }
-    func save(_ user: UserAttribute)
+    var currentEmail: String? { get }
+    func save(_ user: UserAttribute, email: String)
     func clear()
 }
 
@@ -16,12 +17,15 @@ final class DefaultUserAttributeStore: UserAttributeStore {
     static let shared = DefaultUserAttributeStore()
 
     private(set) var currentUser: UserAttribute?
+    private(set) var currentEmail: String?
 
-    func save(_ user: UserAttribute) {
+    func save(_ user: UserAttribute, email: String) {
         currentUser = user
+        currentEmail = email
     }
 
     func clear() {
         currentUser = nil
+        currentEmail = nil
     }
 }

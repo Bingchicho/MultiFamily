@@ -7,7 +7,7 @@
 
 struct AttributeDTO: Codable {
     let preferredUsername: String
-    let preferredLanguage: String
+    let preferredLanguage: String?
     let phone: String?
     let country: String?
     let debugLog: Bool?

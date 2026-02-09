@@ -21,7 +21,7 @@ enum LoginError: Error, Equatable {
 
 struct UserAttribute {
     let username: String
-    let language: Language
+    let language: Language?
     let phone: String?
     let country: String?
     let isDebugEnabled: Bool?
@@ -44,7 +44,10 @@ enum Language: String {
     case enUS = "enUS"
     case jaJP = "jaJP"
 
-    static func from(apiValue: String) -> Language {
-        Language(rawValue: apiValue) ?? .enUS
+    static func from(apiValue: String?) -> Language {
+        guard let apiValue = apiValue else {
+            return .enUS
+        }
+        return Language(rawValue: apiValue) ?? .enUS
     }
 }
