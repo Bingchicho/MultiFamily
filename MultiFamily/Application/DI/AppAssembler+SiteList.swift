@@ -8,10 +8,8 @@
 extension AppAssembler {
     static func makeSiteListUseCase() -> SiteListUseCase {
         
-        let interceptor = AuthorizationInterceptor(tokenProvider: { () async throws -> String? in
-            return DefaultTokenStore().accessToken
-        })
-        let apiClient = URLSessionAPIClient(authInterceptor: interceptor)
+   
+        let apiClient = URLSessionAPIClient()
         let env = DefaultEnvironmentConfig()
         let device = DefaultDeviceIdentifierProvider()
 

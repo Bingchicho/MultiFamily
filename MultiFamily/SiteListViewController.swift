@@ -40,6 +40,7 @@ final class SiteListViewController: UIViewController {
     private func setupUI() {
        
         titleLabel.style = .title
+        closeButton.setTitle("", for: .normal)
     }
     
     private func bindViewModel() {
@@ -120,6 +121,9 @@ final class SiteListViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
     }
     
     @IBAction func closeTapped() {

@@ -18,6 +18,13 @@ class SiteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         titleLabel.style = .title
         
+        if #available(iOS 14.0, *) {
+            backgroundConfiguration = nil
+        } else {
+            // Fallback on earlier versions
+        }
+         backgroundColor = .clear
+        contentView.backgroundColor = .systemBackground
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

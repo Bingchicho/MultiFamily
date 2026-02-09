@@ -48,9 +48,18 @@ final class URLSessionAPIClient: APIClient {
             }
         }
         
-        if let interceptor = authInterceptor {
-            try await interceptor.adapt(request, urlRequest: &urlRequest)
+        if request.requiresAuth {
+            let token = AppAssembler.tokenStore.accessToken ?? ""
+            urlRequest.setValue(
+                "Bearer \(token)",
+                forHTTPHeaderField: "Authorization"
+            )
         }
+        
+//        if let interceptor = authInterceptor {
+//            try await interceptor.adapt(request, urlRequest: &urlRequest)
+//            
+//        }
 
         logRequest(urlRequest)
         

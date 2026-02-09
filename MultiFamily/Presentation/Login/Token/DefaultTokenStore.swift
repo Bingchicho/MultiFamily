@@ -8,13 +8,24 @@ import Security
 
 final class DefaultTokenStore: TokenStore {
     
+    static let shared = DefaultTokenStore()
+    
     private let secureStore: SecureStore
     
-    init(secureStore: SecureStore = KeychainService()) {
+    private init(secureStore: SecureStore = KeychainService()) {
         self.secureStore = secureStore
     }
     
-    var accessToken: String?   // 👉 只放記憶體
+    var accessToken: String? {
+        get { secureStore.load(key: "access_token") }
+        set {
+            if let value = newValue {
+                secureStore.save(value, key: "access_token")
+            } else {
+                secureStore.delete(key: "access_token")
+            }
+        }
+    }
     
     var refreshToken: String? {
         get { secureStore.load(key: "refresh_token") }

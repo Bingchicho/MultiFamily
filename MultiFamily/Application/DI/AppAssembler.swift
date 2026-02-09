@@ -10,7 +10,7 @@ final class AppAssembler {
     static func makeLoginUseCase() -> LoginUseCase {
 
         let apiClient = URLSessionAPIClient()
-        let tokenStore = DefaultTokenStore()
+        let tokenStore = AppAssembler.tokenStore
         let env = DefaultEnvironmentConfig()
         let device = DefaultDeviceIdentifierProvider()
         let attribute = DefaultUserAttributeStore()

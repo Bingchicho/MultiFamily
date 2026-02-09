@@ -95,7 +95,7 @@ final class ViewController: UIViewController {
     
     private func checkRefreshToken() {
 
-        guard DefaultTokenStore().accessToken != nil else {
+        guard AppAssembler.tokenStore.accessToken != nil else {
             return
         }
         

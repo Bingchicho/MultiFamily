@@ -32,6 +32,9 @@
                                         <color key="tintColor" name="Primary"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                        <connections>
+                                            <action selector="closeTapped" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HXk-BJ-ZLs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -69,6 +72,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="Uur-XI-lDZ" id="RoI-w1-DiK"/>
                         <outlet property="loadingBackground" destination="u0B-Nv-QMB" id="R0h-7c-Z7g"/>
                         <outlet property="loadingIndicator" destination="40C-ca-pFP" id="VAy-ot-X1H"/>
                         <outlet property="tableView" destination="WZ1-JP-lvK" id="zZA-TT-EXR"/>
