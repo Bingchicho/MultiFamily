@@ -11,10 +11,10 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var siteButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         setupUI()
     }
     
@@ -22,16 +22,20 @@ class HomeViewController: UIViewController {
         self.title = L10n.Home.title
         siteButton.setTitle("", for: .normal)
         accountButton.setTitle("", for: .normal)
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "site",
            let vc = segue.destination as? SiteListViewController {
             vc.delegate = self
         }
     }
-
+    
 }
 
 
