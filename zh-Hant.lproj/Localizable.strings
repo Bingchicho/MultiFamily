@@ -12,6 +12,7 @@
 "common.error.network" = "Network error. Please try again";
 "common.button.confirm" = "Confirm";
 "common.notice.title" = "Notice";
+"common.button.cancel" = "Cancel";
 
 // ==========================
 // Login
@@ -97,7 +98,47 @@
 
 
 
+
 // ==========================
 // Home
 // ==========================
-"Home.title" = "Lock";
+"home.title" = "Lock";
+
+
+// ==========================
+// Profile
+// ==========================
+"profile.title" = "Profile";
+"profile.error" = "Update failed. Please try again";
+
+"profile.name.title" = "Name";
+"profile.email.title" = "Email";
+"profile.mobile.title" = "Mobile";
+
+"profile.button.edit" = "Edit";
+"profile.button.change_password" = "Change Password";
+"profile.button.delete_account" = "Delete Account";
+"profile.button.logout" = "Logout";
+
+"profile.alert.edit_name.title" = "Edit Name";
+"profile.alert.edit_name.content" = "Enter your name";
+"profile.alert.edit_name.placeholder" = "Name";
+
+"profile.alert.edit_mobile.title" = "Edit Mobile";
+"profile.alert.edit_mobile.content" = "Enter your mobile";
+"profile.alert.edit_mobile.placeholder" = "Mobile";
+
+"profile.alert.change_password.title" = "Change Password";
+"profile.alert.change_password.content" = "Enter your new Password";
+"profile.alert.change_password.old_password.placeholder" = "Old Password";
+"profile.alert.change_password.new_password.placeholder" = "New Password";
+"profile.alert.change_password.confirm_password.placeholder" = "Confirm Password";
+"profile.alert.change_password.error.not_match" = "Password do not match";
+
+"profile.alert.delete_account.title" = "Delete Account";
+"profile.alert.delete_account.content" = "Permanently delete your account? The account will no longer be available, and all data in the account will be permanently delete";
+"profile.alert.delete_account.fail" = "Failed to delete account";
+"profile.alert.delete_account.fail.content" = "Due to the incomplete card return process, you are unable to delete your account. Please contact technical support for assistance";
+
+"profile.alert.logout.title" = "Logout";
+"profile.alert.logout.content" = "Are you sure you want to logout?";

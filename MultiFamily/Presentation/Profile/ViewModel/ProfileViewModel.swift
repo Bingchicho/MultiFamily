@@ -77,11 +77,31 @@ final class ProfileViewModel {
     }
     
     func logout() {
-        AppAssembler.userAttributeStore.clear()
-        AppAssembler.siteSelectionStore.clear()
-        AppAssembler.tokenStore.clear()
         
-        onRoute?(.logout)
+        Task {
+            
+            state = .loading
+            
+            let result = await useCase.logout()
+            
+            switch result {
+                
+            case .success:
+                state = .idle
+                AppAssembler.userAttributeStore.clear()
+                AppAssembler.siteSelectionStore.clear()
+                AppAssembler.tokenStore.clear()
+                
+                onRoute?(.logout)
+                
+            case .failure(let message):
+                
+                onStateChange?(.error(message))
+            }
+            
+          
+        }
+    
     }
     
     private func handle(_ result: UpdateProfileResult) {

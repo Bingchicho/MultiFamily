@@ -18,6 +18,15 @@ enum ProfileEndpoint {
     }
     
     
-
+    static func logout(_ dto: LogoutRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/user/logout",
+            method: .post,
+            body: dto,
+            requiresAuth: true
+        )
+    }
     
 }

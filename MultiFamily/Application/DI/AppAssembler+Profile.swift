@@ -14,7 +14,7 @@ extension AppAssembler {
         let device = DefaultDeviceIdentifierProvider()
         let attribute = AppAssembler.userAttributeStore
 
-        let requestFactory = UpdateProfileRequestFactory(
+        let requestFactory = ProfileRequestFactory(
             env: env,
             device: device,
             tokenStore: tokenStore

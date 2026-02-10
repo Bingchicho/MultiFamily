@@ -10,12 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  internal enum Home {
-    /// Lock
-    internal static let title = L10n.tr("Localizable", "Home.title", fallback: "Lock")
-  }
   internal enum Common {
     internal enum Button {
+      /// Cancel
+      internal static let cancel = L10n.tr("Localizable", "common.button.cancel", fallback: "Cancel")
       /// Confirm
       internal static let confirm = L10n.tr("Localizable", "common.button.confirm", fallback: "Confirm")
     }
@@ -75,6 +73,10 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "forgotpassword.success.title", fallback: "Change Password Success")
     }
   }
+  internal enum Home {
+    /// Lock
+    internal static let title = L10n.tr("Localizable", "home.title", fallback: "Lock")
+  }
   internal enum Login {
     /// Forgot Password
     internal static let forgotPassword = L10n.tr("Localizable", "login.forgot_password", fallback: "Forgot Password")
@@ -91,6 +93,92 @@ internal enum L10n {
     internal enum Password {
       /// Password
       internal static let placeholder = L10n.tr("Localizable", "login.password.placeholder", fallback: "Password")
+    }
+  }
+  internal enum Profile {
+    /// Update failed. Please try again
+    internal static let error = L10n.tr("Localizable", "profile.error", fallback: "Update failed. Please try again")
+    /// Profile
+    internal static let title = L10n.tr("Localizable", "profile.title", fallback: "Profile")
+    internal enum Alert {
+      internal enum ChangePassword {
+        /// Enter your new Password
+        internal static let content = L10n.tr("Localizable", "profile.alert.change_password.content", fallback: "Enter your new Password")
+        /// Change Password
+        internal static let title = L10n.tr("Localizable", "profile.alert.change_password.title", fallback: "Change Password")
+        internal enum ConfirmPassword {
+          /// Confirm Password
+          internal static let placeholder = L10n.tr("Localizable", "profile.alert.change_password.confirm_password.placeholder", fallback: "Confirm Password")
+        }
+        internal enum Error {
+          /// Password do not match
+          internal static let notMatch = L10n.tr("Localizable", "profile.alert.change_password.error.not_match", fallback: "Password do not match")
+        }
+        internal enum NewPassword {
+          /// New Password
+          internal static let placeholder = L10n.tr("Localizable", "profile.alert.change_password.new_password.placeholder", fallback: "New Password")
+        }
+        internal enum OldPassword {
+          /// Old Password
+          internal static let placeholder = L10n.tr("Localizable", "profile.alert.change_password.old_password.placeholder", fallback: "Old Password")
+        }
+      }
+      internal enum DeleteAccount {
+        /// Permanently delete your account? The account will no longer be available, and all data in the account will be permanently delete
+        internal static let content = L10n.tr("Localizable", "profile.alert.delete_account.content", fallback: "Permanently delete your account? The account will no longer be available, and all data in the account will be permanently delete")
+        /// Failed to delete account
+        internal static let fail = L10n.tr("Localizable", "profile.alert.delete_account.fail", fallback: "Failed to delete account")
+        /// Delete Account
+        internal static let title = L10n.tr("Localizable", "profile.alert.delete_account.title", fallback: "Delete Account")
+        internal enum Fail {
+          /// Due to the incomplete card return process, you are unable to delete your account. Please contact technical support for assistance
+          internal static let content = L10n.tr("Localizable", "profile.alert.delete_account.fail.content", fallback: "Due to the incomplete card return process, you are unable to delete your account. Please contact technical support for assistance")
+        }
+      }
+      internal enum EditMobile {
+        /// Enter your mobile
+        internal static let content = L10n.tr("Localizable", "profile.alert.edit_mobile.content", fallback: "Enter your mobile")
+        /// Mobile
+        internal static let placeholder = L10n.tr("Localizable", "profile.alert.edit_mobile.placeholder", fallback: "Mobile")
+        /// Edit Mobile
+        internal static let title = L10n.tr("Localizable", "profile.alert.edit_mobile.title", fallback: "Edit Mobile")
+      }
+      internal enum EditName {
+        /// Enter your name
+        internal static let content = L10n.tr("Localizable", "profile.alert.edit_name.content", fallback: "Enter your name")
+        /// Name
+        internal static let placeholder = L10n.tr("Localizable", "profile.alert.edit_name.placeholder", fallback: "Name")
+        /// Edit Name
+        internal static let title = L10n.tr("Localizable", "profile.alert.edit_name.title", fallback: "Edit Name")
+      }
+      internal enum Logout {
+        /// Are you sure you want to logout?
+        internal static let content = L10n.tr("Localizable", "profile.alert.logout.content", fallback: "Are you sure you want to logout?")
+        /// Logout
+        internal static let title = L10n.tr("Localizable", "profile.alert.logout.title", fallback: "Logout")
+      }
+    }
+    internal enum Button {
+      /// Change Password
+      internal static let changePassword = L10n.tr("Localizable", "profile.button.change_password", fallback: "Change Password")
+      /// Delete Account
+      internal static let deleteAccount = L10n.tr("Localizable", "profile.button.delete_account", fallback: "Delete Account")
+      /// Edit
+      internal static let edit = L10n.tr("Localizable", "profile.button.edit", fallback: "Edit")
+      /// Logout
+      internal static let logout = L10n.tr("Localizable", "profile.button.logout", fallback: "Logout")
+    }
+    internal enum Email {
+      /// Email
+      internal static let title = L10n.tr("Localizable", "profile.email.title", fallback: "Email")
+    }
+    internal enum Mobile {
+      /// Mobile
+      internal static let title = L10n.tr("Localizable", "profile.mobile.title", fallback: "Mobile")
+    }
+    internal enum Name {
+      /// Name
+      internal static let title = L10n.tr("Localizable", "profile.name.title", fallback: "Name")
     }
   }
   internal enum Register {

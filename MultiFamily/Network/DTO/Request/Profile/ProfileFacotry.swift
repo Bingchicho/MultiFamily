@@ -6,17 +6,17 @@
 //
 
 
-protocol UpdateProfileRequestFactoryProtocol {
+protocol ProfileRequestFactoryProtocol {
     func makeNameRequest(name: String) -> UpdateProfileRequestDTO
     func makePasswordRequest(email: String, oldPassword: String, password: String) -> UpdateProfileRequestDTO
     func makeMobileRequest(mobile: String) -> UpdateProfileRequestDTO
+    func makeLogoutRequest() -> LogoutRequestDTO
 }
 
-struct UpdateProfileRequestFactory: UpdateProfileRequestFactoryProtocol {
+struct ProfileRequestFactory: ProfileRequestFactoryProtocol {
 
     
 
-    
 
     private let env: EnvironmentConfig
     private let device: DeviceIdentifierProvider
@@ -45,6 +45,10 @@ struct UpdateProfileRequestFactory: UpdateProfileRequestFactoryProtocol {
     func makeMobileRequest(mobile: String) -> UpdateProfileRequestDTO {
         let name = AppAssembler.userAttributeStore.currentUser?.username ?? "-"
         return UpdateProfileRequestDTO(applicationID: env.applicationID, attribute: AttributeDTO(preferredUsername: name, preferredLanguage: nil, phone: mobile, country: nil, debugLog: nil, permission: nil), login: nil, clientToken: device.clientToken)
+    }
+    
+    func makeLogoutRequest() -> LogoutRequestDTO {
+        LogoutRequestDTO(applicationID: env.applicationID, logoutAllDevice: false, clientToken: device.clientToken)
     }
 
    

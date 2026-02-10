@@ -180,6 +180,10 @@ final class ViewController: UIViewController {
         // 導向註冊
     }
     
+    @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {
+        resetUI()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }

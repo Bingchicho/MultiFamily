@@ -116,12 +116,12 @@ class ProfileViewController: UIViewController {
         case .logout,
              .deleted:
 
-            navigationController?.popToRootViewController(animated: true)
+            self.performSegue(withIdentifier: "logout", sender: nil)
         }
     }
     
     private func setupUI() {
-        self.title = "Profile"
+        self.title = L10n.Profile.title
         
         deleteAccountButton.tintColor = .error
         deleteAccountButton.setTitleColor(.error, for: .normal)
@@ -134,7 +134,15 @@ class ProfileViewController: UIViewController {
         emailLabel.style = .body
         mobileLabel.style = .body
         
-
+        nameTitleLabel.text = L10n.Profile.Name.title
+        emailTitleLabel.text = L10n.Profile.Email.title
+        mobileTitleLabel.text = L10n.Profile.Mobile.title
+        editNameButton.setTitle(L10n.Profile.Button.edit, for: .normal)
+        editMobileButton.setTitle(L10n.Profile.Button.edit, for: .normal)
+        
+        changePasswordButton.setTitle(L10n.Profile.Button.changePassword, for: .normal)
+        deleteAccountButton.setTitle(L10n.Profile.Button.deleteAccount, for: .normal)
+        logoutButton.setTitle(L10n.Profile.Button.logout, for: .normal)
         
     }
     
@@ -142,26 +150,26 @@ class ProfileViewController: UIViewController {
 
     @IBAction func editNameAction(_ sender: UIButton) {
         let alert = UIAlertController(
-            title: "Edit Name",
-            message: "Enter your name",
+            title: L10n.Profile.Alert.EditName.title,
+            message: L10n.Profile.Alert.EditName.content,
             preferredStyle: .alert
         )
 
         alert.addTextField { textField in
-            textField.placeholder = "Name"
+            textField.placeholder = L10n.Profile.Alert.EditName.placeholder
             textField.text = AppAssembler.userAttributeStore.currentUser?.username
         }
 
 
 
-        let confirm = UIAlertAction(title: "Confirm", style: .default) { _ in
+        let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { _ in
             if let firstName = alert.textFields?[0].text{
                 self.viewModel.updateName(firstName)
             }
     
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
 
         alert.addAction(confirm)
         alert.addAction(cancel)
@@ -171,19 +179,19 @@ class ProfileViewController: UIViewController {
     
     @IBAction func editMobileAction(_ sender: UIButton) {
         let alert = UIAlertController(
-            title: "Edit Mobile",
-            message: "Enter your mobile",
+            title: L10n.Profile.Alert.EditMobile.title,
+            message: L10n.Profile.Alert.EditName.content,
             preferredStyle: .alert
         )
 
         alert.addTextField { textField in
-            textField.placeholder = "mobile"
+            textField.placeholder = L10n.Profile.Alert.EditMobile.placeholder
             textField.text = AppAssembler.userAttributeStore.currentUser?.phone
         }
 
 
 
-        let confirm = UIAlertAction(title: "Confirm", style: .default) { _ in
+        let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { _ in
             if let phone = alert.textFields?[0].text {
                 self.viewModel.changeMobile(phone)
             }
@@ -191,7 +199,7 @@ class ProfileViewController: UIViewController {
             
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
 
         alert.addAction(confirm)
         alert.addAction(cancel)
@@ -201,27 +209,27 @@ class ProfileViewController: UIViewController {
     
     @IBAction func changePasswordAction(_ sender: UIButton) {
         let alert = UIAlertController(
-            title: "Change Password",
-            message: "Enter your new password",
+            title: L10n.Profile.Alert.ChangePassword.title,
+            message: L10n.Profile.Alert.ChangePassword.content,
             preferredStyle: .alert
         )
         
         alert.addTextField { textField in
-            textField.placeholder = "Old Password"
+            textField.placeholder = L10n.Profile.Alert.ChangePassword.OldPassword.placeholder
             textField.isSecureTextEntry = true
         }
 
         alert.addTextField { textField in
-            textField.placeholder = "New Password"
+            textField.placeholder = L10n.Profile.Alert.ChangePassword.NewPassword.placeholder
             textField.isSecureTextEntry = true
         }
 
         alert.addTextField { textField in
-            textField.placeholder = "Confirm Password"
+            textField.placeholder = L10n.Profile.Alert.ChangePassword.ConfirmPassword.placeholder
             textField.isSecureTextEntry = true
         }
 
-        let confirm = UIAlertAction(title: "Confirm", style: .default) { _ in
+        let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { _ in
             let oldPassword = alert.textFields?[0].text ?? ""
             let newPassword = alert.textFields?[1].text ?? ""
             let confirmPassword = alert.textFields?[2].text ?? ""
@@ -229,8 +237,8 @@ class ProfileViewController: UIViewController {
             guard !newPassword.isEmpty,
                   newPassword == confirmPassword else {
                 self.showSimpleAlert(
-                    title: "Error",
-                    message: "Passwords do not match"
+                    title: L10n.Common.Error.title,
+                    message: L10n.Profile.Alert.ChangePassword.Error.notMatch
                 )
                 return
             }
@@ -238,7 +246,7 @@ class ProfileViewController: UIViewController {
             self.viewModel.changePassword(oldPassword: oldPassword, newPassword: newPassword)
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
 
         alert.addAction(confirm)
         alert.addAction(cancel)
@@ -248,16 +256,16 @@ class ProfileViewController: UIViewController {
     
     @IBAction func deleteAccountAction(_ sender: Any) {
         let alert = UIAlertController(
-            title: "Delete Account",
-            message: "Are you sure you want to delete your account?",
+            title: L10n.Profile.Alert.DeleteAccount.title,
+            message: L10n.Profile.Alert.DeleteAccount.content,
             preferredStyle: .alert
         )
 
-        let confirm = UIAlertAction(title: "Confirm", style: .destructive) { _ in
+        let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .destructive) { _ in
             // TODO: call delete account use case
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
 
         alert.addAction(confirm)
         alert.addAction(cancel)
@@ -267,16 +275,16 @@ class ProfileViewController: UIViewController {
     
     @IBAction func logoutAction(_ sender: UIButton) {
         let alert = UIAlertController(
-            title: "Logout",
-            message: "Are you sure you want to logout?",
+            title: L10n.Profile.Alert.Logout.title,
+            message: L10n.Profile.Alert.Logout.content,
             preferredStyle: .alert
         )
 
-        let confirm = UIAlertAction(title: "Confirm", style: .destructive) { _ in
+        let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .destructive) { _ in
             self.viewModel.logout()
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
 
         alert.addAction(confirm)
         alert.addAction(cancel)
@@ -292,7 +300,7 @@ class ProfileViewController: UIViewController {
         )
 
         alert.addAction(
-            UIAlertAction(title: "OK", style: .default)
+            UIAlertAction(title: L10n.Common.Button.confirm, style: .default)
         )
 
         present(alert, animated: true)

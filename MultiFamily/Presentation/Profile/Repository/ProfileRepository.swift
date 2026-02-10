@@ -10,21 +10,18 @@ protocol ProfileRepository {
     func updateName(name: String, email: String) async throws
     func updatePassword(email: String, oldPassword: String, password: String) async throws
     func updateMobile(mobile: String, email: String) async throws
+    func logout() async throws
 }
 
 final class ProfileRepositoryImpl: ProfileRepository {
 
-    
-
-    
-
     private let apiClient: APIClient
-    private let factory: UpdateProfileRequestFactoryProtocol
+    private let factory: ProfileRequestFactoryProtocol
     private let userStore: UserAttributeStore
 
     init(
         apiClient: APIClient,
-        factory: UpdateProfileRequestFactoryProtocol,
+        factory: ProfileRequestFactoryProtocol,
         userStore: UserAttributeStore
     ) {
         self.apiClient = apiClient
@@ -64,6 +61,14 @@ final class ProfileRepositoryImpl: ProfileRepository {
         let profile = response.attribute.toDomain()
 
         userStore.save(profile,email: email)
+    }
+    
+    
+    func logout() async throws {
+        let request = factory.makeLogoutRequest()
+        let _: ClientResponseDTO = try await apiClient.request(
+            ProfileEndpoint.logout(request)
+        )
     }
    
 }

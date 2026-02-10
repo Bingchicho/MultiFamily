@@ -10,6 +10,7 @@ protocol ProfileUseCase {
     func changeName(email: String, name: String) async -> UpdateProfileResult
     func changeMobile(email: String, mobile: String) async -> UpdateProfileResult
     func changePassword(email: String, oldPassword: String, password: String) async -> UpdateProfileResult
+    func logout() async -> UpdateProfileResult
 }
 
 final class ProfileUseCaseImpl: ProfileUseCase {
@@ -28,7 +29,7 @@ final class ProfileUseCaseImpl: ProfileUseCase {
              try await repository.updateName(name: name, email: email)
             return .success
         } catch {
-            return .failure(L10n.Register.error)
+            return .failure(L10n.Profile.error)
         }
     }
     
@@ -37,7 +38,7 @@ final class ProfileUseCaseImpl: ProfileUseCase {
             try await repository.updateMobile(mobile: mobile, email: email)
             return .success
         } catch {
-            return .failure(L10n.Register.error)
+            return .failure(L10n.Profile.error)
         }
     }
     
@@ -46,7 +47,16 @@ final class ProfileUseCaseImpl: ProfileUseCase {
              try await repository.updatePassword(email: email, oldPassword: oldPassword, password: password)
             return .success
         } catch {
-            return .failure(L10n.Register.error)
+            return .failure(L10n.Profile.error)
+        }
+    }
+    
+    func logout() async -> UpdateProfileResult {
+        do {
+            try await repository.logout()
+            return .success
+        } catch {
+            return .failure(L10n.Profile.error)
         }
     }
     
