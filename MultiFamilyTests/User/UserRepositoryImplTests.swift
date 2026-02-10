@@ -175,14 +175,17 @@ final class FakeUserAttributeStore: UserAttributeStore {
     private(set) var currentUser: UserAttribute?
     private(set) var didSaveUser = false
     private(set) var didClear = false
+    private(set) var currentEmail: String?
 
-    func save(_ user: UserAttribute) {
+    func save(_ user: UserAttribute, email: String) {
         didSaveUser = true
         currentUser = user
+        currentEmail = email
     }
 
     func clear() {
         didClear = true
         currentUser = nil
+        currentEmail = nil
     }
 }
