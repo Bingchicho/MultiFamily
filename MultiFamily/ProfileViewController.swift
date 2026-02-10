@@ -262,7 +262,7 @@ class ProfileViewController: UIViewController {
         )
 
         let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .destructive) { _ in
-            // TODO: call delete account use case
+            self.viewModel.deleteAccount()
         }
 
         let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)

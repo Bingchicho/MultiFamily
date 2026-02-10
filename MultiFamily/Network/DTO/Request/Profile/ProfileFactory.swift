@@ -11,12 +11,12 @@ protocol ProfileRequestFactoryProtocol {
     func makePasswordRequest(email: String, oldPassword: String, password: String) -> UpdateProfileRequestDTO
     func makeMobileRequest(mobile: String) -> UpdateProfileRequestDTO
     func makeLogoutRequest() -> LogoutRequestDTO
+    func makeDeleteAccountRequest() -> applicationIDRequestDTO
 }
 
 struct ProfileRequestFactory: ProfileRequestFactoryProtocol {
 
     
-
 
     private let env: EnvironmentConfig
     private let device: DeviceIdentifierProvider
@@ -51,5 +51,7 @@ struct ProfileRequestFactory: ProfileRequestFactoryProtocol {
         LogoutRequestDTO(applicationID: env.applicationID, logoutAllDevice: false, clientToken: device.clientToken)
     }
 
-   
+    func makeDeleteAccountRequest() -> applicationIDRequestDTO {
+        applicationIDRequestDTO(applicationID: env.applicationID, clientToken: device.clientToken)
+    }
 }

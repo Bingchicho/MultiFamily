@@ -29,4 +29,15 @@ enum ProfileEndpoint {
         )
     }
     
+    static func deleteAccount(_ dto: applicationIDRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/user/delete",
+            method: .post,
+            body: dto,
+            requiresAuth: true
+        )
+    }
+    
 }

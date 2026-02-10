@@ -104,6 +104,34 @@ final class ProfileViewModel {
     
     }
     
+    func deleteAccount() {
+        
+        Task {
+            
+            state = .loading
+            
+            let result = await useCase.deleteAccount()
+            
+            switch result {
+                
+            case .success:
+                state = .idle
+                AppAssembler.userAttributeStore.clear()
+                AppAssembler.siteSelectionStore.clear()
+                AppAssembler.tokenStore.clear()
+                
+                onRoute?(.logout)
+                
+            case .failure(let message):
+                
+                onStateChange?(.error(message))
+            }
+            
+          
+        }
+    
+    }
+    
     private func handle(_ result: UpdateProfileResult) {
         
         switch result {

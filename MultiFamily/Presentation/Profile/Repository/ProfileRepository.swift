@@ -11,9 +11,12 @@ protocol ProfileRepository {
     func updatePassword(email: String, oldPassword: String, password: String) async throws
     func updateMobile(mobile: String, email: String) async throws
     func logout() async throws
+    func deleteAccount() async throws
 }
 
 final class ProfileRepositoryImpl: ProfileRepository {
+
+    
 
     private let apiClient: APIClient
     private let factory: ProfileRequestFactoryProtocol
@@ -68,6 +71,13 @@ final class ProfileRepositoryImpl: ProfileRepository {
         let request = factory.makeLogoutRequest()
         let _: ClientResponseDTO = try await apiClient.request(
             ProfileEndpoint.logout(request)
+        )
+    }
+    
+    func deleteAccount() async throws {
+        let request = factory.makeDeleteAccountRequest()
+        let _: ClientResponseDTO = try await apiClient.request(
+            ProfileEndpoint.deleteAccount(request)
         )
     }
    

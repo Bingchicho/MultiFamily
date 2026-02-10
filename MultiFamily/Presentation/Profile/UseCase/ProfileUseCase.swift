@@ -11,9 +11,12 @@ protocol ProfileUseCase {
     func changeMobile(email: String, mobile: String) async -> UpdateProfileResult
     func changePassword(email: String, oldPassword: String, password: String) async -> UpdateProfileResult
     func logout() async -> UpdateProfileResult
+    func deleteAccount() async -> UpdateProfileResult
 }
 
 final class ProfileUseCaseImpl: ProfileUseCase {
+
+    
 
     
     
@@ -57,6 +60,16 @@ final class ProfileUseCaseImpl: ProfileUseCase {
             return .success
         } catch {
             return .failure(L10n.Profile.error)
+        }
+    }
+    
+    
+    func deleteAccount() async -> UpdateProfileResult {
+        do {
+            try await repository.deleteAccount()
+            return .success
+        } catch {
+            return .failure(L10n.Profile.Alert.DeleteAccount.fail)
         }
     }
     
