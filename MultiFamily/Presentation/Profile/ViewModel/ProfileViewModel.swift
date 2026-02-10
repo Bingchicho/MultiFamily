@@ -30,9 +30,12 @@ final class ProfileViewModel {
     
     func load() {
 
-        name = AppAssembler.userAttributeStore.currentUser?.username ?? "-"
-        email = AppAssembler.userAttributeStore.currentEmail ?? "-"
-        phone = AppAssembler.userAttributeStore.currentUser?.phone ?? "-"
+        let store = AppAssembler.userAttributeStore
+        
+        name = store.currentUser?.username ?? "-"
+        email = store.currentEmail ?? "-"
+        phone = store.currentUser?.phone ?? "-"
+        
         state = .idle
     }
     
@@ -88,15 +91,13 @@ final class ProfileViewModel {
                 
             case .success:
                 state = .idle
-                AppAssembler.userAttributeStore.clear()
-                AppAssembler.siteSelectionStore.clear()
-                AppAssembler.tokenStore.clear()
+                clearSession()
                 
                 onRoute?(.logout)
                 
             case .failure(let message):
                 
-                onStateChange?(.error(message))
+                state = .error(message)
             }
             
           
@@ -116,9 +117,7 @@ final class ProfileViewModel {
                 
             case .success:
                 state = .idle
-                AppAssembler.userAttributeStore.clear()
-                AppAssembler.siteSelectionStore.clear()
-                AppAssembler.tokenStore.clear()
+                clearSession()
                 
                 onRoute?(.logout)
                 
@@ -144,5 +143,12 @@ final class ProfileViewModel {
             
             onStateChange?(.error(message))
         }
+    }
+    
+    
+    private func clearSession() {
+        AppAssembler.userAttributeStore.clear()
+        AppAssembler.siteSelectionStore.clear()
+        AppAssembler.tokenStore.clear()
     }
 }

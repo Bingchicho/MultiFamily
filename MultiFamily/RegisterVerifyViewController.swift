@@ -51,11 +51,13 @@ final class RegisterVerifyViewController: UIViewController {
         viewModel = vm
 
         vm.onStateChange = { [weak self] state in
-            self?.render(state)
+            guard let self else { return }
+            self.render(state)
         }
 
         vm.onRoute = { [weak self] route in
-            self?.handle(route)
+            guard let self else { return }
+            self.handle(route)
         }
 
         verifyCodeTextField.addTarget(

@@ -36,15 +36,18 @@ class ProfileViewController: UIViewController {
 
 
         viewModel.onStateChange = { [weak self] state in
-            self?.render(state)
+            guard let self else { return }
+            self.render(state)
         }
 
         viewModel.onRoute = { [weak self] route in
-            self?.handle(route)
+            guard let self else { return }
+            self.handle(route)
         }
         
         viewModel.onProfileUpdated = { [weak self] in
-            self?.updated()
+            guard let self else { return }
+            self.updated()
         }
         
         viewModel.load()

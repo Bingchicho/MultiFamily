@@ -57,15 +57,18 @@ final class RegisterViewController: UIViewController {
         viewModel = vm
 
         vm.onStateChange = { [weak self] state in
-            self?.render(state)
+            guard let self else { return }
+            self.render(state)
         }
 
         vm.onRoute = { [weak self] route in
-            self?.handle(route)
+            guard let self else { return }
+            self.handle(route)
         }
 
         vm.onOpenLink = { [weak self] link in
-            self?.openURL(link.urlString)
+            guard let self else { return }
+            self.openURL(link.urlString)
         }
 
         emailTextField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)

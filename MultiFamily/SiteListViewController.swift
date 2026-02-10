@@ -53,7 +53,8 @@ final class SiteListViewController: UIViewController {
         
         vm.loadSites()
         vm.onStateChange = { [weak self] state in
-            self?.render(state)
+            guard let self else { return }
+            self.render(state)
         }
     }
     

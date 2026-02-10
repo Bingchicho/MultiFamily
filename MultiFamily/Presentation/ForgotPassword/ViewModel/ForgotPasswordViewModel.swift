@@ -105,6 +105,7 @@ final class ForgotPasswordViewModel {
             repeats: true
         ) { [weak self] _ in
             Task { @MainActor in
+                
                 self?.tick()
             }
         }
