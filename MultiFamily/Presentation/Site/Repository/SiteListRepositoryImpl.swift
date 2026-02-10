@@ -31,7 +31,7 @@ final class SiteListRepositoryImpl: SiteListRepository {
             let requestDTO: SiteListRequestDTO = siteListRequestFactory.makeSiteListRequest()
             
             let response: SiteListResponseDTO = try await apiClient.request(
-                SiteEndpoint.getList(requestDTO)
+                SiteEndpoint.list(requestDTO)
             )
             
             let sites = response.sites

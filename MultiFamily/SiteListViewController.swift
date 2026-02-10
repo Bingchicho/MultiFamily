@@ -51,6 +51,7 @@ final class SiteListViewController: UIViewController {
 
         viewModel = vm
         
+        holdLoading(animat: true)
         vm.loadSites()
         vm.onStateChange = { [weak self] state in
             guard let self else { return }

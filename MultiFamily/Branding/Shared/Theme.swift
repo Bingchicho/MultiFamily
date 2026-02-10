@@ -12,4 +12,6 @@ protocol Theme {
     var secondary: UIColor { get }
     var error: UIColor { get }
     var background: UIColor { get }
+    var synced: UIColor { get }
+    var unsynced: UIColor { get }
 }

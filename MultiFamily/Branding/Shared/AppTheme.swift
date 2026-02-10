@@ -12,6 +12,8 @@ struct DefaultTheme: Theme {
     var secondary: UIColor { UIColor(named: "Secondary")! }
     var error: UIColor { UIColor(named: "Error")! }
     var background: UIColor { UIColor(named: "Background")! }
+    var synced: UIColor { UIColor(named: "Synced")! }
+    var unsynced: UIColor { UIColor(named: "Unsynced")! }
 }
 
 enum AppTheme {

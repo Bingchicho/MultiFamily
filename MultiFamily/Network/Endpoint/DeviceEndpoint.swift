@@ -1,22 +1,19 @@
 //
-//  SiteListEndpoint.swift
+//  DeviceEndpoint.swift
 //  MultiFamily
 //
-//  Created by Sunion on 2026/2/6.
+//  Created by Sunion on 2026/2/10.
 //
 
-enum SiteEndpoint {
-    static func list(_ dto: SiteListRequestDTO) -> APIRequest {
+enum DeviceEndpoint {
+    static func list(_ dto: DeviceListRequestDTO) -> APIRequest {
         APIRequest(
             host: AppEnvironment.apiHostname,
             version: AppEnvironment.authService,
-            path: "/site-list/get",
+            path: "/device-list/get",
             method: .post,
             body: dto,
             requiresAuth: true
         )
     }
-    
-
-    
 }
