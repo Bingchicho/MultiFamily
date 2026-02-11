@@ -104,8 +104,11 @@ final class ViewController: UIViewController {
         guard AppAssembler.tokenStore.accessToken != nil else {
             return
         }
-        
-        viewModel?.refreshTokenIfNeeded()
+        holdLoading(animat: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.viewModel?.refreshTokenIfNeeded()
+        }
+       
     }
     
     @objc private func emailChanged() {

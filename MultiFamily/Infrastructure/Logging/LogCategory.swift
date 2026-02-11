@@ -12,4 +12,5 @@ enum LogCategory: String, CaseIterable {
     case database
     case system
     case site
+    case detail
 }

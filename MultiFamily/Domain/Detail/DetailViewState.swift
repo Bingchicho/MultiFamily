@@ -1,0 +1,15 @@
+//
+//  DeviceDetailViewState.swift
+//  MultiFamily
+//
+//  Created by Sunion on 2026/2/11.
+//
+
+enum DetailViewState {
+
+    case idle
+    case loading
+    case loaded(Detail)
+    case error(String)
+
+}

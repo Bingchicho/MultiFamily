@@ -106,6 +106,7 @@
 				Network/DTO/Response/User/AttributeDTO.swift,
 				Network/DTO/Response/User/UserResponseDTO.swift,
 				Network/DTO/Response/User/VerificationRequiredDTO.swift,
+				Network/Endpoint/DetailEndpoint.swift,
 				Network/Endpoint/DeviceEndpoint.swift,
 				Network/Endpoint/ForgotPasswordEndpoint.swift,
 				Network/Endpoint/ProfileEndpoint.swift,

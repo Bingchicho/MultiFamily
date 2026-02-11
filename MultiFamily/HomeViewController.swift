@@ -95,7 +95,6 @@ class HomeViewController: UIViewController {
 
               case .error(let message):
                   holdLoading(animat: false)
-                  print(message)
 
               default:
                   break

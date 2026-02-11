@@ -211,23 +211,40 @@
                                 </subviews>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJb-id-ctw">
-                                <rect key="frame" x="17.333333333333343" y="410.33333333333326" width="358.33333333333326" height="441.66666666666674"/>
+                                <rect key="frame" x="17" y="410" width="359" height="442"/>
                                 <connections>
                                     <segue destination="kKx-92-IPL" kind="embed" id="Gav-9v-rGQ"/>
                                 </connections>
                             </containerView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Juq-91-HDr">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="voN-Iy-W7V">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="voN-Iy-W7V" firstAttribute="centerX" secondItem="Juq-91-HDr" secondAttribute="centerX" id="TxP-KY-ErY"/>
+                                    <constraint firstItem="voN-Iy-W7V" firstAttribute="centerY" secondItem="Juq-91-HDr" secondAttribute="centerY" id="Wzc-4g-ROS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Juq-91-HDr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="0bb-Vf-VyJ"/>
+                            <constraint firstAttribute="top" secondItem="Juq-91-HDr" secondAttribute="top" id="7yA-Ml-DAd"/>
                             <constraint firstItem="PJb-id-ctw" firstAttribute="width" secondItem="uhy-dy-62E" secondAttribute="width" multiplier="1.01225" id="9X6-RG-oh7"/>
                             <constraint firstItem="PJb-id-ctw" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="Elv-OF-ge9"/>
+                            <constraint firstItem="Juq-91-HDr" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="JSs-tm-u2V"/>
                             <constraint firstItem="uhy-dy-62E" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Qv9-pn-0O0"/>
                             <constraint firstItem="PJb-id-ctw" firstAttribute="centerX" secondItem="uhy-dy-62E" secondAttribute="centerX" id="UmY-OQ-agC"/>
                             <constraint firstItem="4BJ-YV-e4n" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="WYu-aJ-V4y"/>
                             <constraint firstItem="4BJ-YV-e4n" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="fDg-fi-i8w"/>
                             <constraint firstItem="uhy-dy-62E" firstAttribute="top" secondItem="4BJ-YV-e4n" secondAttribute="bottom" constant="16" id="geu-LZ-oBu"/>
                             <constraint firstItem="4BJ-YV-e4n" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.8" id="kK0-UG-3JL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Juq-91-HDr" secondAttribute="trailing" id="kWb-w6-YVy"/>
                             <constraint firstItem="PJb-id-ctw" firstAttribute="top" secondItem="uhy-dy-62E" secondAttribute="bottom" constant="16" id="sBI-P6-rH2"/>
                             <constraint firstItem="uhy-dy-62E" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.9" id="uY1-MA-XbX"/>
                         </constraints>
@@ -243,6 +260,8 @@
                         <outlet property="blackButton" destination="Gti-MN-60a" id="i0H-Tu-aTX"/>
                         <outlet property="containerView" destination="PJb-id-ctw" id="h4N-0p-0qg"/>
                         <outlet property="historyButton" destination="PSv-y9-DXm" id="IaA-Cn-RSe"/>
+                        <outlet property="loadingBackground" destination="Juq-91-HDr" id="P7A-5p-9fn"/>
+                        <outlet property="loadingIndicator" destination="voN-Iy-W7V" id="kww-mi-gMJ"/>
                         <outlet property="lockUnlockButton" destination="VBE-nU-yoB" id="KCl-0r-YfJ"/>
                         <outlet property="moreButton" destination="qHZ-qX-dqC" id="Beu-xs-Gcm"/>
                         <outlet property="settingButton" destination="uap-d3-u1h" id="yy4-UV-Vyi"/>
