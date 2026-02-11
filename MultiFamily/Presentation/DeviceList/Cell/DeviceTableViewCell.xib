@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xpd-oW-oCZ">
-                        <rect key="frame" x="16" y="21.666666666666671" width="30" height="35"/>
+                        <rect key="frame" x="16" y="14.333333333333336" width="30" height="50.000000000000007"/>
                         <color key="tintColor" name="Primary"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="Xpd-oW-oCZ" secondAttribute="height" multiplier="1:1" id="lTe-nN-kMp"/>
+                            <constraint firstAttribute="width" secondItem="Xpd-oW-oCZ" secondAttribute="height" multiplier="1:1.5" id="lTe-nN-kMp"/>
                             <constraint firstAttribute="width" constant="30" id="mQl-UV-tn2"/>
                         </constraints>
                         <imageReference key="image" image="lock.shield.fill" catalog="system" symbolScale="large"/>

@@ -43,6 +43,9 @@
                                         <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="thz-8n-8l5" kind="show" id="LQl-vb-CJE"/>
+                                </connections>
                             </button>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dtH-Sr-NW5">
                                 <rect key="frame" x="59" y="488.66666666666674" width="275" height="119"/>
@@ -64,6 +67,9 @@
                                         <color key="tintColor" name="Primary"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="ADD LOCK"/>
+                                        <connections>
+                                            <segue destination="thz-8n-8l5" kind="show" id="Sx6-aQ-EaA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -145,6 +151,7 @@
                         <outlet property="searchBar" destination="EYP-TH-tgo" id="vgQ-QN-r8s"/>
                         <outlet property="siteButton" destination="BIN-ca-rt9" id="mk5-Tn-UqV"/>
                         <outlet property="tableView" destination="fBU-zU-aOj" id="HQa-R9-MDO"/>
+                        <segue destination="Hbc-tI-Y3z" kind="show" identifier="detail" id="a9p-pz-jEc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -169,6 +176,26 @@
             </objects>
             <point key="canvasLocation" x="1683.9694656488548" y="78.873239436619727"/>
         </scene>
+        <!--AddViewController-->
+        <scene sceneID="r96-Mi-XXx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Add" referencedIdentifier="AddViewController" id="thz-8n-8l5" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="n2M-e5-ime"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eb2-C6-uAa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1674" y="217"/>
+        </scene>
+        <!--DetailViewController-->
+        <scene sceneID="bVn-EZ-t3p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Detail" referencedIdentifier="DetailViewController" id="Hbc-tI-Y3z" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nY4-7t-YgD"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QKW-7I-IwH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1685" y="331"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="qKL-qw-I5w">
             <objects>
@@ -188,6 +215,9 @@
             <point key="canvasLocation" x="115" y="131"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Sx6-aQ-EaA"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>

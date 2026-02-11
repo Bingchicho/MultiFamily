@@ -127,6 +127,11 @@ class HomeViewController: UIViewController {
            let vc = segue.destination as? SiteListViewController {
             vc.delegate = self
         }
+        
+        if segue.identifier == "detail",
+           let vc = segue.destination as? DetailViewController {
+            vc.device = sender as? Device
+        }
     }
     
 }
@@ -182,15 +187,10 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let device = viewModel.displayDevice(at: indexPath.row)
+        
+        self.performSegue(withIdentifier: "detail", sender: device)
 
-//        // storyboard push
-//        let vc = storyboard?.instantiateViewController(
-//            withIdentifier: "DeviceDetailViewController"
-//        ) as! DeviceDetailViewController
-//
-//        vc.device = device
-//
-//        navigationController?.pushViewController(vc, animated: true)
+
     }
 }
 
