@@ -1,26 +1,36 @@
-//
-//  DeviceListViewModel.swift
-//  MultiFamily
-//
-//  Created by Sunion on 2026/2/10.
-//
-
+import Foundation
 @MainActor
+
 final class DeviceListViewModel {
 
+    // MARK: - Dependency
+
     private let useCase: DeviceUseCase
+
+    // MARK: - State
 
     private(set) var state: DeviceListViewState = .idle {
         didSet { onStateChange?(state) }
     }
 
+    var onStateChange: ((DeviceListViewState) -> Void)?
+
+    // MARK: - Source Data
+
     private(set) var devices: [Device] = []
 
-    var onStateChange: ((DeviceListViewState) -> Void)?
+    // MARK: - Search State
+
+    private var filteredDevices: [Device] = []
+    private(set) var isSearching: Bool = false
+
+    // MARK: - Init
 
     init(useCase: DeviceUseCase) {
         self.useCase = useCase
     }
+
+    // MARK: - Load
 
     func load(siteID: String) {
 
@@ -34,23 +44,51 @@ final class DeviceListViewModel {
 
             case .success(let devices):
 
-                self.devices = devices
-                self.state = .loaded(devices)
+                // Sort by name for stable UI
+                self.devices = devices.sorted {
+                    $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+                }
+
+                self.filteredDevices = self.devices
+                self.isSearching = false
+
+                state = .loaded(self.devices)
 
             case .failure(let message):
 
-                self.state = .error(message)
+                state = .error(message)
             }
         }
     }
 
-    func device(at index: Int) -> Device {
+    // MARK: - Search
 
-        devices[index]
+    func search(keyword: String) {
+
+        let trimmed = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !trimmed.isEmpty else {
+            isSearching = false
+            filteredDevices = devices
+            return
+        }
+
+        isSearching = true
+
+        filteredDevices = devices.filter {
+            $0.name.localizedCaseInsensitiveContains(trimmed)
+        }
     }
 
-    var count: Int {
+    // MARK: - Display Helpers
 
-        devices.count
+    var displayCount: Int {
+        isSearching ? filteredDevices.count : devices.count
+    }
+
+    func displayDevice(at index: Int) -> Device {
+        isSearching
+        ? filteredDevices[index]
+        : devices[index]
     }
 }

@@ -76,6 +76,28 @@ internal enum L10n {
   internal enum Home {
     /// Lock
     internal static let title = L10n.tr("Localizable", "home.title", fallback: "Lock")
+    internal enum Button {
+      /// Add lock
+      internal static let addLock = L10n.tr("Localizable", "home.button.add_lock", fallback: "Add lock")
+      internal enum Sync {
+        /// Sync
+        internal static let title = L10n.tr("Localizable", "home.button.sync.title", fallback: "Sync")
+      }
+    }
+    internal enum Empty {
+      /// There is no lock yet
+      internal static let content = L10n.tr("Localizable", "home.empty.content", fallback: "There is no lock yet")
+      /// No Lock
+      internal static let title = L10n.tr("Localizable", "home.empty.title", fallback: "No Lock")
+    }
+    internal enum Synced {
+      /// Synced
+      internal static let title = L10n.tr("Localizable", "home.synced.title", fallback: "Synced")
+    }
+    internal enum Unsynced {
+      /// Unsynced
+      internal static let title = L10n.tr("Localizable", "home.unsynced.title", fallback: "Unsynced")
+    }
   }
   internal enum Login {
     /// Forgot Password

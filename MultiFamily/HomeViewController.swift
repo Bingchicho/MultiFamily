@@ -27,12 +27,13 @@ class HomeViewController: UIViewController {
         DeviceListViewModel(
             useCase: AppAssembler.makeDeviceUseCase()
         )
-
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        searchBar.delegate = self
         setupUI()
         bind()
         
@@ -89,8 +90,8 @@ class HomeViewController: UIViewController {
                   if !viewModel.devices.isEmpty {
                       tableView.reloadData()
                   }
-     
-                 
+
+                  tableView.reloadData()
 
               case .error(let message):
                   holdLoading(animat: false)
@@ -114,6 +115,10 @@ class HomeViewController: UIViewController {
         
         noDataTitleLabel.style = .title
         noDataContentLabel.style = .body
+        
+        noDataTitleLabel.text = L10n.Home.Empty.title
+        noDataContentLabel.text = L10n.Home.Empty.content
+        noDataAddButton.setTitle(L10n.Home.Button.addLock, for: .normal)
     }
     
     
@@ -145,7 +150,7 @@ extension HomeViewController: UITableViewDataSource {
         numberOfRowsInSection section: Int
     ) -> Int {
 
-        viewModel.count
+        viewModel.displayCount
     }
 
     func tableView(
@@ -158,7 +163,7 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! DeviceTableViewCell
 
-        let device = viewModel.device(at: indexPath.row)
+        let device = viewModel.displayDevice(at: indexPath.row)
 
         cell.configure(device)
 
@@ -176,7 +181,7 @@ extension HomeViewController: UITableViewDelegate {
 
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let device = viewModel.device(at: indexPath.row)
+        let device = viewModel.displayDevice(at: indexPath.row)
 
 //        // storyboard push
 //        let vc = storyboard?.instantiateViewController(
@@ -186,5 +191,20 @@ extension HomeViewController: UITableViewDelegate {
 //        vc.device = device
 //
 //        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.search(keyword: searchText)
+        tableView.reloadData()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        viewModel.search(keyword: "")
+        tableView.reloadData()
     }
 }

@@ -20,7 +20,7 @@ class DeviceTableViewCell: UITableViewCell {
         deviceNameLabel.style = .body
        
         syncedLabel.style = .caption
-        
+        syncButton.setTitle(L10n.Home.Button.Sync.title, for: .normal)
         
     }
 
@@ -37,10 +37,14 @@ class DeviceTableViewCell: UITableViewCell {
         if device.job == 0 {
             syncedImageView.image = UIImage(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
             syncedImageView.tintColor = .synced
+            syncedLabel.text = L10n.Home.Synced.title
+            syncedLabel.textColor = .synced
             syncButton.isHidden = true
         } else {
             syncedImageView.image = UIImage(systemName: "exclamationmark.arrow.trianglehead.2.clockwise.rotate.90")
             syncedImageView.tintColor = .unsynced
+            syncedLabel.text = L10n.Home.Unsynced.title
+            syncedLabel.textColor = .unsynced
             syncButton.isHidden = false
             syncButton.isEnabled = true
         }
