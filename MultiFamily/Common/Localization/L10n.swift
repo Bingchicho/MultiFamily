@@ -31,6 +31,82 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "common.notice.title", fallback: "Notice")
     }
   }
+  internal enum Detail {
+    internal enum AutoLock {
+      /// Auto Lock:
+      internal static let title = L10n.tr("Localizable", "detail.auto_lock.title", fallback: "Auto Lock:")
+    }
+    internal enum Battery {
+      /// battery:
+      internal static let title = L10n.tr("Localizable", "detail.battery.title", fallback: "battery:")
+    }
+    internal enum Beep {
+      /// Beep:
+      internal static let title = L10n.tr("Localizable", "detail.beep.title", fallback: "Beep:")
+    }
+    internal enum Bt {
+      internal enum Adv {
+        /// BLE Adv:
+        internal static let title = L10n.tr("Localizable", "detail.bt.adv.title", fallback: "BLE Adv:")
+      }
+      internal enum TxPower {
+        /// BLE Power:
+        internal static let title = L10n.tr("Localizable", "detail.bt.tx_power.title", fallback: "BLE Power:")
+      }
+    }
+    internal enum Button {
+      internal enum Lock {
+        /// Lock
+        internal static let title = L10n.tr("Localizable", "detail.button.lock.title", fallback: "Lock")
+      }
+      internal enum More {
+        /// More
+        internal static let title = L10n.tr("Localizable", "detail.button.more.title", fallback: "More")
+      }
+      internal enum Sync {
+        /// Sync
+        internal static let title = L10n.tr("Localizable", "detail.button.sync.title", fallback: "Sync")
+      }
+      internal enum Unlock {
+        /// Unlock
+        internal static let title = L10n.tr("Localizable", "detail.button.unlock.title", fallback: "Unlock")
+      }
+    }
+    internal enum Hight {
+      /// Hight
+      internal static let title = L10n.tr("Localizable", "detail.hight.title", fallback: "Hight")
+    }
+    internal enum Low {
+      /// Low
+      internal static let title = L10n.tr("Localizable", "detail.low.title", fallback: "Low")
+    }
+    internal enum Middle {
+      /// Middle
+      internal static let title = L10n.tr("Localizable", "detail.middle.title", fallback: "Middle")
+    }
+    internal enum Off {
+      /// OFF
+      internal static let title = L10n.tr("Localizable", "detail.off.title", fallback: "OFF")
+    }
+    internal enum On {
+      /// ON
+      internal static let title = L10n.tr("Localizable", "detail.on.title", fallback: "ON")
+    }
+    internal enum Tab {
+      internal enum Authorized {
+        /// Authorized
+        internal static let title = L10n.tr("Localizable", "detail.tab.authorized.title", fallback: "Authorized")
+      }
+      internal enum Black {
+        /// BlackList
+        internal static let title = L10n.tr("Localizable", "detail.tab.black.title", fallback: "BlackList")
+      }
+      internal enum History {
+        /// History
+        internal static let title = L10n.tr("Localizable", "detail.tab.history.title", fallback: "History")
+      }
+    }
+  }
   internal enum Forgotpassword {
     /// Forgot Password
     internal static let title = L10n.tr("Localizable", "forgotpassword.title", fallback: "Forgot Password")

@@ -148,3 +148,27 @@
 
 "profile.alert.logout.title" = "Logout";
 "profile.alert.logout.content" = "Are you sure you want to logout?";
+
+
+// ==========================
+// Detail
+// ==========================
+"detail.battery.title" = "battery:";
+"detail.auto_lock.title" = "Auto Lock:";
+"detail.beep.title" = "Beep:";
+"detail.bt.tx_power.title" = "BLE Power:";
+"detail.bt.adv.title" = "BLE Adv:";
+"detail.on.title" = "ON";
+"detail.off.title" = "OFF";
+"detail.hight.title" = "Hight";
+"detail.middle.title" = "Middle";
+"detail.low.title" = "Low";
+
+"detail.button.sync.title" = "Sync";
+"detail.button.lock.title" = "Lock";
+"detail.button.unlock.title" = "Unlock";
+"detail.button.more.title" = "More";
+
+"detail.tab.history.title" = "History";
+"detail.tab.authorized.title" = "Authorized";
+"detail.tab.black.title" = "BlackList";

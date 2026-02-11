@@ -24,6 +24,7 @@ struct Detail {
     let btKey: String
     let btToken: String
     let btIV: String
+    
     let bleTxPower: Int
     let bleAdv: Int
     

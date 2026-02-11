@@ -21,7 +21,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var betteryLabel: AppLabel!
     @IBOutlet weak var betteryTitleLabel: AppLabel!
     @IBOutlet weak var containerView: UIView!
-    
+    @IBOutlet weak var blepowerLabel: AppLabel!
+    @IBOutlet weak var blepowerTitleLabel: AppLabel!
+    @IBOutlet weak var bleadvLabel: AppLabel!
+    @IBOutlet weak var bleadvTitleLabel: AppLabel!
     
     @IBOutlet weak var syncButton: PrimaryButton!
     
@@ -128,7 +131,26 @@ class DetailViewController: UIViewController {
         beepTitleLabel.style = .caption
         beepLabel.style = .caption
         timeLabel.style = .caption
+        bleadvTitleLabel.style = .caption
+        blepowerTitleLabel.style = .caption
+        bleadvLabel.style = .caption
+        blepowerLabel.style = .caption
         settingButton.setTitle("", for: .normal)
+        
+        beepTitleLabel.text = L10n.Detail.Beep.title
+        betteryTitleLabel.text = L10n.Detail.Battery.title
+        autoLockTitleLabel.text = L10n.Detail.AutoLock.title
+        bleadvTitleLabel.text = L10n.Detail.Bt.Adv.title
+        blepowerTitleLabel.text = L10n.Detail.Bt.TxPower.title
+        
+        syncButton.setTitle(L10n.Detail.Button.Sync.title, for: .normal)
+        lockUnlockButton.setTitle(L10n.Detail.Button.Lock.title, for: .normal)
+        moreButton.setTitle(L10n.Detail.Button.More.title, for: .normal)
+      
+        
+        historyButton.setTitle(L10n.Detail.Tab.History.title, for: .normal)
+        authorizedButton.setTitle(L10n.Detail.Tab.Authorized.title, for: .normal)
+        blackButton.setTitle(L10n.Detail.Tab.Black.title, for: .normal)
         
         if device?.job == 0 {
             syncedImageView.image = UIImage(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
@@ -146,9 +168,38 @@ class DetailViewController: UIViewController {
     
     private func setupData(value: Detail) {
         betteryLabel.text = "\(value.battery)%"
-        autoLockLabel.text = value.autoLock ? "\(value.autoLockDelay)S" : "OFF"
-        beepLabel.text = value.beep ? "ON" : "OFF"
+        autoLockLabel.text = value.autoLock ? "\(value.autoLockDelay)S" : L10n.Detail.Off.title
+        beepLabel.text = value.beep ? L10n.Detail.On.title : L10n.Detail.Off.title
         timeLabel.text = "\(value.updateAt)"
+     
+
+        let powerText: String
+        switch value.bleTxPower {
+        case 1...30:
+            powerText = L10n.Detail.Low.title
+        case 31...60:
+            powerText = L10n.Detail.Middle.title
+        case 61...100:
+            powerText = L10n.Detail.Hight.title
+        default:
+            powerText = "-"
+        }
+
+        blepowerLabel.text = powerText
+        
+        let advText: String
+        switch value.bleAdv {
+        case 1...30:
+            advText = L10n.Detail.Low.title
+        case 31...60:
+            advText = L10n.Detail.Middle.title
+        case 61...100:
+            advText = L10n.Detail.Hight.title
+        default:
+            advText = "-"
+        }
+
+        bleadvLabel.text = advText
         
     }
     
