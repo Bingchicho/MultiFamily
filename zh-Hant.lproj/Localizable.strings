@@ -168,7 +168,11 @@
 "detail.button.lock.title" = "Lock";
 "detail.button.unlock.title" = "Unlock";
 "detail.button.more.title" = "More";
+"detail.button.remove.title" = "Remove";
 
 "detail.tab.history.title" = "History";
 "detail.tab.authorized.title" = "Authorized";
 "detail.tab.black.title" = "BlackList";
+
+"detail.alert.remove.title" = "Remove Lock?";
+"detail.alert.remove.content" = "Remove the lock from this site?";

@@ -20,7 +20,7 @@ struct DetailResponseDTO: Decodable {
     let createAt: TimeInterval
     let isResident: Bool
     let remotePinCode: String?
-    let installationNotComplete: Bool
+    let installationNotComplete: Bool?
     let bt: DetailBTDTO
     let attributes: DetailAttributesDTO
 

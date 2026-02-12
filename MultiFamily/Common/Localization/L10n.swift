@@ -32,6 +32,14 @@ internal enum L10n {
     }
   }
   internal enum Detail {
+    internal enum Alert {
+      internal enum Remove {
+        /// Remove the lock from this site?
+        internal static let content = L10n.tr("Localizable", "detail.alert.remove.content", fallback: "Remove the lock from this site?")
+        /// Remove Lock?
+        internal static let title = L10n.tr("Localizable", "detail.alert.remove.title", fallback: "Remove Lock?")
+      }
+    }
     internal enum AutoLock {
       /// Auto Lock:
       internal static let title = L10n.tr("Localizable", "detail.auto_lock.title", fallback: "Auto Lock:")
@@ -62,6 +70,10 @@ internal enum L10n {
       internal enum More {
         /// More
         internal static let title = L10n.tr("Localizable", "detail.button.more.title", fallback: "More")
+      }
+      internal enum Remove {
+        /// Remove
+        internal static let title = L10n.tr("Localizable", "detail.button.remove.title", fallback: "Remove")
       }
       internal enum Sync {
         /// Sync

@@ -8,11 +8,14 @@
 protocol DetailUseCase {
 
     func execute(thingName: String) async -> Result<Detail, Error>
+    func remove(thingName: String) async -> Result<Void, Error>
 
 }
 
 
 final class DetailUseCaseImpl: DetailUseCase {
+
+    
 
     private let repository: DetailRepository
 
@@ -37,6 +40,22 @@ final class DetailUseCaseImpl: DetailUseCase {
 
         }
 
+    }
+    
+    func remove(thingName: String) async -> Result<Void, any Error> {
+        do {
+
+            try await repository.deleteDevice(
+                    thingName: thingName
+                )
+
+            return .success(())
+
+        } catch {
+
+            return .failure(error)
+
+        }
     }
 
 }

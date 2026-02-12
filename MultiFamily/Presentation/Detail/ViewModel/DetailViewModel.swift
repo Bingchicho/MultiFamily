@@ -84,6 +84,32 @@ final class DetailViewModel {
         }
 
     }
+    
+    func remove(thingName: String) {
+
+        state = .loading
+
+        Task {
+
+            let result =
+            await useCase.remove(
+                    thingName: thingName
+                )
+
+            switch result {
+
+            case .success:
+                
+                state = .deleted
+
+            case .failure(let error):
+                state = .error(L10n.Common.Error.network)
+
+            }
+
+        }
+
+    }
 
 }
 

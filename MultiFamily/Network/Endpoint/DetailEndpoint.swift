@@ -16,4 +16,17 @@ enum DetailEndpoint {
             requiresAuth: true
         )
     }
+    
+    static func delete(_ dto: DeleteDeviceRequestDTO) -> APIRequest {
+
+           APIRequest(
+               host: AppEnvironment.apiHostname,
+               version: AppEnvironment.authService,
+               path: "/device/delete",
+               method: .post,
+               body: dto,
+               requiresAuth: true
+           )
+       }
+    
 }

@@ -8,6 +8,7 @@
 protocol DetailRequestFactoryProtocol {
 
     func makeDetailRequest(thingName: String) -> DetailRequestDTO
+    func makeDeleteDeviceRequest(thingName: String) -> DeleteDeviceRequestDTO
 
 }
 
@@ -29,5 +30,14 @@ struct DetailRequestFactory: DetailRequestFactoryProtocol {
             clientToken: device.clientToken
         )
     }
+    
+    func makeDeleteDeviceRequest(thingName: String) -> DeleteDeviceRequestDTO {
+
+            DeleteDeviceRequestDTO(
+                applicationID: env.applicationID,
+                thingName: thingName,
+                clientToken: device.clientToken
+            )
+        }
 
 }

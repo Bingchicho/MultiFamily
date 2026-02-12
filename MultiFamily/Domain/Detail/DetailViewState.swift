@@ -10,6 +10,7 @@ enum DetailViewState {
     case idle
     case loading
     case loaded
+    case deleted
     case error(String)
 
 }

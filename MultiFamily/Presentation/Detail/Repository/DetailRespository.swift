@@ -8,6 +8,7 @@
 protocol DetailRepository {
 
     func fetchRegistry(thingName: String) async throws -> Detail
+    func deleteDevice(thingName: String) async throws
 
 }
 final class DetailRepositoryImpl: DetailRepository {
@@ -35,6 +36,19 @@ final class DetailRepositoryImpl: DetailRepository {
         
         return dto.toDomain()
     }
+    
+    func deleteDevice(thingName: String) async throws {
 
+            let requestDTO = factory.makeDeleteDeviceRequest(
+                thingName: thingName
+            )
+
+       
+        let dto: ClientResponseDTO = try await apiClient.request(
+                DetailEndpoint.delete(requestDTO)
+            )
+
+        
+        }
     
 }

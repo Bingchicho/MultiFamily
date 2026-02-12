@@ -97,6 +97,9 @@ class DetailViewController: UIViewController {
         case .loaded:
             setupData()
             holdLoading(animat: false)
+        case .deleted:
+            holdLoading(animat: false)
+            self.navigationController?.popViewController(animated: true)
         case .error(let message):
             holdLoading(animat: false)
             showError(message)
@@ -225,6 +228,61 @@ class DetailViewController: UIViewController {
     @IBAction func lockUnlockButtonAction(_ sender: UIButton) {
     }
     @IBAction func moreButtonAction(_ sender: UIButton) {
+        
+        let alert = UIAlertController(
+            title: L10n.Detail.Button.More.title,
+            message: nil,
+            preferredStyle: .actionSheet)
+        
+        let removeAction = UIAlertAction(
+            title: L10n.Detail.Button.Remove.title,
+            style: .destructive
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.removeDeviceAlert()
+        }
+        
+        let cancelAction = UIAlertAction(
+            title: L10n.Common.Button.cancel,
+            style: .cancel
+        )
+        
+        
+        // Required for iPad and modern iOS to show action sheet properly
+        if let popover = alert.popoverPresentationController {
+            popover.sourceView = sender
+            popover.sourceRect = sender.bounds
+            popover.permittedArrowDirections = [.up, .down]
+        }
+
+        
+        alert.addAction(removeAction)
+        alert.addAction(cancelAction)
+        
+        
+        present(alert, animated: true)
+    }
+    
+    private func removeDeviceAlert() {
+        let alert = UIAlertController(
+            title: L10n.Detail.Alert.Remove.title,
+            message: L10n.Detail.Alert.Remove.content,
+            preferredStyle: .alert
+        )
+
+        let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .destructive) { _ in
+            if let thingName = self.device?.thingName {
+                self.viewModel.remove(thingName: thingName)
+            }
+            
+        }
+
+        let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
+
+        alert.addAction(confirm)
+        alert.addAction(cancel)
+
+        present(alert, animated: true)
     }
     
     
