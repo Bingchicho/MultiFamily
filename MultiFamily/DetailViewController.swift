@@ -94,8 +94,8 @@ class DetailViewController: UIViewController {
         case .loading:
            holdLoading(animat: true)
             
-        case .loaded(let detail):
-            setupData(value: detail)
+        case .loaded:
+            setupData()
             holdLoading(animat: false)
         case .error(let message):
             holdLoading(animat: false)
@@ -166,40 +166,15 @@ class DetailViewController: UIViewController {
         
     }
     
-    private func setupData(value: Detail) {
-        betteryLabel.text = "\(value.battery)%"
-        autoLockLabel.text = value.autoLock ? "\(value.autoLockDelay)S" : L10n.Detail.Off.title
-        beepLabel.text = value.beep ? L10n.Detail.On.title : L10n.Detail.Off.title
-        timeLabel.text = "\(value.updateAt)"
-     
-
-        let powerText: String
-        switch value.bleTxPower {
-        case 1...30:
-            powerText = L10n.Detail.Low.title
-        case 31...60:
-            powerText = L10n.Detail.Middle.title
-        case 61...100:
-            powerText = L10n.Detail.Hight.title
-        default:
-            powerText = "-"
-        }
-
-        blepowerLabel.text = powerText
+    private func setupData() {
+  
+        betteryLabel.text = viewModel.batteryText
+        autoLockLabel.text = viewModel.autoLockText
+        beepLabel.text = viewModel.beepText
+        timeLabel.text = viewModel.updateTimeText
+        blepowerLabel.text = viewModel.blePowerText
+        bleadvLabel.text = viewModel.bleAdvText
         
-        let advText: String
-        switch value.bleAdv {
-        case 1...30:
-            advText = L10n.Detail.Low.title
-        case 31...60:
-            advText = L10n.Detail.Middle.title
-        case 61...100:
-            advText = L10n.Detail.Hight.title
-        default:
-            advText = "-"
-        }
-
-        bleadvLabel.text = advText
         
     }
     

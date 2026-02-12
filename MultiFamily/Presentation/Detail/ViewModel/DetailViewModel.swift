@@ -15,6 +15,45 @@ final class DetailViewModel {
     var onStateChange: ((DetailViewState) -> Void)?
 
     private let useCase: DetailUseCase
+    
+    private(set) var detail: Detail?
+    
+    // MARK: - UI Output
+
+       var batteryText: String {
+           guard let detail else { return "-" }
+           return "\(detail.battery)%"
+       }
+
+       var autoLockText: String {
+           guard let detail else { return "-" }
+           return detail.autoLock
+           ? "\(detail.autoLockDelay)S"
+           : L10n.Detail.Off.title
+       }
+
+       var beepText: String {
+           guard let detail else { return "-" }
+           return detail.beep
+           ? L10n.Detail.On.title
+           : L10n.Detail.Off.title
+       }
+
+       var updateTimeText: String {
+           guard let detail else { return "-" }
+           return detail.updateAt
+       }
+
+       var blePowerText: String {
+           guard let detail else { return "-" }
+           return detail.bleTxPower.bleLevelText
+       }
+
+       var bleAdvText: String {
+           guard let detail else { return "-" }
+           return detail.bleAdv.bleLevelText
+       }
+
 
     init(useCase: DetailUseCase) {
         self.useCase = useCase
@@ -34,7 +73,8 @@ final class DetailViewModel {
             switch result {
 
             case .success(let detail):
-                state = .loaded(detail)
+                self.detail = detail
+                state = .loaded
 
             case .failure(let error):
                 state = .error(L10n.Common.Error.network)
@@ -43,6 +83,23 @@ final class DetailViewModel {
 
         }
 
+    }
+
+}
+
+extension Int {
+
+    var bleLevelText: String {
+        switch self {
+        case 1...30:
+            return L10n.Detail.Low.title
+        case 31...60:
+            return L10n.Detail.Middle.title
+        case 61...100:
+            return L10n.Detail.Hight.title
+        default:
+            return "-"
+        }
     }
 
 }
