@@ -30,7 +30,7 @@ final class HistoryUseCaseImpl: HistoryUseCase {
             let result = try await repository.fetch(
                 id: id,
                 timePoint: timePoint,
-                maximum: 100
+                maximum: 700
             )
 
             return .success(result)
@@ -47,6 +47,7 @@ extension Date {
 
     var millisecondsSince1970: Int64 {
         Int64(timeIntervalSince1970 * 1000)
+        
     }
 
 }

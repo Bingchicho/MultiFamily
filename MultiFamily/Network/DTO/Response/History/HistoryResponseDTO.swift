@@ -9,11 +9,11 @@ import Foundation
 
 struct HistoryResponseDTO: Decodable {
 
-    let applicationID: String
+
     let id: String
     let idType: String
     let activity: [HistoryActivityDTO]
-    let clientToken: String
+
 
 }
 
@@ -21,7 +21,7 @@ struct HistoryActivityDTO: Decodable {
 
     let type: Int
     let detail: HistoryDetailDTO?
-    let millisecond: Int64
+    let millisecond: Double
 
 }
 
@@ -39,7 +39,7 @@ extension HistoryResponseDTO {
         activity.map {
 
             History(
-                type: HistoryType(rawValue: $0.type),
+                type: HistoryType(value: $0.type),
                 from: $0.detail?.from,
                 to: $0.detail?.to,
                 message: $0.detail?.message,

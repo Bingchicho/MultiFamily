@@ -28,6 +28,14 @@ class HistoryViewController: UIViewController {
         bindViewModel()
         setupUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let thingName = device?.thingName {
+            viewModel.load(id: thingName)
+        }
+    }
 
     private func setupUI() {
         noDataTitleLabel.style = .title
@@ -68,9 +76,7 @@ class HistoryViewController: UIViewController {
                 break
             }
         }
-        if let thingName = device?.thingName {
-            viewModel.load(id: thingName)
-        }
+
        
     }
 

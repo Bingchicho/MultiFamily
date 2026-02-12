@@ -34,12 +34,29 @@ enum HistoryType: Int {
     case accessCodeUnlockFail = 11
     case manualUnlock = 12
     case manualUnlockFail = 13
+    case cardUnlock = 14
+    case cardUnlockFail = 15
+    case fingerprintUnlock = 16
+    case fingerprintUnlockFail = 17
+    case faceUnlock = 18
+    case faceUnlockFail = 19
+    case twoFAUnlock = 20
+    case twoFAUnlockFail = 21
 
     case pinCreate = 80
     case pinUpdate = 81
     case pinDelete = 82
+    case ota = 95
 
     case errorPin = 128
+    case connectionError = 129
+    case wrongTimeAccess = 130
+    case vacationModeError = 131
+    case wrongCard = 132
+    case wrongFingerprint = 133
+    case wrongFace = 134
+    case twoFAError = 135
+    case otaLowBattery = 136
 
     case shareCreate = 1001
     case shareExpire = 1002
@@ -50,9 +67,9 @@ enum HistoryType: Int {
 
     case unknown
 
-    init(rawValue: Int) {
-        self = HistoryType(rawValue: rawValue)
-    }
+    init(value: Int) {
+         self = HistoryType(rawValue: value) ?? .unknown
+     }
 }
 
 extension HistoryType {
@@ -61,14 +78,41 @@ extension HistoryType {
 
         switch self {
 
-        case .autoLock:
-            return "Auto locked"
+        case .autoLock: return "Auto lock success"
+        case .autoLockFail: return "Auto lock failed"
 
-        case .appUnlock:
-            return "Unlocked via App"
+        case .appLock: return "App lock success"
+        case .appLockFail: return "App lock failed"
 
-        case .accessCodeUnlock:
-            return "Unlocked via Code"
+        case .appUnlock: return "App unlock success"
+        case .appUnlockFail: return "App unlock failed"
+
+        case .accessCodeUnlock: return "Code unlock success"
+        case .accessCodeUnlockFail: return "Code unlock failed"
+
+        case .cardUnlock: return "Card unlock success"
+        case .cardUnlockFail: return "Card unlock failed"
+
+        case .fingerprintUnlock: return "Fingerprint unlock success"
+        case .fingerprintUnlockFail: return "Fingerprint unlock failed"
+
+        case .faceUnlock: return "Face unlock success"
+        case .faceUnlockFail: return "Face unlock failed"
+
+        case .twoFAUnlock: return "2FA unlock success"
+        case .twoFAUnlockFail: return "2FA unlock failed"
+
+        case .ota: return "OTA update"
+
+        case .errorPin: return "Wrong PIN"
+        case .connectionError: return "Connection error"
+        case .wrongTimeAccess: return "Invalid time access"
+        case .vacationModeError: return "Vacation mode restriction"
+        case .wrongCard: return "Invalid card"
+        case .wrongFingerprint: return "Invalid fingerprint"
+        case .wrongFace: return "Invalid face"
+        case .twoFAError: return "2FA error"
+        case .otaLowBattery: return "OTA failed (low battery)"
 
         default:
             return "Unknown"

@@ -5,6 +5,8 @@
 //  Created by Sunion on 2026/2/12.
 //
 
+import Foundation
+
 @MainActor
 final class HistoryViewModel {
 
@@ -28,7 +30,7 @@ final class HistoryViewModel {
 
         Task {
 
-            let result = await useCase.fetch(id: id, timePoint: 0)
+            let result = await useCase.fetch(id: id, timePoint: Date().millisecondsSince1970)
 
             switch result {
 

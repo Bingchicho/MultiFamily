@@ -35,15 +35,17 @@ final class HistoryRepositoryImpl: HistoryRepository {
         maximum: Int
     ) async throws -> [History] {
 
-        let dto = factory.makeHistoryRequest(
+        let requestDTO = factory.makeHistoryRequest(
             id: id,
             timePoint: timePoint,
             maximum: maximum
         )
 
-        let request = HistoryEndpoint.history(dto)
 
-        let response: HistoryResponseDTO = try await apiClient.request(request)
+
+        let response: HistoryResponseDTO = try await apiClient.request(
+            HistoryEndpoint.history(requestDTO)
+        )
 
         return response.toDomain()
     }
