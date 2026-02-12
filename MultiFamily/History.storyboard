@@ -18,40 +18,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="amz-J5-tmV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="amz-J5-tmV">
                                 <rect key="frame" x="0.0" y="118" width="393" height="734"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="m31-y7-COT">
-                                <rect key="frame" x="176" y="430.66666666666669" width="41.333333333333343" height="40.666666666666686"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="m31-y7-COT">
+                                <rect key="frame" x="39.333333333333343" y="430.66666666666669" width="314.33333333333326" height="40.666666666666686"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40t-d9-7GI" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40t-d9-7GI" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="136.66666666666666" y="0.0" width="41.333333333333343" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDi-61-9GC" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20.333333333333314" width="41.333333333333336" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDi-61-9GC" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="136.66666666666666" y="20.333333333333314" width="41.333333333333343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="Secondary"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77g-79-nRk">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="GwF-xf-eK3">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GwF-xf-eK3" firstAttribute="centerX" secondItem="77g-79-nRk" secondAttribute="centerX" id="lfg-XW-kbL"/>
+                                    <constraint firstItem="GwF-xf-eK3" firstAttribute="centerY" secondItem="77g-79-nRk" secondAttribute="centerY" id="rey-QE-4HB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="77g-79-nRk" secondAttribute="trailing" id="4Dh-cq-vg1"/>
                             <constraint firstItem="amz-J5-tmV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="B6Q-rZ-PWr"/>
+                            <constraint firstAttribute="top" secondItem="77g-79-nRk" secondAttribute="top" id="BXr-sl-RHY"/>
                             <constraint firstItem="m31-y7-COT" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="FQh-n3-jHN"/>
+                            <constraint firstItem="77g-79-nRk" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="PfT-ax-QmM"/>
                             <constraint firstAttribute="bottom" secondItem="amz-J5-tmV" secondAttribute="bottom" id="Q7R-7W-eG7"/>
                             <constraint firstItem="m31-y7-COT" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="QHd-oV-USv"/>
+                            <constraint firstItem="77g-79-nRk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hDB-bz-z5I"/>
+                            <constraint firstItem="m31-y7-COT" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.8" id="oPr-VA-ibq"/>
                             <constraint firstItem="amz-J5-tmV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yIn-7O-k3a"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="amz-J5-tmV" secondAttribute="trailing" id="z81-cO-Mjm"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingBackground" destination="77g-79-nRk" id="iLf-MK-j4B"/>
+                        <outlet property="loadingIndicator" destination="GwF-xf-eK3" id="yck-WX-wTv"/>
                         <outlet property="noDataContentLabel" destination="zDi-61-9GC" id="6y6-xU-ccV"/>
                         <outlet property="noDataStackView" destination="m31-y7-COT" id="yKe-GM-M1b"/>
                         <outlet property="noDataTitleLabel" destination="40t-d9-7GI" id="IMw-Py-f9k"/>

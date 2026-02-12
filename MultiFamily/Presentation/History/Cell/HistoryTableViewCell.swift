@@ -15,7 +15,7 @@ class HistoryTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        eventLabel.style = .title
+        eventLabel.style = .body
         dateLabel.style = .caption
         userLabel.style = .body
     }

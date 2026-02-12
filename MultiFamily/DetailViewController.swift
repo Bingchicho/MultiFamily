@@ -52,7 +52,12 @@ class DetailViewController: UIViewController {
                 withIdentifier: "AuthorizedViewController"
             ) as! AuthorizedViewController
     }()
-    private lazy var blacklistVC = BlacklistViewController()
+    private lazy var blacklistVC: BlacklistViewController = {
+        UIStoryboard(name: "Black", bundle: nil)
+            .instantiateViewController(
+                withIdentifier: "BlacklistViewController"
+            ) as! BlacklistViewController
+    }()
     
     private lazy var viewModel =
     DetailViewModel(
@@ -219,9 +224,11 @@ class DetailViewController: UIViewController {
             newVC = eventVC
             
         case .authorized:
+            authorizedVC.device = device
             newVC = authorizedVC
             
         case .blacklist:
+            blacklistVC.device = device
             newVC = blacklistVC
         }
         

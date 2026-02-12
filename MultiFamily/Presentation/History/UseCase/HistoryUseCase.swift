@@ -32,8 +32,10 @@ final class HistoryUseCaseImpl: HistoryUseCase {
                 timePoint: timePoint,
                 maximum: 700
             )
+        
+            let sorted = result.sorted(by: { $0.date.millisecondsSince1970 > $1.date.millisecondsSince1970 })
 
-            return .success(result)
+            return .success(sorted)
 
         } catch {
 

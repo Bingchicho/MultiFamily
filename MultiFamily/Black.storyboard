@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Blacklist View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="BlacklistViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="BlacklistViewController" customModule="MultiFamily" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gwi-pF-ZJF">
+                                <rect key="frame" x="0.0" y="118" width="393" height="734"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6ER-iF-6B1">
+                                <rect key="frame" x="39.333333333333343" y="430.66666666666669" width="314.33333333333326" height="40.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO BLACKLIST" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-S3-nIK" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="99" y="0.0" width="116.33333333333331" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THERE IS NO CARD IN  BLACKLIST YET" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUW-4k-e9W" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="6.3333333333333428" y="20.333333333333314" width="301.66666666666663" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="Secondary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1p-he-cbw">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ya4-g1-Sn1">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ya4-g1-Sn1" firstAttribute="centerX" secondItem="L1p-he-cbw" secondAttribute="centerX" id="hQ8-Xf-uum"/>
+                                    <constraint firstItem="ya4-g1-Sn1" firstAttribute="centerY" secondItem="L1p-he-cbw" secondAttribute="centerY" id="iDH-SX-FbN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gwi-pF-ZJF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="3NY-2G-KgW"/>
+                            <constraint firstItem="6ER-iF-6B1" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.8" id="BMt-0Z-mvt"/>
+                            <constraint firstItem="L1p-he-cbw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="POU-ys-vFh"/>
+                            <constraint firstItem="6ER-iF-6B1" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="XCb-bb-23w"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gwi-pF-ZJF" secondAttribute="trailing" id="Zyf-y0-IBu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="top" secondItem="gwi-pF-ZJF" secondAttribute="top" id="b5t-gA-N1i"/>
+                            <constraint firstItem="gwi-pF-ZJF" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="eWB-lk-Yl5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L1p-he-cbw" secondAttribute="trailing" id="gbA-1e-3kq"/>
+                            <constraint firstItem="6ER-iF-6B1" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="lo3-ob-3Qb"/>
+                            <constraint firstAttribute="top" secondItem="L1p-he-cbw" secondAttribute="top" id="t0h-a3-4Qz"/>
+                            <constraint firstItem="L1p-he-cbw" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="zKc-z7-myb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingBackground" destination="L1p-he-cbw" id="Q0Z-ha-tNN"/>
+                        <outlet property="loadingIndicator" destination="ya4-g1-Sn1" id="4rU-SM-xGr"/>
+                        <outlet property="noDataContentLabel" destination="wUW-4k-e9W" id="QT4-kL-F1k"/>
+                        <outlet property="noDataStackView" destination="6ER-iF-6B1" id="r2N-CD-tj4"/>
+                        <outlet property="noDataTitleLabel" destination="7h0-S3-nIK" id="aaU-OT-SfU"/>
+                        <outlet property="tableView" destination="gwi-pF-ZJF" id="RJK-hG-p3b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="92"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Secondary">
+            <color red="0.45490196078431372" green="0.58823529411764708" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

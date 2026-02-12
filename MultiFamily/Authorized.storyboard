@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,21 +18,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QmR-h6-MnY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QmR-h6-MnY">
                                 <rect key="frame" x="0.0" y="118" width="393" height="734"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OVb-3a-P8f">
+                                <rect key="frame" x="39.333333333333343" y="420.66666666666669" width="314.33333333333326" height="61"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO AUTHORIZED" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q83-jS-TyL" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="89.999999999999986" y="0.0" width="134.66666666666663" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THERE IS NO AUTHORIZED FOR  THIS LOCK YET" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWh-D4-ABb" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                                        <rect key="frame" x="8.3333333333333428" y="20.333333333333311" width="297.66666666666663" height="40.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="Secondary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tId-GF-HVK">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="GWj-qw-Clg">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GWj-qw-Clg" firstAttribute="centerX" secondItem="tId-GF-HVK" secondAttribute="centerX" id="8hM-hS-Vbk"/>
+                                    <constraint firstItem="GWj-qw-Clg" firstAttribute="centerY" secondItem="tId-GF-HVK" secondAttribute="centerY" id="V6F-9s-Mws"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="OVb-3a-P8f" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="BSy-M0-67w"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tId-GF-HVK" secondAttribute="trailing" id="DER-am-RXY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QmR-h6-MnY" secondAttribute="trailing" id="Qzb-eH-Tvs"/>
+                            <constraint firstItem="OVb-3a-P8f" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="Rwo-Y6-1Uv"/>
+                            <constraint firstItem="tId-GF-HVK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="TVk-yC-Nnp"/>
+                            <constraint firstItem="tId-GF-HVK" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="Tn5-3w-r0F"/>
                             <constraint firstAttribute="bottom" secondItem="QmR-h6-MnY" secondAttribute="bottom" id="h2i-Fc-xOy"/>
+                            <constraint firstItem="OVb-3a-P8f" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.8" id="kpI-en-cb6"/>
+                            <constraint firstAttribute="top" secondItem="tId-GF-HVK" secondAttribute="top" id="qYV-ke-Hrf"/>
                             <constraint firstItem="QmR-h6-MnY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="t7Y-7U-U1w"/>
                             <constraint firstItem="QmR-h6-MnY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="tIH-dX-6qe"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingBackground" destination="tId-GF-HVK" id="Nfa-iu-7b0"/>
+                        <outlet property="loadingIndicator" destination="GWj-qw-Clg" id="Qsn-OJ-Ngn"/>
+                        <outlet property="noDataContentLabel" destination="dWh-D4-ABb" id="IVA-9f-yfE"/>
+                        <outlet property="noDataStackView" destination="OVb-3a-P8f" id="ZXY-Pj-6gP"/>
+                        <outlet property="noDataTitleLabel" destination="Q83-jS-TyL" id="tt7-pD-bcK"/>
                         <outlet property="tableView" destination="QmR-h6-MnY" id="QPA-92-iMC"/>
                     </connections>
                 </viewController>
@@ -41,6 +84,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Secondary">
+            <color red="0.45490196078431372" green="0.58823529411764708" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
