@@ -182,3 +182,15 @@
 // ==========================
 "history.empty.title" = "No Event history";
 "history.empty.content" = "There is no event yet";
+
+// ==========================
+// Auth
+// ==========================
+"auth.empty.title" = "No authorized";
+"auth.empty.content" = "There is no authorized resident for this lock yet";
+
+// ==========================
+// Black
+// ==========================
+"black.empty.title" = "No blocklist";
+"black.empty.content" = "There is no card in blocklist yet";

@@ -10,6 +10,22 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum Auth {
+    internal enum Empty {
+      /// There is no authorized resident for this lock yet
+      internal static let content = L10n.tr("Localizable", "auth.empty.content", fallback: "There is no authorized resident for this lock yet")
+      /// No authorized
+      internal static let title = L10n.tr("Localizable", "auth.empty.title", fallback: "No authorized")
+    }
+  }
+  internal enum Black {
+    internal enum Empty {
+      /// There is no card in blocklist yet
+      internal static let content = L10n.tr("Localizable", "black.empty.content", fallback: "There is no card in blocklist yet")
+      /// No blocklist
+      internal static let title = L10n.tr("Localizable", "black.empty.title", fallback: "No blocklist")
+    }
+  }
   internal enum Common {
     internal enum Button {
       /// Cancel

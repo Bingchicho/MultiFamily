@@ -32,6 +32,15 @@ class BlacklistViewController: UIViewController {
 
         bind()
         setupTableView()
+        setupUI()
+    }
+    
+    private func setupUI() {
+        noDataTitleLabel.style = .title
+        noDataContentLabel.style = .body
+        
+        noDataTitleLabel.text = L10n.Black.Empty.title
+        noDataContentLabel.text = L10n.Black.Empty.content
     }
     
     private func holdLoading(animat: Bool) {
