@@ -161,6 +161,14 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "forgotpassword.success.title", fallback: "Change Password Success")
     }
   }
+  internal enum History {
+    internal enum Empty {
+      /// There is no event yet
+      internal static let content = L10n.tr("Localizable", "history.empty.content", fallback: "There is no event yet")
+      /// No Event history
+      internal static let title = L10n.tr("Localizable", "history.empty.title", fallback: "No Event history")
+    }
+  }
   internal enum Home {
     /// Lock
     internal static let title = L10n.tr("Localizable", "home.title", fallback: "Lock")

@@ -46,7 +46,12 @@ class DetailViewController: UIViewController {
                 withIdentifier: "HistoryViewController"
             ) as! HistoryViewController
     }()
-    private lazy var authorizedVC = AuthorizedViewController()
+    private lazy var authorizedVC: AuthorizedViewController = {
+        UIStoryboard(name: "Authorized", bundle: nil)
+            .instantiateViewController(
+                withIdentifier: "AuthorizedViewController"
+            ) as! AuthorizedViewController
+    }()
     private lazy var blacklistVC = BlacklistViewController()
     
     private lazy var viewModel =
@@ -188,21 +193,18 @@ class DetailViewController: UIViewController {
     }
     
     private func switchChild(to newVC: UIViewController) {
-        
-        if let currentVC {
-            currentVC.willMove(toParent: nil)
-            currentVC.view.removeFromSuperview()
-            currentVC.removeFromParent()
-        }
-        
+
+        guard currentVC !== newVC else { return }
+
+        currentVC?.willMove(toParent: nil)
+        currentVC?.view.removeFromSuperview()
+        currentVC?.removeFromParent()
+
         addChild(newVC)
-        
         newVC.view.frame = containerView.bounds
-        
         containerView.addSubview(newVC.view)
-        
         newVC.didMove(toParent: self)
-        
+
         currentVC = newVC
     }
     

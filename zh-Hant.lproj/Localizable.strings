@@ -176,3 +176,9 @@
 
 "detail.alert.remove.title" = "Remove Lock?";
 "detail.alert.remove.content" = "Remove the lock from this site?";
+
+// ==========================
+// History
+// ==========================
+"history.empty.title" = "No Event history";
+"history.empty.content" = "There is no event yet";

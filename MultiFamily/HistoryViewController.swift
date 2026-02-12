@@ -12,6 +12,9 @@ class HistoryViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var noDataContentLabel: AppLabel!
+    @IBOutlet weak var noDataTitleLabel: AppLabel!
+    @IBOutlet weak var noDataStackView: UIStackView!
     var device: Device?
     
     private let viewModel = HistoryViewModel(
@@ -23,8 +26,16 @@ class HistoryViewController: UIViewController {
 
         setupTableView()
         bindViewModel()
+        setupUI()
     }
 
+    private func setupUI() {
+        noDataTitleLabel.style = .title
+        noDataContentLabel.style = .body
+        
+        noDataTitleLabel.text = L10n.History.Empty.title
+        noDataContentLabel.text = L10n.History.Empty.content
+    }
     
     private func setupTableView() {
         
@@ -44,8 +55,14 @@ class HistoryViewController: UIViewController {
 
             switch state {
 
-            case .loaded:
-                tableView.reloadData()
+            case .loaded(let history):
+                if history.count == 0 {
+                    noDataStackView.isHidden = false
+                } else {
+                    noDataStackView.isHidden = true
+                    tableView.reloadData()
+                }
+              
 
             default:
                 break
