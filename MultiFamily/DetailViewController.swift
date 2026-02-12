@@ -40,7 +40,12 @@ class DetailViewController: UIViewController {
     
     private var currentVC: UIViewController?
     
-    private lazy var eventVC = EventHistoryViewController()
+    private lazy var eventVC: HistoryViewController = {
+        UIStoryboard(name: "History", bundle: nil)
+            .instantiateViewController(
+                withIdentifier: "HistoryViewController"
+            ) as! HistoryViewController
+    }()
     private lazy var authorizedVC = AuthorizedViewController()
     private lazy var blacklistVC = BlacklistViewController()
     
@@ -56,6 +61,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bind()
+        switchTo(.event)
     }
     
     private func holdLoading(animat: Bool) {
@@ -207,6 +213,7 @@ class DetailViewController: UIViewController {
         switch tab {
             
         case .event:
+            eventVC.device = device
             newVC = eventVC
             
         case .authorized:

@@ -109,6 +109,7 @@
 				Network/Endpoint/DetailEndpoint.swift,
 				Network/Endpoint/DeviceEndpoint.swift,
 				Network/Endpoint/ForgotPasswordEndpoint.swift,
+				Network/Endpoint/HistoryEndpoint.swift,
 				Network/Endpoint/ProfileEndpoint.swift,
 				Network/Endpoint/RegisterEndpoint.swift,
 				Network/Endpoint/SiteListEndpoint.swift,
