@@ -9,6 +9,6 @@ struct RegistryUpdateResponseDTO: Decodable {
     let overwrite: Bool
     let taskID: String
     let status: String // "done" / "wait"
-    let userName: String
+    let userName: String?
     let clientToken: String
 }

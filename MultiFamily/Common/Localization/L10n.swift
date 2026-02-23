@@ -373,6 +373,62 @@ internal enum L10n {
       internal static let terms = L10n.tr("Localizable", "register.terms.terms", fallback: "Terms & Conditions")
     }
   }
+  internal enum Registry {
+    /// Lock setting
+    internal static let title = L10n.tr("Localizable", "registry.title", fallback: "Lock setting")
+    internal enum Adv {
+      /// BLE Adv
+      internal static let title = L10n.tr("Localizable", "registry.adv.title", fallback: "BLE Adv")
+    }
+    internal enum AutoLock {
+      /// Auto lock
+      internal static let title = L10n.tr("Localizable", "registry.auto_lock.title", fallback: "Auto lock")
+      internal enum Time {
+        /// Auto lock time
+        internal static let title = L10n.tr("Localizable", "registry.auto_lock.time.title", fallback: "Auto lock time")
+      }
+    }
+    internal enum Beep {
+      /// Beep
+      internal static let title = L10n.tr("Localizable", "registry.beep.title", fallback: "Beep")
+    }
+    internal enum Button {
+      internal enum Save {
+        /// Save
+        internal static let title = L10n.tr("Localizable", "registry.button.save.title", fallback: "Save")
+      }
+    }
+    internal enum Id {
+      /// Lock ID
+      internal static let title = L10n.tr("Localizable", "registry.id.title", fallback: "Lock ID")
+    }
+    internal enum Name {
+      /// Lock name
+      internal static let title = L10n.tr("Localizable", "registry.name.title", fallback: "Lock name")
+    }
+    internal enum Picker {
+      internal enum Adv {
+        /// Bluetooth Adv
+        internal static let title = L10n.tr("Localizable", "registry.picker.adv.title", fallback: "Bluetooth Adv")
+      }
+      internal enum AutoLock {
+        /// Auto Lock Time(s)
+        internal static let title = L10n.tr("Localizable", "registry.picker.auto_lock.title", fallback: "Auto Lock Time(s)")
+      }
+      internal enum Power {
+        /// Bluetooth Power
+        internal static let title = L10n.tr("Localizable", "registry.picker.power.title", fallback: "Bluetooth Power")
+      }
+    }
+    internal enum Power {
+      /// BLE Power
+      internal static let title = L10n.tr("Localizable", "registry.power.title", fallback: "BLE Power")
+    }
+    internal enum Success {
+      /// Update successful (synchronization required)
+      internal static let title = L10n.tr("Localizable", "registry.success.title", fallback: "Update successful (synchronization required)")
+    }
+  }
   internal enum Site {
     /// Site
     internal static let title = L10n.tr("Localizable", "site.title", fallback: "Site")

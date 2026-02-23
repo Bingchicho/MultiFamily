@@ -395,6 +395,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="10S" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="autoTimeButtonActionWithSender:" destination="TKm-jt-1mV" eventType="touchUpInside" id="sMy-JR-qUz"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -429,6 +432,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="LOW" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="powerButtonActionWithSender:" destination="TKm-jt-1mV" eventType="touchUpInside" id="pAH-br-HaL"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -449,6 +455,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="LOW" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="advButtonActionWithSender:" destination="TKm-jt-1mV" eventType="touchUpInside" id="ohN-sh-p4C"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -514,15 +523,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rM4-L9-2bF">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="GU4-yx-Tdh">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ur2-BZ-jDu" customClass="TextButton" customModule="MultiFamily" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="OTr-Si-L52">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Qt7-QU-QOQ">
                                 <rect key="frame" x="307.66666666666669" y="4.6666666666666687" width="65.333333333333314" height="34.666666666666664"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" name="Primary"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="SAVE"/>
                                 <connections>
-                                    <action selector="tapSave" destination="TKm-jt-1mV" eventType="touchUpInside" id="ENc-0F-wTe"/>
+                                    <action selector="tapSave" destination="TKm-jt-1mV" eventType="touchUpInside" id="ZiU-fU-ubn"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -544,7 +552,7 @@
                         <outlet property="nameTitleLabel" destination="rgM-Zw-1P7" id="WJ6-sS-Pya"/>
                         <outlet property="powerButton" destination="edY-i0-NTU" id="WgL-hu-wTo"/>
                         <outlet property="powerTitieLabel" destination="nUJ-x9-4pT" id="WbN-MT-kl4"/>
-                        <outlet property="saveButton" destination="ur2-BZ-jDu" id="lG9-Fc-mhS"/>
+                        <outlet property="saveButton" destination="Qt7-QU-QOQ" id="jQt-Ym-BHO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCY-4c-ilT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

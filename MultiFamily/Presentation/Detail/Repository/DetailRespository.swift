@@ -54,6 +54,9 @@ final class DetailRepositoryImpl: DetailRepository {
         let requestDTO = factory.makeRegistryUpdateRequest(thingName: thingName, name: name, autoLockOn: autoLockOn, autoLockTime: autoLockTime, beepOn: beepOn, power: power, adv: adv)
         
         let dto: RegistryUpdateResponseDTO = try await apiClient.request(DetailEndpoint.update(requestDTO))
+        
+        
+        
     }
     
     

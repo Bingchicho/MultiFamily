@@ -21,6 +21,7 @@ final class RegistryViewModel {
     private let useCase: RegistryUseCase
 
     // MARK: - Form (Input)
+    private var originalForm: RegistryForm?
     private(set) var form: RegistryForm = .init() {
         didSet { validateAndEmit() }
     }
@@ -31,7 +32,16 @@ final class RegistryViewModel {
 
     func configure(with data: DetailResponseDTO) {
         
-        let form = RegistryForm.init(name: data.name, isAutoLockOn: data.attributes.autoLock == "Y" ? true: false, autoLockDelay: data.attributes.autoLockDelay, isBeepOn: data.attributes.operatorVoice == "Y" ? true: false, txPower: BLETxPower(rawValue: data.attributes.bleTXPower) ?? .low, adv: BLEAdv(rawValue: data.attributes.bleAdv) ?? .low)
+        let form = RegistryForm(
+            name: data.name,
+            isAutoLockOn: data.attributes.autoLock == "Y",
+            autoLockDelay: data.attributes.autoLockDelay,
+            isBeepOn: data.attributes.operatorVoice == "Y",
+            txPower: BLETxPower(rawValue: data.attributes.bleTXPower) ?? .low,
+            adv: BLEAdv(rawValue: data.attributes.bleAdv) ?? .low
+        )
+
+        originalForm = form
         self.form = form
     }
 
@@ -89,9 +99,10 @@ final class RegistryViewModel {
 
     // MARK: - Validation
     private var isValid: Bool {
-     
-        let autoLockOK = form.isAutoLockOn ? (form.autoLockDelay != nil) : true
-        return autoLockOK
+        guard let originalForm else { return false }
+
+        // Only enable save if form changed
+        return form != originalForm
     }
 
     private func validateAndEmit() {

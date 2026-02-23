@@ -194,3 +194,23 @@
 // ==========================
 "black.empty.title" = "No blocklist";
 "black.empty.content" = "There is no card in blocklist yet";
+
+
+// ==========================
+// Registry
+// ==========================
+"registry.title" = "Lock setting";
+"registry.button.save.title" = "Save";
+"registry.id.title" = "Lock ID";
+"registry.name.title" = "Lock name";
+"registry.auto_lock.title" = "Auto lock";
+"registry.auto_lock.time.title" = "Auto lock time";
+"registry.beep.title" = "Beep";
+"registry.power.title" = "BLE Power";
+"registry.adv.title" = "BLE Adv";
+
+"registry.picker.power.title" = "Bluetooth Power";
+"registry.picker.adv.title" = "Bluetooth Adv";
+"registry.picker.auto_lock.title" = "Auto Lock Time(s)";
+
+"registry.success.title" = "Update successful (synchronization required)";

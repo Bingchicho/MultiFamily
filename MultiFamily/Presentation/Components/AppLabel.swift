@@ -40,7 +40,6 @@ final class AppLabel: UILabel {
         case .title:
             font = Typography.title
             
-
         case .body:
             font = Typography.body
 

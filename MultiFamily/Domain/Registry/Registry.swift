@@ -6,35 +6,35 @@
 //
 
 
-enum BLETxPower: Int, CaseIterable {
+enum BLETxPower: Int, CaseIterable, Equatable {
     case low = 30
     case medium = 60
     case high = 90
 
     var title: String {
         switch self {
-        case .low: return "Low"
-        case .medium: return "Middle"
-        case .high: return "High"
+        case .low: return L10n.Detail.Low.title
+        case .medium: return L10n.Detail.Middle.title
+        case .high: return L10n.Detail.Hight.title
         }
     }
 }
 
-enum BLEAdv: Int, CaseIterable {
+enum BLEAdv: Int, CaseIterable, Equatable {
     case low = 30
     case high = 90
 
     var title: String {
         switch self {
-        case .low: return "Low"
-        case .high: return "High"
+        case .low: return L10n.Detail.Low.title
+        case .high: return L10n.Detail.Hight.title
         }
     }
 }
 
 
 /// 這頁面表單狀態（ViewModel 內維護）
-struct RegistryForm {
+struct RegistryForm: Equatable {
 
     var name: String = ""
 
@@ -43,6 +43,8 @@ struct RegistryForm {
 
     var isBeepOn: Bool = false
 
-    var txPower: BLETxPower = .medium
+    var txPower: BLETxPower = .low
     var adv: BLEAdv = .low
 }
+
+
