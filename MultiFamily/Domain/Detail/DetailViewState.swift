@@ -9,7 +9,7 @@ enum DetailViewState {
 
     case idle
     case loading
-    case loaded
+    case loaded(response: DetailResponseDTO?)
     case deleted
     case error(String)
 

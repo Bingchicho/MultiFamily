@@ -39,6 +39,7 @@ final class AppLabel: UILabel {
         switch style {
         case .title:
             font = Typography.title
+            
 
         case .body:
             font = Typography.body

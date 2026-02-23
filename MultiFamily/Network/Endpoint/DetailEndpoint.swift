@@ -29,4 +29,16 @@ enum DetailEndpoint {
            )
        }
     
+    static func update(_ dto: RegistryUpdateRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/device-registry/update",
+            method: .post,
+            body: dto,
+            requiresAuth: true
+        )
+    }
+    
+    
 }

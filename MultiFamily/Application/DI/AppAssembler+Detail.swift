@@ -28,4 +28,27 @@ extension AppAssembler {
             repository: repository
         )
     }
+    
+    static func makeRegistryUseCase() -> RegistryUseCase {
+
+        let apiClient = URLSessionAPIClient()
+        let env = DefaultEnvironmentConfig()
+        let device = DefaultDeviceIdentifierProvider()
+
+        let requestFactory = DetailRequestFactory(
+            env: env,
+            device: device
+        )
+
+        let repository = DetailRepositoryImpl(
+            apiClient: apiClient,
+            factory: requestFactory,
+      
+        )
+
+
+        return RegistryUseCaseImpl(
+            repository: repository
+        )
+    }
 }

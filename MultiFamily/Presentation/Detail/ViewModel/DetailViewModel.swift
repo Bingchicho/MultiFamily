@@ -74,9 +74,10 @@ final class DetailViewModel {
 
             case .success(let detail):
                 self.detail = detail
-                state = .loaded
+        
+                self.state = .loaded(response: useCase.response)
 
-            case .failure(let error):
+            case .failure:
                 state = .error(L10n.Common.Error.network)
 
             }
@@ -102,7 +103,7 @@ final class DetailViewModel {
                 
                 state = .deleted
 
-            case .failure(let error):
+            case .failure:
                 state = .error(L10n.Common.Error.network)
 
             }

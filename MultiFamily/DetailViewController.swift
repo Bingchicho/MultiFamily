@@ -67,6 +67,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
     
+    
+    var data: DetailResponseDTO?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -108,11 +111,12 @@ class DetailViewController: UIViewController {
         switch state {
             
         case .loading:
-           holdLoading(animat: true)
+            holdLoading(animat: true)
             
-        case .loaded:
+        case .loaded(let res):
             setupData()
             holdLoading(animat: false)
+            self.data = res
         case .deleted:
             holdLoading(animat: false)
             self.navigationController?.popViewController(animated: true)
@@ -314,4 +318,13 @@ class DetailViewController: UIViewController {
         switchTo(.blacklist)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "registry",
+           let vc = segue.destination as? RegistryViewController {
+            vc.data = data
+        }
+        
+     
+    }
 }

@@ -6,6 +6,8 @@
 //
 
 protocol DetailUseCase {
+    
+    var response: DetailResponseDTO? { get }
 
     func execute(thingName: String) async -> Result<Detail, Error>
     func remove(thingName: String) async -> Result<Void, Error>
@@ -15,9 +17,10 @@ protocol DetailUseCase {
 
 final class DetailUseCaseImpl: DetailUseCase {
 
-    
 
     private let repository: DetailRepository
+    
+    var response: DetailResponseDTO?
 
     init(repository: DetailRepository) {
         self.repository = repository
@@ -31,8 +34,8 @@ final class DetailUseCaseImpl: DetailUseCase {
                 try await repository.fetchRegistry(
                     thingName: thingName
                 )
-
-            return .success(detail)
+            response = detail
+            return .success(detail.toDomain())
 
         } catch {
 
