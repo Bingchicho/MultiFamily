@@ -81,18 +81,10 @@ class ProvisionViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRegistry",
-           let (bt, remotePinCode) = sender as? (ProvisionBLEInfo, String) {
-
-            // Example: pass to next VC
-            // (Rename the VC type / properties to your real one)
-            //
-            // if let vc = segue.destination as? RegistryViewController {
-            //     vc.btInfo = bt
-            //     vc.remotePinCode = remotePinCode
-            // }
-
-            _ = bt
-            _ = remotePinCode
+           let (bt, remotePinCode) = sender as? (ProvisionBLEInfo, String),
+            let vc = segue.destination as? AddViewController {
+            vc.provisionBLEInfo = bt
+            vc.remotePinCode = remotePinCode
         }
     }
 

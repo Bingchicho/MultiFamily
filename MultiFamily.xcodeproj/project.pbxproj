@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5A7AF27C2F2C40ED009D0C63 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A7AF27A2F2C40ED009D0C63 /* Localizable.strings */; };
 		5ABA12862F4D35680094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5ABA12852F4D35680094A5D9 /* MFRBleSDK */; };
+		5ABA15822F4D733A0094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD49F612F4C379E00B05394 /* MFRBleSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ABA15822F4D733A0094A5D9 /* MFRBleSDK in Frameworks */,
 				5ABA12862F4D35680094A5D9 /* MFRBleSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
