@@ -25,7 +25,6 @@ extension AppAssembler {
       
         )
 
-
         return PermissionUseCaseImpl(
             repository: repository
         )

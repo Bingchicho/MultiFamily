@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A7AF27C2F2C40ED009D0C63 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A7AF27A2F2C40ED009D0C63 /* Localizable.strings */; };
+		5ABA12862F4D35680094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5ABA12852F4D35680094A5D9 /* MFRBleSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 				Network/Endpoint/HistoryEndpoint.swift,
 				Network/Endpoint/PermissionEndpoint.swift,
 				Network/Endpoint/ProfileEndpoint.swift,
+				Network/Endpoint/ProvisionEndpoint.swift,
 				Network/Endpoint/RegisterEndpoint.swift,
 				Network/Endpoint/SiteListEndpoint.swift,
 				Network/Endpoint/UserEndpoint.swift,
@@ -166,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ABA12862F4D35680094A5D9 /* MFRBleSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +230,8 @@
 			);
 			name = MultiFamily;
 			packageProductDependencies = (
+				5AD49F612F4C379E00B05394 /* MFRBleSDK */,
+				5ABA12852F4D35680094A5D9 /* MFRBleSDK */,
 			);
 			productName = MultiFamily;
 			productReference = 5A0151012F2AEC20008A5839 /* MultiFamily.app */;
@@ -312,6 +317,7 @@
 			mainGroup = 5A0150F82F2AEC20008A5839;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				5ABA12842F4D35680094A5D9 /* XCLocalSwiftPackageReference "../MFRBleSDK" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5A0151022F2AEC20008A5839 /* Products */;
@@ -879,6 +885,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		5ABA12842F4D35680094A5D9 /* XCLocalSwiftPackageReference "../MFRBleSDK" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../MFRBleSDK;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5ABA12852F4D35680094A5D9 /* MFRBleSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MFRBleSDK;
+		};
+		5AD49F612F4C379E00B05394 /* MFRBleSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MFRBleSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5A0150F92F2AEC20008A5839 /* Project object */;
 }

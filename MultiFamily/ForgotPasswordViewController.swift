@@ -123,7 +123,11 @@ final class ForgotPasswordViewController: UIViewController {
             message: L10n.Forgotpassword.Code.success(message),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
+        
+       let confirm =  UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { _ in
+           self.holdLoading(animat: false)
+        }
+        alert.addAction(confirm)
         present(alert, animated: true)
     }
     
@@ -133,7 +137,10 @@ final class ForgotPasswordViewController: UIViewController {
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
+        let confirm =  UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { _ in
+            self.holdLoading(animat: false)
+         }
+         alert.addAction(confirm)
         present(alert, animated: true)
     }
     

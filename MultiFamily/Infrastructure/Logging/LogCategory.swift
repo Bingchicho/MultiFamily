@@ -13,4 +13,5 @@ enum LogCategory: String, CaseIterable {
     case system
     case site
     case detail
+    case bluetooth
 }
