@@ -72,19 +72,19 @@ class ProvisionViewController: UIViewController {
 
     private func handle(_ route: ProvisionRoute) {
         switch route {
-        case .next(let bt, let remotePinCode):
+        case .next(let bt):
             // 1) If you are using segue, keep data then performSegue
             // 2) Or push directly
-            performSegue(withIdentifier: "toRegistry", sender: (bt, remotePinCode))
+            performSegue(withIdentifier: "toRegistry", sender: (bt))
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRegistry",
-           let (bt, remotePinCode) = sender as? (ProvisionBLEInfo, String),
+           let (bt) = sender as? (ProvisionBLEInfo),
             let vc = segue.destination as? AddViewController {
             vc.provisionBLEInfo = bt
-            vc.remotePinCode = remotePinCode
+            vc.viewModel = viewModel
           
         }
     }

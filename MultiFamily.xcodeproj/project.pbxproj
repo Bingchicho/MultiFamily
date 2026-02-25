@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		5A7AF27C2F2C40ED009D0C63 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A7AF27A2F2C40ED009D0C63 /* Localizable.strings */; };
 		5ABA12862F4D35680094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5ABA12852F4D35680094A5D9 /* MFRBleSDK */; };
-		5ABA15822F4D733A0094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD49F612F4C379E00B05394 /* MFRBleSDK */; };
+		5ABA27182F4ED7880094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5ABA27172F4ED7880094A5D9 /* MFRBleSDK */; };
+		5ABA271B2F4ED7A00094A5D9 /* MFRBleSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5ABA271A2F4ED7A00094A5D9 /* MFRBleSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,8 +171,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ABA15822F4D733A0094A5D9 /* MFRBleSDK in Frameworks */,
 				5ABA12862F4D35680094A5D9 /* MFRBleSDK in Frameworks */,
+				5ABA27182F4ED7880094A5D9 /* MFRBleSDK in Frameworks */,
+				5ABA271B2F4ED7A00094A5D9 /* MFRBleSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,8 +235,9 @@
 			);
 			name = MultiFamily;
 			packageProductDependencies = (
-				5AD49F612F4C379E00B05394 /* MFRBleSDK */,
 				5ABA12852F4D35680094A5D9 /* MFRBleSDK */,
+				5ABA27172F4ED7880094A5D9 /* MFRBleSDK */,
+				5ABA271A2F4ED7A00094A5D9 /* MFRBleSDK */,
 			);
 			productName = MultiFamily;
 			productReference = 5A0151012F2AEC20008A5839 /* MultiFamily.app */;
@@ -320,7 +323,7 @@
 			mainGroup = 5A0150F82F2AEC20008A5839;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				5ABA12842F4D35680094A5D9 /* XCLocalSwiftPackageReference "../MFRBleSDK" */,
+				5ABA27192F4ED7A00094A5D9 /* XCLocalSwiftPackageReference "../MFRBleSDK" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5A0151022F2AEC20008A5839 /* Products */;
@@ -890,7 +893,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		5ABA12842F4D35680094A5D9 /* XCLocalSwiftPackageReference "../MFRBleSDK" */ = {
+		5ABA27192F4ED7A00094A5D9 /* XCLocalSwiftPackageReference "../MFRBleSDK" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../MFRBleSDK;
 		};
@@ -901,7 +904,11 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = MFRBleSDK;
 		};
-		5AD49F612F4C379E00B05394 /* MFRBleSDK */ = {
+		5ABA27172F4ED7880094A5D9 /* MFRBleSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MFRBleSDK;
+		};
+		5ABA271A2F4ED7A00094A5D9 /* MFRBleSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MFRBleSDK;
 		};

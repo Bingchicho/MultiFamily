@@ -13,11 +13,13 @@ public struct ProvisionBLEInfo: Equatable, Sendable {
     public let key: String
     public let token: String
     public let iv: String
+    public let remotePinCode: String
 
-    public init(uuid: String, key: String, token: String, iv: String) {
+    public init(uuid: String, key: String, token: String, iv: String, remotePinCode: String) {
         self.uuid = uuid
         self.key = key
         self.token = token
         self.iv = iv
+        self.remotePinCode = remotePinCode
     }
 }

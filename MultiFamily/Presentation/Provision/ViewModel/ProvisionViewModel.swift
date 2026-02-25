@@ -4,7 +4,7 @@
 //
 //  Created by Sunion on 2026/2/23.
 //
-
+import Foundation
 
 @MainActor
 final class ProvisionViewModel {
@@ -24,6 +24,31 @@ final class ProvisionViewModel {
     private var siteID: String?
     private var model: String?
     private var activeMode: ActiveModeDTO = .ble
+    
+    
+    // add頁面從這邊 因應bleService要同一個
+    
+    private(set) var addState: AddDeviceViewState = .idle {
+        didSet { addonStateChange?(addState) }
+    }
+
+    var addonStateChange: ((AddDeviceViewState) -> Void)?
+ 
+
+
+    private(set) var form: AddForm = .init()
+    
+    
+    
+    var isValid: Bool {
+        // Name + Area 必填
+        guard !form.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return false }
+
+        return true
+    }
+
+     private var provision: ProvisionBLEInfo?
+  
 
     init(provisionUseCase: ProvisionUseCase,
          bleService: BLEService) {
@@ -59,18 +84,122 @@ final class ProvisionViewModel {
                     uuid: provision.bt.uuid,
                     key: provision.bt.key,
                     token: provision.bt.token,
-                    iv: provision.bt.iv
+                    iv: provision.bt.iv,
+                    remotePinCode: provision.remotePinCode
                 )
 
         
                 try await bleService.connection()
 
                 state = .success
-                onRoute?(.next(bt: info, remotePinCode: provision.remotePinCode))
+                onRoute?(.next(bt: info))
 
             } catch {
                 state = .error(L10n.Common.Error.network)
             }
         }
     }
+    
+    
+    // add
+    
+    func addConfigure(provision: ProvisionBLEInfo) {
+
+        self.form = AddForm(lockID: provision.uuid, name: "", area: .public, isAutoLockOn: false, autoLockDelay: 5, isBeepOn: true, txPower: .medium, adv: .low, group: nil)
+        self.provision = provision
+        
+    
+    }
+    
+    // MARK: - Input mutations
+       func updateName(_ value: String) {
+           form.name = value
+         
+       }
+
+       func updateArea(_ value: LockArea) {
+           form.area = value
+     
+       }
+
+       func updateAutoLockOn(_ isOn: Bool) {
+           form.isAutoLockOn = isOn
+           if !isOn { form.autoLockDelay = nil } // 關掉就清空
+           
+       }
+
+       func updateAutoLockDelay(_ value: Int) {
+           form.autoLockDelay = value
+      
+       }
+
+       func updateBeepOn(_ isOn: Bool) {
+           form.isBeepOn = isOn
+          
+       }
+
+       func updateTxPower(_ value: BLETxPower) {
+           form.txPower = value
+          
+       }
+
+       func updateAdv(_ value: BLEAdv) {
+           form.adv = value
+         
+       }
+    
+
+    
+
+
+    // MARK: - Actions
+    func save(siteID: String) {
+            guard let provision else {
+                state = .error("Missing provision info")
+                return
+            }
+
+            addState = .loading
+
+            Task {
+                do {
+                    // 1) BLE side: write settings / fetch registry
+                    try await bleService.provisionAndFetchRegistry(
+                        btInfo: provision,
+                        addform: form,
+                        siteID: siteID
+                    )
+
+                    // 2) Server side: submit device/add
+                   _ = try await provisionUseCase.submit(
+                        siteID: siteID,
+                        name: form.name,
+                        activeMode: "ble",
+                        model: "MFA_THING",
+                        isResident: form.area?.boolValue ?? false,
+                        deviceID: Int(form.lockID) ?? 0,
+                        remotePinCode: provision.remotePinCode,
+                        bt: DeviceAddBTRequestDTO(
+                            uuid: provision.uuid,
+                            key: provision.key,
+                            token: provision.token,
+                            iv: provision.iv
+                        ),
+                        attributes: DeviceAddAttributesDTO(
+                            autoLock: form.isAutoLockOn ? "Y" : "N",
+                            autoLockDelay: form.autoLockDelay,
+                            operatorVoice: form.isBeepOn ? "Y" : "N",
+                            bleTXPower: form.txPower.rawValue,
+                            bleAdv: form.adv.rawValue
+                        )
+                    )
+
+                    addState = .success
+          
+
+                } catch {
+                    addState = .error(L10n.Common.Error.network)
+                }
+            }
+        }
 }

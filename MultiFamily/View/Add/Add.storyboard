@@ -282,6 +282,9 @@
                                 <color key="tintColor" name="Primary"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="CONFIRM"/>
+                                <connections>
+                                    <action selector="tapSave" destination="Zps-EL-c96" eventType="touchUpInside" id="cYO-zs-HLU"/>
+                                </connections>
                             </button>
                             <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMR-eu-VRh">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>

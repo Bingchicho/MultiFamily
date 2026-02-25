@@ -16,9 +16,16 @@ enum LockArea: String, CaseIterable, Equatable {
 
         }
     }
+    
+    var boolValue: Bool {
+        switch self {
+        case .private: return true
+        case .public: return false
+        }
+    }
 }
 
-struct AddForm: Equatable {
+public struct AddForm: Equatable {
     var lockID: String = ""          // 顯示用（通常不可編）
     var name: String = ""            // 必填
     var area: LockArea? = nil        // 必填

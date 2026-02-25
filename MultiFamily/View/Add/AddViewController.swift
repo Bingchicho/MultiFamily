@@ -10,7 +10,6 @@ import UIKit
 class AddViewController: UIViewController {
 
     var provisionBLEInfo: ProvisionBLEInfo?
-    var remotePinCode: String?
     
     @IBOutlet weak var idTitleLabel: AppLabel!
     @IBOutlet weak var idTextField: UITextField!
@@ -40,11 +39,7 @@ class AddViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private lazy var viewModel =
-    AddViewModel(
-        provisionUseCase: AppAssembler.makeProvisionUseCase(),
-        bleService: AppAssembler.makeBLEService()
-    )
+    var viewModel: ProvisionViewModel?
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
@@ -76,22 +71,16 @@ class AddViewController: UIViewController {
     
     private func bind() {
         
-        if let provisionBLEInfo, let remotePinCode {
-            viewModel.configure(provision: provisionBLEInfo, remotePinCode: remotePinCode)
+        guard let viewModel else { return }
+        
+        if let provisionBLEInfo {
+            viewModel.addConfigure(provision: provisionBLEInfo)
             setupData()
         }
         
-        viewModel.onStateChange = { [weak self] state in
+        viewModel.addonStateChange = { [weak self] state in
             guard let self else { return }
             self.render(state)
-        }
-
-        viewModel.onRoute = { [weak self] route in
-            guard let self else { return }
-            switch route {
-            case .close:
-                self.performSegue(withIdentifier: "backhome", sender: nil)
-            }
         }
 
         nameTextField.addTarget(self, action: #selector(nameChanged), for: .editingChanged)
@@ -101,6 +90,7 @@ class AddViewController: UIViewController {
     
     
     func setupData() {
+        guard let viewModel else { return }
         idTextField.text = viewModel.form.lockID
         areaButton.setTitle(viewModel.form.area?.title, for: .normal)
         autoSwitch.isOn = viewModel.form.isAutoLockOn
@@ -156,25 +146,33 @@ class AddViewController: UIViewController {
 
     
     @objc private func nameChanged() {
+        guard let viewModel else { return }
         viewModel.updateName(nameTextField.text ?? "")
         saveButton.isEnabled = viewModel.isValid
     }
 
     @objc private func autoLockChanged() {
+        guard let viewModel else { return }
         viewModel.updateAutoLockOn(autoSwitch.isOn)
         autoTimeButton.isEnabled = autoSwitch.isOn
     }
 
     @objc private func beepChanged() {
+        guard let viewModel else { return }
         viewModel.updateBeepOn(beepSwitch.isOn)
+    }
+    
+    @IBAction private func tapSave() {
+        guard let viewModel else { return }
+        if let id = AppAssembler.siteSelectionStore.currentSite?.id {
+            viewModel.save(siteID: id)
+        }
     }
     
     private func render(_ state: AddDeviceViewState) {
         switch state {
         case .idle:
             holdLoading(animat: false)
-
-
         case .success:
             holdLoading(animat: false)
             showSuccess()
@@ -190,7 +188,8 @@ class AddViewController: UIViewController {
     private func showSuccess() {
         let alert = UIAlertController(title: L10n.Registry.Success.title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+    
+            self?.performSegue(withIdentifier: "backhome", sender: nil)
         })
         present(alert, animated: true)
     }
@@ -198,7 +197,7 @@ class AddViewController: UIViewController {
     private func showErrorAndDismiss(_ message: String) {
         let alert = UIAlertController(title: L10n.Common.Error.title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
-           
+            self?.performSegue(withIdentifier: "backhome", sender: nil)
         })
         present(alert, animated: true)
     }
@@ -240,6 +239,7 @@ class AddViewController: UIViewController {
     }
     
     @IBAction private func autoTimeButtonAction(sender: UIButton) {
+        guard let viewModel else { return }
         // 1...120 seconds
         let options = (1...120).map { "\($0)" }
         
@@ -255,7 +255,7 @@ class AddViewController: UIViewController {
             guard let self else { return }
             let value = Int(selected) ?? 1
             // Update VM + UI
-            self.viewModel.updateAutoLockDelay(value)
+            self.viewModel?.updateAutoLockDelay(value)
             self.autoTimeButton.setTitle("\(value) S", for: .normal)
         }
     }
@@ -288,12 +288,13 @@ class AddViewController: UIViewController {
                 value = .public
             }
 
-            self.viewModel.updateArea(value)
+            self.viewModel?.updateArea(value)
             self.areaButton.setTitle(value.title, for: .normal)
         }
     }
 
     @IBAction private func powerButtonAction(sender: UIButton) {
+        guard let viewModel else { return }
         // low / middle / high
         let options = [
             BLETxPower.low.title,
@@ -322,12 +323,13 @@ class AddViewController: UIViewController {
                 value = .low
             }
 
-            self.viewModel.updateTxPower(value)
+            self.viewModel?.updateTxPower(value)
             self.powerButton.setTitle(value.title, for: .normal)
         }
     }
 
     @IBAction private func advButtonAction(sender: UIButton) {
+        guard let viewModel else { return }
         // low / high
         let options = [
             BLEAdv.low.title,
@@ -346,7 +348,7 @@ class AddViewController: UIViewController {
             guard let self else { return }
 
             let value: BLEAdv = (selectedTitle == BLEAdv.high.title) ? .high : .low
-            self.viewModel.updateAdv(value)
+            self.viewModel?.updateAdv(value)
             self.advButton.setTitle(value.title, for: .normal)
         }
     }

@@ -6,5 +6,5 @@
 //
 
 enum ProvisionRoute {
-    case next(bt: ProvisionBLEInfo, remotePinCode: String)
+    case next(bt: ProvisionBLEInfo)
 }

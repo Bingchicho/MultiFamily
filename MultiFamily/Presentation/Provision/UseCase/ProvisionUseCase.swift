@@ -7,15 +7,12 @@
 
 protocol ProvisionUseCase {
     func provision(siteID: String, activeMode: ActiveModeDTO, model: String) async throws -> ProvisionResponseDTO
-    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws -> DeviceAddResponseDTO
+    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws 
 }
 
 
 final class ProvisionUseCaseImpl: ProvisionUseCase {
  
-    
-
-    
     
     private let repository: ProvisionRepository
     
@@ -28,7 +25,7 @@ final class ProvisionUseCaseImpl: ProvisionUseCase {
         return try await repository.provision(siteID: siteID, activeMode: activeMode, model: model)
     }
     
-    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws -> DeviceAddResponseDTO {
-        return try await repository.submit(siteID: siteID, name: name, activeMode: activeMode, model: model, isResident: isResident, deviceID: deviceID, remotePinCode: remotePinCode, bt: bt, attributes: attributes)
+    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws  {
+        try await repository.submit(siteID: siteID, name: name, activeMode: activeMode, model: model, isResident: isResident, deviceID: deviceID, remotePinCode: remotePinCode, bt: bt, attributes: attributes)
     }
 }

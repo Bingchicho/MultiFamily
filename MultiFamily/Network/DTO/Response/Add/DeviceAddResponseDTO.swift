@@ -15,7 +15,7 @@ struct DeviceAddResponseDTO: Decodable {
     let thingName: String
     let bt: DeviceAddBTResponseDTO
     let remotePinCode: String
-    let installationNotComplete: Bool
+    let installationNotComplete: Bool?
     let clientToken: String
 }
 
@@ -28,7 +28,7 @@ struct DeviceAddBTResponseDTO: Decodable {
     let iv: String
 
     enum CodingKeys: String, CodingKey {
-        case uuid = "bt"
+        case uuid
         case key
         case token
         case iv

@@ -47,14 +47,26 @@ public final class MFRBleClient: BleClient {
     public func connect() async throws {
         if isConnected { return }
 
-        // TODO: 替換成你 SDK 真正的 connect/handshake 流程
+   
         try await withCheckedThrowingContinuation { continuation in
-            // 假想：sdk.connect(uuid:key:token:iv:completion:)
+   
             sdk.connect { result in
                 switch result {
                 case .success:
-                    self.isConnected = true
-                    continuation.resume()
+                
+                    let tz = TimeZone.current
+                    self.sdk.setDeviceTime(date: Date(), timeZone: tz) { result in
+                        switch result {
+                        case .success:
+                            self.isConnected = true
+                            continuation.resume()
+                        case .failure(let error):
+                            self.sdk.disconnect()
+                            self.isConnected = false
+                            continuation.resume(throwing: error)
+                        }
+                    }
+                    
                 case .failure(let error):
                     self.isConnected = false
                     continuation.resume(throwing: error)
@@ -66,22 +78,111 @@ public final class MFRBleClient: BleClient {
     public func disconnect() async {
         guard isConnected else { return }
 
-        // TODO: 替換成你 SDK 真正的 disconnect
         sdk.disconnect()
         isConnected = false
     }
 
-//    public func readRegistrySnapshot(info: ProvisionBLEInfo) async throws -> DeviceRegistrySnapshot {
-//        guard isConnected else {
-//            throw NSError(domain: "BLE", code: -1, userInfo: [NSLocalizedDescriptionKey: "BLE not connected"])
-//        }
-//
-//        // TODO: 用 SDK 實際 API 讀值，組回 DeviceRegistrySnapshot
-//        // 這裡示範假資料
-////        return DeviceRegistrySnapshot(
-////            battery: 80,
-////            mcuVersion: "0.0.1",
-////            timezone: "Asia/Taipei"
-////        )
-//    }
+    // MARK: - SDK callback -> async helpers
+
+    private func sdkSetUID(_ config: UIDConfig) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.setUID(config) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    private func sdkSetKeyOne(_ config: KeyOneConfig) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.setKeyOne(config) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    private func sdkAddBleUser(_ request: BleUserCreateRequest) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.addBleUser(request) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    private func sdkSetRemotePinCodeRandom(_ config: RemotePinCodeRandomConfig) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.setRemotePinCodeRandom(config) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    public func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws {
+        guard isConnected else {
+            throw NSError(domain: "BLE", code: -1, userInfo: [NSLocalizedDescriptionKey: "BLE not connected"])
+        }
+
+     
+        let uidConfig = UIDConfig(siteCode: siteID,
+                                  uid: info.uuid,
+                                  doorType: addform.area == .private ? .resident : .publicDoor)
+        
+        do {
+            // 1) set UID
+            try await sdkSetUID(uidConfig)
+
+            // 2) set KeyOne
+            let keyoneConfig = KeyOneConfig(
+                aesKeyHex: info.key,
+                ivHex: info.iv,
+                cardAesKeyHex: "00000000000000000000000000000000",
+                cardSaltHex: "0000000000000000"
+            )
+            try await sdkSetKeyOne(keyoneConfig)
+
+            // 3) add BLE user
+            let bleUserCreateRequest = try BleUserCreateRequest(
+                index: 0,
+                role: .owner,
+                tokenHex: info.token,
+                startTime: Date(),
+                endTime: Calendar.current.date(byAdding: .year, value: 1, to: Date())!,
+                identity: addform.name
+            )
+            try await sdkAddBleUser(bleUserCreateRequest)
+
+            // 4) set remote pin code random
+            let pincodeRequest = RemotePinCodeRandomConfig(hexString: info.remotePinCode)
+            try await sdkSetRemotePinCodeRandom(pincodeRequest)
+
+            // ✅ Only reach here means ALL steps succeeded
+            AppLogger.log(.info, category: .bluetooth, "readRegistrySnapshot ✅ all steps done")
+
+        } catch {
+            await disconnect()
+            AppLogger.log(.error, category: .bluetooth, "readRegistrySnapshot ❌ failed: \(error)")
+            throw error
+        }
+        
+
+    }
 }

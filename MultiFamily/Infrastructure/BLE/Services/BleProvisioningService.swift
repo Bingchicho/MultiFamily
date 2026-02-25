@@ -22,12 +22,12 @@ public final class BleProvisioningService: BLEService {
         self.client = client
     }
 
-//    public func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo) async throws -> DeviceRegistrySnapshot {
-//        // 流程：connect → read → disconnect（用 defer 確保離開時斷線）
-//     
-//        defer { Task { await client.disconnect() } }
-//        
-//        let snapshot = try await client.readRegistrySnapshot(info: btInfo)
-//        return snapshot
-//    }
+    public func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws {
+        // 流程：connect → read → disconnect（用 defer 確保離開時斷線）
+     
+        defer { Task { await client.disconnect() } }
+        
+        try await client.readRegistrySnapshot(info: btInfo, addform: addform, siteID: siteID)
+        
+    }
 }

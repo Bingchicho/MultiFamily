@@ -7,7 +7,7 @@
 
 protocol ProvisionRepository {
     func provision(siteID: String, activeMode: ActiveModeDTO, model: String) async throws -> ProvisionResponseDTO
-    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws -> DeviceAddResponseDTO
+    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws
 }
 
 
@@ -36,7 +36,7 @@ final class ProvisionRepositoryImpl: ProvisionRepository {
     
     }
     
-    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws -> DeviceAddResponseDTO {
+    func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, remotePinCode: String, bt: DeviceAddBTRequestDTO, attributes: DeviceAddAttributesDTO) async throws  {
         let requestDTO = factory.makeDeviceAddRequest(siteID: siteID, name: name, activeMode: activeMode, model: model, isResident: isResident, deviceID: deviceID, remotePinCode: remotePinCode, bt: bt, attributes: attributes)
         
         let dto: DeviceAddResponseDTO =
@@ -44,6 +44,6 @@ final class ProvisionRepositoryImpl: ProvisionRepository {
             AddEndpoint.deviceAdd(requestDTO)
         )
         
-        return dto
+       
     }
 }
