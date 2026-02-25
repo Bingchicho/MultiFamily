@@ -133,6 +133,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {
+        if let id = AppAssembler.siteSelectionStore.currentSite?.id {
+            viewModel.load(siteID: id)
+        }
+    }
 }
 
 

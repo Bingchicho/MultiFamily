@@ -85,6 +85,7 @@ class ProvisionViewController: UIViewController {
             let vc = segue.destination as? AddViewController {
             vc.provisionBLEInfo = bt
             vc.remotePinCode = remotePinCode
+          
         }
     }
 

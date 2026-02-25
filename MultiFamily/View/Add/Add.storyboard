@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8b0-eq-hKD">
-                                <rect key="frame" x="0.0" y="172" width="393" height="553.66666666666663"/>
+                                <rect key="frame" x="0.0" y="172" width="393" height="529.66666666666663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz7-Ce-vyh">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="683.33333333333337"/>
@@ -266,11 +266,24 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="mju-yv-0Ag"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhk-RR-lXc">
-                                <rect key="frame" x="39.333333333333343" y="749.66666666666663" width="314.33333333333326" height="34.333333333333371"/>
+                                <rect key="frame" x="39.333333333333343" y="725.66666666666663" width="314.33333333333326" height="34.333333333333371"/>
                                 <color key="tintColor" name="Primary"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="CONFIRM"/>
                             </button>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMR-eu-VRh">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8N9-zy-b2B">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="8N9-zy-b2B" firstAttribute="centerX" secondItem="TMR-eu-VRh" secondAttribute="centerX" id="H70-Rf-rkV"/>
+                                    <constraint firstItem="8N9-zy-b2B" firstAttribute="centerY" secondItem="TMR-eu-VRh" secondAttribute="centerY" id="OSG-Qs-oCm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wE8-sr-GhG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -280,13 +293,40 @@
                             <constraint firstItem="yhk-RR-lXc" firstAttribute="width" secondItem="wE8-sr-GhG" secondAttribute="width" multiplier="0.8" id="Dky-jQ-HrQ"/>
                             <constraint firstItem="wE8-sr-GhG" firstAttribute="top" secondItem="8b0-eq-hKD" secondAttribute="top" id="Gt8-Ew-cT5"/>
                             <constraint firstItem="wE8-sr-GhG" firstAttribute="trailing" secondItem="8b0-eq-hKD" secondAttribute="trailing" id="L5C-6H-aFk"/>
-                            <constraint firstItem="wE8-sr-GhG" firstAttribute="bottom" secondItem="yhk-RR-lXc" secondAttribute="bottom" id="MO3-4s-2sH"/>
+                            <constraint firstAttribute="top" secondItem="TMR-eu-VRh" secondAttribute="top" id="LOO-XK-obd"/>
+                            <constraint firstItem="wE8-sr-GhG" firstAttribute="bottom" secondItem="yhk-RR-lXc" secondAttribute="bottom" constant="24" id="MO3-4s-2sH"/>
+                            <constraint firstItem="TMR-eu-VRh" firstAttribute="leading" secondItem="wE8-sr-GhG" secondAttribute="leading" id="SwB-oM-yL3"/>
+                            <constraint firstItem="TMR-eu-VRh" firstAttribute="bottom" secondItem="h9k-db-hOK" secondAttribute="bottom" id="e0q-Gy-KKZ"/>
+                            <constraint firstItem="wE8-sr-GhG" firstAttribute="trailing" secondItem="TMR-eu-VRh" secondAttribute="trailing" id="fd4-DW-XzN"/>
                             <constraint firstItem="yhk-RR-lXc" firstAttribute="top" secondItem="8b0-eq-hKD" secondAttribute="bottom" constant="24" id="yfk-dn-ziC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tnV-aC-lbN"/>
+                    <connections>
+                        <outlet property="advButton" destination="2Zx-65-p00" id="8nH-zL-5zo"/>
+                        <outlet property="advTitieLabel" destination="See-4H-WyR" id="43j-44-KFR"/>
+                        <outlet property="areaButton" destination="kn0-Mw-dE9" id="3d4-Z7-ccC"/>
+                        <outlet property="areaTitieLabel" destination="Bqc-FU-KnH" id="Evn-VL-QCm"/>
+                        <outlet property="autoSwitch" destination="vzd-wn-U2O" id="Hrs-Od-Kbw"/>
+                        <outlet property="autoTimeButton" destination="ViH-w2-f0E" id="cDd-EA-mQX"/>
+                        <outlet property="autoTimeTitieLabel" destination="ab5-yc-JQX" id="bvV-al-Y3r"/>
+                        <outlet property="autoTitleLabel" destination="1Vw-2z-Goi" id="tAy-fq-qzP"/>
+                        <outlet property="beepSwitch" destination="a3P-aG-fed" id="hfc-63-Zsi"/>
+                        <outlet property="beepTitleLabel" destination="LOn-NH-wjk" id="fGw-EM-zQQ"/>
+                        <outlet property="idTextField" destination="oZO-oj-3X0" id="ma9-1P-Nar"/>
+                        <outlet property="idTitleLabel" destination="JdH-iv-IiZ" id="wuO-vz-tL9"/>
+                        <outlet property="loadingBackground" destination="TMR-eu-VRh" id="Eh1-aL-ven"/>
+                        <outlet property="loadingIndicator" destination="8N9-zy-b2B" id="hRt-oM-dFK"/>
+                        <outlet property="nameTextField" destination="zuc-35-tI2" id="uho-Lv-1FJ"/>
+                        <outlet property="nameTitleLabel" destination="T3G-Lx-sFC" id="8zt-dG-apc"/>
+                        <outlet property="powerButton" destination="hSh-4l-qNe" id="doe-d7-49d"/>
+                        <outlet property="powerTitieLabel" destination="fNO-VR-FnJ" id="Bn8-KZ-DI1"/>
+                        <outlet property="saveButton" destination="yhk-RR-lXc" id="fG2-Qr-Tsx"/>
+                        <segue destination="yWn-Fn-ufq" kind="unwind" identifier="backhome" unwindAction="unwindToHome:" id="AYP-lb-FDd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ml-tc-bao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="yWn-Fn-ufq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2930.5343511450383" y="130.98591549295776"/>
         </scene>

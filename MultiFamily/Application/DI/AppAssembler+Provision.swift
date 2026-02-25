@@ -18,10 +18,16 @@ extension AppAssembler {
             env: env,
             device: device
         )
+        let factory = DeviceAddRequestFactory(
+            env: env,
+            device: device
+        )
+        
 
         let repository = ProvisionRepositoryImpl(
             apiClient: apiClient,
-            requestFactory: requestFactory
+            requestFactory: requestFactory,
+            factory: factory
         )
 
 
