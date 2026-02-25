@@ -5,6 +5,7 @@
 //  Created by Sunion on 2026/2/25.
 //
 
+import Foundation
 
 @MainActor
 final class AddViewModel {
@@ -21,6 +22,15 @@ final class AddViewModel {
 
 
     private(set) var form: AddForm = .init()
+    
+    
+    
+    var isValid: Bool {
+        // Name + Area 必填
+        guard !form.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return false }
+
+        return true
+    }
 
      private var provision: ProvisionBLEInfo?
      private var remotePinCode: String?
@@ -34,12 +44,11 @@ final class AddViewModel {
     func configure(provision: ProvisionBLEInfo,
                    remotePinCode: String) {
 
-        self.form = AddForm(lockID: provision.uuid)
+        self.form = AddForm(lockID: provision.uuid, name: "", area: .public, isAutoLockOn: false, autoLockDelay: 5, isBeepOn: true, txPower: .medium, adv: .low, group: nil)
         self.provision = provision
         self.remotePinCode = remotePinCode
         
-        
-
+    
     }
     
     // MARK: - Input mutations
@@ -78,6 +87,10 @@ final class AddViewModel {
            form.adv = value
          
        }
+    
+
+    
+
 
     // MARK: - Actions
         func save() {

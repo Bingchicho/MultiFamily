@@ -8,6 +8,14 @@
 enum LockArea: String, CaseIterable, Equatable {
     case `private` = "Private"
     case `public`  = "Public"
+    
+    var title: String {
+        switch self {
+        case .private: return "Private"
+        case .public: return "Public"
+
+        }
+    }
 }
 
 struct AddForm: Equatable {

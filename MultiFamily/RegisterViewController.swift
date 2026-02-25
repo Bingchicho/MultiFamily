@@ -110,6 +110,7 @@ final class RegisterViewController: UIViewController {
     }
     
     private func setupKeyboardHandling() {
+        scrollView.keyboardDismissMode = .onDrag
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
@@ -142,9 +143,7 @@ final class RegisterViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets.bottom = 0
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+
     
     private func setupUI() {
         registerButton.isEnabled = false

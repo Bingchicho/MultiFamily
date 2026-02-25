@@ -204,6 +204,7 @@ final class ForgotPasswordViewController: UIViewController {
     }
     
     private func setupKeyboardHandling() {
+        scrollView.keyboardDismissMode = .onDrag
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),

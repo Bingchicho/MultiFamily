@@ -13,5 +13,6 @@ import Foundation
 public protocol BLEService {
     /// Provision 流程：用 btInfo 連上去，讀出 registry 類資料
     func connection() async throws
+
  //   func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo) async throws -> DeviceRegistrySnapshot
 }

@@ -38,6 +38,8 @@ class AddViewController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     private lazy var viewModel =
     AddViewModel(
         provisionUseCase: AppAssembler.makeProvisionUseCase(),
@@ -50,14 +52,33 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-       bind()
+        bind()
+        setLeftTopBackButton()
+        setupKeyboardHandling()
+    }
+    
+    private func setLeftTopBackButton() {
+        navigationItem.hidesBackButton = true
+        
+        let backItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(backToHome)
+        )
+        
+        navigationItem.leftBarButtonItem = backItem
+    }
+    
+    @objc private func backToHome() {
+        self.performSegue(withIdentifier: "backhome", sender: nil)
     }
     
     private func bind() {
         
         if let provisionBLEInfo, let remotePinCode {
             viewModel.configure(provision: provisionBLEInfo, remotePinCode: remotePinCode)
-            idTextField.text = provisionBLEInfo.uuid
+            setupData()
         }
         
         viewModel.onStateChange = { [weak self] state in
@@ -79,11 +100,64 @@ class AddViewController: UIViewController {
     }
     
     
+    func setupData() {
+        idTextField.text = viewModel.form.lockID
+        areaButton.setTitle(viewModel.form.area?.title, for: .normal)
+        autoSwitch.isOn = viewModel.form.isAutoLockOn
+        
+        autoTimeButton.isEnabled =  viewModel.form.isAutoLockOn
+        
+        if let time = viewModel.form.autoLockDelay {
+            autoTimeButton.setTitle("\(time) S", for: .normal)
+        }
+        
+        beepSwitch.isOn = viewModel.form.isBeepOn
+        powerButton.setTitle(viewModel.form.txPower.title, for: .normal)
+        advButton.setTitle(viewModel.form.adv.title, for: .normal)
+        
+        saveButton.isEnabled = viewModel.isValid
+
+    }
     
+    private func setupKeyboardHandling() {
+        scrollView.keyboardDismissMode = .onDrag
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
     
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard
+            let info = notification.userInfo,
+            let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        else { return }
+
+        let bottomInset = keyboardFrame.height - view.safeAreaInsets.bottom
+
+        scrollView.contentInset.bottom = bottomInset + 16
+        scrollView.verticalScrollIndicatorInsets.bottom = bottomInset
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        scrollView.contentInset.bottom = 0
+        scrollView.verticalScrollIndicatorInsets.bottom = 0
+    }
+    
+
     
     @objc private func nameChanged() {
         viewModel.updateName(nameTextField.text ?? "")
+        saveButton.isEnabled = viewModel.isValid
     }
 
     @objc private func autoLockChanged() {
@@ -183,6 +257,39 @@ class AddViewController: UIViewController {
             // Update VM + UI
             self.viewModel.updateAutoLockDelay(value)
             self.autoTimeButton.setTitle("\(value) S", for: .normal)
+        }
+    }
+    
+    @IBAction private func areaButtonAction(sender: UIButton) {
+      
+        let options = [
+            LockArea.public.title,
+            LockArea.private.title
+        ]
+
+        let currentTitle = "Area"
+        let selectedIndex = options.firstIndex(of: currentTitle) ?? 0
+
+        presentPicker(
+            title: "Area",
+            options: options,
+            selectedIndex: selectedIndex,
+            sourceView: sender
+        ) { [weak self] selectedTitle in
+            guard let self else { return }
+       
+            let value: LockArea
+            switch selectedTitle {
+            case LockArea.public.title:
+                value = .public
+            case LockArea.private.title:
+                value = .private
+            default:
+                value = .public
+            }
+
+            self.viewModel.updateArea(value)
+            self.areaButton.setTitle(value.title, for: .normal)
         }
     }
 

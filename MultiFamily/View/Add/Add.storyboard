@@ -139,6 +139,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="PRIVATE" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="areaButtonActionWithSender:" destination="Zps-EL-c96" eventType="touchUpInside" id="qa6-NN-8DV"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -173,6 +176,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="10S" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="autoTimeButtonActionWithSender:" destination="Zps-EL-c96" eventType="touchUpInside" id="4nJ-dJ-nd3"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -207,6 +213,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="LOW" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="powerButtonActionWithSender:" destination="Zps-EL-c96" eventType="touchUpInside" id="EID-fv-c8T"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -227,6 +236,9 @@
                                                                 <color key="tintColor" name="Primary"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.down.circle.fill" catalog="system" imagePlacement="trailing" title="LOW" imagePadding="8"/>
+                                                                <connections>
+                                                                    <action selector="advButtonActionWithSender:" destination="Zps-EL-c96" eventType="touchUpInside" id="p6V-4u-k9D"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -322,6 +334,7 @@
                         <outlet property="powerButton" destination="hSh-4l-qNe" id="doe-d7-49d"/>
                         <outlet property="powerTitieLabel" destination="fNO-VR-FnJ" id="Bn8-KZ-DI1"/>
                         <outlet property="saveButton" destination="yhk-RR-lXc" id="fG2-Qr-Tsx"/>
+                        <outlet property="scrollView" destination="8b0-eq-hKD" id="QZZ-tK-K66"/>
                         <segue destination="yWn-Fn-ufq" kind="unwind" identifier="backhome" unwindAction="unwindToHome:" id="AYP-lb-FDd"/>
                     </connections>
                 </viewController>
