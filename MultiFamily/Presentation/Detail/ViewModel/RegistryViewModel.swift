@@ -33,12 +33,12 @@ final class RegistryViewModel {
     func configure(with data: DetailResponseDTO) {
         
         let form = RegistryForm(
-            name: data.name,
-            isAutoLockOn: data.attributes.autoLock == "Y",
-            autoLockDelay: data.attributes.autoLockDelay,
-            isBeepOn: data.attributes.operatorVoice == "Y",
-            txPower: BLETxPower(rawValue: data.attributes.bleTXPower) ?? .low,
-            adv: BLEAdv(rawValue: data.attributes.bleAdv) ?? .low
+            name: data.name ?? "",
+            isAutoLockOn: data.attributes?.autoLock == "Y",
+            autoLockDelay: data.attributes?.autoLockDelay,
+            isBeepOn: data.attributes?.operatorVoice == "Y",
+            txPower: BLETxPower(rawValue: data.attributes?.bleTXPower ?? 30) ?? .low,
+            adv: BLEAdv(rawValue: data.attributes?.bleAdv ?? 30) ?? .low
         )
 
         originalForm = form

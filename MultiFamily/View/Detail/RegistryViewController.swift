@@ -76,7 +76,7 @@ class RegistryViewController: UIViewController {
     
     private func setupData(data: DetailResponseDTO) {
   
-        idLabel.text = String(data.deviceID)
+        idLabel.text = data.uuid
         nameTextField.text = viewModel.form.name
         autoSwitch.isOn = viewModel.form.isAutoLockOn
 

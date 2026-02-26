@@ -12,6 +12,21 @@ struct PermissionResponseDTO: Decodable {
     let users: [PermissionUserDTO]
     let cards: [PermissionCardDTO]
     let clientToken: String
+
+    enum CodingKeys: String, CodingKey {
+        case users
+        case cards
+        case clientToken
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+
+        // backend 可能不回 cards / users，這裡給預設值避免 keyNotFound
+        self.users = (try? c.decodeIfPresent([PermissionUserDTO].self, forKey: .users)) ?? []
+        self.cards = (try? c.decodeIfPresent([PermissionCardDTO].self, forKey: .cards)) ?? []
+        self.clientToken = (try? c.decodeIfPresent(String.self, forKey: .clientToken)) ?? ""
+    }
 }
 
 struct PermissionUserDTO: Decodable {
@@ -48,6 +63,18 @@ struct PermissionUserAttributeDTO: Decodable {
 struct PermissionDeviceRoleDTO: Decodable {
 
     let userRole: String
+
+    enum CodingKeys: String, CodingKey {
+        case userRole
+        case deviceRole
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        self.userRole = (try? c.decodeIfPresent(String.self, forKey: .userRole))
+            ?? (try? c.decodeIfPresent(String.self, forKey: .deviceRole))
+            ?? ""
+    }
 }
 
 struct PermissionVerifyRequiredDTO: Decodable {
@@ -85,7 +112,7 @@ struct PermissionCardDTO: Decodable {
     let nameTokens: [String]?
 
     let status: Int
-    let createAt: TimeInterval
+    let createAt: TimeInterval?
 }
 
 struct PermissionDoorDTO: Decodable {
