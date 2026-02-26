@@ -5,6 +5,7 @@
 //  Created by Sunion on 2026/2/23.
 //
 import Foundation
+import MFRBleSDK
 
 @MainActor
 final class ProvisionViewModel {
@@ -169,7 +170,7 @@ final class ProvisionViewModel {
                         addform: form,
                         siteID: siteID
                     )
-
+                    let status = bleService.status
                     // 2) Server side: submit device/add
                    _ = try await provisionUseCase.submit(
                         siteID: siteID,
@@ -189,8 +190,10 @@ final class ProvisionViewModel {
                             autoLock: form.isAutoLockOn ? "Y" : "N",
                             autoLockDelay: form.autoLockDelay,
                             operatorVoice: form.isBeepOn ? "Y" : "N",
+                            mcuVersion: status?.boardVersionString,
                             bleTXPower: form.txPower.rawValue,
-                            bleAdv: form.adv.rawValue
+                            bleAdv: form.adv.rawValue,
+                            battery: status?.batteryLevelInt
                         )
                     )
 

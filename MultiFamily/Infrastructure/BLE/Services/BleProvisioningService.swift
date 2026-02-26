@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import MFRBleSDK
 
 /// ✅ 實作 BLEService：把「流程」寫在這裡
 /// - 這裡不 import MFRBleSDK
 /// - 只用 BleClient
 public final class BleProvisioningService: BLEService {
+    public var status: LockStatus?
     
     public func connection() async throws {
         try await client.connect()
@@ -20,6 +22,7 @@ public final class BleProvisioningService: BLEService {
 
     public init(client: BleClient) {
         self.client = client
+        self.status = client.status
     }
 
     public func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws {
@@ -28,6 +31,6 @@ public final class BleProvisioningService: BLEService {
         defer { Task { await client.disconnect() } }
         
         try await client.readRegistrySnapshot(info: btInfo, addform: addform, siteID: siteID)
-        
+        self.status = client.status
     }
 }

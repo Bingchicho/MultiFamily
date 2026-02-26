@@ -15,10 +15,12 @@ public final class MFRBleClient: BleClient {
 
     private let sdk: MFRBleSDK
     public private(set) var isConnected: Bool = false
+    public private(set) var status: LockStatus?
 
     public init() {
         self.sdk = MFRBleSDK()
         self.sdk.isDebugLogEnabled = true
+   
         observe()
       
     }
@@ -135,6 +137,24 @@ public final class MFRBleClient: BleClient {
             }
         }
     }
+    
+    private func sdkGetStatus() async throws{
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.queryLockStatus { result in
+                switch result {
+                case .success(let status):
+                    
+                    self.status = status
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+
+    
 
     public func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws {
         guard isConnected else {
@@ -173,6 +193,8 @@ public final class MFRBleClient: BleClient {
             // 4) set remote pin code random
             let pincodeRequest = RemotePinCodeRandomConfig(hexString: info.remotePinCode)
             try await sdkSetRemotePinCodeRandom(pincodeRequest)
+            
+            try await sdkGetStatus()
 
             // ✅ Only reach here means ALL steps succeeded
             AppLogger.log(.info, category: .bluetooth, "readRegistrySnapshot ✅ all steps done")

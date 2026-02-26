@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import MFRBleSDK
 
 /// ✅ 連線層抽象：像 socket 一樣
 /// - Service 需要連線，就呼叫這個
 /// - Service 不該知道底下用 MFRBleSDK 還是 CoreBluetooth
 public protocol BleClient {
     var isConnected: Bool { get }
+    var status: LockStatus? { get }
 
     func connect() async throws
     func disconnect() async

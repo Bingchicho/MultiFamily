@@ -59,6 +59,7 @@ struct DeviceAddAttributesDTO: Encodable {
     let voiceLanguageSupport: Int?
     let bleTXPower: Int?
     let bleAdv: Int?
+    let battery: Int?
 
     // 如果你確定一定會帶，就改成非 Optional
     init(
@@ -83,7 +84,8 @@ struct DeviceAddAttributesDTO: Encodable {
         timezone: String? = nil,
         mcuVersion: String? = nil,
         bleTXPower: Int? = nil,
-        bleAdv: Int? = nil
+        bleAdv: Int? = nil,
+        battery: Int? = nil
     ) {
         self.location = location
         self.direction = direction
@@ -107,6 +109,7 @@ struct DeviceAddAttributesDTO: Encodable {
         self.mcuVersion = mcuVersion
         self.bleTXPower = bleTXPower
         self.bleAdv = bleAdv
+        self.battery = battery
     }
 }
 
