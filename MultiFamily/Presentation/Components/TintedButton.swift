@@ -9,13 +9,30 @@ import UIKit
 final class TintedButton: UIButton {
 
     private var didSetup = false
+    private var pressAnimator: UIViewPropertyAnimator?
+    private let pressedScale: CGFloat = 0.97
 
     override var isEnabled: Bool {
-        didSet { updateAppearance() }
+        didSet {
+            updateAppearance()
+            if !isEnabled {
+                pressAnimator?.stopAnimation(true)
+                transform = .identity
+            }
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            updateAppearance()
+        }
     }
 
     override var isHighlighted: Bool {
-        didSet { updateAppearance() }
+        didSet {
+            updateAppearance()
+            animatePress(down: isHighlighted)
+        }
     }
 
     override init(frame: CGRect) {
@@ -76,23 +93,19 @@ final class TintedButton: UIButton {
 
         let base = AppTheme.current.primary
 
-        let bgAlpha: CGFloat
-        let fgAlpha: CGFloat
-
         if !button.isEnabled {
-            bgAlpha = 0.15
-            fgAlpha = 0.40
-        } else if button.isHighlighted {
-            bgAlpha = 0.25
-            fgAlpha = 1.0
+            config.baseBackgroundColor = UIColor.clear
+            config.baseForegroundColor = base.withAlphaComponent(0.4)
+        } else if button.isSelected {
+            config.baseBackgroundColor = base.withAlphaComponent(0.25)
+            config.baseForegroundColor = base
         } else {
-            bgAlpha = 0.12
-            fgAlpha = 1.0
+            // ✅ 未點擊時回到預設（透明）
+            config.baseBackgroundColor = UIColor.clear
+            config.baseForegroundColor = base
         }
 
         // ✅ 不改 imagePlacement / imagePadding / contentInsets（保留 storyboard 的）
-        config.baseBackgroundColor = base.withAlphaComponent(bgAlpha)
-        config.baseForegroundColor = base.withAlphaComponent(fgAlpha)
 
         button.configuration = config
     }
@@ -103,22 +116,41 @@ final class TintedButton: UIButton {
         let base = AppTheme.current.primary
 
         if !isEnabled {
-            backgroundColor = base.withAlphaComponent(0.15)
+            backgroundColor = .clear
             setTitleColor(base.withAlphaComponent(0.4), for: .normal)
             setTitleColor(base.withAlphaComponent(0.4), for: .disabled)
             tintColor = base.withAlphaComponent(0.4)
-            layer.borderWidth = 0
             return
         }
 
-        if isHighlighted {
+        if isSelected {
             backgroundColor = base.withAlphaComponent(0.25)
         } else {
-            backgroundColor = base.withAlphaComponent(0.12)
+            // ✅ 未點擊時恢復預設背景
+            backgroundColor = .clear
         }
 
         setTitleColor(base, for: .normal)
         tintColor = base
-        layer.borderWidth = 0
+    }
+
+    // MARK: - Press animation (Apple-like tinted feel)
+
+    private func animatePress(down: Bool) {
+        // Cancel any in-flight animation to prevent jitter
+        pressAnimator?.stopAnimation(true)
+
+        let targetTransform: CGAffineTransform = down ? CGAffineTransform(scaleX: pressedScale, y: pressedScale) : .identity
+
+        // Keep it subtle and snappy like system buttons
+        let duration: TimeInterval = down ? 0.12 : 0.18
+
+        let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: 0.85) { [weak self] in
+            guard let self else { return }
+            self.transform = targetTransform
+        }
+
+        animator.startAnimation()
+        pressAnimator = animator
     }
 }

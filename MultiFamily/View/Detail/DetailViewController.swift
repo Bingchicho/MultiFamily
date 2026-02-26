@@ -74,6 +74,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bind()
+        selectButton(historyButton)
         switchTo(.event)
     }
     
@@ -305,16 +306,24 @@ class DetailViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    
+    private func selectButton(_ selected: TintedButton) {
+        let buttons = [historyButton, authorizedButton, blackButton]
+
+        buttons.forEach { $0?.isSelected = false }
+        selected.isSelected = true
+    }
     @IBAction func historyButtonAction(_ sender: UIButton) {
+        selectButton(sender as! TintedButton)
         switchTo(.event)
     }
     
     @IBAction func authorizedButtonAction(_ sender: UIButton) {
+        selectButton(sender as! TintedButton)
         switchTo(.authorized)
     }
     
     @IBAction func blackButtonAction(_ sender: UIButton) {
+        selectButton(sender as! TintedButton)
         switchTo(.blacklist)
     }
     
