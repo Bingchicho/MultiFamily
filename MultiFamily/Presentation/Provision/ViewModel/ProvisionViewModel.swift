@@ -64,13 +64,13 @@ final class ProvisionViewModel {
 
     func start() {
         guard let siteID, let model else {
-            state = .error("Missing siteID/model")
+            state = .error(L10n.Common.Error.network)
             return
         }
 
         Task { [activeMode] in
             do {
-                state = .loading("Provisioning...")
+                state = .loading(L10n.Add.Status.provision)
 
                 let provision = try await provisionUseCase.provision(
                     siteID: siteID,
@@ -78,7 +78,7 @@ final class ProvisionViewModel {
                     model: model
                 )
 
-                state = .loading("Connecting BLE...")
+                state = .loading(L10n.Add.Status.connecting)
 
                 let info = ProvisionBLEInfo(
                     uuid: provision.bt.uuid,
@@ -155,7 +155,7 @@ final class ProvisionViewModel {
     // MARK: - Actions
     func save(siteID: String) {
             guard let provision else {
-                state = .error("Missing provision info")
+                state = .error(L10n.Common.Error.network)
                 return
             }
 

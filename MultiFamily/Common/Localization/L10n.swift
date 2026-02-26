@@ -10,6 +10,26 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum Add {
+    internal enum Area {
+      /// Area
+      internal static let title = L10n.tr("Localizable", "add.area.title", fallback: "Area")
+    }
+    internal enum Content {
+      /// Please enable Bluetooth broadcasting on the device, and bringing your phone close to the device
+      internal static let title = L10n.tr("Localizable", "add.content.title", fallback: "Please enable Bluetooth broadcasting on the device, and bringing your phone close to the device")
+    }
+    internal enum Status {
+      /// Connecting BLE...
+      internal static let connecting = L10n.tr("Localizable", "add.status.connecting", fallback: "Connecting BLE...")
+      /// Provisioning...
+      internal static let provision = L10n.tr("Localizable", "add.status.provision", fallback: "Provisioning...")
+    }
+    internal enum Success {
+      /// Setting successful
+      internal static let title = L10n.tr("Localizable", "add.success.title", fallback: "Setting successful")
+    }
+  }
   internal enum Auth {
     internal enum Empty {
       /// There is no authorized resident for this lock yet

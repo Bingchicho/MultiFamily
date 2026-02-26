@@ -38,6 +38,8 @@ class ProvisionViewController: UIViewController {
     private func setupUI() {
         contentLabel.style = .body
         actionLabel.style = .title
+        
+        contentLabel.text = L10n.Add.Content.title
     }
     
     private func bindViewModel() {

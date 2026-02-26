@@ -186,7 +186,7 @@ class AddViewController: UIViewController {
     }
     
     private func showSuccess() {
-        let alert = UIAlertController(title: L10n.Registry.Success.title, message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: L10n.Add.Success.title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
     
             self?.performSegue(withIdentifier: "backhome", sender: nil)
@@ -217,6 +217,7 @@ class AddViewController: UIViewController {
         view.isUserInteractionEnabled = !animat
     }
     private func setupUI() {
+        self.title = L10n.Registry.title
         idTitleLabel.style = .title
    
         nameTitleLabel.style = .title
@@ -236,6 +237,7 @@ class AddViewController: UIViewController {
         beepTitleLabel.text = L10n.Registry.Beep.title
         powerTitieLabel.text = L10n.Registry.Power.title
         advTitieLabel.text = L10n.Registry.Adv.title
+        areaTitieLabel.text = L10n.Add.Area.title
     }
     
     @IBAction private func autoTimeButtonAction(sender: UIButton) {
@@ -267,11 +269,11 @@ class AddViewController: UIViewController {
             LockArea.private.title
         ]
 
-        let currentTitle = "Area"
+        let currentTitle = L10n.Add.Area.title
         let selectedIndex = options.firstIndex(of: currentTitle) ?? 0
 
         presentPicker(
-            title: "Area",
+            title: L10n.Add.Area.title,
             options: options,
             selectedIndex: selectedIndex,
             sourceView: sender

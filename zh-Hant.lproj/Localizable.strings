@@ -214,3 +214,14 @@
 "registry.picker.auto_lock.title" = "Auto Lock Time(s)";
 
 "registry.success.title" = "Update successful (synchronization required)";
+
+// ==========================
+// Add
+// ==========================
+"add.area.title" = "Area";
+"add.success.title" = "Setting successful";
+
+"add.status.provision" = "Provisioning...";
+"add.status.connecting" = "Connecting BLE...";
+
+"add.content.title" = "Please enable Bluetooth broadcasting on the device, and bringing your phone close to the device";
