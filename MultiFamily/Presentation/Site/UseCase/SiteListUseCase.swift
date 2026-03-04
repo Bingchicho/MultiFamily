@@ -12,25 +12,27 @@
 
 import Foundation
 
-protocol SiteListUseCase {
-    func execute() async -> SiteListResult
+protocol SiteUseCase {
+    func execute() async -> SiteResult
     func setSiteSelection(_ site: Site)
+    func create(_ name: String) async -> SiteResult
+    func edit(id: String, _ name: String) async -> SiteResult
+    func delete(_ id: String) async -> SiteResult
 }
 
-final class SiteListUseCaseImpl: SiteListUseCase {
+final class SiteListUseCaseImpl: SiteUseCase {
 
-    
 
-    private let repository: SiteListRepository
+    private let repository: SiteRepository
     private let siteSelectionStore = AppAssembler.siteSelectionStore
 
-    init(repository: SiteListRepository) {
+    init(repository: SiteRepository) {
         self.repository = repository
     }
 
-    func execute() async -> SiteListResult {
+    func execute() async -> SiteResult {
 
-        let result: SiteListResult
+        let result: SiteResult
 
         do {
             result = try await repository.getList()
@@ -48,10 +50,83 @@ final class SiteListUseCaseImpl: SiteListUseCase {
 
             return .failure(message)
 
+        case .optionSuccess:
+            return .optionSuccess
         }
     }
     
     func setSiteSelection(_ site: Site) {
         siteSelectionStore.save(site)
+    }
+    
+    func create(_ name: String) async -> SiteResult {
+        let result: SiteResult
+        
+        do {
+            result = try await repository.create(name)
+        } catch {
+            return .failure(error.localizedDescription)
+        }
+        
+        switch result {
+            
+        case .success(_):
+
+            return .success(sides: [])
+
+        case .failure(let message):
+
+            return .failure(message)
+
+        case .optionSuccess:
+            return .optionSuccess
+        }
+    }
+    func edit(id: String, _ name: String) async -> SiteResult {
+        let result: SiteResult
+        
+        do {
+            result = try await repository.update(id, name)
+        } catch {
+            return .failure(error.localizedDescription)
+        }
+        
+        switch result {
+            
+        case .success(_):
+
+            return .success(sides: [])
+
+        case .failure(let message):
+
+            return .failure(message)
+
+        case .optionSuccess:
+            return .optionSuccess
+        }
+    }
+    
+    func delete(_ id: String) async -> SiteResult {
+        let result: SiteResult
+        
+        do {
+            result = try await repository.delete(id)
+        } catch {
+            return .failure(error.localizedDescription)
+        }
+        
+        switch result {
+            
+        case .success(_):
+
+            return .success(sides: [])
+
+        case .failure(let message):
+
+            return .failure(message)
+
+        case .optionSuccess:
+            return .optionSuccess
+        }
     }
 }

@@ -7,6 +7,7 @@
 
 enum SiteListViewState {
     case idle
+    case create
     case loading
     case loaded([Site])
     case error(String)

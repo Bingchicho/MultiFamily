@@ -452,6 +452,12 @@ internal enum L10n {
   internal enum Site {
     /// Site
     internal static let title = L10n.tr("Localizable", "site.title", fallback: "Site")
+    internal enum Alert {
+      /// Site name
+      internal static let placeholder = L10n.tr("Localizable", "site.alert.placeholder", fallback: "Site name")
+      /// Create/Edit Site
+      internal static let title = L10n.tr("Localizable", "site.alert.title", fallback: "Create/Edit Site")
+    }
   }
   internal enum Verify {
     /// Verification code has been sent to

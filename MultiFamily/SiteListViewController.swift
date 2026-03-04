@@ -27,6 +27,8 @@ final class SiteListViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
 
+    private var isPresentingCreateAlert = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -46,7 +48,7 @@ final class SiteListViewController: UIViewController {
     private func bindViewModel() {
         
         let vm = SiteListViewModel(
-            useCase: AppAssembler.makeSiteListUseCase()
+            useCase: AppAssembler.makeSiteUseCase()
         )
 
         viewModel = vm
@@ -93,7 +95,44 @@ final class SiteListViewController: UIViewController {
         case .error:
             holdLoading(animat: false)
             break
+        case .create:
+            holdLoading(animat: false)
+            presentCreateSiteAlertIfNeeded()
         }
+    }
+    
+    private func presentCreateSiteAlertIfNeeded() {
+        guard isPresentingCreateAlert == false else { return }
+        isPresentingCreateAlert = true
+
+        let alert = UIAlertController(
+            title: L10n.Site.Alert.title,
+            message: nil,
+            preferredStyle: .alert
+        )
+
+        alert.addTextField { textField in
+            textField.placeholder = L10n.Site.Alert.placeholder
+            textField.autocapitalizationType = .words
+            textField.autocorrectionType = .no
+        }
+
+        let create = UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
+            guard let self else { return }
+            self.isPresentingCreateAlert = false
+
+            let name = alert.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            guard name.isEmpty == false else {
+                // If empty, re-present so user can input again
+                self.presentCreateSiteAlertIfNeeded()
+                return
+            }
+            self.viewModel?.createSite(name: name)
+        }
+
+        alert.addAction(create)
+
+        present(alert, animated: true)
     }
     
     private func setupSheet() {
@@ -129,6 +168,7 @@ final class SiteListViewController: UIViewController {
     }
     
     @IBAction func closeTapped() {
+        isPresentingCreateAlert = false
         dismiss(animated: true)
     }
 

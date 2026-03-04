@@ -38,7 +38,7 @@ final class SiteListRepositoryImplTests: XCTestCase {
             clientToken: "TOKEN"
         )
 
-        let sut = SiteListRepositoryImpl(
+        let sut = SiteRepositoryImpl(
             apiClient: apiClient,
             siteListFactory: factory
         )
@@ -62,6 +62,8 @@ final class SiteListRepositoryImplTests: XCTestCase {
 
         case .failure:
             XCTFail("Expected success")
+        case .optionSuccess:
+            break
         }
     }
 
@@ -75,7 +77,7 @@ final class SiteListRepositoryImplTests: XCTestCase {
 
         apiClient.shouldThrowError = true
 
-        let sut = SiteListRepositoryImpl(
+        let sut = SiteRepositoryImpl(
             apiClient: apiClient,
             siteListFactory: factory
         )
@@ -93,6 +95,8 @@ final class SiteListRepositoryImplTests: XCTestCase {
 
         case .failure(let message):
             XCTAssertEqual(message, L10n.Common.Error.network)
+        case .optionSuccess:
+            break
         }
     }
 }
@@ -117,7 +121,7 @@ final class MockSiteListAPIClient: APIClient {
         return response as! T
     }
 }
-final class FakeSiteListRequestFactory: SiteListRequestFactoryProtocol {
+final class FakeSiteListRequestFactory: SiteRequestFactoryProtocol {
 
     private(set) var didMakeRequest = false
 

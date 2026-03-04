@@ -7,9 +7,9 @@
 @MainActor
 final class SiteListViewModel {
 
-    private let useCase: SiteListUseCase
+    private let useCase: SiteUseCase
 
-    init(useCase: SiteListUseCase) {
+    init(useCase: SiteUseCase) {
         self.useCase = useCase
     }
 
@@ -38,6 +38,8 @@ final class SiteListViewModel {
             case .failure(let message):
 
                 self.state = .error(message)
+            case .optionSuccess:
+                break
             }
         }
     }
@@ -52,5 +54,68 @@ final class SiteListViewModel {
     
     func setSelectedSite(_ site: Site) {
         useCase.setSiteSelection(site)
+    }
+    
+    func createSite(name: String) {
+        state = .loading
+
+        Task {
+            let result = await useCase.create(name)
+
+            switch result {
+
+            case .success(let sites):
+
+              break
+
+            case .failure(let message):
+
+                self.state = .error(message)
+            case .optionSuccess:
+                self.loadSites()
+            }
+        }
+    }
+    
+    func editSite(id: String, name: String) {
+        state = .loading
+
+        Task {
+            let result = await useCase.edit(id: id, name)
+
+            switch result {
+
+            case .success(let sites):
+
+              break
+
+            case .failure(let message):
+
+                self.state = .error(message)
+            case .optionSuccess:
+                self.loadSites()
+            }
+        }
+    }
+    
+    func deleteSite(id: String) {
+        state = .loading
+
+        Task {
+            let result = await useCase.delete(id)
+
+            switch result {
+
+            case .success(let sites):
+
+              break
+
+            case .failure(let message):
+
+                self.state = .error(message)
+            case .optionSuccess:
+                self.loadSites()
+            }
+        }
     }
 }

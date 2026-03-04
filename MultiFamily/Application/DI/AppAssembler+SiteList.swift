@@ -6,7 +6,7 @@
 //
 
 extension AppAssembler {
-    static func makeSiteListUseCase() -> SiteListUseCase {
+    static func makeSiteUseCase() -> SiteUseCase {
         
    
         let apiClient = URLSessionAPIClient()
@@ -14,14 +14,14 @@ extension AppAssembler {
         let device = DefaultDeviceIdentifierProvider()
 
 
-        let requestFactory = SiteListRequestFactory(
+        let requestFactory = SiteRequestFactory(
             env: env,
             device: device
         )
         
         
 
-        let repository = SiteListRepositoryImpl(
+        let repository = SiteRepositoryImpl(
             apiClient: apiClient,
             siteListFactory: requestFactory
         )
