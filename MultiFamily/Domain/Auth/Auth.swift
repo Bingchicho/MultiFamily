@@ -36,7 +36,7 @@ struct UserPermission {
 enum UserRole: String {
     case admin = "Admin"
     case manager = "Manager"
-    case user = "user"
+    case user = "User"
 }
 
 enum Language: String {

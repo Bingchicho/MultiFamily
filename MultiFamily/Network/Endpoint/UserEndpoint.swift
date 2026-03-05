@@ -18,4 +18,26 @@ enum UserEndpoint {
             requiresAuth: false
         )
     }
+    
+    static func update(_ dto: SiteUserUpdateRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/site-user/update",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
+    
+    static func delete(_ dto: SiteUserDeleteRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/site-user/delete",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
 }
