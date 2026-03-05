@@ -11,10 +11,13 @@ protocol UserRepository {
     func delete(siteId: String, userId: String) async throws
     func inviteResend(code: String) async throws
     func inviteDelete(code: String) async throws
+    func inviteUser(email: String, permission: UserPermission) async throws
 }
 
 
 final class UserRepositoryImpl: UserRepository {
+
+    
 
 
     private let apiClient: APIClient
@@ -86,6 +89,14 @@ final class UserRepositoryImpl: UserRepository {
         
         let _: ClientResponseDTO = try await apiClient.request(
             UserEndpoint.inviteDelete(requestDTO)
+        )
+    }
+    
+    func inviteUser(email: String, permission: UserPermission) async throws {
+        let requestDTO = userRequestFactory.makeInviteUserRequest(email: email, permission: permission)
+        
+        let _: ClientResponseDTO = try await apiClient.request(
+            UserEndpoint.inviteUser(requestDTO)
         )
     }
 }

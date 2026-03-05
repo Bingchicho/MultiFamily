@@ -28,7 +28,7 @@ struct UserAttribute {
     let permissions: [UserPermission]?
 }
 
-struct UserPermission {
+struct UserPermission: Codable {
     let siteID: String
     let role: UserRole
 }

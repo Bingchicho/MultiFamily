@@ -62,4 +62,15 @@ enum UserEndpoint {
             requiresAuth: false
         )
     }
+    
+    static func inviteUser(_ dto: InviteUserRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/invite-user/create",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
 }

@@ -24,7 +24,7 @@ struct UserDTO: Decodable {
 struct UserAttributeDTO: Decodable {
 
     let preferredUsername: String?
-    let permission: [UserPermissionDTO]?
+    let permission: [UserPermission]?
     let debugLog: Bool?
     let verifyRequired: VerifyRequiredDTO?
 
@@ -37,12 +37,6 @@ struct UserAttributeDTO: Decodable {
 
 }
 
-struct UserPermissionDTO: Decodable {
-
-    let group: String
-    let userRole: UserRole
-
-}
 
 
 struct VerifyRequiredDTO: Decodable {
@@ -98,7 +92,7 @@ extension UserDTO {
     func toDomain() -> User {
 
         let name = attribute.preferredUsername ?? ""
-        let role = attribute.permission?.first?.userRole ?? .user
+        let role = attribute.permission?.first?.role ?? .user
 
         return User(
             id: identityID,

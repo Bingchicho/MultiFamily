@@ -11,18 +11,11 @@ protocol UserRequestFactoryProtocol {
     func makeDeleteRequest(siteID: String, userID: String) -> SiteUserDeleteRequestDTO
     func makeInviteResendRequest(code: String) -> InviteResendRequestDTO
     func makeInviteDeleteRequest(code: String) -> InviteResendRequestDTO
+    func makeInviteUserRequest(email: String, permission: UserPermission) -> InviteUserRequestDTO
 }
 
 struct UserRequestFactory: UserRequestFactoryProtocol {
 
-    
-
-    
-
-    
-
-    
- 
     
     
     private let env: EnvironmentConfig
@@ -55,4 +48,8 @@ struct UserRequestFactory: UserRequestFactoryProtocol {
         InviteResendRequestDTO(applicationID: env.applicationID, inviteCode: code, clientToken: device.clientToken)
     }
     
+    
+    func makeInviteUserRequest(email: String, permission: UserPermission) -> InviteUserRequestDTO {
+        InviteUserRequestDTO(applicationID: env.applicationID, email: email, permission: [permission], clientToken: device.clientToken)
+    }
 }
