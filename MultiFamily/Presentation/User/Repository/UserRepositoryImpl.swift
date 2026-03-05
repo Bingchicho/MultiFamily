@@ -9,13 +9,13 @@ protocol UserRepository {
     func list() async throws -> UserListResult
     func update(siteId: String, userId: String, role: UserRole) async throws
     func delete(siteId: String, userId: String) async throws
+    func inviteResend(code: String) async throws
+    func inviteDelete(code: String) async throws
 }
 
 
 final class UserRepositoryImpl: UserRepository {
 
-    
-    
 
     private let apiClient: APIClient
     private var tokenStore: TokenStore
@@ -57,9 +57,9 @@ final class UserRepositoryImpl: UserRepository {
     
     
     func update(siteId: String, userId: String, role: UserRole) async throws {
-        let requestDTO = userRequestFactory.makeUpdateRequest(siteID: siteId, userID: userId, userRole: role.rawValue)
+        let requestDTO = userRequestFactory.makeUpdateRequest(siteID: siteId, userID: userId, userRole: role)
         
-        let dto: ClientResponseDTO = try await apiClient.request(
+        let _: ClientResponseDTO = try await apiClient.request(
             UserEndpoint.update(requestDTO)
         )
     }
@@ -68,8 +68,24 @@ final class UserRepositoryImpl: UserRepository {
     func delete(siteId: String, userId: String) async throws {
         let requestDTO = userRequestFactory.makeDeleteRequest(siteID: siteId, userID: userId)
         
-        let dto: ClientResponseDTO = try await apiClient.request(
+        let _: ClientResponseDTO = try await apiClient.request(
             UserEndpoint.delete(requestDTO)
+        )
+    }
+    
+    func inviteResend(code: String) async throws {
+        let requestDTO = userRequestFactory.makeInviteResendRequest(code: code)
+        
+        let _: ClientResponseDTO = try await apiClient.request(
+            UserEndpoint.inviteResend(requestDTO)
+        )
+    }
+    
+    func inviteDelete(code: String) async throws {
+        let requestDTO = userRequestFactory.makeInviteDeleteRequest(code: code)
+        
+        let _: ClientResponseDTO = try await apiClient.request(
+            UserEndpoint.inviteDelete(requestDTO)
         )
     }
 }

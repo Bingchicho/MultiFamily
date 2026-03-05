@@ -10,5 +10,5 @@ struct PermissionUser {
     let identityID: String
     let email: String
     let name: String
-    let role: String
+    let role: UserRole
 }

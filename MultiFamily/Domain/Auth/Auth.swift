@@ -33,10 +33,24 @@ struct UserPermission {
     let role: UserRole
 }
 
-enum UserRole: String {
+enum UserRole: String, Codable, CaseIterable {
+
     case admin = "Admin"
     case manager = "Manager"
     case user = "User"
+
+}
+
+extension UserRole {
+
+    var title: String {
+        switch self {
+        case .admin: return L10n.Common.Admin.title
+        case .manager: return L10n.Common.Manager.title
+        case .user: return L10n.Common.User.title
+        }
+    }
+
 }
 
 enum Language: String {

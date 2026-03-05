@@ -47,6 +47,10 @@ internal enum L10n {
     }
   }
   internal enum Common {
+    internal enum Admin {
+      /// Admin
+      internal static let title = L10n.tr("Localizable", "common.admin.title", fallback: "Admin")
+    }
     internal enum Button {
       /// Cancel
       internal static let cancel = L10n.tr("Localizable", "common.button.cancel", fallback: "Cancel")
@@ -62,9 +66,17 @@ internal enum L10n {
       ///  Generated & maintained for SwiftGen
       internal static let title = L10n.tr("Localizable", "common.error.title", fallback: "Error")
     }
+    internal enum Manager {
+      /// Manager
+      internal static let title = L10n.tr("Localizable", "common.manager.title", fallback: "Manager")
+    }
     internal enum Notice {
       /// Notice
       internal static let title = L10n.tr("Localizable", "common.notice.title", fallback: "Notice")
+    }
+    internal enum User {
+      /// User
+      internal static let title = L10n.tr("Localizable", "common.user.title", fallback: "User")
     }
   }
   internal enum Detail {

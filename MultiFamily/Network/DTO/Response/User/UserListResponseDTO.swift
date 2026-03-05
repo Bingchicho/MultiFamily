@@ -40,7 +40,7 @@ struct UserAttributeDTO: Decodable {
 struct UserPermissionDTO: Decodable {
 
     let group: String
-    let userRole: String
+    let userRole: UserRole
 
 }
 
@@ -74,10 +74,10 @@ struct InviteUserDTO: Decodable {
 }
 
 
-struct InvitePermissionDTO: Decodable {
+struct InvitePermissionDTO: Codable {
 
     let siteID: String
-    let userRole: String
+    let userRole: UserRole
 
 }
 
@@ -98,7 +98,7 @@ extension UserDTO {
     func toDomain() -> User {
 
         let name = attribute.preferredUsername ?? ""
-        let role = attribute.permission?.first?.userRole ?? "unknown"
+        let role = attribute.permission?.first?.userRole ?? .user
 
         return User(
             id: identityID,
@@ -113,7 +113,7 @@ extension InviteUserDTO {
 
     func toDomain() -> InviteUser {
 
-        let role = permission.first?.userRole ?? "unknown"
+        let role = permission.first?.userRole ?? .user
 
         return InviteUser(
             inviteCode: inviteCode,

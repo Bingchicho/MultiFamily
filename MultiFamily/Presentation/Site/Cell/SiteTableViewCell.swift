@@ -84,7 +84,7 @@ class SiteTableViewCell: UITableViewCell {
     
     func setUpAction(_ site: Site) {
  
-        actionStackView.isHidden = !(site.role == .admin)
+        actionStackView.isHidden = !(site.userRole == .admin)
     }
     
     @IBAction private func editButtonTapped(_ sender: UIButton) {

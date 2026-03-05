@@ -25,7 +25,7 @@ struct AttributeDTO: Codable {
 
 struct PermissionDTO: Codable {
     let siteID: String
-    let userRole: String
+    let userRole: UserRole
 }
 
 extension AttributeDTO {
@@ -47,7 +47,7 @@ extension PermissionDTO {
     func toDomain() -> UserPermission {
         UserPermission(
             siteID: siteID,
-            role: UserRole(rawValue: userRole) ?? .user
+            role: userRole
         )
     }
 }

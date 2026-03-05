@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
     }
     
     private func checkInviteButton(site: Site?) {
-        if site?.role == .admin {
+        if site?.userRole == .admin {
             inviteButton.isHidden = false
         } else {
             inviteButton.isHidden = true

@@ -13,6 +13,9 @@
 "common.button.confirm" = "Confirm";
 "common.notice.title" = "Notice";
 "common.button.cancel" = "Cancel";
+"common.admin.title" = "Admin";
+"common.manager.title" = "Manager";
+"common.user.title" = "User";
 
 // ==========================
 // Login

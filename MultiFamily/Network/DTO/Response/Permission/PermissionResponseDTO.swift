@@ -62,8 +62,9 @@ struct PermissionUserAttributeDTO: Decodable {
 
 struct PermissionDeviceRoleDTO: Decodable {
 
-    let userRole: String
+    let userRole: UserRole
 
+    // backend 有時候會回 userRole，有時候會回 deviceRole
     enum CodingKeys: String, CodingKey {
         case userRole
         case deviceRole
@@ -71,9 +72,15 @@ struct PermissionDeviceRoleDTO: Decodable {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        self.userRole = (try? c.decodeIfPresent(String.self, forKey: .userRole))
+
+        let raw = (try? c.decodeIfPresent(String.self, forKey: .userRole))
             ?? (try? c.decodeIfPresent(String.self, forKey: .deviceRole))
             ?? ""
+
+        // 容錯：去空白/換行，避免 backend 多餘空白導致 rawValue 不匹配
+        let normalized = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        self.userRole = UserRole(rawValue: normalized) ?? .user
     }
 }
 
@@ -132,7 +139,7 @@ extension PermissionUserDTO {
             identityID: identityID,
             email: email ?? "",
             name: attribute.preferredUsername ?? "",
-            role: attribute.permission?.first?.userRole ?? ""
+            role: attribute.permission?.first?.userRole ?? .user
         )
     }
 }

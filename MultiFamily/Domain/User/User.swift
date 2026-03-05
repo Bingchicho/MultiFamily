@@ -11,22 +11,8 @@ struct User {
     let id: String
     let name: String
     let email: String
-    let role: String
-    
-    var roleValue: siteUserRole {
-        switch role
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased() {
-        case "admin":
-            return .admin
-        case "manager":
-            return .manager
-        case "user":
-            return .user
-        default:
-            return .unknown
-        }
-    }
+    let role: UserRole
+
 }
 
 
@@ -34,22 +20,8 @@ struct InviteUser {
 
     let inviteCode: String
     let email: String
-    let role: String
+    let role: UserRole
     
-    var roleValue: siteUserRole {
-        switch role
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased() {
-        case "admin":
-            return .admin
-        case "manager":
-            return .manager
-        case "user":
-            return .user
-        default:
-            return .unknown
-        }
-    }
 }
 
 

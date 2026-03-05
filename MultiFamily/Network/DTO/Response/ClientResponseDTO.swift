@@ -7,7 +7,7 @@
 
 struct ClientResponseDTO: Decodable {
 
-    let clientToken: String
+    let clientToken: String?
 
     enum CodingKeys: String, CodingKey {
         case clientToken

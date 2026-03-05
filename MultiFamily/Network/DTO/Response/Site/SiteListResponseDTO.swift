@@ -23,7 +23,7 @@ struct SiteDTO: Decodable {
     let group: String
     let name: String
     let node: Bool?
-    let userRole: String
+    let userRole: UserRole
 
     enum CodingKeys: String, CodingKey {
         case applicationID

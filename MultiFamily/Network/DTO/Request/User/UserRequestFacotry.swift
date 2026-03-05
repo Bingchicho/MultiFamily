@@ -7,11 +7,19 @@
 
 
 protocol UserRequestFactoryProtocol {
-    func makeUpdateRequest(siteID: String, userID: String, userRole: String) -> SiteUserUpdateRequestDTO
+    func makeUpdateRequest(siteID: String, userID: String, userRole: UserRole) -> SiteUserUpdateRequestDTO
     func makeDeleteRequest(siteID: String, userID: String) -> SiteUserDeleteRequestDTO
+    func makeInviteResendRequest(code: String) -> InviteResendRequestDTO
+    func makeInviteDeleteRequest(code: String) -> InviteResendRequestDTO
 }
 
 struct UserRequestFactory: UserRequestFactoryProtocol {
+
+    
+
+    
+
+    
 
     
  
@@ -30,15 +38,21 @@ struct UserRequestFactory: UserRequestFactoryProtocol {
         
     }
     
-    func makeUpdateRequest(siteID: String, userID: String, userRole: String) -> SiteUserUpdateRequestDTO {
+    func makeUpdateRequest(siteID: String, userID: String, userRole: UserRole) -> SiteUserUpdateRequestDTO {
         
-        let role = SiteUserRoleDTO(rawValue: userRole)!
-        
-        return SiteUserUpdateRequestDTO(applicationID: env.applicationID, siteID: siteID, userID: userID, userRole: role, clientToken: device.clientToken)
+        SiteUserUpdateRequestDTO(applicationID: env.applicationID, siteID: siteID, userID: userID, userRole: userRole, clientToken: device.clientToken)
     }
     
     func makeDeleteRequest(siteID: String, userID: String) -> SiteUserDeleteRequestDTO {
         SiteUserDeleteRequestDTO(applicationID: env.applicationID, siteID: siteID, userID: userID, clientToken: device.clientToken)
+    }
+    
+    func makeInviteResendRequest(code: String) -> InviteResendRequestDTO {
+        InviteResendRequestDTO(applicationID: env.applicationID, inviteCode: code, clientToken: device.clientToken)
+    }
+    
+    func makeInviteDeleteRequest(code: String) -> InviteResendRequestDTO {
+        InviteResendRequestDTO(applicationID: env.applicationID, inviteCode: code, clientToken: device.clientToken)
     }
     
 }

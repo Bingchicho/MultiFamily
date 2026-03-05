@@ -40,4 +40,26 @@ enum UserEndpoint {
             requiresAuth: false
         )
     }
+    
+    static func inviteResend(_ dto: InviteResendRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/invite-user/resend",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
+    
+    static func inviteDelete(_ dto: InviteResendRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/invite-user/delete",
+            method: .post,
+            body: dto,
+            requiresAuth: false
+        )
+    }
 }
