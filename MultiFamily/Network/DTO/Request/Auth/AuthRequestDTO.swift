@@ -5,7 +5,7 @@
 //  Created by Sunion on 2026/1/29.
 //
 
-struct UserRequestDTO: Encodable {
+struct AuthRequestDTO: Encodable {
 
      let applicationID: String 
      let clientToken: String
@@ -28,7 +28,7 @@ struct UserRequestDTO: Encodable {
 
 }
 
-extension UserRequestDTO {
+extension AuthRequestDTO {
 
     enum CodingKeys: String, CodingKey {
         case applicationID

@@ -5,12 +5,15 @@
 //  Created by Sunion on 2026/1/29.
 //
 
-protocol UserRequestFactoryProtocol {
-    func makeLoginRequest(email: String, password: String) -> UserRequestDTO
-    func makeTokenRequest() -> UserRequestDTO
+protocol AuthRequestFactoryProtocol {
+    func makeLoginRequest(email: String, password: String) -> AuthRequestDTO
+    func makeTokenRequest() -> AuthRequestDTO
+
 }
 
-struct UserRequestFactory: UserRequestFactoryProtocol {
+struct AuthRequestFactory: AuthRequestFactoryProtocol {
+
+    
 
     private let env: EnvironmentConfig
     private let device: DeviceIdentifierProvider
@@ -29,9 +32,9 @@ struct UserRequestFactory: UserRequestFactoryProtocol {
     func makeLoginRequest(
         email: String,
         password: String
-    ) -> UserRequestDTO {
+    ) -> AuthRequestDTO {
 
-        UserRequestDTO(
+        AuthRequestDTO(
             applicationID: env.applicationID,
             clientToken: device.clientToken,
             payload: .login(
@@ -43,12 +46,14 @@ struct UserRequestFactory: UserRequestFactoryProtocol {
         )
     }
     
-    func makeTokenRequest() -> UserRequestDTO {
+    func makeTokenRequest() -> AuthRequestDTO {
         let refreshToken = tokenStore.refreshToken ?? "1234"
-        return UserRequestDTO(
+        return AuthRequestDTO(
             applicationID: env.applicationID,
             clientToken: device.clientToken,
             payload: .refreshToken(RefreshTokenPayloadDTO(refreshToken: refreshToken))
         )
     }
+    
+ 
 }

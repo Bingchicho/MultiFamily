@@ -15,13 +15,13 @@ final class AppAssembler {
         let device = DefaultDeviceIdentifierProvider()
         let attribute = AppAssembler.userAttributeStore
 
-        let requestFactory = UserRequestFactory(
+        let requestFactory = AuthRequestFactory(
             env: env,
             device: device,
             tokenStore: tokenStore
         )
 
-        let repository = UserRepositoryImpl(
+        let repository = AuthRepositoryImpl(
             apiClient: apiClient,
             tokenStore: tokenStore,
             userRequestFactory: requestFactory,

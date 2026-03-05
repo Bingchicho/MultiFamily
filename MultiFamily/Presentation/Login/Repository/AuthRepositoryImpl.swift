@@ -1,14 +1,16 @@
-final class UserRepositoryImpl: UserRepository {
+final class AuthRepositoryImpl: AuthRepository {
+
+    
 
     private let apiClient: APIClient
     private var tokenStore: TokenStore
-    private let userRequestFactory: UserRequestFactoryProtocol
+    private let userRequestFactory: AuthRequestFactoryProtocol
     private let userAttributeStore: UserAttributeStore
 
     init(
         apiClient: APIClient,
         tokenStore: TokenStore,
-        userRequestFactory: UserRequestFactoryProtocol,
+        userRequestFactory: AuthRequestFactoryProtocol,
         userAttribute: UserAttributeStore
     ) {
         self.apiClient = apiClient
@@ -26,8 +28,8 @@ final class UserRepositoryImpl: UserRepository {
             password: password
         )
 
-        let response: UserResponseDTO = try await apiClient.request(
-            UserEndpoint.login(requestDTO)
+        let response: AuthResponseDTO = try await apiClient.request(
+            AuthEndpoint.login(requestDTO)
         )
 
         saveAuth(from: response)
@@ -43,8 +45,8 @@ final class UserRepositoryImpl: UserRepository {
 
         let requestDTO = userRequestFactory.makeTokenRequest()
 
-        let response: UserResponseDTO = try await apiClient.request(
-            UserEndpoint.refresh(requestDTO)
+        let response: AuthResponseDTO = try await apiClient.request(
+            AuthEndpoint.refresh(requestDTO)
         )
 
         saveAuth(from: response)
@@ -53,7 +55,7 @@ final class UserRepositoryImpl: UserRepository {
     // MARK: - Private
 
     /// Centralized auth persistence to avoid duplicated logic
-    private func saveAuth(from response: UserResponseDTO) {
+    private func saveAuth(from response: AuthResponseDTO) {
 
         let token = response.toDomain()
 
@@ -63,4 +65,6 @@ final class UserRepositoryImpl: UserRepository {
         let attribute = response.attribute.toDomain()
         userAttributeStore.save(attribute, email: response.email)
     }
+    
+    
 }

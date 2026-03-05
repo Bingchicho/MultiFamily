@@ -43,7 +43,7 @@ extension SiteDTO {
         Site(
             id: siteID,
             name: name,
-            urserRole: userRole,
+            userRole: userRole,
         )
     }
 }

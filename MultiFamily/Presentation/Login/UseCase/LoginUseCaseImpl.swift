@@ -2,11 +2,11 @@ import Foundation
 
 final class LoginUseCaseImpl: LoginUseCase {
 
-    private let repository: UserRepository
+    private let repository: AuthRepository
 
 
     init(
-        repository: UserRepository
+        repository: AuthRepository
     ) {
         self.repository = repository
 

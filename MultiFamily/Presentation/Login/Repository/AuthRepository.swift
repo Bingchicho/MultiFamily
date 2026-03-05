@@ -5,7 +5,8 @@
 //  Created by Sunion on 2026/1/29.
 //
 
-protocol UserRepository {
+protocol AuthRepository {
     func login(email: String, password: String) async throws
-    func refreshIfNeeded() async throws 
+    func refreshIfNeeded() async throws
+   
 }

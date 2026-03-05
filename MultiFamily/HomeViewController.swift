@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var noDataTitleLabel: AppLabel!
     @IBOutlet weak var noDataAddButton: PrimaryButton!
     
+    @IBOutlet weak var inviteButton: UIButton!
+    
     @IBOutlet weak var noDataContentLabel: AppLabel!
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -38,11 +40,20 @@ class HomeViewController: UIViewController {
         bind()
         
         if let id = AppAssembler.siteSelectionStore.currentSite?.id {
+            checkInviteButton(site: AppAssembler.siteSelectionStore.currentSite)
             viewModel.load(siteID: id)
         } else {
             self.performSegue(withIdentifier: "site", sender: nil)
         }
        
+    }
+    
+    private func checkInviteButton(site: Site?) {
+        if site?.role == .admin {
+            inviteButton.isHidden = false
+        } else {
+            inviteButton.isHidden = true
+        }
     }
     
     private func holdLoading(animat: Bool) {
@@ -93,7 +104,7 @@ class HomeViewController: UIViewController {
 
                   tableView.reloadData()
 
-              case .error(let message):
+              case .error(_):
                   holdLoading(animat: false)
 
               default:
@@ -107,6 +118,7 @@ class HomeViewController: UIViewController {
         siteButton.setTitle("", for: .normal)
         accountButton.setTitle("", for: .normal)
         addButton.setTitle("", for: .normal)
+        inviteButton.setTitle("", for: .normal)
         
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -145,7 +157,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: SiteListDelegate {
     func siteListDidSelect(_ site: Site) {
         AppLogger.log(.info, category: .site, "selected site: \(site)")
-    
+        checkInviteButton(site: site)
         viewModel.load(siteID: site.id)
     }
     

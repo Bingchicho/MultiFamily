@@ -83,11 +83,8 @@ class SiteTableViewCell: UITableViewCell {
     }
     
     func setUpAction(_ site: Site) {
-        // Show action buttons only for Admin.
-        // Note: role values may contain different casing or surrounding spaces.
-        let role = site.urserRole.trimmingCharacters(in: .whitespacesAndNewlines)
-        let isAdmin = role.caseInsensitiveCompare("Admin") == .orderedSame
-        actionStackView.isHidden = !isAdmin
+ 
+        actionStackView.isHidden = !(site.role == .admin)
     }
     
     @IBAction private func editButtonTapped(_ sender: UIButton) {

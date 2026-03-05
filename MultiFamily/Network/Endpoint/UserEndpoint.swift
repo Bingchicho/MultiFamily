@@ -1,31 +1,21 @@
 //
-//  UserEndpoint.swift
+//  UserEndpoing.swift
 //  MultiFamily
 //
-//  Created by Sunion on 2026/1/29.
+//  Created by Sunion on 2026/3/5.
 //
 
+
 enum UserEndpoint {
-    static func login(_ dto: UserRequestDTO) -> APIRequest {
+    
+    static func list(_ dto: applicationIDRequestDTO) -> APIRequest {
         APIRequest(
             host: AppEnvironment.apiHostname,
             version: AppEnvironment.authService,
-            path: "/user/login",
+            path: "/user-list/get",
             method: .post,
             body: dto,
             requiresAuth: false
         )
     }
-    
-    static func refresh(_ dto: UserRequestDTO) -> APIRequest {
-        APIRequest(
-            host: AppEnvironment.apiHostname,
-            version: AppEnvironment.authService,
-            path: "/user/login",
-            method: .post,
-            body: dto,
-            requiresAuth: false
-        )
-    }
-    
 }

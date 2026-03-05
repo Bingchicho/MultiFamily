@@ -8,7 +8,7 @@
 
 protocol applicationIDRequestFactoryProtocol {
     func makeapplicationIDRequest() -> applicationIDRequestDTO
-
+    func makeListRequest() -> applicationIDRequestDTO
 }
 
 struct applicationIDRequestFactory: applicationIDRequestFactoryProtocol {
@@ -32,6 +32,8 @@ struct applicationIDRequestFactory: applicationIDRequestFactoryProtocol {
         applicationIDRequestDTO(applicationID: env.applicationID, clientToken: device.clientToken)
     }
     
- 
+    func makeListRequest() -> applicationIDRequestDTO {
+        applicationIDRequestDTO(applicationID: env.applicationID, clientToken: device.clientToken)
+    }
    
 }

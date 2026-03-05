@@ -1,5 +1,5 @@
 //
-//  UserResponseDTO.swift
+//  AuthResponseDTO.swift
 //  MultiFamily
 //
 //  Created by Sunion on 2026/1/29.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserResponseDTO: Decodable {
+struct AuthResponseDTO: Decodable {
 
     let tokenType: String
     let accessToken: String
@@ -30,7 +30,7 @@ struct UserResponseDTO: Decodable {
     }
 }
 
-extension UserResponseDTO {
+extension AuthResponseDTO {
     func toDomain(now: Date = Date()) -> UserToken {
         UserToken(
             accessToken: accessToken,
