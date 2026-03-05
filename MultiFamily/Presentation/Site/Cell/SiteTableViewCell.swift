@@ -7,25 +7,51 @@
 
 import UIKit
 
+protocol SiteTableViewCellDelegate: AnyObject {
+    func siteTableViewCell(_ cell: SiteTableViewCell, didTapEdit site: Site)
+    func siteTableViewCell(_ cell: SiteTableViewCell, didTapDelete site: Site)
+}
+
 class SiteTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleLabel: AppLabel!
     
-    private var  siteSelection = AppAssembler.siteSelectionStore.currentSite
+    @IBOutlet weak var actionStackView: UIStackView!
+    
+    @IBOutlet weak var editButton: UIButton!
+    
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    weak var delegate: SiteTableViewCellDelegate?
+    private var currentSite: Site!
+    
+    private var siteSelection: Site? { AppAssembler.siteSelectionStore.currentSite }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.style = .title
+        editButton.setTitle("", for: .normal)
+        deleteButton.setTitle("", for: .normal)
+        editButton.tintColor = .primary
+        deleteButton.tintColor = .error
         
         if #available(iOS 14.0, *) {
             backgroundConfiguration = nil
-        } else {
-            // Fallback on earlier versions
         }
-         backgroundColor = .clear
+
+        // Keep cell background clear so we can color the contentView for selection styling.
+        backgroundColor = .clear
         contentView.backgroundColor = .systemBackground
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // Reset reused state
+        applyDeselectedStyle()
+        actionStackView.isHidden = true
+        currentSite = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,6 +61,7 @@ class SiteTableViewCell: UITableViewCell {
     }
     
     func configure(with site: Site) {
+        currentSite = site
 
         titleLabel.text = site.name
 
@@ -42,6 +69,7 @@ class SiteTableViewCell: UITableViewCell {
 
         guard let siteSelection else {
             applyDeselectedStyle()
+           
             return
         }
 
@@ -50,6 +78,26 @@ class SiteTableViewCell: UITableViewCell {
         } else {
             applyDeselectedStyle()
         }
+        
+    
+    }
+    
+    func setUpAction(_ site: Site) {
+        // Show action buttons only for Admin.
+        // Note: role values may contain different casing or surrounding spaces.
+        let role = site.urserRole.trimmingCharacters(in: .whitespacesAndNewlines)
+        let isAdmin = role.caseInsensitiveCompare("Admin") == .orderedSame
+        actionStackView.isHidden = !isAdmin
+    }
+    
+    @IBAction private func editButtonTapped(_ sender: UIButton) {
+        guard let site = currentSite else { return }
+        delegate?.siteTableViewCell(self, didTapEdit: site)
+    }
+
+    @IBAction private func deleteButtonTapped(_ sender: UIButton) {
+        guard let site = currentSite else { return }
+        delegate?.siteTableViewCell(self, didTapDelete: site)
     }
 
     private func applySelectedStyle() {

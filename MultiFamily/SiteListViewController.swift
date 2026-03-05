@@ -17,6 +17,8 @@ final class SiteListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var titleLabel: AppLabel!
+    
+    @IBOutlet weak var addButton: UIButton!
 
     weak var delegate: SiteListDelegate?
 
@@ -43,6 +45,9 @@ final class SiteListViewController: UIViewController {
         titleLabel.text = L10n.Site.title
         titleLabel.style = .title
         closeButton.setTitle("", for: .normal)
+        
+        addButton.setTitle("", for: .normal)
+        addButton.tintColor = .primary
     }
     
     private func bindViewModel() {
@@ -101,7 +106,7 @@ final class SiteListViewController: UIViewController {
         }
     }
     
-    private func presentCreateSiteAlertIfNeeded() {
+    private func presentCreateSiteAlertIfNeeded(_ hasCancel: Bool = false, editSite: Site? = nil) {
         guard isPresentingCreateAlert == false else { return }
         isPresentingCreateAlert = true
 
@@ -115,6 +120,10 @@ final class SiteListViewController: UIViewController {
             textField.placeholder = L10n.Site.Alert.placeholder
             textField.autocapitalizationType = .words
             textField.autocorrectionType = .no
+            
+            if let editname = editSite?.name {
+                textField.text = editname
+            }
         }
 
         let create = UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
@@ -127,7 +136,21 @@ final class SiteListViewController: UIViewController {
                 self.presentCreateSiteAlertIfNeeded()
                 return
             }
-            self.viewModel?.createSite(name: name)
+            
+            if let editSite = editSite {
+                self.viewModel?.editSite(id: editSite.id, name: name)
+            } else {
+                self.viewModel?.createSite(name: name)
+            }
+      
+        }
+        
+        if hasCancel {
+            let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel) { [weak self] _ in
+                guard let self else { return }
+                self.isPresentingCreateAlert = false
+            }
+            alert.addAction(cancel)
         }
 
         alert.addAction(create)
@@ -171,6 +194,10 @@ final class SiteListViewController: UIViewController {
         isPresentingCreateAlert = false
         dismiss(animated: true)
     }
+    
+    @IBAction func addTapped() {
+        presentCreateSiteAlertIfNeeded(true)
+    }
 
 }
 
@@ -195,12 +222,37 @@ extension SiteListViewController: UITableViewDataSource {
         ) as! SiteTableViewCell
 
         cell.configure(with: sites[indexPath.row])
-
+        cell.setUpAction(sites[indexPath.row])
+        cell.delegate = self
         return cell
     }
 }
 
-extension SiteListViewController: UITableViewDelegate {
+extension SiteListViewController: UITableViewDelegate, SiteTableViewCellDelegate {
+    func siteTableViewCell(_ cell: SiteTableViewCell, didTapEdit site: Site) {
+        presentCreateSiteAlertIfNeeded(true, editSite: site)
+    }
+    
+    func siteTableViewCell(_ cell: SiteTableViewCell, didTapDelete site: Site) {
+
+        let alert = UIAlertController(
+            title: L10n.Site.Alert.Delete.title,
+            message: nil,
+            preferredStyle: .alert
+        )
+
+        let deleteAction = UIAlertAction(title: L10n.Site.Alert.Button.Delete.title, style: .destructive) { [weak self] _ in
+            self?.viewModel?.deleteSite(id: site.id)
+        }
+
+        let cancelAction = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
+
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true)
+    }
+    
 
     func tableView(
         _ tableView: UITableView,

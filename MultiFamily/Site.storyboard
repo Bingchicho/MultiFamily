@@ -18,17 +18,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="234" translatesAutoresizingMaskIntoConstraints="NO" id="kuA-qB-aZv">
-                                <rect key="frame" x="39" y="134" width="315" height="34.333333333333343"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kuA-qB-aZv">
+                                <rect key="frame" x="19.666666666666657" y="134" width="353.66666666666674" height="34.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SITE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reh-Yt-8Kr">
-                                        <rect key="frame" x="0.0" y="6.9999999999999982" width="34.666666666666664" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yvy-R7-4HB">
+                                        <rect key="frame" x="0.0" y="0.0" width="98" height="34.333333333333336"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SITE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reh-Yt-8Kr">
+                                                <rect key="frame" x="0.0" y="6.9999999999999982" width="49" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THb-9O-Fva">
+                                                <rect key="frame" x="49" y="0.0" width="49" height="34.333333333333336"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" name="Primary"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="plus.app.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="addTapped" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Hhv-No-NHY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uur-XI-lDZ">
-                                        <rect key="frame" x="268.66666666666669" y="0.0" width="46.333333333333314" height="34.333333333333336"/>
+                                        <rect key="frame" x="307.33333333333331" y="0.0" width="46.333333333333314" height="34.333333333333336"/>
                                         <color key="tintColor" name="Primary"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
@@ -69,9 +84,11 @@
                             <constraint firstAttribute="bottom" secondItem="WZ1-JP-lvK" secondAttribute="bottom" id="dfM-R3-s3U"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WZ1-JP-lvK" secondAttribute="trailing" id="i66-Zo-dcO"/>
                             <constraint firstItem="u0B-Nv-QMB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tsY-1F-8lZ"/>
+                            <constraint firstItem="kuA-qB-aZv" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.9" id="xAX-aB-XBP"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="THb-9O-Fva" id="nuY-uu-bgU"/>
                         <outlet property="closeButton" destination="Uur-XI-lDZ" id="RoI-w1-DiK"/>
                         <outlet property="loadingBackground" destination="u0B-Nv-QMB" id="R0h-7c-Z7g"/>
                         <outlet property="loadingIndicator" destination="40C-ca-pFP" id="VAy-ot-X1H"/>
@@ -85,6 +102,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Primary">
             <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

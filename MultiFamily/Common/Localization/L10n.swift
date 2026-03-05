@@ -457,6 +457,16 @@ internal enum L10n {
       internal static let placeholder = L10n.tr("Localizable", "site.alert.placeholder", fallback: "Site name")
       /// Create/Edit Site
       internal static let title = L10n.tr("Localizable", "site.alert.title", fallback: "Create/Edit Site")
+      internal enum Button {
+        internal enum Delete {
+          /// Delete
+          internal static let title = L10n.tr("Localizable", "site.alert.button.delete.title", fallback: "Delete")
+        }
+      }
+      internal enum Delete {
+        /// Deleting a Site requires completely clearing all related relationships to ensure proper deletion
+        internal static let title = L10n.tr("Localizable", "site.alert.delete.title", fallback: "Deleting a Site requires completely clearing all related relationships to ensure proper deletion")
+      }
     }
   }
   internal enum Verify {

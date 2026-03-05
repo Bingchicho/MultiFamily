@@ -26,23 +26,53 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SITENAME" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OK1-Go-rAj" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
-                        <rect key="frame" x="56" y="16" width="423" height="23"/>
+                        <rect key="frame" x="56" y="16" width="82" height="23"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGZ-q0-2DO">
+                        <rect key="frame" x="379.33333333333331" y="10.333333333333332" width="99.666666666666686" height="34.333333333333343"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqZ-bY-Wxk">
+                                <rect key="frame" x="0.0" y="0.0" width="51.666666666666664" height="34.333333333333336"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="highlighter" catalog="system"/>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qnH-iB-Q4v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ry5-JG-ICg">
+                                <rect key="frame" x="51.666666666666686" y="0.0" width="48" height="34.333333333333336"/>
+                                <color key="tintColor" name="Error"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XB5-tK-q2w"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="99.666666666666686" id="807-A5-DeT"/>
+                        </constraints>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OK1-Go-rAj" firstAttribute="leading" secondItem="dTL-tA-5Yu" secondAttribute="trailing" constant="16" id="0Ab-X8-hnY"/>
                     <constraint firstItem="dTL-tA-5Yu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="7A4-la-Zds"/>
                     <constraint firstAttribute="bottom" secondItem="OK1-Go-rAj" secondAttribute="bottom" constant="16" id="A8h-FC-dDg"/>
+                    <constraint firstItem="qGZ-q0-2DO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OK1-Go-rAj" secondAttribute="trailing" constant="16" id="Txh-Lm-Dgx"/>
                     <constraint firstItem="OK1-Go-rAj" firstAttribute="top" secondItem="dTL-tA-5Yu" secondAttribute="top" id="U6k-4T-Qaf"/>
+                    <constraint firstAttribute="trailing" secondItem="qGZ-q0-2DO" secondAttribute="trailing" constant="16" id="kUK-p2-fnS"/>
+                    <constraint firstItem="qGZ-q0-2DO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oeL-GA-2gy"/>
                     <constraint firstItem="dTL-tA-5Yu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="rVY-lb-CNK"/>
-                    <constraint firstAttribute="trailing" secondItem="OK1-Go-rAj" secondAttribute="trailing" constant="16" id="uNU-pq-1RJ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="actionStackView" destination="qGZ-q0-2DO" id="dOU-4u-Uf1"/>
+                <outlet property="deleteButton" destination="ry5-JG-ICg" id="p2C-ow-VJU"/>
+                <outlet property="editButton" destination="qqZ-bY-Wxk" id="U6G-4h-ghC"/>
                 <outlet property="iconView" destination="dTL-tA-5Yu" id="pW8-qb-VcX"/>
                 <outlet property="titleLabel" destination="OK1-Go-rAj" id="37o-4F-8yf"/>
             </connections>
@@ -50,7 +80,12 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="highlighter" catalog="system" width="128" height="120"/>
         <image name="house" catalog="system" width="128" height="104"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <namedColor name="Error">
+            <color red="0.89803921568627454" green="0.25098039215686274" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Primary">
             <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

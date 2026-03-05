@@ -8,4 +8,5 @@
 struct Site: Equatable, Decodable {
     let id: String
     let name: String
+    let urserRole: String
 }

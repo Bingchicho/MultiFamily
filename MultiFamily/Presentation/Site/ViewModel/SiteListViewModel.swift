@@ -33,7 +33,11 @@ final class SiteListViewModel {
             case .success(let sites):
 
                 self.sites = sites
-                self.state = .loaded(sites)
+                if sites.isEmpty {
+                    self.state = .create
+                } else {
+                    self.state = .loaded(sites)
+                }
 
             case .failure(let message):
 
@@ -64,7 +68,7 @@ final class SiteListViewModel {
 
             switch result {
 
-            case .success(let sites):
+            case .success(_):
 
               break
 
@@ -85,7 +89,7 @@ final class SiteListViewModel {
 
             switch result {
 
-            case .success(let sites):
+            case .success(_):
 
               break
 
@@ -106,7 +110,7 @@ final class SiteListViewModel {
 
             switch result {
 
-            case .success(let sites):
+            case .success(_):
 
               break
 

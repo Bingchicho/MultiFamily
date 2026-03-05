@@ -97,7 +97,8 @@
 "site.title" = "Site";
 "site.alert.title" = "Create/Edit Site";
 "site.alert.placeholder" = "Site name";
-
+"site.alert.delete.title" = "Deleting a Site requires completely clearing all related relationships to ensure proper deletion";
+"site.alert.button.delete.title" = "Delete";
 
 
 

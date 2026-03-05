@@ -7,8 +7,8 @@
 
 struct SiteDeleteResponseDTO: Decodable {
 
-    let applicationID: String
-    let siteID: String
+    let applicationID: String?
+    let siteID: String?
     let clientToken: String
 
 }
