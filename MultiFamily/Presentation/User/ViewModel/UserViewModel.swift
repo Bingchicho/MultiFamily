@@ -96,7 +96,7 @@ final class UserViewModel {
             case .failure(let message):
                 state = .error(message)
             case .optionSuccess:
-                load()
+                state = .option
             }
         }
     }

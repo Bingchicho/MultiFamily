@@ -19,6 +19,7 @@ final class InviteUserTableViewCell: UITableViewCell {
     @IBOutlet private weak var resendButton: UIButton!
     @IBOutlet private weak var deleteButton: UIButton!
 
+    @IBOutlet private weak var roleLabel: AppLabel!
     weak var delegate: InviteUserCellDelegate?
 
     private var currentInviteUser: InviteUser?
@@ -40,6 +41,11 @@ final class InviteUserTableViewCell: UITableViewCell {
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.style = .body
+        
+        roleLabel.numberOfLines = 0
+        roleLabel.lineBreakMode = .byWordWrapping
+        roleLabel.style = .caption
+        roleLabel.textColor = .secondary
 
         resendButton.setTitle("", for: .normal)
         deleteButton.setTitle("", for: .normal)
@@ -56,6 +62,7 @@ final class InviteUserTableViewCell: UITableViewCell {
     func configure(with inviteUser: InviteUser) {
         currentInviteUser = inviteUser
         titleLabel.text = inviteUser.email
+        roleLabel.text = inviteUser.role.rawValue
     }
 
     @IBAction private func resendButtonTapped(_ sender: UIButton) {

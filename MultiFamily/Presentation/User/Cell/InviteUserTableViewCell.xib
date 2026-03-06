@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="377" height="63"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzd-wD-O2S" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzd-wD-O2S" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
                         <rect key="frame" x="16.000000000000004" y="16" width="41.333333333333343" height="31"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -50,22 +50,30 @@
                             <constraint firstAttribute="width" constant="97" id="Qig-f2-HeC"/>
                         </constraints>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X14-Jh-aWF" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                        <rect key="frame" x="159" y="23" width="97" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="UPh-7u-uZV" firstAttribute="leading" secondItem="X14-Jh-aWF" secondAttribute="trailing" constant="8" id="70t-5H-rMe"/>
+                    <constraint firstItem="X14-Jh-aWF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dzd-wD-O2S" secondAttribute="trailing" constant="16" id="GpO-MY-0Va"/>
                     <constraint firstAttribute="trailing" secondItem="UPh-7u-uZV" secondAttribute="trailing" constant="16" id="MBE-s3-0bi"/>
-                    <constraint firstItem="UPh-7u-uZV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PXG-By-1Jo"/>
                     <constraint firstItem="UPh-7u-uZV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="TM5-cg-Q3o"/>
+                    <constraint firstItem="X14-Jh-aWF" firstAttribute="width" secondItem="UPh-7u-uZV" secondAttribute="width" id="cIW-Dh-PxX"/>
+                    <constraint firstAttribute="bottom" secondItem="Dzd-wD-O2S" secondAttribute="bottom" constant="16" id="eCF-9r-fb1"/>
+                    <constraint firstItem="X14-Jh-aWF" firstAttribute="centerY" secondItem="UPh-7u-uZV" secondAttribute="centerY" id="ha2-9T-TTe"/>
                     <constraint firstItem="Dzd-wD-O2S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="hcQ-Zt-8dJ"/>
                     <constraint firstItem="Dzd-wD-O2S" firstAttribute="top" secondItem="UPh-7u-uZV" secondAttribute="top" id="qVg-Lf-WMl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <constraints>
-                <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="Dzd-wD-O2S" secondAttribute="bottom" constant="16" id="hVj-cI-etC"/>
-            </constraints>
             <connections>
                 <outlet property="deleteButton" destination="KyS-VG-p7T" id="EEL-pb-82R"/>
                 <outlet property="resendButton" destination="Gr1-BR-014" id="NVc-Mu-rk0"/>
+                <outlet property="roleLabel" destination="X14-Jh-aWF" id="dFk-Xs-Qyi"/>
                 <outlet property="titleLabel" destination="Dzd-wD-O2S" id="tgj-Bq-MgV"/>
             </connections>
             <point key="canvasLocation" x="109.16030534351144" y="121.47887323943662"/>

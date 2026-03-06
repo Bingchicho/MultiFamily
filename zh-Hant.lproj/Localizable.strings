@@ -240,3 +240,6 @@
 "user.alert.edit.title" = "Edit User";
 "user.alert.delete.title" = "Are you sure you want to delete %@";
 "user.alert.button.delete.title" = "Delete";
+"user.alert.invite.resend.title" = "Resend Verify Code to %@";
+"user.alert.invite.resend.success" = "New Verify Code sended";
+"user.alert.invite.delete.title" = "Are you sure you want to delete %@ invite";

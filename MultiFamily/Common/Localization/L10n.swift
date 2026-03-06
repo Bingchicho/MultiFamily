@@ -501,6 +501,22 @@ internal enum L10n {
         /// Edit User
         internal static let title = L10n.tr("Localizable", "user.alert.edit.title", fallback: "Edit User")
       }
+      internal enum Invite {
+        internal enum Delete {
+          /// Are you sure you want to delete %@ invite
+          internal static func title(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "user.alert.invite.delete.title", String(describing: p1), fallback: "Are you sure you want to delete %@ invite")
+          }
+        }
+        internal enum Resend {
+          /// New Verify Code sended
+          internal static let success = L10n.tr("Localizable", "user.alert.invite.resend.success", fallback: "New Verify Code sended")
+          /// Resend Verify Code to %@
+          internal static func title(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "user.alert.invite.resend.title", String(describing: p1), fallback: "Resend Verify Code to %@")
+          }
+        }
+      }
     }
     internal enum Invite {
       /// Invite User

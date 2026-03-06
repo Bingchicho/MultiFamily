@@ -52,6 +52,7 @@ final class UserViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
 
+
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
@@ -104,7 +105,22 @@ final class UserViewController: UIViewController {
             )
             present(alert, animated: true)
         case .option:
-            break
+            holdLoading(animat: false)
+
+            let alert = UIAlertController(
+                title: nil,
+                message: L10n.User.Alert.Invite.Resend.success,
+                preferredStyle: .alert
+            )
+
+            alert.addAction(
+                UIAlertAction(
+                    title: L10n.Common.Button.confirm,
+                    style: .default
+                )
+            )
+
+            present(alert, animated: true)
         }
     }
 
@@ -195,13 +211,51 @@ extension UserViewController: UITableViewDelegate {
 extension UserViewController: InviteUserCellDelegate {
 
     func inviteUserCell(_ cell: InviteUserTableViewCell, didTapResend inviteUser: InviteUser) {
-        print("resend invite: \(inviteUser.email)")
-        // viewModel.resendInvite(inviteCode: inviteUser.inviteCode)
+        let alert = UIAlertController(
+            title: L10n.User.Alert.Invite.Resend.title(inviteUser.email),
+            message: inviteUser.email,
+            preferredStyle: .alert
+        )
+
+        let resendAction = UIAlertAction(
+            title: L10n.Common.Button.confirm,
+            style: .default
+        ) { [weak self] _ in
+            self?.viewModel.inviteResend(code: inviteUser.inviteCode)
+        }
+
+        let cancelAction = UIAlertAction(
+            title: L10n.Common.Button.cancel,
+            style: .cancel
+        )
+
+        alert.addAction(resendAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
 
     func inviteUserCell(_ cell: InviteUserTableViewCell, didTapDelete inviteUser: InviteUser) {
-        print("delete invite: \(inviteUser.email)")
-        // viewModel.deleteInvite(inviteCode: inviteUser.inviteCode)
+        let alert = UIAlertController(
+            title: L10n.User.Alert.Invite.Delete.title(inviteUser.email),
+            message: "",
+            preferredStyle: .alert
+        )
+
+        let deleteAction = UIAlertAction(
+            title: L10n.User.Alert.Button.Delete.title,
+            style: .destructive
+        ) { [weak self] _ in
+            self?.viewModel.inviteDelete(code: inviteUser.inviteCode)
+        }
+
+        let cancelAction = UIAlertAction(
+            title: L10n.Common.Button.cancel,
+            style: .cancel
+        )
+
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
 }
 
