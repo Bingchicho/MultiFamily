@@ -18,23 +18,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gFF-Qh-Zxt">
-                                <rect key="frame" x="0.0" y="172" width="393" height="680"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gFF-Qh-Zxt">
+                                <rect key="frame" x="0.0" y="180" width="393" height="672"/>
                             </tableView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03b-T6-ZlM">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Z0b-Rf-ysp">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Z0b-Rf-ysp" firstAttribute="centerY" secondItem="03b-T6-ZlM" secondAttribute="centerY" id="hwr-9w-dxi"/>
+                                    <constraint firstItem="Z0b-Rf-ysp" firstAttribute="centerX" secondItem="03b-T6-ZlM" secondAttribute="centerX" id="nLI-1b-Hcl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="03b-T6-ZlM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="IxZ-QH-1GR"/>
+                            <constraint firstAttribute="top" secondItem="03b-T6-ZlM" secondAttribute="top" id="Kez-D9-PUU"/>
                             <constraint firstAttribute="bottom" secondItem="gFF-Qh-Zxt" secondAttribute="bottom" id="R7i-Yy-wlY"/>
                             <constraint firstItem="gFF-Qh-Zxt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SMv-TR-fNH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gFF-Qh-Zxt" secondAttribute="trailing" id="Xpi-CJ-DSz"/>
-                            <constraint firstItem="gFF-Qh-Zxt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="y2d-cs-UFX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="03b-T6-ZlM" secondAttribute="trailing" id="iN8-8S-l29"/>
+                            <constraint firstItem="gFF-Qh-Zxt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="y2d-cs-UFX"/>
+                            <constraint firstItem="03b-T6-ZlM" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="zAV-TB-gAf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gut-W9-Oji">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="IeN-yF-q71">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3Zt-lO-oTt">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3Zt-lO-oTt">
                                 <rect key="frame" x="324.66666666666669" y="4.6666666666666687" width="48.333333333333314" height="34.666666666666664"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" name="Primary"/>
@@ -44,13 +60,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="inviteButton" destination="3Zt-lO-oTt" id="Rtx-sJ-Foq"/>
-                        <outlet property="tableView" destination="gFF-Qh-Zxt" id="Wcn-fg-RlX"/>
+                        <outlet property="inviteButton" destination="3Zt-lO-oTt" id="6ro-sl-6jc"/>
+                        <outlet property="loadingBackground" destination="03b-T6-ZlM" id="t5M-3h-bhc"/>
+                        <outlet property="loadingIndicator" destination="Z0b-Rf-ysp" id="BeZ-vj-mEj"/>
+                        <outlet property="tableView" destination="gFF-Qh-Zxt" id="sRY-Tk-a5b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1393" y="198"/>
+            <point key="canvasLocation" x="1382" y="199"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FoD-7F-Vex">

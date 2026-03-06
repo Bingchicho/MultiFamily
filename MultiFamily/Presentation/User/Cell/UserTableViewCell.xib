@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="67" id="KGk-i7-Jjw" customClass="UserTableViewCell" customModule="MultiFamily" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="67"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="340" height="67"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiN-DP-9zI" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                        <rect key="frame" x="16.000000000000004" y="16" width="41.333333333333343" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kcw-3a-K5q">
+                        <rect key="frame" x="216.33333333333334" y="16.000000000000004" width="107.66666666666666" height="34.333333333333343"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fU0-IS-rMJ">
+                                <rect key="frame" x="0.0" y="0.0" width="51.666666666666664" height="34.333333333333336"/>
+                                <color key="tintColor" name="Primary"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="highlighter" catalog="system"/>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lQ2-vF-3nJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qkd-zK-cvB">
+                                <rect key="frame" x="59.666666666666657" y="0.0" width="48" height="34.333333333333336"/>
+                                <color key="tintColor" name="Error"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="removeButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zWU-cm-mTN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITh-Rz-LNa" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                        <rect key="frame" x="167" y="23" width="41.333333333333343" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="DiN-DP-9zI" secondAttribute="bottom" constant="16" id="2Ig-tE-y2q"/>
+                    <constraint firstAttribute="trailing" secondItem="Kcw-3a-K5q" secondAttribute="trailing" constant="16" id="QXa-qI-jWp"/>
+                    <constraint firstItem="Kcw-3a-K5q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Yjc-dZ-OcI"/>
+                    <constraint firstItem="DiN-DP-9zI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bDg-KX-cXj"/>
+                    <constraint firstItem="Kcw-3a-K5q" firstAttribute="leading" secondItem="ITh-Rz-LNa" secondAttribute="trailing" constant="8" id="equ-PC-6mN"/>
+                    <constraint firstItem="ITh-Rz-LNa" firstAttribute="centerY" secondItem="Kcw-3a-K5q" secondAttribute="centerY" id="gy7-LE-pKB"/>
+                    <constraint firstItem="DiN-DP-9zI" firstAttribute="top" secondItem="Kcw-3a-K5q" secondAttribute="top" id="ihT-w0-b5I"/>
+                    <constraint firstItem="ITh-Rz-LNa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DiN-DP-9zI" secondAttribute="trailing" constant="16" id="nAT-Fi-Og2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="editButton" destination="fU0-IS-rMJ" id="zHd-PD-7FV"/>
+                <outlet property="removeButton" destination="qkd-zK-cvB" id="eRL-Hc-I0v"/>
+                <outlet property="roleLabel" destination="ITh-Rz-LNa" id="N3m-DS-ujn"/>
+                <outlet property="titleLabel" destination="DiN-DP-9zI" id="MVe-Mp-s2u"/>
+            </connections>
+            <point key="canvasLocation" x="135.87786259541986" y="152.46478873239437"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="highlighter" catalog="system" width="128" height="120"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <namedColor name="Error">
+            <color red="0.89803921568627454" green="0.25098039215686274" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary">
+            <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

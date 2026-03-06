@@ -481,6 +481,32 @@ internal enum L10n {
       }
     }
   }
+  internal enum User {
+    /// User
+    internal static let title = L10n.tr("Localizable", "user.title", fallback: "User")
+    internal enum Alert {
+      internal enum Button {
+        internal enum Delete {
+          /// Delete
+          internal static let title = L10n.tr("Localizable", "user.alert.button.delete.title", fallback: "Delete")
+        }
+      }
+      internal enum Delete {
+        /// Are you sure you want to delete %@
+        internal static func title(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "user.alert.delete.title", String(describing: p1), fallback: "Are you sure you want to delete %@")
+        }
+      }
+      internal enum Edit {
+        /// Edit User
+        internal static let title = L10n.tr("Localizable", "user.alert.edit.title", fallback: "Edit User")
+      }
+    }
+    internal enum Invite {
+      /// Invite User
+      internal static let title = L10n.tr("Localizable", "user.invite.title", fallback: "Invite User")
+    }
+  }
   internal enum Verify {
     /// Verification code has been sent to
     internal static let content = L10n.tr("Localizable", "verify.content", fallback: "Verification code has been sent to")

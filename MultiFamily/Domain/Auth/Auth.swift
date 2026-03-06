@@ -26,14 +26,17 @@ struct UserAttribute {
     let country: String?
     let isDebugEnabled: Bool?
     let permissions: [UserPermission]?
+    var identityID: String?
 }
 
 struct UserPermission: Codable {
-    let siteID: String
-    let role: UserRole
+    let siteID: String?
+    let userRole: UserRole?
+    let group: String?
+
 }
 
-enum UserRole: String, Codable, CaseIterable {
+enum UserRole: String, Codable, CaseIterable, Equatable {
 
     case admin = "Admin"
     case manager = "Manager"

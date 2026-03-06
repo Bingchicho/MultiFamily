@@ -26,6 +26,9 @@ struct AttributeDTO: Codable {
 struct PermissionDTO: Codable {
     let siteID: String
     let userRole: UserRole
+    let group: String?
+    
+    
 }
 
 extension AttributeDTO {
@@ -37,7 +40,8 @@ extension AttributeDTO {
             phone: phone,
             country: country,
             isDebugEnabled: debugLog,
-            permissions: permission?.map { $0.toDomain() }
+            permissions: permission?.map { $0.toDomain() },
+            identityID: ""
         )
     }
 }
@@ -47,7 +51,8 @@ extension PermissionDTO {
     func toDomain() -> UserPermission {
         UserPermission(
             siteID: siteID,
-            role: userRole
+            userRole: userRole,
+            group: group
         )
     }
 }

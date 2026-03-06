@@ -50,27 +50,7 @@
                                             <segue destination="thz-8n-8l5" kind="show" id="LQl-vb-CJE"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJQ-G3-cK3">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="oJQ-G3-cK3" secondAttribute="height" multiplier="1:1" id="6RY-4D-rLF"/>
-                                            <constraint firstAttribute="width" constant="50" id="qor-2p-sei"/>
-                                        </constraints>
-                                        <color key="tintColor" name="Primary"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain">
-                                            <backgroundConfiguration key="background" imageContentMode="scaleAspectFit">
-                                                <imageReference key="image" image="person.2.fill" catalog="system" symbolScale="large"/>
-                                            </backgroundConfiguration>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <segue destination="LEd-Eb-xXK" kind="show" id="ctJ-Ya-s80"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="oJQ-G3-cK3" firstAttribute="width" secondItem="oJQ-G3-cK3" secondAttribute="height" multiplier="1:1" id="8VR-0F-I64"/>
-                                </constraints>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dtH-Sr-NW5">
                                 <rect key="frame" x="59" y="488.66666666666674" width="275" height="119"/>
@@ -162,12 +142,24 @@
                                     </connections>
                                 </button>
                             </barButtonItem>
+                            <barButtonItem style="plain" id="lTj-xu-tSW">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Lxn-fv-iyK">
+                                    <rect key="frame" x="177.66666666666663" y="4.6666666666666687" width="59" height="34.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" name="Primary"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="person.2" catalog="system"/>
+                                    <connections>
+                                        <segue destination="LEd-Eb-xXK" kind="show" id="jrk-X7-0vx"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="accountButton" destination="6Ed-ha-kdg" id="ZPL-Nj-pBY"/>
                         <outlet property="addButton" destination="WwF-a2-3Mt" id="i3V-k0-P2r"/>
-                        <outlet property="inviteButton" destination="oJQ-G3-cK3" id="bU6-Ms-T0m"/>
+                        <outlet property="inviteButton" destination="Lxn-fv-iyK" id="IKU-hV-pPU"/>
                         <outlet property="loadingBackground" destination="cHo-bR-CMD" id="WuC-ID-I1o"/>
                         <outlet property="loadingIndicator" destination="BLq-Cu-B9T" id="ZdW-Dt-qlg"/>
                         <outlet property="noDataAddButton" destination="v3W-Ir-78D" id="9Lr-h2-cSo"/>
@@ -256,7 +248,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house" catalog="system" width="128" height="104"/>
-        <image name="person.2.fill" catalog="system" width="128" height="86"/>
+        <image name="person.2" catalog="system" width="128" height="87"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="Primary">

@@ -62,7 +62,8 @@ final class AuthRepositoryImpl: AuthRepository {
         tokenStore.accessToken = token.accessToken
         tokenStore.refreshToken = token.refreshToken
 
-        let attribute = response.attribute.toDomain()
+        var attribute = response.attribute.toDomain()
+        attribute.identityID = response.identityID
         userAttributeStore.save(attribute, email: response.email)
     }
     

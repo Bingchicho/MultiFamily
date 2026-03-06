@@ -15,7 +15,7 @@ enum UserEndpoint {
             path: "/user-list/get",
             method: .post,
             body: dto,
-            requiresAuth: false
+            requiresAuth: true
         )
     }
     
@@ -26,7 +26,7 @@ enum UserEndpoint {
             path: "/site-user/update",
             method: .post,
             body: dto,
-            requiresAuth: false
+            requiresAuth: true
         )
     }
     
@@ -37,7 +37,7 @@ enum UserEndpoint {
             path: "/site-user/delete",
             method: .post,
             body: dto,
-            requiresAuth: false
+            requiresAuth: true
         )
     }
     
@@ -48,7 +48,7 @@ enum UserEndpoint {
             path: "/invite-user/resend",
             method: .post,
             body: dto,
-            requiresAuth: false
+            requiresAuth: true
         )
     }
     
@@ -59,7 +59,7 @@ enum UserEndpoint {
             path: "/invite-user/delete",
             method: .post,
             body: dto,
-            requiresAuth: false
+            requiresAuth: true
         )
     }
     
@@ -70,7 +70,7 @@ enum UserEndpoint {
             path: "/invite-user/create",
             method: .post,
             body: dto,
-            requiresAuth: false
+            requiresAuth: true
         )
     }
 }

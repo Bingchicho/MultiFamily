@@ -24,12 +24,14 @@ struct UserDTO: Decodable {
 struct UserAttributeDTO: Decodable {
 
     let preferredUsername: String?
+    let preferredLanguage: String?
     let permission: [UserPermission]?
     let debugLog: Bool?
     let verifyRequired: VerifyRequiredDTO?
 
     enum CodingKeys: String, CodingKey {
         case preferredUsername = "PreferredUsername"
+        case preferredLanguage = "preferredLanguage"
         case permission
         case debugLog = "DebugLog"
         case verifyRequired = "VerifyRequired"
@@ -63,7 +65,7 @@ struct InviteUserDTO: Decodable {
     let email: String
     let permission: [InvitePermissionDTO]
     let expirationTime: Int
-    let createAt: Int
+    let createAt: Double
 
 }
 
@@ -92,13 +94,14 @@ extension UserDTO {
     func toDomain() -> User {
 
         let name = attribute.preferredUsername ?? ""
-        let role = attribute.permission?.first?.role ?? .user
+        let role = attribute.permission?.first?.userRole ?? .user
 
         return User(
             id: identityID,
             name: name,
             email: email ?? "",
-            role: role
+            role: role,
+            group: attribute.permission?.first?.group ?? ""
         )
     }
 }
@@ -113,6 +116,8 @@ extension InviteUserDTO {
             inviteCode: inviteCode,
             email: email,
             role: role,
+            createAt: createAt,
+            siteID: permission.first?.siteID ?? ""
         )
     }
 }

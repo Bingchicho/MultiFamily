@@ -231,3 +231,12 @@
 "add.status.connecting" = "Connecting BLE...";
 
 "add.content.title" = "Please enable Bluetooth broadcasting on the device, and bringing your phone close to the device";
+
+// ==========================
+// User
+// ==========================
+"user.title" = "User";
+"user.invite.title" = "Invite User";
+"user.alert.edit.title" = "Edit User";
+"user.alert.delete.title" = "Are you sure you want to delete %@";
+"user.alert.button.delete.title" = "Delete";

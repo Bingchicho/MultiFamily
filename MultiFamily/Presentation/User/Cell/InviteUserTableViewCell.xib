@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteUserCell" rowHeight="63" id="KGk-i7-Jjw" customClass="InviteUserTableViewCell" customModule="MultiFamily" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="377" height="63"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzd-wD-O2S" customClass="AppLabel" customModule="MultiFamily" customModuleProvider="target">
+                        <rect key="frame" x="16.000000000000004" y="16" width="41.333333333333343" height="31"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UPh-7u-uZV">
+                        <rect key="frame" x="264" y="16.000000000000004" width="97" height="34.333333333333343"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gr1-BR-014">
+                                <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="34.333333333333336"/>
+                                <color key="tintColor" name="Primary"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane" catalog="system"/>
+                                <connections>
+                                    <action selector="resendButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="51U-HW-yhD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyS-VG-p7T">
+                                <rect key="frame" x="58.666666666666686" y="0.0" width="38.333333333333343" height="34.333333333333336"/>
+                                <color key="tintColor" name="Error"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CMc-zp-Dbn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="97" id="Qig-f2-HeC"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="UPh-7u-uZV" secondAttribute="trailing" constant="16" id="MBE-s3-0bi"/>
+                    <constraint firstItem="UPh-7u-uZV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PXG-By-1Jo"/>
+                    <constraint firstItem="UPh-7u-uZV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="TM5-cg-Q3o"/>
+                    <constraint firstItem="Dzd-wD-O2S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="hcQ-Zt-8dJ"/>
+                    <constraint firstItem="Dzd-wD-O2S" firstAttribute="top" secondItem="UPh-7u-uZV" secondAttribute="top" id="qVg-Lf-WMl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <constraints>
+                <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="Dzd-wD-O2S" secondAttribute="bottom" constant="16" id="hVj-cI-etC"/>
+            </constraints>
+            <connections>
+                <outlet property="deleteButton" destination="KyS-VG-p7T" id="EEL-pb-82R"/>
+                <outlet property="resendButton" destination="Gr1-BR-014" id="NVc-Mu-rk0"/>
+                <outlet property="titleLabel" destination="Dzd-wD-O2S" id="tgj-Bq-MgV"/>
+            </connections>
+            <point key="canvasLocation" x="109.16030534351144" y="121.47887323943662"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="paperplane" catalog="system" width="128" height="119"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <namedColor name="Error">
+            <color red="0.89803921568627454" green="0.25098039215686274" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary">
+            <color red="0.027450980392156862" green="0.29411764705882354" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

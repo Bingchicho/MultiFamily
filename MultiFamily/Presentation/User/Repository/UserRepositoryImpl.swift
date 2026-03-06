@@ -21,22 +21,20 @@ final class UserRepositoryImpl: UserRepository {
 
 
     private let apiClient: APIClient
-    private var tokenStore: TokenStore
+
     private let applicationFactory:applicationIDRequestFactoryProtocol
     private let userRequestFactory: UserRequestFactoryProtocol
 
 
     init(
         apiClient: APIClient,
-        tokenStore: TokenStore,
-        applicationFactory: applicationIDRequestFactoryProtocol,
         userRequestFactory: UserRequestFactoryProtocol,
+        applicationFactory: applicationIDRequestFactoryProtocol
 
     ) {
         self.apiClient = apiClient
-        self.tokenStore = tokenStore
-        self.applicationFactory = applicationFactory
         self.userRequestFactory = userRequestFactory
+        self.applicationFactory = applicationFactory
    
     }
 
@@ -44,18 +42,23 @@ final class UserRepositoryImpl: UserRepository {
     
     func list() async throws -> UserListResult {
         
-        let requestDTO = applicationFactory.makeListRequest()
+        do {
+            
+            let requestDTO = applicationFactory.makeListRequest()
+            
+            let dto: UserListResponseDTO = try await apiClient.request(
+                UserEndpoint.list(requestDTO)
+            )
+
+            let domain = dto.toDomain()
+
+            return .success(users: domain.users, inviteUsers: domain.inviteUsers)
+            
+        } catch {
+            return .failure(L10n.Common.Error.network)
+        }
         
-        let dto: UserListResponseDTO = try await apiClient.request(
-            UserEndpoint.list(requestDTO)
-        )
-
-        let domain = dto.toDomain()
-
-        return UserListResult(
-            users: domain.users,
-            inviteUsers: domain.inviteUsers
-        )
+ 
     }
     
     

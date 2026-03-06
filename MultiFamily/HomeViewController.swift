@@ -50,9 +50,9 @@ class HomeViewController: UIViewController {
     
     private func checkInviteButton(site: Site?) {
         if site?.userRole == .admin {
-            inviteButton.isHidden = false
+            inviteButton.isEnabled = true
         } else {
-            inviteButton.isHidden = true
+            inviteButton.isEnabled = false
         }
     }
     
@@ -119,6 +119,7 @@ class HomeViewController: UIViewController {
         accountButton.setTitle("", for: .normal)
         addButton.setTitle("", for: .normal)
         inviteButton.setTitle("", for: .normal)
+        inviteButton.isEnabled = false
         
         let backItem = UIBarButtonItem()
         backItem.title = ""
