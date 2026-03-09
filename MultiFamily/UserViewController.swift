@@ -21,6 +21,8 @@ final class UserViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
     
+    var devices: [Device] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -126,6 +128,15 @@ final class UserViewController: UIViewController {
 
     @IBAction private func inviteButtonAction(_ sender: UIButton) {
         // TODO: push invite page
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "invite",
+           let vc = segue.destination as? InviteUserViewController {
+            vc.devices = devices
+        }
     }
 }
 

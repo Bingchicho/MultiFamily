@@ -136,15 +136,7 @@ final class UserViewModel {
     }
 }
 
-// MARK: - ViewState
 
-enum UserViewState: Equatable {
-    case idle
-    case loading
-    case loaded
-    case option
-    case error(String)
-}
 
 // MARK: - Section
 

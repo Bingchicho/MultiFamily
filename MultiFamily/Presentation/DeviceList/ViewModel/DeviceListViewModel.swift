@@ -17,7 +17,7 @@ final class DeviceListViewModel {
 
     // MARK: - Source Data
 
-    private(set) var devices: [Device] = []
+     var devices: [Device] = []
 
     // MARK: - Search State
 

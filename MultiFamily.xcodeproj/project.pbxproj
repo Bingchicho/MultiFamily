@@ -65,6 +65,7 @@
 				Domain/Site/Site.swift,
 				Domain/Site/SiteListResult.swift,
 				Domain/User/User.swift,
+				Domain/User/UserViewState.swift,
 				Environment/AppEnvironment.swift,
 				Environment/DefaultEnvironmentConfig.swift,
 				Environment/Device/DefaultDeviceIdentifierProvider.swift,

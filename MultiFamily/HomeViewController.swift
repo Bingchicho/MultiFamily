@@ -144,6 +144,11 @@ class HomeViewController: UIViewController {
            let vc = segue.destination as? DetailViewController {
             vc.device = sender as? Device
         }
+        
+        if segue.identifier == "user",
+           let vc = segue.destination as? UserViewController {
+            vc.devices = viewModel.devices
+        }
     }
     
     
