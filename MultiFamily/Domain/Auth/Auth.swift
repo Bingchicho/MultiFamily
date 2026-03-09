@@ -29,7 +29,7 @@ struct UserAttribute {
     var identityID: String?
 }
 
-struct UserPermission: Codable {
+struct UserPermission: Codable, Equatable {
     let siteID: String?
     let userRole: UserRole?
     let group: String?

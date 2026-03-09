@@ -188,6 +188,13 @@ class DetailViewController: UIViewController {
             syncedLabel.textColor = .unsynced
         }
         
+        // lock/unlock User only
+        if AppAssembler.userAttributeStore.currentUser?.permissions?.first?.userRole == .user {
+            lockUnlockButton.isHidden = false
+        } else {
+            lockUnlockButton.isHidden = true
+        }
+        
     }
     
     private func setupData() {

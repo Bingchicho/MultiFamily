@@ -46,7 +46,13 @@ struct UserUseCaseImpl: UserUseCase {
 
             let filteredUsers = users
                 .filter { user in
-                    matchesSelectedSite(group: user.group, selectedSiteId: selectedSiteId)
+                    var groupValue = ""
+                    if let sideId = AppAssembler.siteSelectionStore.currentSite?.id,
+                       let permission = user.permission.first(where: { $0.siteID == sideId }){
+                        groupValue = permission.group ?? ""
+                    }
+                    
+                    return matchesSelectedSite(group: groupValue, selectedSiteId: selectedSiteId)
                 }
                 .sorted { lhs, rhs in
                     lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
@@ -54,7 +60,7 @@ struct UserUseCaseImpl: UserUseCase {
 
             let filteredInviteUsers = inviteUsers
                 .filter { inviteUser in
-                    inviteUser.siteID == selectedSiteId
+                    inviteUser.permission.contains { $0.siteID == selectedSiteId }
                 }
                 .sorted { lhs, rhs in
                     lhs.email.localizedCaseInsensitiveCompare(rhs.email) == .orderedAscending

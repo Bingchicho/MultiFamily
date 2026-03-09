@@ -62,7 +62,11 @@ final class InviteUserTableViewCell: UITableViewCell {
     func configure(with inviteUser: InviteUser) {
         currentInviteUser = inviteUser
         titleLabel.text = inviteUser.email
-        roleLabel.text = inviteUser.role.rawValue
+        if let sideId = AppAssembler.siteSelectionStore.currentSite?.id,
+           let permission = inviteUser.permission.first(where: { $0.siteID == sideId }) {
+            roleLabel.text = permission.userRole.rawValue
+        }
+       
     }
 
     @IBAction private func resendButtonTapped(_ sender: UIButton) {

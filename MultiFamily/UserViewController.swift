@@ -304,11 +304,16 @@ extension UserViewController: UserCellDelegate {
         
         if availableRoles.count > 1 {
             let segment = UISegmentedControl(items: availableRoles.map { $0.rawValue })
-            if let index = availableRoles.firstIndex(of: user.role) {
+            
+            if let sideId = AppAssembler.siteSelectionStore.currentSite?.id,
+               let permission = user.permission.first(where: { $0.siteID == sideId }),
+               let index = availableRoles.firstIndex(of: permission.userRole ?? .user) {
                 segment.selectedSegmentIndex = index
             } else {
-                segment.selectedSegmentIndex = 0
+                segment.selectedSegmentIndex = 1
             }
+            
+
             segment.translatesAutoresizingMaskIntoConstraints = false
             
  
@@ -335,7 +340,7 @@ extension UserViewController: UserCellDelegate {
                 selectedRole = availableRoles[roleSegment.selectedSegmentIndex]
             } else {
                 // manager only has `.user`, or fallback to original role if available.
-                selectedRole = availableRoles.first ?? user.role
+                selectedRole = .user
             }
 
             guard let siteId = AppAssembler.siteSelectionStore.currentSite?.id else { return }

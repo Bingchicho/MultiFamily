@@ -61,9 +61,17 @@ final class UserTableViewCell: UITableViewCell {
     func configure(with user: User) {
         currentUser = user
         titleLabel.text = user.name.isEmpty ? user.email : user.name
-        roleLabel.text = user.role.rawValue
         
-        editButton.isHidden = user.role == .user
+        if let sideId = AppAssembler.siteSelectionStore.currentSite?.id,
+           let permission = user.permission.first(where: { $0.siteID == sideId }) {
+            roleLabel.text = permission.userRole?.rawValue
+            editButton.isHidden = permission.userRole == .user
+        } else {
+            roleLabel.text = nil
+            editButton.isHidden = true
+        }
+     
+  
     }
 
     @IBAction private func editButtonTapped(_ sender: UIButton) {

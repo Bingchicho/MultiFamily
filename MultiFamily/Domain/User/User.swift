@@ -11,8 +11,7 @@ struct User: Equatable {
     let id: String
     let name: String
     let email: String
-    let role: UserRole
-    let group: String
+    let permission: [UserPermission]
 
 }
 
@@ -21,9 +20,8 @@ struct InviteUser: Equatable {
 
     let inviteCode: String
     let email: String
-    let role: UserRole
     let createAt: Double
-    let siteID: String
+    let permission: [InvitePermissionDTO]
 }
 
 

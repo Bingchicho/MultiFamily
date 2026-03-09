@@ -70,7 +70,7 @@ struct InviteUserDTO: Decodable {
 }
 
 
-struct InvitePermissionDTO: Codable {
+struct InvitePermissionDTO: Codable, Equatable {
 
     let siteID: String
     let userRole: UserRole
@@ -94,14 +94,13 @@ extension UserDTO {
     func toDomain() -> User {
 
         let name = attribute.preferredUsername ?? ""
-        let role = attribute.permission?.first?.userRole ?? .user
+     
 
         return User(
             id: identityID,
             name: name,
             email: email ?? "",
-            role: role,
-            group: attribute.permission?.first?.group ?? ""
+            permission: attribute.permission ?? []
         )
     }
 }
@@ -110,14 +109,12 @@ extension InviteUserDTO {
 
     func toDomain() -> InviteUser {
 
-        let role = permission.first?.userRole ?? .user
 
         return InviteUser(
             inviteCode: inviteCode,
             email: email,
-            role: role,
             createAt: createAt,
-            siteID: permission.first?.siteID ?? ""
+            permission: permission
         )
     }
 }
