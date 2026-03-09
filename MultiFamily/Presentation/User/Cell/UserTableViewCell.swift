@@ -62,6 +62,8 @@ final class UserTableViewCell: UITableViewCell {
         currentUser = user
         titleLabel.text = user.name.isEmpty ? user.email : user.name
         roleLabel.text = user.role.rawValue
+        
+        editButton.isHidden = user.role == .user
     }
 
     @IBAction private func editButtonTapped(_ sender: UIButton) {
