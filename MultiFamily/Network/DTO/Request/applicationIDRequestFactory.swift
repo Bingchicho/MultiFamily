@@ -25,7 +25,7 @@ struct applicationIDRequestFactory: applicationIDRequestFactoryProtocol {
     ) {
         self.env = env
         self.device = device
-    
+
     }
     
     func makeapplicationIDRequest() -> applicationIDRequestDTO {

@@ -12,6 +12,7 @@ protocol DetailRepository {
     func updateRegistry(thingName: String, name: String? ,autoLockOn: Bool?, autoLockTime: Int?, beepOn: Bool?, power: Int?, adv: Int?) async throws
     func removeDevice(thingName: String) async throws
     
+    
 }
 final class DetailRepositoryImpl: DetailRepository {
 
@@ -46,7 +47,7 @@ final class DetailRepositoryImpl: DetailRepository {
         )
         
         
-        let dto: ClientResponseDTO = try await apiClient.request(
+        let _: ClientResponseDTO = try await apiClient.request(
             DetailEndpoint.delete(requestDTO)
         )
         
@@ -56,7 +57,7 @@ final class DetailRepositoryImpl: DetailRepository {
     func updateRegistry(thingName: String, name: String? , autoLockOn: Bool?, autoLockTime: Int?, beepOn: Bool?, power: Int?, adv: Int?) async throws {
         let requestDTO = factory.makeRegistryUpdateRequest(thingName: thingName, name: name, autoLockOn: autoLockOn, autoLockTime: autoLockTime, beepOn: beepOn, power: power, adv: adv)
         
-        let dto: RegistryUpdateResponseDTO = try await apiClient.request(DetailEndpoint.update(requestDTO))
+        let _: RegistryUpdateResponseDTO = try await apiClient.request(DetailEndpoint.update(requestDTO))
         
     }
     
@@ -67,7 +68,7 @@ final class DetailRepositoryImpl: DetailRepository {
         let requestDTO = factory.makePermissionDeleteRequest(thingName: thingName, identityID: userId)
         
         
-        let dto: ClientResponseDTO = try await apiClient.request(
+        let _: ClientResponseDTO = try await apiClient.request(
             PermissionEndpoint.delete(requestDTO)
         )
     }
