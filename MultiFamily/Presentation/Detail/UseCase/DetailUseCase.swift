@@ -10,8 +10,8 @@ protocol DetailUseCase {
     var response: DetailResponseDTO? { get }
 
     func execute(thingName: String) async -> Result<Detail, Error>
+    func delete(thingName: String) async -> Result<Void, Error>
     func remove(thingName: String) async -> Result<Void, Error>
-
 }
 
 
@@ -45,10 +45,26 @@ final class DetailUseCaseImpl: DetailUseCase {
 
     }
     
-    func remove(thingName: String) async -> Result<Void, any Error> {
+    func delete(thingName: String) async -> Result<Void, any Error> {
         do {
 
             try await repository.deleteDevice(
+                    thingName: thingName
+                )
+
+            return .success(())
+
+        } catch {
+
+            return .failure(error)
+
+        }
+    }
+    
+    func remove(thingName: String) async -> Result<Void, any Error> {
+        do {
+
+            try await repository.removeDevice(
                     thingName: thingName
                 )
 

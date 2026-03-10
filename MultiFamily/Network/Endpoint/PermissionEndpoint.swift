@@ -16,4 +16,15 @@ enum PermissionEndpoint {
             requiresAuth: true
         )
     }
+    
+    static func delete(_ dto: PermissionDeleteRequestDTO) -> APIRequest {
+        APIRequest(
+            host: AppEnvironment.apiHostname,
+            version: AppEnvironment.authService,
+            path: "/device-permission/delete",
+            method: .post,
+            body: dto,
+            requiresAuth: true
+        )
+    }
 }

@@ -299,10 +299,20 @@ class DetailViewController: UIViewController {
         )
 
         let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .destructive) { _ in
-            if let thingName = self.device?.thingName {
+            // admin: 裝置從Site刪除 manager/ User: 取消這個裝置的權限
+            guard
+                let thingName = self.device?.thingName,
+                let siteId = AppAssembler.siteSelectionStore.currentSite?.id,
+                let permission = AppAssembler.userAttributeStore.currentUser?
+                    .permissions?
+                    .first(where: { $0.siteID == siteId })
+            else { return }
+
+            if permission.userRole == .user {
                 self.viewModel.remove(thingName: thingName)
+            } else {
+                self.viewModel.delete(thingName: thingName)
             }
-            
         }
 
         let cancel = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)

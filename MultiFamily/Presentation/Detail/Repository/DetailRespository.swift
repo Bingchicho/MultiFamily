@@ -10,9 +10,12 @@ protocol DetailRepository {
     func fetchRegistry(thingName: String) async throws -> DetailResponseDTO
     func deleteDevice(thingName: String) async throws
     func updateRegistry(thingName: String, name: String? ,autoLockOn: Bool?, autoLockTime: Int?, beepOn: Bool?, power: Int?, adv: Int?) async throws
+    func removeDevice(thingName: String) async throws
     
 }
 final class DetailRepositoryImpl: DetailRepository {
+
+    
     
     private let apiClient: APIClient
     private let factory: DetailRequestFactoryProtocol
@@ -55,8 +58,18 @@ final class DetailRepositoryImpl: DetailRepository {
         
         let dto: RegistryUpdateResponseDTO = try await apiClient.request(DetailEndpoint.update(requestDTO))
         
+    }
+    
+    func removeDevice(thingName: String) async throws {
+        
+        guard let userId = AppAssembler.userAttributeStore.currentUser?.identityID else { return }
+        
+        let requestDTO = factory.makePermissionDeleteRequest(thingName: thingName, identityID: userId)
         
         
+        let dto: ClientResponseDTO = try await apiClient.request(
+            PermissionEndpoint.delete(requestDTO)
+        )
     }
     
     

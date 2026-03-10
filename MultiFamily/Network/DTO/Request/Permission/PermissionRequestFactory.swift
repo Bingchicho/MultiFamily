@@ -11,10 +11,14 @@ protocol PermissionRequestFactoryProtocol {
     func makePermissionRequest(
         thingName: String
     ) -> PermissionRequestDTO
+    
+
 
 }
 
 struct PermissionRequestFactory: PermissionRequestFactoryProtocol {
+
+    
 
     private let env: EnvironmentConfig
     private let device: DeviceIdentifierProvider
@@ -30,4 +34,6 @@ struct PermissionRequestFactory: PermissionRequestFactoryProtocol {
 
         PermissionRequestDTO(applicationID: env.applicationID, thingName: thingName, clientToken: device.clientToken)
     }
+    
+
 }

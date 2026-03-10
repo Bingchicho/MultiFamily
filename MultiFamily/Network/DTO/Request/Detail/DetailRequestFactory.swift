@@ -10,7 +10,10 @@ protocol DetailRequestFactoryProtocol {
     func makeDetailRequest(thingName: String) -> DetailRequestDTO
     func makeDeleteDeviceRequest(thingName: String) -> DeleteDeviceRequestDTO
     func makeRegistryUpdateRequest(thingName: String, name: String?, autoLockOn: Bool?, autoLockTime: Int?, beepOn: Bool?, power: Int?, adv: Int?) -> RegistryUpdateRequestDTO
-    
+    func makePermissionDeleteRequest(
+            thingName: String,
+            identityID: String
+        ) -> PermissionDeleteRequestDTO
 }
 
 struct DetailRequestFactory: DetailRequestFactoryProtocol {
@@ -47,4 +50,7 @@ struct DetailRequestFactory: DetailRequestFactoryProtocol {
         RegistryUpdateRequestDTO(applicationID: env.applicationID, thingName: thingName, clientToken: device.clientToken, overwrite: nil, taskID: device.clientToken, status: "started", userName: nil, name: name, installationNotComplete: nil, bt: nil, attributes: DeviceAttributesDTO(location: nil, direction: nil, accessCode: nil, preamble: nil, virtualCode: nil, twoFA: nil, vacationMode: nil, autoLock: autoLockOn ?? false ? "Y": "N", autoLockDelay: autoLockTime, autoLockDelayMin: nil, autoLockDelayMax: nil, operatorVoice: beepOn ?? false ? "Y" : "N", voiceType: nil, voiceValue: nil, showFastPassageMode: nil, sabbathMode: nil, voiceLanguage: nil, voiceLanguageSupport: nil, timezone: nil, mcuVersion: nil, bleTXPower: power, bleAdv: adv, battery: nil, updateAt: nil))
     }
     
+    func makePermissionDeleteRequest(thingName: String, identityID: String) -> PermissionDeleteRequestDTO {
+        PermissionDeleteRequestDTO(applicationID: env.applicationID, thingName: thingName, user: .init(identityID: identityID), clientToken: device.clientToken)
+    }
 }
