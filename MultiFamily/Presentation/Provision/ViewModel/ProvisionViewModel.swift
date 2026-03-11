@@ -24,15 +24,6 @@ final class ProvisionViewModel {
     private var model: String?
     private var activeMode: ActiveModeDTO = .ble
     
-    
-    // add頁面從這邊 因應bleService要同一個
-    
-    private(set) var addState: AddDeviceViewState = .idle {
-        didSet { addonStateChange?(addState) }
-    }
-
-    var addonStateChange: ((AddDeviceViewState) -> Void)?
- 
 
 
     private(set) var form: AddForm = .init()
@@ -96,87 +87,5 @@ final class ProvisionViewModel {
     }
     
     
-    // add
-    
-    func addConfigure(provision: ProvisionBLEInfo) {
-
-        self.form = AddForm(lockID: provision.uuid, name: "", area: .public, isAutoLockOn: false, autoLockDelay: 5, isBeepOn: true, txPower: .medium, adv: .low, group: nil)
-        self.provision = provision
-        
-    
-    }
-    
-    // MARK: - Input mutations
-       func updateName(_ value: String) {
-           form.name = value
-         
-       }
-
-       func updateArea(_ value: LockArea) {
-           form.area = value
-     
-       }
-
-       func updateAutoLockOn(_ isOn: Bool) {
-           form.isAutoLockOn = isOn
-           if !isOn { form.autoLockDelay = nil } // 關掉就清空
-           
-       }
-
-       func updateAutoLockDelay(_ value: Int) {
-           form.autoLockDelay = value
-      
-       }
-
-       func updateBeepOn(_ isOn: Bool) {
-           form.isBeepOn = isOn
-          
-       }
-
-       func updateTxPower(_ value: BLETxPower) {
-           form.txPower = value
-          
-       }
-
-       func updateAdv(_ value: BLEAdv) {
-           form.adv = value
-         
-       }
-    
-
-    
-
-
-    // MARK: - Actions
-    func save(siteID: String) {
-            guard let provision else {
-                state = .error(L10n.Common.Error.network)
-                return
-            }
-
-            addState = .loading
-
-            Task {
-                do {
-            
-                   _ = try await provisionUseCase.submit(
-                        siteID: siteID,
-                        name: form.name,
-                        activeMode: "ble",
-                        model: "MFA_THING",
-                        isResident: form.area?.boolValue ?? false,
-                        deviceID: Int(form.lockID) ?? 0,
-                        provision: provision,
-                        form: form,
-                
-                    )
-
-                    addState = .success
-          
-
-                } catch {
-                    addState = .error(L10n.Common.Error.network)
-                }
-            }
-        }
+  
 }

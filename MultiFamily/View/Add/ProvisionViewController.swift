@@ -85,7 +85,6 @@ class ProvisionViewController: UIViewController {
            let (bt) = sender as? (ProvisionBLEInfo),
             let vc = segue.destination as? AddViewController {
             vc.provisionBLEInfo = bt
-            vc.viewModel = viewModel
           
         }
     }

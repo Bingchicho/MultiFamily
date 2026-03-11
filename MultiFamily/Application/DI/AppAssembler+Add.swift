@@ -1,34 +1,34 @@
 //
-//  AppAssembler+Provision.swift
+//  AppAssembler+Add.swift
 //  MultiFamily
 //
-//  Created by Sunion on 2026/2/24.
+//  Created by Sunion on 2026/3/11.
 //
 
 extension AppAssembler {
-    static func makeProvisionUseCase() -> ProvisionUseCase {
+    static func makeAddUseCase() -> AddUseCase {
 
         let apiClient = URLSessionAPIClient()
         let tokenStore = AppAssembler.tokenStore
         let env = DefaultEnvironmentConfig()
         let device = DefaultDeviceIdentifierProvider()
-        let attribute = AppAssembler.userAttributeStore
+  
         let bleService = AppAssembler.makeBLEService()
 
-        let requestFactory = ProvisionRequestFactory(
+        let requestFactory = DeviceAddRequestFactory(
             env: env,
             device: device
         )
   
         
 
-        let repository = ProvisionRepositoryImpl(
+        let repository = AddRepositoryImpl(
             apiClient: apiClient,
             requestFactory: requestFactory
         )
 
 
-        return ProvisionUseCaseImpl(
+        return AddUseCaseImpl(
             repository: repository, bleService: bleService
         )
     }

@@ -39,7 +39,10 @@ class AddViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var viewModel: ProvisionViewModel?
+    private lazy var viewModel =
+    AddViewModel(
+        AddUseCase: AppAssembler.makeAddUseCase()
+    )
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
@@ -71,10 +74,10 @@ class AddViewController: UIViewController {
     
     private func bind() {
         
-        guard let viewModel else { return }
+      
         
         if let provisionBLEInfo {
-            viewModel.addConfigure(provision: provisionBLEInfo)
+            viewModel.addConfigure(Add: provisionBLEInfo)
             setupData()
         }
         
@@ -90,7 +93,7 @@ class AddViewController: UIViewController {
     
     
     func setupData() {
-        guard let viewModel else { return }
+      
         idTextField.text = viewModel.form.lockID
         areaButton.setTitle(viewModel.form.area?.title, for: .normal)
         autoSwitch.isOn = viewModel.form.isAutoLockOn
@@ -146,24 +149,24 @@ class AddViewController: UIViewController {
 
     
     @objc private func nameChanged() {
-        guard let viewModel else { return }
+     
         viewModel.updateName(nameTextField.text ?? "")
         saveButton.isEnabled = viewModel.isValid
     }
 
     @objc private func autoLockChanged() {
-        guard let viewModel else { return }
+   
         viewModel.updateAutoLockOn(autoSwitch.isOn)
         autoTimeButton.isEnabled = autoSwitch.isOn
     }
 
     @objc private func beepChanged() {
-        guard let viewModel else { return }
+       
         viewModel.updateBeepOn(beepSwitch.isOn)
     }
     
     @IBAction private func tapSave() {
-        guard let viewModel else { return }
+  
         if let id = AppAssembler.siteSelectionStore.currentSite?.id {
             viewModel.save(siteID: id)
         }
@@ -241,7 +244,7 @@ class AddViewController: UIViewController {
     }
     
     @IBAction private func autoTimeButtonAction(sender: UIButton) {
-        guard let viewModel else { return }
+  
         // 1...120 seconds
         let options = (1...120).map { "\($0)" }
         
@@ -257,7 +260,7 @@ class AddViewController: UIViewController {
             guard let self else { return }
             let value = Int(selected) ?? 1
             // Update VM + UI
-            self.viewModel?.updateAutoLockDelay(value)
+            self.viewModel.updateAutoLockDelay(value)
             self.autoTimeButton.setTitle("\(value) S", for: .normal)
         }
     }
@@ -290,13 +293,13 @@ class AddViewController: UIViewController {
                 value = .public
             }
 
-            self.viewModel?.updateArea(value)
+            self.viewModel.updateArea(value)
             self.areaButton.setTitle(value.title, for: .normal)
         }
     }
 
     @IBAction private func powerButtonAction(sender: UIButton) {
-        guard let viewModel else { return }
+     
         // low / middle / high
         let options = [
             BLETxPower.low.title,
@@ -325,13 +328,13 @@ class AddViewController: UIViewController {
                 value = .low
             }
 
-            self.viewModel?.updateTxPower(value)
+            self.viewModel.updateTxPower(value)
             self.powerButton.setTitle(value.title, for: .normal)
         }
     }
 
     @IBAction private func advButtonAction(sender: UIButton) {
-        guard let viewModel else { return }
+     
         // low / high
         let options = [
             BLEAdv.low.title,
@@ -350,7 +353,7 @@ class AddViewController: UIViewController {
             guard let self else { return }
 
             let value: BLEAdv = (selectedTitle == BLEAdv.high.title) ? .high : .low
-            self.viewModel?.updateAdv(value)
+            self.viewModel.updateAdv(value)
             self.advButton.setTitle(value.title, for: .normal)
         }
     }
