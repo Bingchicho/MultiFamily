@@ -32,7 +32,7 @@ struct JobUpdateRequestDTO: Encodable {
     }
 }
 
-enum JobStatusDTO: Equatable {
+enum JobStatusDTO: Equatable, Decodable {
 
     case revoke
     case conflict

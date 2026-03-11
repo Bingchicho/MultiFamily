@@ -6,11 +6,11 @@
 //
 
 enum JobEndpoint {
-    static func get(_ dto: JobGetRequestDTO) -> APIRequest {
+    static func list(_ dto: JobListGetRequestDTO) -> APIRequest {
         APIRequest(
             host: AppEnvironment.apiHostname,
             version: AppEnvironment.authService,
-            path: "/job/get",
+            path: "/job-list/get",
             method: .post,
             body: dto,
             requiresAuth: true

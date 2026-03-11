@@ -16,10 +16,13 @@ extension AppAssembler {
             env: env,
             device: device
         )
+        
+        let jobFactory = JobRequestFactory(env: env, device: device)
 
         let repository = DetailRepositoryImpl(
             apiClient: apiClient,
             factory: requestFactory,
+            jobFacotry: jobFactory,
       
         )
 
@@ -39,10 +42,12 @@ extension AppAssembler {
             env: env,
             device: device
         )
+        
+        let jobFactory = JobRequestFactory(env: env, device: device)
 
         let repository = DetailRepositoryImpl(
             apiClient: apiClient,
-            factory: requestFactory,
+            factory: requestFactory, jobFacotry: jobFactory,
       
         )
 

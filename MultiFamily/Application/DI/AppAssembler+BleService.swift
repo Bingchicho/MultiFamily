@@ -6,7 +6,9 @@
 //
 
 extension AppAssembler {
-    static func makeBLEService() -> BLEService {
+
+    /// Shared BLE service instance so multiple pages / use cases reuse the same BLE connection
+    private static let sharedBLEService: BLEService = {
 
         // 1️⃣ 建立底層 BLE Client（唯一 import MFRBleSDK 的實作）
         let bleClient: BleClient = MFRBleClient()
@@ -15,5 +17,9 @@ extension AppAssembler {
         let bleService = BleProvisioningService(client: bleClient)
 
         return bleService
+    }()
+
+    static func makeBLEService() -> BLEService {
+        return sharedBLEService
     }
 }

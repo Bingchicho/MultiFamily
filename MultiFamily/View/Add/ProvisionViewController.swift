@@ -14,8 +14,7 @@ class ProvisionViewController: UIViewController {
     
     private lazy var viewModel =
     ProvisionViewModel(
-        provisionUseCase: AppAssembler.makeProvisionUseCase(),
-        bleService: AppAssembler.makeBLEService()
+        provisionUseCase: AppAssembler.makeProvisionUseCase()
     )
     
     override func viewDidLoad() {

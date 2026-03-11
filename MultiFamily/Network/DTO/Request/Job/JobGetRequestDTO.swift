@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct JobGetRequestDTO: Encodable {
+struct JobListGetRequestDTO: Encodable {
     let applicationID: String
     let thingName: String
+    let all: Bool
     let clientToken: String
 }

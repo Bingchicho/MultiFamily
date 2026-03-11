@@ -11,22 +11,29 @@ protocol DetailRepository {
     func deleteDevice(thingName: String) async throws
     func updateRegistry(thingName: String, name: String? ,autoLockOn: Bool?, autoLockTime: Int?, beepOn: Bool?, power: Int?, adv: Int?) async throws
     func removeDevice(thingName: String) async throws
-    
+    func jobList(thingName: String) async throws -> [JobListItemDTO]
+    func jobUpdate(jobId: String) async throws
     
 }
 final class DetailRepositoryImpl: DetailRepository {
 
     
+
+    
+
     
     private let apiClient: APIClient
     private let factory: DetailRequestFactoryProtocol
+    private let jobFacotry: JobRequestFactoryProtocol
     
     init(
         apiClient: APIClient,
-        factory: DetailRequestFactoryProtocol
+        factory: DetailRequestFactoryProtocol,
+        jobFacotry: JobRequestFactoryProtocol
     ) {
         self.apiClient = apiClient
         self.factory = factory
+        self.jobFacotry = jobFacotry
     }
     
     func fetchRegistry(thingName: String) async throws -> DetailResponseDTO {
@@ -73,5 +80,26 @@ final class DetailRepositoryImpl: DetailRepository {
         )
     }
     
+    
+    func jobList(thingName: String) async throws -> [JobListItemDTO] {
+        let requestDTO = jobFacotry.makeJobListGetRequest(thingName: thingName)
+        
+        let dto: JobListGetResponseDTO =
+        try await apiClient.request(
+            JobEndpoint.list(requestDTO)
+        )
+        
+        return dto.jobs
+    }
+    
+    
+    func jobUpdate(jobId: String) async throws {
+        
+        let requestDTO = jobFacotry.makeJobUpdateRequest(jobID: jobId, status: .done)
+        
+        let _: ClientResponseDTO = try await apiClient.request(
+            JobEndpoint.update(requestDTO)
+        )
+    }
     
 }

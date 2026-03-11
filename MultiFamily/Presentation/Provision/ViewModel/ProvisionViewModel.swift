@@ -5,7 +5,6 @@
 //  Created by Sunion on 2026/2/23.
 //
 import Foundation
-import MFRBleSDK
 
 @MainActor
 final class ProvisionViewModel {
@@ -18,7 +17,6 @@ final class ProvisionViewModel {
     var onRoute: ((ProvisionRoute) -> Void)?
 
     private let provisionUseCase: ProvisionUseCase
-    private let bleService: BLEService
 
 
     // 外部從上一頁帶進來（你說 form 不要 init 就要求資料：這裡用 configure 方式）
@@ -51,10 +49,9 @@ final class ProvisionViewModel {
      private var provision: ProvisionBLEInfo?
   
 
-    init(provisionUseCase: ProvisionUseCase,
-         bleService: BLEService) {
+    init(provisionUseCase: ProvisionUseCase) {
         self.provisionUseCase = provisionUseCase
-        self.bleService = bleService
+        
     }
 
     func configure(siteID: String, model: String, activeMode: ActiveModeDTO = .ble) {
@@ -88,9 +85,6 @@ final class ProvisionViewModel {
                     iv: provision.bt.iv,
                     remotePinCode: provision.remotePinCode
                 )
-
-        
-                try await bleService.connection()
 
                 state = .success
                 onRoute?(.next(bt: info))
@@ -164,14 +158,7 @@ final class ProvisionViewModel {
 
             Task {
                 do {
-                    // 1) BLE side: write settings / fetch registry
-                    try await bleService.provisionAndFetchRegistry(
-                        btInfo: provision,
-                        addform: form,
-                        siteID: siteID
-                    )
-                    let status = bleService.status
-                    // 2) Server side: submit device/add
+            
                    _ = try await provisionUseCase.submit(
                         siteID: siteID,
                         name: form.name,
@@ -179,22 +166,9 @@ final class ProvisionViewModel {
                         model: "MFA_THING",
                         isResident: form.area?.boolValue ?? false,
                         deviceID: Int(form.lockID) ?? 0,
-                        remotePinCode: provision.remotePinCode,
-                        bt: DeviceAddBTRequestDTO(
-                            uuid: provision.uuid,
-                            key: provision.key,
-                            token: provision.token,
-                            iv: provision.iv
-                        ),
-                        attributes: DeviceAddAttributesDTO(
-                            autoLock: form.isAutoLockOn ? "Y" : "N",
-                            autoLockDelay: form.autoLockDelay,
-                            operatorVoice: form.isBeepOn ? "Y" : "N",
-                            mcuVersion: status?.boardVersionString,
-                            bleTXPower: form.txPower.rawValue,
-                            bleAdv: form.adv.rawValue,
-                            battery: status?.batteryLevelInt
-                        )
+                        provision: provision,
+                        form: form,
+                
                     )
 
                     addState = .success

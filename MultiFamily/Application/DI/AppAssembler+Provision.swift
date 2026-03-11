@@ -13,6 +13,7 @@ extension AppAssembler {
         let env = DefaultEnvironmentConfig()
         let device = DefaultDeviceIdentifierProvider()
         let attribute = AppAssembler.userAttributeStore
+        let bleService = AppAssembler.makeBLEService()
 
         let requestFactory = ProvisionRequestFactory(
             env: env,
@@ -32,7 +33,7 @@ extension AppAssembler {
 
 
         return ProvisionUseCaseImpl(
-            repository: repository
+            repository: repository, bleService: bleService
         )
     }
     

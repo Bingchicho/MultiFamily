@@ -14,9 +14,13 @@ protocol DetailRequestFactoryProtocol {
             thingName: String,
             identityID: String
         ) -> PermissionDeleteRequestDTO
+    
+
 }
 
 struct DetailRequestFactory: DetailRequestFactoryProtocol {
+
+    
     
     
     
@@ -53,4 +57,6 @@ struct DetailRequestFactory: DetailRequestFactoryProtocol {
     func makePermissionDeleteRequest(thingName: String, identityID: String) -> PermissionDeleteRequestDTO {
         PermissionDeleteRequestDTO(applicationID: env.applicationID, thingName: thingName, user: .init(identityID: identityID), clientToken: device.clientToken)
     }
+    
+
 }

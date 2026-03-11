@@ -12,10 +12,13 @@ protocol DetailUseCase {
     func execute(thingName: String) async -> Result<Detail, Error>
     func delete(thingName: String) async -> Result<Void, Error>
     func remove(thingName: String) async -> Result<Void, Error>
+//    func jobSync(thingName: String) async -> Result<Void, Error>
 }
 
 
 final class DetailUseCaseImpl: DetailUseCase {
+  
+    
 
 
     private let repository: DetailRepository
@@ -76,5 +79,26 @@ final class DetailUseCaseImpl: DetailUseCase {
 
         }
     }
+    
+    
+//    func jobSync(thingName: String) async -> Result<Void, any Error> {
+////        do {
+////
+////           let list =  try await repository.jobList(
+////                    thingName: thingName
+////                )
+////            
+//////            // MFRBleSDK
+//////            
+//////            let update = try await repository.jobUpdate(jobId: list.first?.jobID)
+//////            
+////          
+////
+////        } catch {
+////
+////            return .failure(error)
+////
+////        }
+//    }
 
 }

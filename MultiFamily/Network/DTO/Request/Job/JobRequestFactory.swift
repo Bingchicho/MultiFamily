@@ -8,9 +8,9 @@
 
 protocol JobRequestFactoryProtocol {
     
-    func makeJobGetRequest(
+    func makeJobListGetRequest(
         thingName: String
-    ) -> JobGetRequestDTO
+    ) -> JobListGetRequestDTO
     
     func makeJobCreateRequest(
         thingName: String,
@@ -43,8 +43,8 @@ struct JobRequestFactory: JobRequestFactoryProtocol {
         self.device = device
     }
     
-    func makeJobGetRequest(thingName: String) -> JobGetRequestDTO {
-        JobGetRequestDTO(applicationID: env.applicationID, thingName: thingName, clientToken: device.clientToken)
+    func makeJobListGetRequest(thingName: String) -> JobListGetRequestDTO {
+        JobListGetRequestDTO(applicationID: env.applicationID, thingName: thingName, all: false, clientToken: device.clientToken)
     }
     
     func makeJobCreateRequest(thingName: String, siteID: String, action: JobActionDTO, payload: JobPayloadDTO) -> JobCreateRequestDTO {
