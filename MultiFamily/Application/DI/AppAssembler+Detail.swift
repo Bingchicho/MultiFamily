@@ -25,10 +25,12 @@ extension AppAssembler {
             jobFacotry: jobFactory,
       
         )
+        
+        let bleservice = AppAssembler.makeConfigBLEService()
 
 
         return DetailUseCaseImpl(
-            repository: repository
+            repository: repository, bleserivce: bleservice
         )
     }
     

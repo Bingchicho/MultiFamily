@@ -17,8 +17,8 @@ final class AddUseCaseImpl: AddUseCase {
  
     
     private let repository: AddRepository
-    private let bleService: BLEService
-    init(repository: AddRepository, bleService: BLEService) {
+    private let bleService: ProvisioningService
+    init(repository: AddRepository, bleService: ProvisioningService) {
         self.repository = repository
         self.bleService = bleService
     }

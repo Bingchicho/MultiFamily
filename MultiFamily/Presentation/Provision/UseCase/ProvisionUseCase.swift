@@ -16,8 +16,8 @@ final class ProvisionUseCaseImpl: ProvisionUseCase {
  
     
     private let repository: ProvisionRepository
-    private let bleService: BLEService
-    init(repository: ProvisionRepository, bleService: BLEService) {
+    private let bleService: ProvisioningService
+    init(repository: ProvisionRepository, bleService: ProvisioningService) {
         self.repository = repository
         self.bleService = bleService
     }

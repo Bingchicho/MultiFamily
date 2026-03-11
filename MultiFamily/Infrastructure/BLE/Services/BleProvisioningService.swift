@@ -8,10 +8,19 @@
 import Foundation
 import MFRBleSDK
 
+public protocol ProvisioningService {
+    /// Provision 流程：用 btInfo 連上去，讀出 registry 類資料
+    var status: LockStatus? { get }
+    func connection() async throws
+
+    func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
+}
+
+
 /// ✅ 實作 BLEService：把「流程」寫在這裡
 /// - 這裡不 import MFRBleSDK
 /// - 只用 BleClient
-public final class BleProvisioningService: BLEService {
+public final class BleProvisioningService: ProvisioningService {
     public var status: LockStatus?
     
     public func connection() async throws {

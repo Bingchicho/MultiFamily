@@ -18,6 +18,8 @@ public protocol BleClient {
     func connect() async throws
     func disconnect() async
 
-    /// 下面這些你可以按需求加（先不做也行）
-    func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws 
+ 
+    func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
+    
+    func setupSetting(value: JobSettingDTO) async throws
 }

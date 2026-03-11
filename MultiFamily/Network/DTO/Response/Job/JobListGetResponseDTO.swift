@@ -66,7 +66,7 @@ struct JobListItemDTO: Decodable {
 
 
 /// same as device-registry
-struct JobSettingDTO: Decodable {
+public struct JobSettingDTO: Decodable, Equatable {
     let location: String?
     let direction: String?
     let accessCode: String?
@@ -92,6 +92,65 @@ struct JobSettingDTO: Decodable {
     let battery: Int?
 }
 
+public extension JobSettingDTO {
+
+    enum Patch: Equatable {
+        case location(String)
+        case direction(String)
+        case accessCode(String)
+        case preamble(String)
+        case virtualCode(String)
+        case twoFA(String)
+        case vacationMode(String)
+        case autoLock(String)
+        case autoLockDelay(Int)
+        case autoLockDelayMin(Int)
+        case autoLockDelayMax(Int)
+        case operatorVoice(String)
+        case voiceType(Int, Int)
+        case showFastPassageMode(String)
+        case sabbathMode(String)
+        case voiceLanguage(Int)
+        case voiceLanguageSupport(Int)
+        case timezone(String)
+        case mcuVersion(String)
+        case bleTXPower(Int)
+        case bleAdv(Int)
+        case battery(Int)
+    }
+
+    /// Returns only the fields that actually need to update downstream payload/config.
+    var patches: [Patch] {
+        var result: [Patch] = []
+
+        if let location { result.append(.location(location)) }
+        if let direction { result.append(.direction(direction)) }
+        if let accessCode { result.append(.accessCode(accessCode)) }
+        if let preamble { result.append(.preamble(preamble)) }
+        if let virtualCode { result.append(.virtualCode(virtualCode)) }
+        if let twoFA { result.append(.twoFA(twoFA)) }
+        if let vacationMode { result.append(.vacationMode(vacationMode)) }
+        if let autoLock { result.append(.autoLock(autoLock)) }
+        if let autoLockDelay { result.append(.autoLockDelay(autoLockDelay)) }
+        if let autoLockDelayMin { result.append(.autoLockDelayMin(autoLockDelayMin)) }
+        if let autoLockDelayMax { result.append(.autoLockDelayMax(autoLockDelayMax)) }
+        if let operatorVoice { result.append(.operatorVoice(operatorVoice)) }
+        if let voiceType {result.append(.voiceType(voiceType, voiceValue ?? 0)) }
+//        if let voiceType { result.append(.voiceType(voiceType)) }
+//        if let voiceValue { result.append(.voiceValue(voiceValue)) }
+        if let showFastPassageMode { result.append(.showFastPassageMode(showFastPassageMode)) }
+        if let sabbathMode { result.append(.sabbathMode(sabbathMode)) }
+        if let voiceLanguage { result.append(.voiceLanguage(voiceLanguage)) }
+        if let voiceLanguageSupport { result.append(.voiceLanguageSupport(voiceLanguageSupport)) }
+        if let timezone { result.append(.timezone(timezone)) }
+        if let mcuVersion { result.append(.mcuVersion(mcuVersion)) }
+        if let bleTXPower { result.append(.bleTXPower(bleTXPower)) }
+        if let bleAdv { result.append(.bleAdv(bleAdv)) }
+        if let battery { result.append(.battery(battery)) }
+
+        return result
+    }
+}
 
 
 /// same as user-credential

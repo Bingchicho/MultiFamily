@@ -13,7 +13,7 @@ extension AppAssembler {
         let env = DefaultEnvironmentConfig()
         let device = DefaultDeviceIdentifierProvider()
   
-        let bleService = AppAssembler.makeBLEService()
+        let bleService = AppAssembler.makeProvisionBLEService()
 
         let requestFactory = DeviceAddRequestFactory(
             env: env,

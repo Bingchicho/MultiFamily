@@ -12,7 +12,7 @@ protocol DetailUseCase {
     func execute(thingName: String) async -> Result<Detail, Error>
     func delete(thingName: String) async -> Result<Void, Error>
     func remove(thingName: String) async -> Result<Void, Error>
-//    func jobSync(thingName: String) async -> Result<Void, Error>
+    func jobSync(thingName: String) async -> Result<Void, Error>
 }
 
 
@@ -22,11 +22,14 @@ final class DetailUseCaseImpl: DetailUseCase {
 
 
     private let repository: DetailRepository
+ 
     
     var response: DetailResponseDTO?
+    private let bleService: ConfigService
 
-    init(repository: DetailRepository) {
+    init(repository: DetailRepository, bleserivce: ConfigService) {
         self.repository = repository
+        self.bleService = bleserivce
     }
 
     func execute(thingName: String) async -> Result<Detail, Error> {
@@ -81,24 +84,32 @@ final class DetailUseCaseImpl: DetailUseCase {
     }
     
     
-//    func jobSync(thingName: String) async -> Result<Void, any Error> {
-////        do {
-////
-////           let list =  try await repository.jobList(
-////                    thingName: thingName
-////                )
-////            
-//////            // MFRBleSDK
-//////            
-//////            let update = try await repository.jobUpdate(jobId: list.first?.jobID)
-//////            
-////          
-////
-////        } catch {
-////
-////            return .failure(error)
-////
-////        }
-//    }
+    func jobSync(thingName: String) async -> Result<Void, any Error> {
+        do {
+            
+            let list =  try await repository.jobList(thingName: thingName)
+            
+            guard !list.isEmpty else {
+                return .success(())
+            }
+            
+            try await bleService.connection()
+            
+            for job in list {
+                if let config = job.setting {
+                    try await bleService.setupSetting(value: config)
+                    try await repository.jobUpdate(jobId: job.jobID)
+                }
+                
+            }
+            
+            return .success(())
+            
+        } catch {
+            
+            return .failure(error)
+            
+        }
+    }
 
 }
