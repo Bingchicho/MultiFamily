@@ -5,26 +5,32 @@
 //  Created by Sunion on 2026/3/11.
 //
 
-public protocol ConfigService {
- 
 
+
+import MFRBleSDK
+public protocol JobService {
+
+    var version: String? { get }
     func connection() async throws
 
-     func setupSetting(value: JobSettingDTO) async throws
+    func setupSetting(value: JobSettingDTO) async throws
 }
 
-public final class BleConfigService: ConfigService {
-
-
+public final class BleConfigService: JobService {
+    public var version: String?
     
     public func connection() async throws {
         try await client.connect()
+        // 取得Version 要跟job的version 判斷
+        try await client.getStatus()
+        self.version = client.status?.boardVersionString
     }
     
     private let client: BleClient
 
     public init(client: BleClient) {
         self.client = client
+        self.version = client.status?.boardVersionString
       
     }
 
@@ -32,7 +38,6 @@ public final class BleConfigService: ConfigService {
         // 流程：connect → read → disconnect（用 defer 確保離開時斷線）
      
         defer { Task { await client.disconnect() } }
-        
         try await client.setupSetting(value: value)
        
     }

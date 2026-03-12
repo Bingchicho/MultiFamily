@@ -25,9 +25,9 @@ final class DetailUseCaseImpl: DetailUseCase {
  
     
     var response: DetailResponseDTO?
-    private let bleService: ConfigService
+    private let bleService: JobService
 
-    init(repository: DetailRepository, bleserivce: ConfigService) {
+    init(repository: DetailRepository, bleserivce: JobService) {
         self.repository = repository
         self.bleService = bleserivce
     }
@@ -96,7 +96,8 @@ final class DetailUseCaseImpl: DetailUseCase {
             try await bleService.connection()
             
             for job in list {
-                if let config = job.setting {
+                if let config = job.setting,
+                   job.payloadVersion == bleService.version {
                     try await bleService.setupSetting(value: config)
                     try await repository.jobUpdate(jobId: job.jobID)
                 }

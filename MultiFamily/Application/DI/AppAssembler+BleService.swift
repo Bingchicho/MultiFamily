@@ -19,7 +19,7 @@ extension AppAssembler {
         return bleService
     }()
     
-    private static let sharedConfigBLEService: ConfigService = {
+    private static let sharedConfigBLEService: JobService = {
 
         // 1️⃣ 建立底層 BLE Client（唯一 import MFRBleSDK 的實作）
         let bleClient: BleClient = MFRBleClient()
@@ -34,7 +34,7 @@ extension AppAssembler {
         return sharedProvisionBLEService
     }
     
-    static func makeConfigBLEService() -> ConfigService {
+    static func makeJobBLEService() -> JobService {
         return sharedConfigBLEService
     }
     

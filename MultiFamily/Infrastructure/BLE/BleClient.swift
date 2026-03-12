@@ -14,7 +14,7 @@ import MFRBleSDK
 public protocol BleClient {
     var isConnected: Bool { get }
     var status: LockStatus? { get }
-
+    
     func connect() async throws
     func disconnect() async
 
@@ -22,4 +22,6 @@ public protocol BleClient {
     func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
     
     func setupSetting(value: JobSettingDTO) async throws
+    
+    func getStatus() async throws 
 }

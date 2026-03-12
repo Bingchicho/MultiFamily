@@ -12,6 +12,8 @@ import MFRBleSDK
 /// - 把 SDK callback 包成 async/await
 /// - 把 SDK 型別/錯誤隔離在這層
 public final class MFRBleClient: BleClient {
+ 
+    
     
     
     
@@ -87,6 +89,10 @@ public final class MFRBleClient: BleClient {
         isConnected = false
     }
     
+    public func getStatus() async throws {
+        try await sdkGetStatus()
+    }
+    
     // MARK: - SDK callback -> async helpers
     
     private func sdkSetUID(_ config: UIDConfig) async throws {
@@ -146,7 +152,6 @@ public final class MFRBleClient: BleClient {
             sdk.queryLockStatus { result in
                 switch result {
                 case .success(let status):
-                    
                     self.status = status
                     continuation.resume()
                 case .failure(let error):
@@ -230,19 +235,21 @@ public final class MFRBleClient: BleClient {
             return
         }
         
+        try await sdkGetConfig()
+        
         var payload = RequestLockConfig(from: config)
         // mapping payload
         value.patches.forEach { patch in
             switch patch {
-            case .location(let value):
+            case .location(_):
                 break
-            case .direction(let value):
+            case .direction(_):
                 break
-            case .accessCode(let value):
+            case .accessCode(_):
                 break
             case .preamble(let value):
                 payload.preamble = value == "Y" ? .on : .off
-            case .virtualCode(let value):
+            case .virtualCode(_):
                 break
             case .twoFA(let value):
                 payload.twoFA =  value == "Y" ? .on : .off
@@ -252,9 +259,9 @@ public final class MFRBleClient: BleClient {
                 payload.autoLock =  value == "Y" ? .on : .off
             case .autoLockDelay(let value):
                 payload.autoLockTimeSeconds = value
-            case .autoLockDelayMin(let value):
+            case .autoLockDelayMin(_):
                 break
-            case .autoLockDelayMax(let value):
+            case .autoLockDelayMax(_):
                 break
             case .operatorVoice(let value):
                 payload.sound =  value == "Y" ? .on : .off
@@ -273,11 +280,11 @@ public final class MFRBleClient: BleClient {
                 payload.quickPassMode = value == "Y" ? .on : .off
             case .sabbathMode(let value):
                 payload.sabbathMode = value == "Y" ? .on : .off
-            case .voiceLanguage(let value):
+            case .voiceLanguage(_):
                 break
-            case .voiceLanguageSupport(let value):
+            case .voiceLanguageSupport(_):
                 break
-            case .timezone(let value):
+            case .timezone(_):
                 break
             case .mcuVersion:
                 break
@@ -294,7 +301,7 @@ public final class MFRBleClient: BleClient {
         try await withCheckedThrowingContinuation { continuation in
             sdk.updateLockConfig(payload: payload) { result in
                 switch result {
-                case .success(let config):
+                case .success(_):
                     
                     continuation.resume()
                 case .failure(let error):

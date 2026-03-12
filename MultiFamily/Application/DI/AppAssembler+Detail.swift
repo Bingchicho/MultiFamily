@@ -26,7 +26,7 @@ extension AppAssembler {
       
         )
         
-        let bleservice = AppAssembler.makeConfigBLEService()
+        let bleservice = AppAssembler.makeJobBLEService()
 
 
         return DetailUseCaseImpl(

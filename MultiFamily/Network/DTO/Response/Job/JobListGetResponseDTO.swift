@@ -41,7 +41,7 @@ struct JobListItemDTO: Decodable {
     let jobID: String
     let status: JobStatusDTO
     let action: JobActionDTO
-    let payloadVersion: Int?
+    let payloadVersion: String?
 
     let setting: JobSettingDTO?
     let blackList: [JobBlackListDTO]?
