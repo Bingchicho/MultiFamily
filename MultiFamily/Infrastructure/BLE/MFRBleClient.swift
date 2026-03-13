@@ -12,6 +12,14 @@ import MFRBleSDK
 /// - 把 SDK callback 包成 async/await
 /// - 把 SDK 型別/錯誤隔離在這層
 public final class MFRBleClient: BleClient {
+    
+    
+    public func updateBt(device: Device) {
+        if let bt = device.bt {
+            self.sdk.updateKeys(hexKey2: bt.key, iv2: bt.iv, token: bt.token)
+        }
+    }
+    
  
     
     
@@ -51,13 +59,15 @@ public final class MFRBleClient: BleClient {
         }
     }
     
-    public func connect() async throws {
+
+    
+    public func connect(targetUID: String?) async throws {
         if isConnected { return }
         
         
         try await withCheckedThrowingContinuation { continuation in
             
-            sdk.connect { result in
+            sdk.connect(targetUID: targetUID) { result in
                 switch result {
                 case .success:
                     
@@ -193,7 +203,7 @@ public final class MFRBleClient: BleClient {
                 role: .owner,
                 tokenHex: info.token,
                 startTime: Date(),
-                endTime: Calendar.current.date(byAdding: .year, value: 1, to: Date())!,
+                endTime: Calendar.current.date(byAdding: .year, value: 999, to: Date())!,
                 identity: addform.name
             )
             try await sdkAddBleUser(bleUserCreateRequest)

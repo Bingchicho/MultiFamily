@@ -55,11 +55,7 @@ final class URLSessionAPIClient: APIClient {
                 forHTTPHeaderField: "Authorization"
             )
         }
-        
-//        if let interceptor = authInterceptor {
-//            try await interceptor.adapt(request, urlRequest: &urlRequest)
-//            
-//        }
+
 
         logRequest(urlRequest)
         

@@ -183,6 +183,8 @@
 "detail.alert.remove.title" = "Remove Lock?";
 "detail.alert.remove.content" = "Remove the lock from this site?";
 
+"detail.sync.error.title" = "Synchronization failed. Please try again";
+
 // ==========================
 // History
 // ==========================

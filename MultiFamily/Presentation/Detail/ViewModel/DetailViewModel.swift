@@ -18,6 +18,8 @@ final class DetailViewModel {
     
     private(set) var detail: Detail?
     
+    private(set) var thingName: String?
+    
     // MARK: - UI Output
 
        var batteryText: String {
@@ -62,7 +64,7 @@ final class DetailViewModel {
     func load(thingName: String) {
 
         state = .loading
-
+        self.thingName = thingName
         Task {
 
             let result =
@@ -86,15 +88,15 @@ final class DetailViewModel {
 
     }
     
-    func delete(thingName: String) {
-
+    func delete() {
+        guard let thingName = thingName else { return }
         state = .loading
 
         Task {
 
             let result =
             await useCase.delete(
-                    thingName: thingName
+                thingName: thingName
                 )
 
             switch result {
@@ -112,8 +114,8 @@ final class DetailViewModel {
 
     }
     
-    func remove(thingName: String) {
-
+    func remove() {
+        guard let thingName = thingName else { return }
         state = .loading
 
         Task {
@@ -136,6 +138,28 @@ final class DetailViewModel {
 
         }
 
+    }
+    
+    func sync(device: Device) {
+    
+        state = .loading
+        Task {
+
+            let result =
+            await useCase.jobSync(device: device)
+
+            switch result {
+
+            case .success:
+                
+                state = .synced
+
+            case .failure:
+                state = .syncFailure(L10n.Detail.Sync.Error.title)
+
+            }
+
+        }
     }
 
 }

@@ -11,7 +11,7 @@ import MFRBleSDK
 public protocol JobService {
 
     var version: String? { get }
-    func connection() async throws
+    func connection(device: Device) async throws
 
     func setupSetting(value: JobSettingDTO) async throws
 }
@@ -19,8 +19,9 @@ public protocol JobService {
 public final class BleConfigService: JobService {
     public var version: String?
     
-    public func connection() async throws {
-        try await client.connect()
+    public func connection(device: Device) async throws {
+        client.updateBt(device: device)
+        try await client.connect(targetUID: String(device.id))
         // 取得Version 要跟job的version 判斷
         try await client.getStatus()
         self.version = client.status?.boardVersionString

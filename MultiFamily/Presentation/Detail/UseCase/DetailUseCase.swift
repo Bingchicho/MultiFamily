@@ -12,7 +12,7 @@ protocol DetailUseCase {
     func execute(thingName: String) async -> Result<Detail, Error>
     func delete(thingName: String) async -> Result<Void, Error>
     func remove(thingName: String) async -> Result<Void, Error>
-    func jobSync(thingName: String) async -> Result<Void, Error>
+    func jobSync(device: Device) async -> Result<Void, Error>
 }
 
 
@@ -84,20 +84,25 @@ final class DetailUseCaseImpl: DetailUseCase {
     }
     
     
-    func jobSync(thingName: String) async -> Result<Void, any Error> {
+    func jobSync(device: Device) async -> Result<Void, any Error> {
         do {
             
-            let list =  try await repository.jobList(thingName: thingName)
+            let list =  try await repository.jobList(thingName: device.thingName)
             
             guard !list.isEmpty else {
                 return .success(())
             }
             
-            try await bleService.connection()
+            try await bleService.connection(device: device)
             
             for job in list {
-                if let config = job.setting,
-                   job.payloadVersion == bleService.version {
+//                if let config = job.setting,
+//                   job.payloadVersion == bleService.version {
+//                    try await bleService.setupSetting(value: config)
+//                    try await repository.jobUpdate(jobId: job.jobID)
+//                }
+                
+                if let config = job.setting {
                     try await bleService.setupSetting(value: config)
                     try await repository.jobUpdate(jobId: job.jobID)
                 }

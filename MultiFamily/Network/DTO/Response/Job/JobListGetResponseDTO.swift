@@ -39,6 +39,9 @@ struct JobListGetResponseDTO: Decodable {
 struct JobListItemDTO: Decodable {
 
     let jobID: String
+    let taskID: String?
+    let userName: String?
+    let createAt: Double?
     let status: JobStatusDTO
     let action: JobActionDTO
     let payloadVersion: String?
@@ -52,6 +55,9 @@ struct JobListItemDTO: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case jobID
+        case taskID
+        case userName
+        case createAt
         case status
         case action
         case payloadVersion
@@ -90,6 +96,7 @@ public struct JobSettingDTO: Decodable, Equatable {
     let bleTXPower: Int?
     let bleAdv: Int?
     let battery: Int?
+    let updateAt: TimeInterval?
 }
 
 public extension JobSettingDTO {
@@ -169,3 +176,4 @@ struct JobRestoreCardDTO: Decodable {
     let resetMask: Int?
     let pincode: String?
 }
+

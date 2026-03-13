@@ -24,7 +24,7 @@ public final class BleProvisioningService: ProvisioningService {
     public var status: LockStatus?
     
     public func connection() async throws {
-        try await client.connect()
+        try await client.connect(targetUID: nil)
     }
     
     private let client: BleClient

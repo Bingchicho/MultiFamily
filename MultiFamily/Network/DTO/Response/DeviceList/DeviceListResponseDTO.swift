@@ -35,4 +35,5 @@ struct DeviceBTDTO: Decodable {
     let uuid: String
     let key: String
     let token: String
+    let iv: String
 }

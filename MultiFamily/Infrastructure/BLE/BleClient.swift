@@ -15,13 +15,15 @@ public protocol BleClient {
     var isConnected: Bool { get }
     var status: LockStatus? { get }
     
-    func connect() async throws
+    func connect(targetUID: String?) async throws
     func disconnect() async
 
  
     func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
     
     func setupSetting(value: JobSettingDTO) async throws
+    
+    func updateBt(device: Device)
     
     func getStatus() async throws 
 }

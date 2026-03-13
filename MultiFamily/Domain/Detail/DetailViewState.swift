@@ -11,6 +11,8 @@ enum DetailViewState {
     case loading
     case loaded(response: DetailResponseDTO?)
     case deleted
+    case synced
     case error(String)
+    case syncFailure(String)
 
 }

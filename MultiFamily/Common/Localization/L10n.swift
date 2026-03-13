@@ -152,6 +152,12 @@ internal enum L10n {
       /// ON
       internal static let title = L10n.tr("Localizable", "detail.on.title", fallback: "ON")
     }
+    internal enum Sync {
+      internal enum Error {
+        /// Synchronization failed. Please try again
+        internal static let title = L10n.tr("Localizable", "detail.sync.error.title", fallback: "Synchronization failed. Please try again")
+      }
+    }
     internal enum Tab {
       internal enum Authorized {
         /// Authorized

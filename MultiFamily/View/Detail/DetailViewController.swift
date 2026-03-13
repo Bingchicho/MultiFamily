@@ -121,18 +121,24 @@ class DetailViewController: UIViewController {
         case .deleted:
             holdLoading(animat: false)
             self.navigationController?.popViewController(animated: true)
+        case .synced:
+            holdLoading(animat: false)
         case .error(let message):
             holdLoading(animat: false)
             showError(message)
             AppLogger.log(.error, category: .detail, message)
+        case .syncFailure(let message):
+            holdLoading(animat: false)
+            showError(message, isPop: false)
+            AppLogger.log(.error, category: .detail, message)
         default:
-            break
+            holdLoading(animat: false)
             
         }
         
     }
     
-    private func showError(_ message: String) {
+    private func showError(_ message: String, isPop: Bool = true) {
         let alert = UIAlertController(
             title: L10n.Common.Error.title,
             message: message,
@@ -140,6 +146,7 @@ class DetailViewController: UIViewController {
         )
     
         alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default, handler: { _ in
+            guard isPop else { return }
             self.navigationController?.popViewController(animated: true)
         }))
         present(alert, animated: true)
@@ -181,12 +188,15 @@ class DetailViewController: UIViewController {
             syncedImageView.tintColor = .synced
             syncedLabel.text = L10n.Home.Synced.title
             syncedLabel.textColor = .synced
+        
         } else {
             syncedImageView.image = UIImage(systemName: "exclamationmark.arrow.trianglehead.2.clockwise.rotate.90")
             syncedImageView.tintColor = .unsynced
             syncedLabel.text = L10n.Home.Unsynced.title
             syncedLabel.textColor = .unsynced
         }
+        
+        syncButton.isEnabled = device?.job != 0
         
         // lock/unlock User only
         if AppAssembler.userAttributeStore.currentUser?.permissions?.first?.userRole == .user {
@@ -251,6 +261,10 @@ class DetailViewController: UIViewController {
     
     
     @IBAction func syncButtonAction(_ sender: UIButton) {
+        if let device = device {
+            viewModel.sync(device: device)
+        }
+      
     }
     
     @IBAction func lockUnlockButtonAction(_ sender: UIButton) {
@@ -301,7 +315,6 @@ class DetailViewController: UIViewController {
         let confirm = UIAlertAction(title: L10n.Common.Button.confirm, style: .destructive) { _ in
             // admin: 裝置從Site刪除 manager/ User: 取消這個裝置的權限
             guard
-                let thingName = self.device?.thingName,
                 let siteId = AppAssembler.siteSelectionStore.currentSite?.id,
                 let permission = AppAssembler.userAttributeStore.currentUser?
                     .permissions?
@@ -309,9 +322,9 @@ class DetailViewController: UIViewController {
             else { return }
 
             if permission.userRole == .user {
-                self.viewModel.remove(thingName: thingName)
+                self.viewModel.remove()
             } else {
-                self.viewModel.delete(thingName: thingName)
+                self.viewModel.delete()
             }
         }
 

@@ -62,4 +62,23 @@ enum JobStatusDTO: Equatable, Decodable {
         case .unknown(let v): return v
         }
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+
+        switch rawValue.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
+        case "revoke": self = .revoke
+        case "conflict": self = .conflict
+        case "initial": self = .initial
+        case "start": self = .start
+        case "error": self = .error
+        case "wait": self = .wait
+        case "onflight": self = .onflight
+        case "done": self = .done
+        case "reject": self = .reject
+        case "timeout": self = .timeout
+        default: self = .unknown(rawValue)
+        }
+    }
 }

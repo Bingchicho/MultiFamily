@@ -5,7 +5,7 @@
 //  Created by Sunion on 2026/2/10.
 //
 
-struct Device {
+public struct Device {
 
     let id: UInt16
     let name: String
@@ -31,6 +31,7 @@ struct DeviceBT {
     let uuid: String
     let key: String
     let token: String
+    let iv: String
 }
 
 extension DeviceDTO {
@@ -59,7 +60,8 @@ extension DeviceBTDTO {
         DeviceBT(
             uuid: uuid,
             key: key,
-            token: token
+            token: token,
+            iv: iv
         )
     }
 }
