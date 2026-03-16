@@ -7,6 +7,7 @@
 
 
 import MFRBleSDK
+import Foundation
 protocol AddUseCase {
  
     func submit(siteID: String, name: String, activeMode: String, model: String, isResident: Bool, deviceID: Int, Add: ProvisionBLEInfo, form: AddForm ) async throws
@@ -33,6 +34,7 @@ final class AddUseCaseImpl: AddUseCase {
             siteID: siteID
         )
         
+        let config = bleService.config
         let status = bleService.status
         
         try await repository.submit(siteID: siteID, name: name, activeMode: activeMode, model: model, isResident: isResident, deviceID: deviceID,
@@ -44,13 +46,29 @@ final class AddUseCaseImpl: AddUseCase {
                                         iv: Add.iv
                                     ),
                                     attributes: DeviceAddAttributesDTO(
-                                        autoLock: form.isAutoLockOn ? "Y" : "N",
+                                        direction: config?.lockDirection.letter,
+                                        accessCode: config?.password.letter,
+                                        preamble: config?.preamble.letter,
+                                        twoFA: config?.twoFA.letter,
+                                        vacationMode: config?.holidayMode.letter,
+                                        autoLock: form.isAutoLockOn ? "T" : "N",
                                         autoLockDelay: form.autoLockDelay,
-                                        operatorVoice: form.isBeepOn ? "Y" : "N",
-                                        mcuVersion: status?.boardVersionString,
+                                        autoLockDelayMin: Int(config?.autoLockMin ?? 10),
+                                        autoLockDelayMax: Int(config?.autoLockMax ?? 120),
+                                        operatorVoice: form.isBeepOn ? "T" : "N",
+                                        voiceType: config?.soundType?.type,
+                                        voiceValue: config?.soundType?.value,
+                                        showFastPassageMode: config?.quickPassMode.letter,
+                                        sabbathMode: config?.sabbathMode.letter,
+                                        voiceLanguage: config?.language?.intValue,
+                                        voiceLanguageSupport: config?.supportedLanguages.intValue,
+                                        timezone: TimeZone.current.identifier,
+                                        mcuVersion: config?.boardVersionString,
                                         bleTXPower: form.txPower.rawValue,
                                         bleAdv: form.adv.rawValue,
                                         battery: status?.batteryLevelInt
                                     ))
+        
+       
     }
 }

@@ -146,7 +146,7 @@ extension DetailResponseDTO {
             isResident: isResident ?? false,
             beep: beep,
             autoLock: autoLock,
-            autoLockDelay: attrs?.autoLockDelay ?? 0,
+            autoLockDelay: attrs?.autoLockDelay ?? 10,
             btUUID: bt?.uuid ?? "",
             btKey: bt?.key ?? "",
             btToken: bt?.token ?? "",

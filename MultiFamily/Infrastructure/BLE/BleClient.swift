@@ -13,6 +13,7 @@ import MFRBleSDK
 /// - Service 不該知道底下用 MFRBleSDK 還是 CoreBluetooth
 public protocol BleClient {
     var isConnected: Bool { get }
+    var config: LockConfig? { get }
     var status: LockStatus? { get }
     
     func connect(targetUID: String?) async throws
@@ -20,6 +21,8 @@ public protocol BleClient {
 
  
     func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
+    
+
     
     func setupSetting(value: JobSettingDTO) async throws
     

@@ -194,7 +194,7 @@ class RegistryViewController: UIViewController {
     @IBAction private func autoTimeButtonAction(sender: UIButton) {
         // 1...120 seconds
         let options = (1...120).map { "\($0)" }
-        let current = viewModel.form.autoLockDelay ?? 1
+        let current = viewModel.form.autoLockDelay ?? 10
         let selectedIndex = max(0, min(options.count - 1, current - 1))
 
         presentPicker(
@@ -204,7 +204,7 @@ class RegistryViewController: UIViewController {
             sourceView: sender
         ) { [weak self] selected in
             guard let self else { return }
-            let value = Int(selected) ?? 1
+            let value = Int(selected) ?? 10
             // Update VM + UI
             self.viewModel.setAutoLockDelay(value)
             self.autoTimeButton.setTitle("\(value) S", for: .normal)

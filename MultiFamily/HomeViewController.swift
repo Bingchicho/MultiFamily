@@ -30,6 +30,8 @@ class HomeViewController: UIViewController {
             useCase: AppAssembler.makeDeviceUseCase()
         )
     
+    private let refreshControl = UIRefreshControl()
+    
     
     
     override func viewDidLoad() {
@@ -39,13 +41,17 @@ class HomeViewController: UIViewController {
         setupUI()
         bind()
         
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if let id = AppAssembler.siteSelectionStore.currentSite?.id {
             checkInviteButton(site: AppAssembler.siteSelectionStore.currentSite)
             viewModel.load(siteID: id)
         } else {
             self.performSegue(withIdentifier: "site", sender: nil)
         }
-       
     }
     
     private func checkInviteButton(site: Site?) {
@@ -80,6 +86,8 @@ class HomeViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
     
     private func bind() {
@@ -95,6 +103,7 @@ class HomeViewController: UIViewController {
 
               case .loaded:
                   holdLoading(animat: false)
+                  refreshControl.endRefreshing()
                   noDataStackView.isHidden = !viewModel.devices.isEmpty
                   tableView.isHidden = viewModel.devices.isEmpty
                   addButton.isHidden = viewModel.devices.isEmpty
@@ -106,6 +115,7 @@ class HomeViewController: UIViewController {
 
               case .error(_):
                   holdLoading(animat: false)
+                  refreshControl.endRefreshing()
 
               default:
                   break
@@ -133,6 +143,15 @@ class HomeViewController: UIViewController {
         noDataAddButton.setTitle(L10n.Home.Button.addLock, for: .normal)
     }
     
+    @objc
+    private func handleRefresh() {
+        guard let id = AppAssembler.siteSelectionStore.currentSite?.id else {
+            refreshControl.endRefreshing()
+            return
+        }
+
+        viewModel.load(siteID: id)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "site",

@@ -24,14 +24,14 @@ public final class BleConfigService: JobService {
         try await client.connect(targetUID: String(device.id))
         // 取得Version 要跟job的version 判斷
         try await client.getStatus()
-        self.version = client.status?.boardVersionString
+        self.version = client.config?.boardVersionString
     }
     
     private let client: BleClient
 
     public init(client: BleClient) {
         self.client = client
-        self.version = client.status?.boardVersionString
+        self.version = client.config?.boardVersionString
       
     }
 

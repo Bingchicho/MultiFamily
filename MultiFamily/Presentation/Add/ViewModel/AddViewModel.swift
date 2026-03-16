@@ -52,7 +52,7 @@ final class AddViewModel {
     
     func addConfigure(Add: ProvisionBLEInfo) {
 
-        self.form = AddForm(lockID: Add.uuid, name: "", area: .public, isAutoLockOn: false, autoLockDelay: 5, isBeepOn: true, txPower: .medium, adv: .low, group: nil)
+        self.form = AddForm(lockID: Add.uuid, name: "", area: .public, isAutoLockOn: false, autoLockDelay: 10, isBeepOn: true, txPower: .medium, adv: .low, group: nil)
         self.Add = Add
         
     

@@ -12,6 +12,8 @@ import MFRBleSDK
 /// - 把 SDK callback 包成 async/await
 /// - 把 SDK 型別/錯誤隔離在這層
 public final class MFRBleClient: BleClient {
+
+    
     
     
     public func updateBt(device: Device) {
@@ -92,6 +94,8 @@ public final class MFRBleClient: BleClient {
         }
     }
     
+
+    
     public func disconnect() async {
         guard isConnected else { return }
         
@@ -104,6 +108,20 @@ public final class MFRBleClient: BleClient {
     }
     
     // MARK: - SDK callback -> async helpers
+    
+    
+    public func sdkDetectDoorDirection() async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.detectDoorDirection() { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
     
     private func sdkSetUID(_ config: UIDConfig) async throws {
         try await withCheckedThrowingContinuation { continuation in
@@ -182,7 +200,8 @@ public final class MFRBleClient: BleClient {
         
         let uidConfig = UIDConfig(siteCode: siteID,
                                   uid: info.uuid,
-                                  doorType: addform.area == .private ? .resident : .publicDoor)
+                                  doorType: addform.area == .private ? .resident : .publicDoor,
+        )
         
         do {
             // 1) set UID
@@ -198,12 +217,14 @@ public final class MFRBleClient: BleClient {
             try await sdkSetKeyOne(keyoneConfig)
             
             // 3) add BLE user
+            let maxDate = Date(timeIntervalSince1970: TimeInterval(UInt32.max))
+        
             let bleUserCreateRequest = try BleUserCreateRequest(
                 index: 0,
                 role: .owner,
                 tokenHex: info.token,
                 startTime: Date(),
-                endTime: Calendar.current.date(byAdding: .year, value: 999, to: Date())!,
+                endTime: maxDate,
                 identity: addform.name
             )
             try await sdkAddBleUser(bleUserCreateRequest)
@@ -212,7 +233,9 @@ public final class MFRBleClient: BleClient {
             let pincodeRequest = RemotePinCodeRandomConfig(hexString: info.remotePinCode)
             try await sdkSetRemotePinCodeRandom(pincodeRequest)
             
+            try await sdkGetConfig()
             try await sdkGetStatus()
+            try await sdkDetectDoorDirection()
             
             // ✅ Only reach here means ALL steps succeeded
             AppLogger.log(.info, category: .bluetooth, "readRegistrySnapshot ✅ all steps done")

@@ -248,7 +248,7 @@ class AddViewController: UIViewController {
         // 1...120 seconds
         let options = (1...120).map { "\($0)" }
         
-        let current = viewModel.form.autoLockDelay ?? 1
+        let current = viewModel.form.autoLockDelay ?? 10
         let selectedIndex = max(0, min(options.count - 1, current - 1))
 
         presentPicker(

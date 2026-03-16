@@ -10,10 +10,12 @@ import MFRBleSDK
 
 public protocol ProvisioningService {
     /// Provision 流程：用 btInfo 連上去，讀出 registry 類資料
+    var config: LockConfig? { get }
     var status: LockStatus? { get }
     func connection() async throws
 
     func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
+
 }
 
 
@@ -21,6 +23,9 @@ public protocol ProvisioningService {
 /// - 這裡不 import MFRBleSDK
 /// - 只用 BleClient
 public final class BleProvisioningService: ProvisioningService {
+
+    
+    public var config: LockConfig?
     public var status: LockStatus?
     
     public func connection() async throws {
@@ -31,7 +36,7 @@ public final class BleProvisioningService: ProvisioningService {
 
     public init(client: BleClient) {
         self.client = client
-        self.status = client.status
+        self.config = client.config
     }
 
     public func provisionAndFetchRegistry(btInfo: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws {
@@ -40,6 +45,9 @@ public final class BleProvisioningService: ProvisioningService {
         defer { Task { await client.disconnect() } }
         
         try await client.readRegistrySnapshot(info: btInfo, addform: addform, siteID: siteID)
+        self.config = client.config
         self.status = client.status
     }
+    
+ 
 }
