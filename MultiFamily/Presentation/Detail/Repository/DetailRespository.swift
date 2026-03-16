@@ -12,7 +12,7 @@ protocol DetailRepository {
     func updateRegistry(thingName: String, name: String? ,autoLockOn: Bool?, autoLockTime: Int?, beepOn: Bool?, power: Int?, adv: Int?) async throws
     func removeDevice(thingName: String) async throws
     func jobList(thingName: String) async throws -> [JobListItemDTO]
-    func jobUpdate(jobId: String) async throws
+    func jobUpdate(jobId: String, status: JobStatusDTO ) async throws
     
 }
 final class DetailRepositoryImpl: DetailRepository {
@@ -93,9 +93,9 @@ final class DetailRepositoryImpl: DetailRepository {
     }
     
     
-    func jobUpdate(jobId: String) async throws {
+    func jobUpdate(jobId: String, status: JobStatusDTO) async throws {
         
-        let requestDTO = jobFacotry.makeJobUpdateRequest(jobID: jobId, status: .done)
+        let requestDTO = jobFacotry.makeJobUpdateRequest(jobID: jobId, status: status)
         
         let _: ClientResponseDTO = try await apiClient.request(
             JobEndpoint.update(requestDTO)

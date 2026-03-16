@@ -103,8 +103,16 @@ final class DetailUseCaseImpl: DetailUseCase {
 //                }
                 
                 if let config = job.setting {
-                    try await bleService.setupSetting(value: config)
-                    try await repository.jobUpdate(jobId: job.jobID)
+                    do {
+                        try await bleService.setupSetting(value: config)
+                        try await repository.jobUpdate(jobId: job.jobID, status: .done)
+                    } catch {
+                        try await repository.jobUpdate(
+                            jobId: job.jobID,
+                            status: .error
+                        )
+                        throw error
+                    }
                 }
                 
             }
@@ -112,7 +120,7 @@ final class DetailUseCaseImpl: DetailUseCase {
             return .success(())
             
         } catch {
-            
+          
             return .failure(error)
             
         }
