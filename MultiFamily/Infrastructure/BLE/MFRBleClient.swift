@@ -258,15 +258,15 @@ public final class MFRBleClient: BleClient {
             case .accessCode(_):
                 break
             case .preamble(let value):
-                payload.preamble = value == "Y" ? .on : .off
+                break
             case .virtualCode(_):
                 break
             case .twoFA(let value):
-                payload.twoFA =  value == "Y" ? .on : .off
+                break
             case .vacationMode(let value):
-                payload.holidayMode =  value == "Y" ? .on : .off
+                break
             case .autoLock(let value):
-                payload.autoLock =  value == "Y" ? .on : .off
+                payload.autoLock =  value == "T" ? .on : .off
             case .autoLockDelay(let value):
                 payload.autoLockTimeSeconds = value
             case .autoLockDelayMin(_):
@@ -274,22 +274,16 @@ public final class MFRBleClient: BleClient {
             case .autoLockDelayMax(_):
                 break
             case .operatorVoice(let value):
-                payload.sound =  value == "Y" ? .on : .off
-            case .voiceType(let v1, let v2):
-                var typeValue: SoundType = .onOff(enabled: true)
-                if v1 == 2 {
-                    typeValue = .level(v2)
-                }
                 
-                if v1 == 3 {
-                    typeValue = .percent(v2)
-                }
+                var typeValue: SoundType = .onOff(enabled: value == "T")
+                
                 payload.soundType = typeValue
-                
+            case .voiceType(let v1, let v2):
+                break
             case .showFastPassageMode(let value):
-                payload.quickPassMode = value == "Y" ? .on : .off
+                break
             case .sabbathMode(let value):
-                payload.sabbathMode = value == "Y" ? .on : .off
+                break
             case .voiceLanguage(_):
                 break
             case .voiceLanguageSupport(_):
