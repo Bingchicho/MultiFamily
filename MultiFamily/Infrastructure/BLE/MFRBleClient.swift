@@ -233,7 +233,25 @@ public final class MFRBleClient: BleClient {
             let pincodeRequest = RemotePinCodeRandomConfig(hexString: info.remotePinCode)
             try await sdkSetRemotePinCodeRandom(pincodeRequest)
             
+            // TODO:  config, autoUnlock, beep on off
+            
             try await sdkGetConfig()
+            
+            if let config = config {
+                var payload = RequestLockConfig(from: config)
+                
+                payload.autoLock = addform.isAutoLockOn ? .on : .off
+                payload.autoLockTimeSeconds = addform.autoLockDelay
+                payload.soundType = addform.isBeepOn ? .onOff(enabled: true) : .onOff(enabled: false)
+                payload.bleTxPower = addform.txPower.rawValue
+                payload.bleAdvInterval = addform.adv.rawValue
+                
+                try await sdkUpdateConfig(payload: payload)
+                
+            }
+            
+            
+            
             try await sdkGetStatus()
             try await sdkDetectDoorDirection()
             
@@ -255,6 +273,20 @@ public final class MFRBleClient: BleClient {
                 switch result {
                 case .success(let config):
                     self.config = config
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    private func sdkUpdateConfig(payload: RequestLockConfig) async throws{
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.updateLockConfig(payload: payload) { result in
+                switch result {
+                case .success(_):
+                    
                     continuation.resume()
                 case .failure(let error):
                     continuation.resume(throwing: error)
@@ -324,19 +356,11 @@ public final class MFRBleClient: BleClient {
             }
         }
         
-        
-        try await withCheckedThrowingContinuation { continuation in
-            sdk.updateLockConfig(payload: payload) { result in
-                switch result {
-                case .success(_):
-                    
-                    continuation.resume()
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
+        try await sdkUpdateConfig(payload: payload)
+
     }
+    
+    
     
     public func setupSetting(value: JobSettingDTO) async throws {
         guard isConnected else {
