@@ -19,13 +19,11 @@ extension AppAssembler {
             device: device
         )
 
-        let applicationFactory = applicationIDRequestFactory(env: env, device: device)
         
 
         let repository = UserRepositoryImpl(
             apiClient: apiClient,
-            userRequestFactory: requestFactory, applicationFactory: applicationFactory
-
+            userRequestFactory: requestFactory
         )
 
 

@@ -131,7 +131,7 @@ extension BlacklistViewController: UITableViewDataSource {
         numberOfRowsInSection section: Int
     ) -> Int {
 
-        viewModel.users.count
+        viewModel.cards.count
     }
     
     func tableView(
@@ -139,12 +139,18 @@ extension BlacklistViewController: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SystemCell", for: indexPath)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "SystemCell")
 
-        let user = viewModel.users[indexPath.row]
+        let card = viewModel.cards[indexPath.row]
 
-        cell.textLabel?.text = user.name
-
+        let date = Date(timeIntervalSince1970: TimeInterval(card.endTime))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d/yyyy hh:mm a"
+        formatter.locale = Locale.current
+        
+        cell.textLabel?.text = card.id
+        cell.detailTextLabel?.text = formatter.string(from: date)
+        
 
 
         return cell

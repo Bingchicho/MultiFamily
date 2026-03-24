@@ -12,9 +12,12 @@ protocol UserRequestFactoryProtocol {
     func makeInviteResendRequest(code: String) -> InviteResendRequestDTO
     func makeInviteDeleteRequest(code: String) -> InviteResendRequestDTO
     func makeInviteUserRequest(email: String, permission: UserPermission) -> InviteUserRequestDTO
+    func makeUserListGetRequest(siteID: String) -> UserListGetRequestDTO
 }
 
 struct UserRequestFactory: UserRequestFactoryProtocol {
+
+    
 
     
     
@@ -51,5 +54,9 @@ struct UserRequestFactory: UserRequestFactoryProtocol {
     
     func makeInviteUserRequest(email: String, permission: UserPermission) -> InviteUserRequestDTO {
         InviteUserRequestDTO(applicationID: env.applicationID, email: email, permission: [permission], clientToken: device.clientToken)
+    }
+    
+    func makeUserListGetRequest(siteID: String) -> UserListGetRequestDTO {
+        UserListGetRequestDTO(applicationID: env.applicationID, siteID: siteID, clientToken: device.clientToken)
     }
 }

@@ -10,7 +10,7 @@
 import Foundation
 
 protocol UserUseCase {
-    func execute() async -> UserListResult
+    func execute(siteId: String) async -> UserListResult
 
     func update(siteId: String, userId: String, role: UserRole) async -> UserListResult
     func delete(siteId: String, userId: String) async -> UserListResult
@@ -30,12 +30,12 @@ struct UserUseCaseImpl: UserUseCase {
         self.repository = repository
     }
 
-    func execute() async -> UserListResult {
+    func execute(siteId: String) async -> UserListResult {
         
         let result: UserListResult
 
         do {
-            result = try await repository.list()
+            result = try await repository.list(siteID: siteId)
         } catch {
             return .failure(error.localizedDescription)
         }

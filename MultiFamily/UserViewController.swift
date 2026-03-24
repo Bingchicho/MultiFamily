@@ -27,7 +27,10 @@ final class UserViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
-        viewModel.load()
+        if let sideId = AppAssembler.siteSelectionStore.currentSite?.id {
+            viewModel.load(siteId: sideId)
+        }
+     
     }
     
     private func holdLoading(animat: Bool) {
@@ -343,11 +346,9 @@ extension UserViewController: UserCellDelegate {
                 selectedRole = .user
             }
 
-            guard let siteId = AppAssembler.siteSelectionStore.currentSite?.id else { return }
-
+  
          
             self?.viewModel.update(
-                siteId: siteId,
                 userId: user.id,
                 role: selectedRole
             )
@@ -375,10 +376,9 @@ extension UserViewController: UserCellDelegate {
             title: L10n.User.Alert.Button.Delete.title,
             style: .destructive
         ) { [weak self] _ in
-            guard let sideId = AppAssembler.siteSelectionStore.currentSite?.id else { return }
-            print("remove user: \(user.email)")
+    
             // self?.viewModel.removeUser(id: user.id)
-            _ = self?.viewModel.delete(siteId: sideId, userId: user.id)
+            _ = self?.viewModel.delete( userId: user.id)
         }
 
         let cancelAction = UIAlertAction(

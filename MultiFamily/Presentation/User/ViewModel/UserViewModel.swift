@@ -18,16 +18,18 @@ final class UserViewModel {
 
     private let useCase: UserUseCase
     private(set) var sections: [UserSection] = []
+    
+    private var sideID: String?
 
     init(useCase: UserUseCase) {
         self.useCase = useCase
     }
 
-    func load() {
+    func load(siteId: String) {
         state = .loading
-
+        sideID = siteId
         Task {
-            let result = await useCase.execute()
+            let result = await useCase.execute(siteId: siteId)
 
             switch result {
 
@@ -50,11 +52,12 @@ final class UserViewModel {
         state = .option
     }
 
-    func update(siteId: String, userId: String, role: UserRole) {
+    func update( userId: String, role: UserRole) {
+        guard let siteID = sideID else { return }
         state = .loading
 
         Task {
-            let result = await useCase.update(siteId: siteId, userId: userId, role: role)
+            let result = await useCase.update(siteId: siteID, userId: userId, role: role)
 
             switch result {
             case .success:
@@ -62,16 +65,17 @@ final class UserViewModel {
             case .failure(let message):
                 state = .error(message)
             case .optionSuccess:
-                load()
+                load(siteId: siteID)
             }
         }
     }
 
-    func delete(siteId: String, userId: String) {
+    func delete( userId: String) {
+        guard let siteID = sideID else { return }
         state = .loading
 
         Task {
-            let result = await useCase.delete(siteId: siteId, userId: userId)
+            let result = await useCase.delete(siteId: siteID, userId: userId)
 
             switch result {
             case .success:
@@ -79,7 +83,7 @@ final class UserViewModel {
             case .failure(let message):
                 state = .error(message)
             case .optionSuccess:
-                load()
+                load(siteId: siteID)
             }
         }
     }
@@ -102,6 +106,7 @@ final class UserViewModel {
     }
 
     func inviteDelete(code: String) {
+        guard let siteID = sideID else { return }
         state = .loading
 
         Task {
@@ -113,12 +118,13 @@ final class UserViewModel {
             case .failure(let message):
                 state = .error(message)
             case .optionSuccess:
-                load()
+                load(siteId: siteID)
             }
         }
     }
 
     func inviteUser(email: String, permission: UserPermission) {
+        guard let siteID = sideID else { return }
         state = .loading
 
         Task {
@@ -130,7 +136,7 @@ final class UserViewModel {
             case .failure(let message):
                 state = .error(message)
             case .optionSuccess:
-                load()
+                load(siteId: siteID)
             }
         }
     }

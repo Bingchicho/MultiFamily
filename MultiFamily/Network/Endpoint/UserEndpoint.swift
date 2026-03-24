@@ -8,7 +8,7 @@
 
 enum UserEndpoint {
     
-    static func list(_ dto: applicationIDRequestDTO) -> APIRequest {
+    static func list(_ dto: UserListGetRequestDTO) -> APIRequest {
         APIRequest(
             host: AppEnvironment.apiHostname,
             version: AppEnvironment.authService,

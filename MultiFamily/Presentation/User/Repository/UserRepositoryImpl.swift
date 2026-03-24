@@ -6,7 +6,7 @@
 //
 
 protocol UserRepository {
-    func list() async throws -> UserListResult
+    func list(siteID: String) async throws -> UserListResult
     func update(siteId: String, userId: String, role: UserRole) async throws
     func delete(siteId: String, userId: String) async throws
     func inviteResend(code: String) async throws
@@ -22,29 +22,26 @@ final class UserRepositoryImpl: UserRepository {
 
     private let apiClient: APIClient
 
-    private let applicationFactory:applicationIDRequestFactoryProtocol
     private let userRequestFactory: UserRequestFactoryProtocol
 
 
     init(
         apiClient: APIClient,
-        userRequestFactory: UserRequestFactoryProtocol,
-        applicationFactory: applicationIDRequestFactoryProtocol
+        userRequestFactory: UserRequestFactoryProtocol
 
     ) {
         self.apiClient = apiClient
         self.userRequestFactory = userRequestFactory
-        self.applicationFactory = applicationFactory
    
     }
 
    
     
-    func list() async throws -> UserListResult {
+    func list(siteID: String) async throws -> UserListResult {
         
         do {
             
-            let requestDTO = applicationFactory.makeListRequest()
+            let requestDTO = userRequestFactory.makeUserListGetRequest(siteID: siteID)
             
             let dto: UserListResponseDTO = try await apiClient.request(
                 UserEndpoint.list(requestDTO)
