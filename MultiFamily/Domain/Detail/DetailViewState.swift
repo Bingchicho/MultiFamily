@@ -15,4 +15,5 @@ enum DetailViewState {
     case error(String)
     case syncFailure(String)
     case lockStatus(Bool?) // true = lock, false = unlock, nil = unknow
+    case disconnect
 }

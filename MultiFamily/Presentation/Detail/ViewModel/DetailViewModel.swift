@@ -60,6 +60,17 @@ final class DetailViewModel {
     init(useCase: DetailUseCase) {
         self.useCase = useCase
     }
+    
+    func observeConnection() {
+        Task {
+            for await isConnected in useCase.isConnectedStream {
+                if !isConnected {
+                    // 🔥 斷線了
+                    state = .disconnect
+                }
+            }
+        }
+    }
 
     func load(thingName: String) {
 

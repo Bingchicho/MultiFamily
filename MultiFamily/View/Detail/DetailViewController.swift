@@ -108,6 +108,8 @@ class DetailViewController: UIViewController {
             holdLoading(animat: true)
             viewModel.load(thingName: thingName)
         }
+        
+        viewModel.observeConnection()
     }
     
     private func render(
@@ -143,6 +145,10 @@ class DetailViewController: UIViewController {
             } else {
                 lockUnlockButton.setTitle(L10n.Detail.Button.Unknow.title, for: .normal)
             }
+            holdLoading(animat: false)
+        case .disconnect:
+            showError(L10n.Detail.Ble.Error.title, isPop: false)
+            lockUnlockButton.setTitle(L10n.Detail.Button.Unknow.title, for: .normal)
             holdLoading(animat: false)
         default:
             holdLoading(animat: false)

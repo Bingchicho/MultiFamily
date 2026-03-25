@@ -12,8 +12,22 @@ import MFRBleSDK
 /// - 把 SDK callback 包成 async/await
 /// - 把 SDK 型別/錯誤隔離在這層
 public final class MFRBleClient: BleClient {
-    
 
+    
+    
+    private var continuation: AsyncStream<Bool>.Continuation?
+
+    public var isConnectedStream: AsyncStream<Bool> {
+        AsyncStream { continuation in
+            self.continuation = continuation
+        }
+    }
+
+    private(set) public var isConnected: Bool = false {
+        didSet {
+            continuation?.yield(isConnected)
+        }
+    }
     
     
     
@@ -23,13 +37,9 @@ public final class MFRBleClient: BleClient {
         }
     }
     
- 
-    
-    
-    
     
     private let sdk: MFRBleSDK
-    public private(set) var isConnected: Bool = false
+
     public private(set) var status: LockStatus?
     public private(set) var config: LockConfig?
     
@@ -59,6 +69,11 @@ public final class MFRBleClient: BleClient {
                 AppLogger.log(.info, category: .bluetooth, "unknown: 🔔 \(function), \(raw)")
                 
             }
+        }
+        
+        sdk.onConnected = { [weak self] connect in
+            guard  let self = self else { return }
+            self.isConnected = connect
         }
     }
     

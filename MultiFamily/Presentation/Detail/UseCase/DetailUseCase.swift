@@ -8,6 +8,8 @@
 import MFRBleSDK
 protocol DetailUseCase {
     
+    var isConnectedStream: AsyncStream<Bool> { get }
+    
     var response: DetailResponseDTO? { get }
 
     func execute(thingName: String) async -> Result<Detail, Error>
@@ -20,11 +22,9 @@ protocol DetailUseCase {
 
 
 final class DetailUseCaseImpl: DetailUseCase {
-
-    
-
-    
-  
+    var isConnectedStream: AsyncStream<Bool> {
+          lockUnlockService.isConnectedStream
+      }
 
     private let repository: DetailRepository
  

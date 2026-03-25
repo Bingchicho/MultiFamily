@@ -10,7 +10,8 @@ import Foundation
 import MFRBleSDK
 
 public protocol LockUnlockService {
-
+    
+    var isConnectedStream: AsyncStream<Bool> { get }
   
     var status: LockStatus? { get }
     func connection(device: Device) async throws
@@ -25,6 +26,12 @@ public protocol LockUnlockService {
 /// - 這裡不 import MFRBleSDK
 /// - 只用 BleClient
 public final class BleLockUnlockService: LockUnlockService {
+    public var isConnectedStream: AsyncStream<Bool> {
+        client.isConnectedStream
+    }
+    
+ 
+    
     public func disconnect() async throws {
          await client.disconnect()
         status = nil

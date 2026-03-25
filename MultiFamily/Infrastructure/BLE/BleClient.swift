@@ -16,6 +16,8 @@ public protocol BleClient {
     var config: LockConfig? { get }
     var status: LockStatus? { get }
     
+    var isConnectedStream: AsyncStream<Bool> { get }
+    
     func connect(targetUID: String?) async throws
     func disconnect() async
 
