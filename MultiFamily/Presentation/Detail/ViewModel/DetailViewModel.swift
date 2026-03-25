@@ -161,6 +161,43 @@ final class DetailViewModel {
 
         }
     }
+    
+    func lockAction( device: Device) {
+        state = .loading
+        Task {
+            
+            let result = await useCase.lockAction(device: device)
+            
+            switch result {
+
+            case .success(let lock):
+                
+                state = .lockStatus(lock)
+
+            case .failure:
+                state = .syncFailure(L10n.Detail.Ble.Error.title)
+
+            }
+        }
+    }
+    
+    func disconnect() {
+        Task {
+            
+            let result = await useCase.disconnect()
+            
+            switch result {
+
+            case .success:
+                
+               break
+
+            case .failure:
+             break
+
+            }
+        }
+    }
 
 }
 

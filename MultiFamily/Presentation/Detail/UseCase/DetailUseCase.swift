@@ -5,6 +5,7 @@
 //  Created by Sunion on 2026/2/11.
 //
 
+import MFRBleSDK
 protocol DetailUseCase {
     
     var response: DetailResponseDTO? { get }
@@ -13,23 +14,29 @@ protocol DetailUseCase {
     func delete(thingName: String) async -> Result<Void, Error>
     func remove(thingName: String) async -> Result<Void, Error>
     func jobSync(device: Device) async -> Result<Void, Error>
+    func lockAction(device: Device) async -> Result<Bool, Error>
+    func disconnect() async -> Result<Void, Error>
 }
 
 
 final class DetailUseCaseImpl: DetailUseCase {
-  
+
     
 
+    
+  
 
     private let repository: DetailRepository
  
     
     var response: DetailResponseDTO?
     private let bleService: JobService
+    private let lockUnlockService: LockUnlockService
 
-    init(repository: DetailRepository, bleserivce: JobService) {
+    init(repository: DetailRepository, bleserivce: JobService, lockunlockservice: LockUnlockService) {
         self.repository = repository
         self.bleService = bleserivce
+        self.lockUnlockService = lockunlockservice
     }
 
     func execute(thingName: String) async -> Result<Detail, Error> {
@@ -123,6 +130,36 @@ final class DetailUseCaseImpl: DetailUseCase {
           
             return .failure(error)
             
+        }
+    }
+    
+    func lockAction(device: Device) async -> Result<Bool, any Error> {
+        do {
+            if let door = lockUnlockService.status?.lock {
+                let lock: Bool = door == .lockedOrNotLinked ? false : true
+                try await lockUnlockService.LockAction(lock: lock, device: device)
+            } else {
+                try await lockUnlockService.connection(device: device)
+            }
+            
+            return .success(self.lockUnlockService.status?.lock == .lockedOrNotLinked)
+        } catch {
+            return .failure(error)
+        }
+      
+    }
+    
+    func disconnect() async -> Result<Void, any Error> {
+        do {
+
+            try await lockUnlockService.disconnect()
+
+            return .success(())
+
+        } catch {
+
+            return .failure(error)
+
         }
     }
 

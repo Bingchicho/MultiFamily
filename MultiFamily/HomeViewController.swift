@@ -57,8 +57,10 @@ class HomeViewController: UIViewController {
     private func checkInviteButton(site: Site?) {
         if site?.userRole == .admin {
             inviteButton.isEnabled = true
+            noDataAddButton.isHidden = false
         } else {
             inviteButton.isEnabled = false
+            noDataAddButton.isHidden = true
         }
     }
     
@@ -141,6 +143,8 @@ class HomeViewController: UIViewController {
         noDataTitleLabel.text = L10n.Home.Empty.title
         noDataContentLabel.text = L10n.Home.Empty.content
         noDataAddButton.setTitle(L10n.Home.Button.addLock, for: .normal)
+        
+        addButton.isHidden = true
     }
     
     @objc

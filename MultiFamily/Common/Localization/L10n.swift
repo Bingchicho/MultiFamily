@@ -100,6 +100,12 @@ internal enum L10n {
       /// Beep:
       internal static let title = L10n.tr("Localizable", "detail.beep.title", fallback: "Beep:")
     }
+    internal enum Ble {
+      internal enum Error {
+        /// Bluetooth failed
+        internal static let title = L10n.tr("Localizable", "detail.ble.error.title", fallback: "Bluetooth failed")
+      }
+    }
     internal enum Bt {
       internal enum Adv {
         /// BLE Adv:
@@ -126,6 +132,10 @@ internal enum L10n {
       internal enum Sync {
         /// Sync
         internal static let title = L10n.tr("Localizable", "detail.button.sync.title", fallback: "Sync")
+      }
+      internal enum Unknow {
+        /// Unknow
+        internal static let title = L10n.tr("Localizable", "detail.button.unknow.title", fallback: "Unknow")
       }
       internal enum Unlock {
         /// Unlock

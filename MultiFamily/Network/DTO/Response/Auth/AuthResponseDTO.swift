@@ -12,7 +12,7 @@ struct AuthResponseDTO: Decodable {
     let tokenType: String
     let accessToken: String
     let refreshToken: String
-    let expiresIn: Int
+    let expiresIn: Double
     let attribute: AttributeDTO
     let identityID: String
     let email: String

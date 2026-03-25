@@ -78,6 +78,11 @@ class DetailViewController: UIViewController {
         switchTo(.event)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.disconnect()
+    }
+    
     private func holdLoading(animat: Bool) {
 
         if animat {
@@ -131,6 +136,14 @@ class DetailViewController: UIViewController {
             holdLoading(animat: false)
             showError(message, isPop: false)
             AppLogger.log(.error, category: .detail, message)
+        case .lockStatus(let lock):
+            if let lock {
+                let title = lock ? L10n.Detail.Button.Lock.title : L10n.Detail.Button.Unlock.title
+                lockUnlockButton.setTitle(title, for: .normal)
+            } else {
+                lockUnlockButton.setTitle(L10n.Detail.Button.Unknow.title, for: .normal)
+            }
+            holdLoading(animat: false)
         default:
             holdLoading(animat: false)
             
@@ -175,7 +188,7 @@ class DetailViewController: UIViewController {
         blepowerTitleLabel.text = L10n.Detail.Bt.TxPower.title
         
         syncButton.setTitle(L10n.Detail.Button.Sync.title, for: .normal)
-        lockUnlockButton.setTitle(L10n.Detail.Button.Lock.title, for: .normal)
+        lockUnlockButton.setTitle(L10n.Detail.Button.Unknow.title, for: .normal)
         moreButton.setTitle(L10n.Detail.Button.More.title, for: .normal)
       
         
@@ -201,8 +214,12 @@ class DetailViewController: UIViewController {
         // lock/unlock User only
         if AppAssembler.userAttributeStore.currentUser?.permissions?.first?.userRole == .user {
             lockUnlockButton.isHidden = false
+            authorizedButton.isHidden = true
+            blackButton.isHidden = true
         } else {
             lockUnlockButton.isHidden = true
+            authorizedButton.isHidden = false
+            blackButton.isHidden = false
         }
         
     }
@@ -268,7 +285,13 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func lockUnlockButtonAction(_ sender: UIButton) {
+        
+        if let device = device {
+            viewModel.lockAction(device: device)
+        }
     }
+    
+    
     @IBAction func moreButtonAction(_ sender: UIButton) {
         
         let alert = UIAlertController(

@@ -21,12 +21,8 @@ public protocol BleClient {
 
  
     func readRegistrySnapshot(info: ProvisionBLEInfo, addform: AddForm, siteID: String) async throws
-    
-
-    
     func setupSetting(value: JobSettingDTO) async throws
-    
     func updateBt(device: Device)
-    
-    func getStatus() async throws 
+    func getStatus() async throws
+    func LockAction(lock: Bool) async throws
 }

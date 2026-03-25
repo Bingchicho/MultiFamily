@@ -27,10 +27,11 @@ extension AppAssembler {
         )
         
         let bleservice = AppAssembler.makeJobBLEService()
+        let lockunlockservice = AppAssembler.makeLockActionService()
 
 
         return DetailUseCaseImpl(
-            repository: repository, bleserivce: bleservice
+            repository: repository, bleserivce: bleservice, lockunlockservice: lockunlockservice
         )
     }
     

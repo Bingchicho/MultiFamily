@@ -12,6 +12,7 @@ import MFRBleSDK
 /// - 把 SDK callback 包成 async/await
 /// - 把 SDK 型別/錯誤隔離在這層
 public final class MFRBleClient: BleClient {
+    
 
     
     
@@ -107,7 +108,25 @@ public final class MFRBleClient: BleClient {
         try await sdkGetStatus()
     }
     
-    // MARK: - SDK callback -> async helpers
+    public func LockAction(lock: Bool) async throws {
+        try await sdkLockAction(lock: lock)
+    }
+
+    
+
+    
+    public func sdkLockAction(lock: Bool) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            sdk.setLockState(lock) { result in
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
     
     
     public func sdkDetectDoorDirection() async throws {

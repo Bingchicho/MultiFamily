@@ -172,6 +172,7 @@
 "detail.button.sync.title" = "Sync";
 "detail.button.lock.title" = "Lock";
 "detail.button.unlock.title" = "Unlock";
+"detail.button.unknow.title" = "Unknow";
 "detail.button.more.title" = "More";
 "detail.button.remove.title" = "Remove";
 
@@ -183,6 +184,7 @@
 "detail.alert.remove.content" = "Remove the lock from this site?";
 
 "detail.sync.error.title" = "Synchronization failed. Please try again";
+"detail.ble.error.title" = "Bluetooth failed";
 
 
 // ==========================
