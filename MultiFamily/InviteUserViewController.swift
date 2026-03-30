@@ -15,10 +15,15 @@ final class InviteUserViewController: UIViewController {
     @IBOutlet private weak var publicTableView: UITableView!
     @IBOutlet private weak var privateTableView: UITableView!
     @IBOutlet private weak var inviteButton: UIButton!
+    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingBackground: UIView!
 
     // MARK: - Dependencies
 
-    private lazy var viewModel = InviteUserViewModel()
+    private lazy var viewModel = InviteUserViewModel(
+        useCase: AppAssembler.makeUserUseCase()
+    )
 
     // MARK: - Input
 
@@ -62,14 +67,57 @@ final class InviteUserViewController: UIViewController {
             switch state {
 
             case .idle:
-                break
+                holdLoading(animat: false)
 
             case .updated:
                 self.inviteButton.isEnabled = self.viewModel.isValid
                 self.publicTableView.reloadData()
                 self.privateTableView.reloadData()
+            case .loading:
+                holdLoading(animat: true)
+            case .created:
+                holdLoading(animat: false)
+                showSuccess()
+            case .error(let error):
+                holdLoading(animat: false)
+                showError(error)
             }
         }
+    }
+    
+    private func showSuccess() {
+        let alert = UIAlertController(title: L10n.Add.Success.title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
+    
+            self?.performSegue(withIdentifier: "backhome", sender: nil)
+        })
+        present(alert, animated: true)
+    }
+    
+    private func showError(_ message: String) {
+        let alert = UIAlertController(
+            title: L10n.Common.Error.title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default))
+        present(alert, animated: true)
+    }
+    
+    
+    private func holdLoading(animat: Bool) {
+        
+        if animat {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
+        
+        loadingIndicator.isHidden = !animat
+        loadingBackground.isHidden = !animat
+        
+        // Only disable current view interaction (avoid freezing navigation stack)
+        view.isUserInteractionEnabled = !animat
     }
 
     // MARK: - Actions

@@ -11,7 +11,7 @@ protocol UserRepository {
     func delete(siteId: String, userId: String) async throws
     func inviteResend(code: String) async throws
     func inviteDelete(code: String) async throws
-    func inviteUser(email: String, permission: UserPermission) async throws
+    func inviteUser(email: String, permission: InviteuserPermission) async throws
 }
 
 
@@ -92,7 +92,7 @@ final class UserRepositoryImpl: UserRepository {
         )
     }
     
-    func inviteUser(email: String, permission: UserPermission) async throws {
+    func inviteUser(email: String, permission: InviteuserPermission) async throws {
         let requestDTO = userRequestFactory.makeInviteUserRequest(email: email, permission: permission)
         
         let _: ClientResponseDTO = try await apiClient.request(

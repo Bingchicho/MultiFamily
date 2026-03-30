@@ -123,7 +123,7 @@ final class UserViewModel {
         }
     }
 
-    func inviteUser(email: String, permission: UserPermission) {
+    func inviteUser(email: String, permission: InviteuserPermission) {
         guard let siteID = sideID else { return }
         state = .loading
 

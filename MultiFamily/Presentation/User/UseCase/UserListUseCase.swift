@@ -18,7 +18,7 @@ protocol UserUseCase {
     func inviteResend(code: String) async -> UserListResult
     func inviteDelete(code: String) async -> UserListResult
 
-    func inviteUser(email: String, permission: UserPermission) async -> UserListResult
+    func inviteUser(email: String, permission: InviteuserPermission) async -> UserListResult
 }
 
 
@@ -135,7 +135,7 @@ struct UserUseCaseImpl: UserUseCase {
         }
     }
 
-    func inviteUser(email: String, permission: UserPermission) async -> UserListResult {
+    func inviteUser(email: String, permission: InviteuserPermission) async -> UserListResult {
         do {
             try await repository.inviteUser(email: email, permission: permission)
             return .optionSuccess

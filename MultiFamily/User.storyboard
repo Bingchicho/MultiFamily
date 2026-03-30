@@ -251,9 +251,11 @@
                         <outlet property="inviteButton" destination="pHF-wv-17V" id="dBa-rf-wOf"/>
                         <outlet property="privateTableView" destination="nyd-sy-lTz" id="J0J-hT-c2g"/>
                         <outlet property="publicTableView" destination="KgQ-Vb-thk" id="qNo-q5-yzM"/>
+                        <segue destination="ote-u2-QZY" kind="unwind" identifier="backhome" unwindAction="unwindToHome:" id="d9u-bn-eaw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enE-o8-p3L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ote-u2-QZY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2269" y="199"/>
         </scene>

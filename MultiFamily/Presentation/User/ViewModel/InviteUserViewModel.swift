@@ -12,7 +12,10 @@ final class InviteUserViewModel {
 
     enum State {
         case idle
+        case loading
         case updated
+        case created
+        case error(String)
     }
 
     // MARK: - Output
@@ -28,9 +31,15 @@ final class InviteUserViewModel {
     private(set) var selectedPrivateLocks: Set<String> = []
 
     private(set) var email: String = ""
+    
+    private let useCase: UserUseCase
 
     var isValid: Bool {
         email.isEmpty == false && (!selectedPublicLocks.isEmpty || !selectedPrivateLocks.isEmpty)
+    }
+    
+    init(useCase: UserUseCase) {
+        self.useCase = useCase
     }
 
     // MARK: - Setup
@@ -70,5 +79,36 @@ final class InviteUserViewModel {
         }
 
         onStateChange?(.updated)
+    }
+    
+    func inviteUser(siteId: String,email: String, userRole: String,publicDevice: [String], privateDevice: [String]) {
+        onStateChange?(.loading)
+      
+        Task {
+            var permissions: [InviteuserPermissionDevices] = []
+            publicDevice.forEach { thingname in
+                permissions.append(.init(thingName: thingname, deviceRole: .sync))
+            }
+            privateDevice.forEach { thingname in
+                permissions.append(.init(thingName: thingname, deviceRole: .sync))
+            }
+            let payload: InviteuserPermission = .init(siteID: siteId, userRole: userRole, devices: permissions)
+            let result = await useCase.inviteUser(email: email, permission: payload)
+
+            switch result {
+
+            case .success:
+         
+              
+                onStateChange?(.created)
+
+            case .failure(let message):
+               
+                onStateChange?(.error(message))
+           
+            case .optionSuccess:
+                break
+            }
+        }
     }
 }
