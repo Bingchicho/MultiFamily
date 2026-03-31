@@ -225,7 +225,7 @@
 "registry.picker.adv.title" = "Bluetooth Adv";
 "registry.picker.auto_lock.title" = "Auto Lock Time(s)";
 
-"registry.success.title" = "Update successful (synchronization required)";
+"registry.success.title" = "Update successful";
 
 // ==========================
 // Add

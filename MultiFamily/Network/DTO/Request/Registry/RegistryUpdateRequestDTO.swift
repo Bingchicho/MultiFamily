@@ -42,7 +42,7 @@ extension RegistryUpdateRequestDTO {
         self.thingName = detail.thingName
         self.clientToken = detail.clientToken
 
-        self.overwrite = nil
+        self.overwrite = true
         self.taskID = nil
         self.status = nil
         self.userName = nil

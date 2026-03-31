@@ -14,6 +14,8 @@ import MFRBleSDK
 public final class MFRBleClient: BleClient {
 
     
+
+    
     
     private var continuation: AsyncStream<Bool>.Continuation?
 
@@ -329,7 +331,7 @@ public final class MFRBleClient: BleClient {
         }
     }
     
-    private func sdkUpdateConfig(value: JobSettingDTO) async throws{
+    private func sdkUpdateJobConfig(value: JobSettingDTO) async throws{
         guard let config else {
             return
         }
@@ -394,13 +396,55 @@ public final class MFRBleClient: BleClient {
 
     }
     
+    private func sdkUpdateConfig(value: RegistryForm) async throws{
+        guard let config else {
+            return
+        }
+        
+        try await sdkGetConfig()
+        
+        var payload = RequestLockConfig(from: config)
+        // mapping payload
+        payload.autoLock = value.isAutoLockOn ? .on : .off
+        payload.autoLockTimeSeconds = value.autoLockDelay ?? 10
+        let typeValue: SoundType = .onOff(enabled: value.isBeepOn)
+        payload.soundType = typeValue
+        payload.bleTxPower = value.txPower.rawValue
+        payload.bleAdvInterval = value.adv.rawValue
+        
+        try await sdkUpdateConfig(payload: payload)
+
+    }
     
     
-    public func setupSetting(value: JobSettingDTO) async throws {
+    public func setupJobSetting(value: JobSettingDTO) async throws {
         guard isConnected else {
             throw NSError(domain: "BLE", code: -1, userInfo: [NSLocalizedDescriptionKey: "BLE not connected"])
         }
         
+        
+        do {
+            // 1)
+            try await sdkGetConfig()
+            
+            // 2)
+            try await sdkUpdateJobConfig(value: value)
+            
+            
+            // ✅ Only reach here means ALL steps succeeded
+            AppLogger.log(.info, category: .bluetooth, "UpdateConfig ✅ all steps done")
+            
+        } catch {
+            await disconnect()
+            AppLogger.log(.error, category: .bluetooth, "UpdateConfig ❌ failed: \(error)")
+            throw error
+        }
+    }
+    
+    public func setupSetting(value: RegistryForm) async throws {
+        guard isConnected else {
+            throw NSError(domain: "BLE", code: -1, userInfo: [NSLocalizedDescriptionKey: "BLE not connected"])
+        }
         
         do {
             // 1)

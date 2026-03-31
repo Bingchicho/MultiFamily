@@ -13,10 +13,13 @@ public protocol JobService {
     var version: String? { get }
     func connection(device: Device) async throws
 
-    func setupSetting(value: JobSettingDTO) async throws
+    func setupJobSetting(value: JobSettingDTO) async throws
+    func setupSetting(value: RegistryForm) async throws
 }
 
 public final class BleConfigService: JobService {
+
+    
     public var version: String?
     
     public func connection(device: Device) async throws {
@@ -35,11 +38,16 @@ public final class BleConfigService: JobService {
       
     }
 
-    public func setupSetting(value: JobSettingDTO) async throws {
+    public func setupJobSetting(value: JobSettingDTO) async throws {
         // 流程：connect → read → disconnect（用 defer 確保離開時斷線）
      
         defer { Task { await client.disconnect() } }
-        try await client.setupSetting(value: value)
+        try await client.setupJobSetting(value: value)
        
+    }
+    
+    public func setupSetting(value: RegistryForm) async throws {
+        defer { Task { await client.disconnect() } }
+        try await client.setupSetting(value: value)
     }
 }

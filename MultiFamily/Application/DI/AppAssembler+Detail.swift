@@ -47,6 +47,7 @@ extension AppAssembler {
         )
         
         let jobFactory = JobRequestFactory(env: env, device: device)
+        let bleservice = AppAssembler.makeJobBLEService()
 
         let repository = DetailRepositoryImpl(
             apiClient: apiClient,
@@ -56,7 +57,8 @@ extension AppAssembler {
 
 
         return RegistryUseCaseImpl(
-            repository: repository
+            repository: repository,
+            bleserivce: bleservice
         )
     }
 }

@@ -34,7 +34,7 @@ enum BLEAdv: Int, CaseIterable, Equatable {
 
 
 /// 這頁面表單狀態（ViewModel 內維護）
-struct RegistryForm: Equatable {
+public struct RegistryForm: Equatable {
 
     var name: String = ""
 

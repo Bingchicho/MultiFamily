@@ -34,9 +34,9 @@ final class RegistryViewModel {
         
         let form = RegistryForm(
             name: data.name ?? "",
-            isAutoLockOn: data.attributes?.autoLock == "Y",
+            isAutoLockOn: data.attributes?.autoLock == "T",
             autoLockDelay: data.attributes?.autoLockDelay,
-            isBeepOn: data.attributes?.operatorVoice == "Y",
+            isBeepOn: data.attributes?.operatorVoice == "T",
             txPower: BLETxPower(rawValue: data.attributes?.bleTXPower ?? 30) ?? .low,
             adv: BLEAdv(rawValue: data.attributes?.bleAdv ?? 30) ?? .low
         )
@@ -76,7 +76,7 @@ final class RegistryViewModel {
         onRoute?(.dismiss)
     }
 
-    func tapSave(thingName: String) {
+    func tapSave(thingName: String, device: Device) {
         guard isValid else { return }
         if case .saving = state { return }
 
@@ -85,7 +85,8 @@ final class RegistryViewModel {
         Task {
             let result = await useCase.execute(
                 thingName: thingName,
-                form: form
+                form: form,
+                device: device
             )
 
             switch result {

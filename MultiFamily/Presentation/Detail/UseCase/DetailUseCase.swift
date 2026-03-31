@@ -111,7 +111,7 @@ final class DetailUseCaseImpl: DetailUseCase {
                 
                 if let config = job.setting {
                     do {
-                        try await bleService.setupSetting(value: config)
+                        try await bleService.setupJobSetting(value: config)
                         try await repository.jobUpdate(jobId: job.jobID, status: .done)
                     } catch {
                         try await repository.jobUpdate(

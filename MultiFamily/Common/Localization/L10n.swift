@@ -473,8 +473,8 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "registry.power.title", fallback: "BLE Power")
     }
     internal enum Success {
-      /// Update successful (synchronization required)
-      internal static let title = L10n.tr("Localizable", "registry.success.title", fallback: "Update successful (synchronization required)")
+      /// Update successful
+      internal static let title = L10n.tr("Localizable", "registry.success.title", fallback: "Update successful")
     }
   }
   internal enum Site {

@@ -391,6 +391,7 @@ class DetailViewController: UIViewController {
         if segue.identifier == "registry",
            let vc = segue.destination as? RegistryViewController {
             vc.data = data
+            vc.device = device
         }
         
      

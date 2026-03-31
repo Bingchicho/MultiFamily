@@ -33,6 +33,7 @@ class RegistryViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     var data: DetailResponseDTO?
+    var device: Device?
     
     private lazy var viewModel =
     RegistryViewModel(
@@ -108,8 +109,9 @@ class RegistryViewController: UIViewController {
     }
 
     @IBAction private func tapSave() {
-        if let thingName = data?.thingName {
-            viewModel.tapSave(thingName: thingName)
+        if let thingName = data?.thingName,
+        let device = device {
+            viewModel.tapSave(thingName: thingName, device: device)
         }
     }
 
