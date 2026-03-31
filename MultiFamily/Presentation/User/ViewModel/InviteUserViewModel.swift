@@ -5,9 +5,10 @@
 //  Created by Sunion on 2026/3/9.
 //
 
+import Foundation
 
-// MARK: - ViewModel
 @MainActor
+
 final class InviteUserViewModel {
 
     enum State {
@@ -21,6 +22,9 @@ final class InviteUserViewModel {
     // MARK: - Output
 
     var onStateChange: ((State) -> Void)?
+    private(set) var state: State = .idle {
+        didSet { onStateChange?(state) }
+    }
 
     // MARK: - Data
 
@@ -31,11 +35,13 @@ final class InviteUserViewModel {
     private(set) var selectedPrivateLocks: Set<String> = []
 
     private(set) var email: String = ""
+    private(set) var selectedRole: String = "User"
     
     private let useCase: UserUseCase
 
     var isValid: Bool {
-        email.isEmpty == false && (!selectedPublicLocks.isEmpty || !selectedPrivateLocks.isEmpty)
+        email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        && (!selectedPublicLocks.isEmpty || !selectedPrivateLocks.isEmpty)
     }
     
     init(useCase: UserUseCase) {
@@ -49,14 +55,19 @@ final class InviteUserViewModel {
         publicLocks = devices.filter { $0.isResident == false }
         privateLocks = devices.filter { $0.isResident == true }
 
-        onStateChange?(.updated)
+        state = .updated
     }
 
     // MARK: - Actions
 
     func updateEmail(_ value: String) {
-        email = value
-        onStateChange?(.updated)
+        email = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        state = .updated
+    }
+    
+    func updateRole(_ role: String) {
+        selectedRole = role
+        state = .updated
     }
 
     func togglePublicLock(_ device: Device) {
@@ -67,7 +78,7 @@ final class InviteUserViewModel {
             selectedPublicLocks.insert(device.thingName)
         }
 
-        onStateChange?(.updated)
+        state = .updated
     }
 
     func togglePrivateLock(_ device: Device) {
@@ -78,36 +89,45 @@ final class InviteUserViewModel {
             selectedPrivateLocks.insert(device.thingName)
         }
 
-        onStateChange?(.updated)
+        state = .updated
     }
     
-    func inviteUser(siteId: String,email: String, userRole: String,publicDevice: [String], privateDevice: [String]) {
-        onStateChange?(.loading)
-      
+    func inviteUser(siteId: String) {
+        guard isValid else {
+            state = .error("Invalid invite data")
+            return
+        }
+
+        state = .loading
+
         Task {
             var permissions: [InviteuserPermissionDevices] = []
-            publicDevice.forEach { thingname in
-                permissions.append(.init(thingName: thingname, deviceRole: .sync))
+
+            selectedPublicLocks.forEach { thingName in
+                permissions.append(.init(thingName: thingName, deviceRole: .sync))
             }
-            privateDevice.forEach { thingname in
-                permissions.append(.init(thingName: thingname, deviceRole: .sync))
+
+            selectedPrivateLocks.forEach { thingName in
+                permissions.append(.init(thingName: thingName, deviceRole: .residential))
             }
-            let payload: InviteuserPermission = .init(siteID: siteId, userRole: userRole, devices: permissions)
+
+            let payload = InviteuserPermission(
+                siteID: siteId,
+                userRole: selectedRole,
+                devices: permissions
+            )
+
             let result = await useCase.inviteUser(email: email, permission: payload)
-
+            
             switch result {
-
             case .success:
-         
-              
-                onStateChange?(.created)
-
-            case .failure(let message):
-               
-                onStateChange?(.error(message))
-           
-            case .optionSuccess:
+                
                 break
+            case .failure(let message):
+                state = .error(message)
+                
+            case .optionSuccess:
+                state = .created
             }
         }
     }

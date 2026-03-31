@@ -537,6 +537,22 @@ internal enum L10n {
     internal enum Invite {
       /// Invite User
       internal static let title = L10n.tr("Localizable", "user.invite.title", fallback: "Invite User")
+      internal enum Success {
+        /// Invite Success
+        internal static let title = L10n.tr("Localizable", "user.invite.success.title", fallback: "Invite Success")
+      }
+    }
+    internal enum Private {
+      /// Private Door
+      internal static let title = L10n.tr("Localizable", "user.private.title", fallback: "Private Door")
+    }
+    internal enum Public {
+      /// Public Door
+      internal static let title = L10n.tr("Localizable", "user.public.title", fallback: "Public Door")
+    }
+    internal enum Role {
+      /// Role
+      internal static let title = L10n.tr("Localizable", "user.role.title", fallback: "Role")
     }
   }
   internal enum Verify {

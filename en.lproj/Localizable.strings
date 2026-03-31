@@ -250,3 +250,7 @@
 "user.alert.invite.resend.title" = "Resend Verify Code to %@";
 "user.alert.invite.resend.success" = "New Verify Code sended";
 "user.alert.invite.delete.title" = "Are you sure you want to delete %@ invite";
+"user.role.title" = "Role";
+"user.public.title" = "Public Door";
+"user.private.title" = "Private Door";
+"user.invite.success.title" = "Invite Success";

@@ -15,6 +15,11 @@ final class InviteUserViewController: UIViewController {
     @IBOutlet private weak var publicTableView: UITableView!
     @IBOutlet private weak var privateTableView: UITableView!
     @IBOutlet private weak var inviteButton: UIButton!
+    @IBOutlet private weak var roleButton: UIButton!
+    @IBOutlet private weak var roleLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var privateLabel: UILabel!
+    @IBOutlet private weak var publicLabel: UILabel!
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
@@ -55,6 +60,12 @@ final class InviteUserViewController: UIViewController {
         privateTableView.register(UITableViewCell.self, forCellReuseIdentifier: "LockCell")
 
         inviteButton.isEnabled = false
+     
+        emailLabel.text = L10n.Profile.Email.title
+        roleLabel.text = L10n.User.Role.title
+        privateLabel.text = L10n.User.Private.title
+        publicLabel.text = L10n.User.Public.title
+        roleButton.setTitle(L10n.Common.User.title, for: .normal)
 
         emailTextField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
     }
@@ -71,6 +82,7 @@ final class InviteUserViewController: UIViewController {
 
             case .updated:
                 self.inviteButton.isEnabled = self.viewModel.isValid
+                self.roleButton.setTitle(self.viewModel.selectedRole, for: .normal)
                 self.publicTableView.reloadData()
                 self.privateTableView.reloadData()
             case .loading:
@@ -86,7 +98,7 @@ final class InviteUserViewController: UIViewController {
     }
     
     private func showSuccess() {
-        let alert = UIAlertController(title: L10n.Add.Success.title, message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: L10n.User.Invite.Success.title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Common.Button.confirm, style: .default) { [weak self] _ in
     
             self?.performSegue(withIdentifier: "backhome", sender: nil)
@@ -128,10 +140,46 @@ final class InviteUserViewController: UIViewController {
     }
 
     @IBAction private func inviteButtonTapped(_ sender: UIButton) {
-        // call invite API later
-        print("Invite email: \(viewModel.email)")
-        print("Selected public: \(viewModel.selectedPublicLocks)")
-        print("Selected private: \(viewModel.selectedPrivateLocks)")
+        guard let siteId = AppAssembler.siteSelectionStore.currentSite?.id else { return }
+
+        viewModel.inviteUser(
+            siteId: siteId
+        )
+    }
+    
+    @IBAction private func roleButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(
+            title: L10n.User.Alert.Edit.title,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let managerAction = UIAlertAction(title: L10n.Common.Manager.title, style: .default) { [weak self] _ in
+            self?.viewModel.updateRole("Manager")
+        }
+
+        let userAction = UIAlertAction(title: L10n.Common.User.title, style: .default) { [weak self] _ in
+            self?.viewModel.updateRole("User")
+        }
+
+        let cancelAction = UIAlertAction(title: L10n.Common.Button.cancel, style: .cancel)
+
+
+        if let sideId = AppAssembler.siteSelectionStore.currentSite?.id,
+           let role = AppAssembler.userAttributeStore.currentUser?.permissions?.filter( { $0.siteID == sideId }).first?.userRole,
+           role == .admin {
+            alert.addAction(managerAction)
+        }
+      
+        alert.addAction(userAction)
+        alert.addAction(cancelAction)
+
+        if let popover = alert.popoverPresentationController {
+            popover.sourceView = sender
+            popover.sourceRect = sender.bounds
+        }
+
+        present(alert, animated: true)
     }
 }
 
@@ -185,4 +233,3 @@ extension InviteUserViewController: UITableViewDelegate {
         tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
-
