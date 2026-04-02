@@ -434,6 +434,7 @@
 				DEVELOPMENT_TEAM = 5PY7CVD87W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiFamily/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs Bluetooth to connect and configure your device";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -444,8 +445,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tw.com.sunion.MultiFamily;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.com.sunion.mfr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -469,6 +470,7 @@
 				DEVELOPMENT_TEAM = 5PY7CVD87W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiFamily/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs Bluetooth to connect and configure your device";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -479,8 +481,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tw.com.sunion.MultiFamily;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.com.sunion.mfr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -788,6 +790,7 @@
 				DEVELOPMENT_TEAM = 5PY7CVD87W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiFamily/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs Bluetooth to connect and configure your device";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -798,8 +801,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tw.com.sunion.MultiFamily;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.com.sunion.mfr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;

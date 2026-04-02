@@ -41,7 +41,5 @@ API_HOSTNAME
 			</array>
 		</dict>
 	</dict>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>App needs Bluetooth to connect and configure your device</string>
 </dict>
 </plist>
